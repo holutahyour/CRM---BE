@@ -1,11 +1,17 @@
-using Microsoft.EntityFrameworkCore;
+using CRM.Services.Services.Interfaces.Common;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 
 namespace CRM.Data
 {
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
+        private readonly ITenantProvider tenantProvider;
+
+        public ApplicationDbContextFactory(ITenantProvider tenantProvider)
+        {
+            this.tenantProvider = tenantProvider;
+        }
+
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             // Build configuration to read from appsettings.json in the API project
@@ -18,10 +24,10 @@ namespace CRM.Data
             // Create DbContextOptions
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-            
+
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new ApplicationDbContext(optionsBuilder.Options);
+            return new ApplicationDbContext(optionsBuilder.Options, tenantProvider);
         }
     }
 }

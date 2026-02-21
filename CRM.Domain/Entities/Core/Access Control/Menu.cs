@@ -8,7 +8,7 @@ public class Menu : BaseEntity<Guid>  // Global — not tenant-scoped
     public string Label { get; set; } = "";
     public string? Icon { get; set; }
     public string? Route { get; set; }
-    public int? ParentId { get; set; }
+    public Guid? ParentId { get; set; }
     public string? ModuleCode { get; set; }
     public int Position { get; set; }
     public bool IsActive { get; set; } = true;

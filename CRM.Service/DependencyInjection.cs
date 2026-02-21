@@ -15,6 +15,8 @@ public static class DependencyInjection
         services.AddScoped<IEthnicityService, EthnicityService>();
         services.AddScoped<IParameterValueService, ParameterValueService>();
 
+        //Core/Access Control
+        services.AddScoped<IRoleService, RoleService>();
 
         var mapperConfig = new MapperConfiguration(cfg =>
         {

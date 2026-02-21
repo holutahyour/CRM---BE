@@ -1,4 +1,5 @@
 ﻿using CRM.Base.Enums;
+using Microsoft.Graph.Models;
 
 namespace CRM.Base.Common.Presentation;
 
@@ -7,6 +8,9 @@ namespace CRM.Base.Common.Presentation;
 public class MSSQLBaseController<TEntity, TResponse, TId> : ControllerBase
 {
     private readonly IMSSQLBaseService<TEntity, TId> _service;
+    protected Guid GetCurrentTenantId() => HttpContext.Items["TenantId"] is Guid id ? id : Guid.Empty;
+    protected string? GetCurrentUserOid() => User.FindFirst("oid")?.Value;
+    protected User? GetCurrentUser() => HttpContext.Items["CurrentUser"] as User;
 
     public MSSQLBaseController(IMSSQLBaseService<TEntity, TId> service)
     {
