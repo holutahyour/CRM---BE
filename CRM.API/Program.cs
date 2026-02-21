@@ -1,52 +1,36 @@
 using Asp.Versioning;
-using Azure.Identity;
 using CRM.Data;
 using CRM.Data.Helpers;
 using CRM.Service;
-using Microsoft.Graph;
-using Microsoft.Identity.Web;
-using Scalar.AspNetCore;
+using Serilog;
 using System.Text.Json.Serialization;
 using static CRM.Data.Helpers.ServiceProviderExtensions;
 
-var builder = global::Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
+
+// Serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .WriteTo.Console()
+    .CreateLogger();
+builder.Host.UseSerilog();
+
+// === Services registered in Phases 3–6 ===
+// builder.Services.AddInfrastructure(builder.Configuration);  // Phase 3
+// builder.Services.AddAuthentication(...)                     // Phase 4
+// builder.Services.AddAuthorization(...)                      // Phase 5
 
 // Add services to the container.
-
 builder.Services.AddControllers()
 .AddJsonOptions(options =>
- {
-     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
- });
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-//builder.Services.AddScoped<IGetOrganizationConfiguration, GetOrganizationConfiguration>();
-//var organizationConfigurationService = builder.Services.BuildServiceProvider().GetService<IGetOrganizationConfiguration>();
-//var azureAdConfiguration = organizationConfigurationService.GetAzureAdConfigurationAsync("lagetronix").GetAwaiter().GetResult();
-
-builder.Services.AddMicrosoftIdentityWebAppAuthentication(builder.Configuration)
-    .EnableTokenAcquisitionToCallDownstreamApi()
-    .AddInMemoryTokenCaches()
-    .AddMicrosoftGraph(x =>
-    {
-        var clientId = builder.Configuration.GetValue<string>("AzureAd:ClientId");
-        var tenantId = builder.Configuration.GetValue<string>("AzureAd:TenantId");
-        var clientSecret = builder.Configuration.GetValue<string>("AzureAd:ClientSecret");
-        var authorization = builder.Configuration.GetValue<string>("AzureAd:Authority");
-        var scope = builder.Configuration.GetValue<string>("AzureAd:Scope");
-        var clientSecretCredential = new ClientSecretCredential(tenantId, clientId, clientSecret);
-
-        return new GraphServiceClient(clientSecretCredential);
-    }, new string[] { ".default" });
-
-builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
-{
-    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-}));
+builder.Services.AddHealthChecks();
 
 builder.Services
     .AddDataDependencies(builder.Configuration)
@@ -61,7 +45,6 @@ builder.Services.AddApiVersioning(options =>
 
 var app = builder.Build();
 
-
 if (app.Environment.IsDevelopment())
 {
     app.Services.ApplyMigrationsAndSeed();
@@ -74,33 +57,22 @@ if (args.Contains("--seed"))
     return;
 }
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
-
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.UseCors("corsapp");
-
-app.MapScalarApiReference(options =>
+if (app.Environment.IsDevelopment())
 {
-    options
-        .WithTitle("Tabernacle")
-        .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
-        .WithOpenApiRoutePattern("/swagger/v1/swagger.json"); // Add Swagger JSON specification
-});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-app.UseCors("corsapp");
 app.UseHttpsRedirection();
+app.UseSerilogRequestLogging();
 
-app.UseAuthentication();
-app.UseAuthorization();
+// === Middleware registered in Phases 4–6 ===
+// app.UseAuthentication();                                    // Phase 4
+// app.UseMiddleware<TenantMiddleware>();                      // Phase 6
+// app.UseMiddleware<UserProvisioningMiddleware>();             // Phase 4
+// app.UseAuthorization();                                     // Phase 5
 
 app.MapControllers();
-
+app.MapHealthChecks("/health");
 
 app.Run();

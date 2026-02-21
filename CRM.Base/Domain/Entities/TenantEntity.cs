@@ -2,6 +2,6 @@
 
 public abstract class TenantEntity<T> : BaseEntity<T>
 {
-    public int TenantId { get; set; }
+    public Guid TenantId { get; set; }
 }
 
