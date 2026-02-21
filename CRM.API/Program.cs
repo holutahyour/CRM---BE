@@ -2,6 +2,8 @@ using Asp.Versioning;
 using CRM.Data;
 using CRM.Data.Helpers;
 using CRM.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
 using Serilog;
 using System.Text.Json.Serialization;
 using static CRM.Data.Helpers.ServiceProviderExtensions;
@@ -35,6 +37,9 @@ builder.Services.AddHealthChecks();
 builder.Services
     .AddDataDependencies(builder.Configuration)
     .AddServiceDependencies(builder.Configuration);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services.AddApiVersioning(options =>
 {
