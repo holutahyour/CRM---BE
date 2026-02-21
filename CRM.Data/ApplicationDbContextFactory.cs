@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace CRM.Data
 {
-    public class CoreDbContextFactory : IDesignTimeDbContextFactory<CoreDbContext>
+    public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-        public CoreDbContext CreateDbContext(string[] args)
+        public ApplicationDbContext CreateDbContext(string[] args)
         {
             // Build configuration to read from appsettings.json in the API project
             var configuration = new ConfigurationBuilder()
@@ -16,12 +16,12 @@ namespace CRM.Data
                 .Build();
 
             // Create DbContextOptions
-            var optionsBuilder = new DbContextOptionsBuilder<CoreDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new CoreDbContext(optionsBuilder.Options);
+            return new ApplicationDbContext(optionsBuilder.Options);
         }
     }
 }

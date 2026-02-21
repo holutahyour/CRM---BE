@@ -4,9 +4,9 @@ namespace CRM.Data.Seeds;
 
 public class Seeder
 {
-    private readonly CoreDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public Seeder(CoreDbContext context)
+    public Seeder(ApplicationDbContext context)
     {
         _context = context;
     }

@@ -2,9 +2,9 @@
 
 public class OperationalDataSeeder
 {
-    private readonly CoreDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public OperationalDataSeeder(CoreDbContext context)
+    public OperationalDataSeeder(ApplicationDbContext context)
     {
         _context = context;
     }

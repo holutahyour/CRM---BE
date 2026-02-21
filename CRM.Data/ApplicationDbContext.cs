@@ -3,11 +3,11 @@ using System.Linq.Expressions;
 
 namespace CRM.Data
 {
-    public class CoreDbContext : ApplicationDbContext
+    public class ApplicationDbContext : Base.Common.Repositories.ApplicationDbContext
     {
-        private readonly DbContextOptions<CoreDbContext> options;
+        private readonly DbContextOptions<ApplicationDbContext> options;
 
-        public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             this.options = options;
         }

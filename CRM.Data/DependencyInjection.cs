@@ -7,7 +7,7 @@
 
             services.AddScoped<OperationalDataSeeder>();
 
-            services.AddDbContext<CoreDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection") ?? "");
             });
@@ -16,7 +16,7 @@
 
             services.AddScoped(typeof(IMSSQLRepository<,>), typeof(MSSQLRepository<,>));
             services.AddHttpContextAccessor();
-            services.AddScoped<IApplicationDbContext, CoreDbContext>();
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
 
             return services;

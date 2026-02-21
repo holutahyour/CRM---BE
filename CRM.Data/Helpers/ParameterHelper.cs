@@ -6,7 +6,7 @@ public static class ParameterHelper
     /// Gets the effective value, converts to T using metadata rules, falls back if invalid/missing.
     /// </summary>
     public static async Task<T> GetEffectiveValueAsync<T>(
-        CoreDbContext db,
+        ApplicationDbContext db,
         string parameterCode,
         string? currentUserCode,
         string? currentHierarchyInstanceCode,
@@ -89,7 +89,7 @@ public static class ParameterHelper
     }
 
     private static async Task<string?> GetRawEffectiveValueAsync(
-        CoreDbContext db,
+        ApplicationDbContext db,
         string parameterCode,
         string? userCode,
         string? instanceCode)

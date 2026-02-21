@@ -8,9 +8,9 @@ namespace CRM.Data.Helpers
         {
             var result = new Result<string>(true);
             using var scope = serviceProvider.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-            var migrationResult = MigrationManager.ApplyMigrations<CoreDbContext>(serviceProvider);
+            var migrationResult = MigrationManager.ApplyMigrations<ApplicationDbContext>(serviceProvider);
 
             if (migrationResult.HasError)
             {
@@ -30,7 +30,7 @@ namespace CRM.Data.Helpers
             public static void Run(IServiceProvider services)
             {
                 using var scope = services.CreateScope();
-                var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 new Seeder(context).Intialize();
             }
         }
