@@ -1,0 +1,9 @@
+﻿using CRM.Base.Common.Services.Interface;
+using CRM.Domain.Entities;
+
+namespace CRM.Services.Interfaces
+{
+    public interface ICityService : IMSSQLBaseService<City, long>
+    {
+    }
+}

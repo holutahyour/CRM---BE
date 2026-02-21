@@ -1,0 +1,9 @@
+﻿global using AutoMapper;
+global using CRM.Base.Common.Services;
+global using CRM.Domain;
+global using CRM.Domain.Entities;
+global using CRM.Services.Implementations;
+global using CRM.Services.Interfaces;
+global using CRM.Services.Services;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;

@@ -1,0 +1,100 @@
+# ASP.NET Core pipeline – flat publish output for direct /wwwroot deployment
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: ProductionSecrets
+  - name: solution
+    value: '**/*.sln'
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value: 'Release'
+  - name: Environment
+    value: 'Production'
+  - name: ConnectionStrings__DefaultConnection
+    value: $(PROD_CONNECTION_STRING)
+  - name: publishOutput
+    value: '$(Build.ArtifactStagingDirectory)/publish-flat'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish API project (flat output)'
+  inputs:
+    command: 'publish'
+    projects: '$(Build.SourcesDirectory)/Lagetronix.Tabernacle.API/Lagetronix.Tabernacle.API.csproj'
+    arguments: >
+      --configuration $(buildConfiguration)
+      --output $(publishOutput)
+      --no-restore
+    zipAfterPublish: false
+    modifyOutputPath: false  # Key fix: prevents project-name subfolder
+
+- script: |
+    echo "Published files - should be flat now (DLL, json, wwwroot directly here):"
+    dir "$(publishOutput)"
+    echo ""
+    echo "Recursive listing to confirm no nesting:"
+    dir /s /b "$(publishOutput)"
+  displayName: 'Debug: Verify publish-flat contents'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Install dotnet-ef tool'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install --global dotnet-ef  # Consider pinning: --version 8.0.10 if issues arise
+
+- script: echo ##vso[task.prependpath]%USERPROFILE%\.dotnet\tools
+  displayName: 'Add dotnet tools to PATH'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Apply EF Core Migrations'
+  condition: eq(variables['Environment'], 'Production')
+  inputs:
+    command: custom
+    custom: ef
+    arguments: >
+      database update
+      --project "$(Build.SourcesDirectory)/Lagetronix.Tabernacle.Data"
+      --startup-project "$(Build.SourcesDirectory)/Lagetronix.Tabernacle.API"
+      --configuration $(buildConfiguration)
+      --connection "$(PROD_CONNECTION_STRING)"
+    workingDirectory: '$(Build.SourcesDirectory)'
+
+- script: |
+    echo "Listing published flat folder before seed:"
+    dir "$(publishOutput)"
+
+    dotnet Lagetronix.Tabernacle.API.dll --seed
+  displayName: 'Seed Data'
+  condition: eq(variables['Environment'], 'Production')
+  workingDirectory: '$(publishOutput)'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(publishOutput)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Lagetronix.Tabernacle.API.zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)/Lagetronix.Tabernacle.API.zip'
+    artifactName: 'drop'

@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.API", "CRM.API\CRM.API.csproj", "{F5E61DFB-1D0F-412F-B99A-CA651EA246C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Base", "CRM.Base\CRM.Base.csproj", "{A6E081A5-91A5-8184-CEE8-EDCB605D17B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Data", "CRM.Data\CRM.Data.csproj", "{69E95E28-7528-0A8D-08EC-A0614243A5E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Domain", "CRM.Domain\CRM.Domain.csproj", "{EE3E46C7-3706-FC73-63EA-7D11757957A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Services", "CRM.Service\CRM.Services.csproj", "{032DA898-2B5C-6EB7-F6C4-0A055E637809}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "implementation-steps", "implementation-steps", "{55947AA8-7976-4A09-BB38-B3F2168F14F7}"
+	ProjectSection(SolutionItems) = preProject
+		docs\implementation-steps\00-Implementation-Overview.md = docs\implementation-steps\00-Implementation-Overview.md
+		docs\implementation-steps\01-Project-Setup-Foundation.md = docs\implementation-steps\01-Project-Setup-Foundation.md
+		docs\implementation-steps\02-Domain-Layer-Entities.md = docs\implementation-steps\02-Domain-Layer-Entities.md
+		docs\implementation-steps\03-Infrastructure-Database.md = docs\implementation-steps\03-Infrastructure-Database.md
+		docs\implementation-steps\04-Authentication-Entra-ID.md = docs\implementation-steps\04-Authentication-Entra-ID.md
+		docs\implementation-steps\05-Authorization-RBAC.md = docs\implementation-steps\05-Authorization-RBAC.md
+		docs\implementation-steps\06-Multi-Tenancy.md = docs\implementation-steps\06-Multi-Tenancy.md
+		docs\implementation-steps\07-Core-Module.md = docs\implementation-steps\07-Core-Module.md
+		docs\implementation-steps\08-Inventory-Module.md = docs\implementation-steps\08-Inventory-Module.md
+		docs\implementation-steps\09-Orders-Supply-Chain.md = docs\implementation-steps\09-Orders-Supply-Chain.md
+		docs\implementation-steps\10-Reporting-Audit-Deployment.md = docs\implementation-steps\10-Reporting-Audit-Deployment.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5E61DFB-1D0F-412F-B99A-CA651EA246C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5E61DFB-1D0F-412F-B99A-CA651EA246C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5E61DFB-1D0F-412F-B99A-CA651EA246C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5E61DFB-1D0F-412F-B99A-CA651EA246C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6E081A5-91A5-8184-CEE8-EDCB605D17B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6E081A5-91A5-8184-CEE8-EDCB605D17B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6E081A5-91A5-8184-CEE8-EDCB605D17B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6E081A5-91A5-8184-CEE8-EDCB605D17B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E95E28-7528-0A8D-08EC-A0614243A5E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E95E28-7528-0A8D-08EC-A0614243A5E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E95E28-7528-0A8D-08EC-A0614243A5E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E95E28-7528-0A8D-08EC-A0614243A5E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE3E46C7-3706-FC73-63EA-7D11757957A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE3E46C7-3706-FC73-63EA-7D11757957A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE3E46C7-3706-FC73-63EA-7D11757957A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE3E46C7-3706-FC73-63EA-7D11757957A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{032DA898-2B5C-6EB7-F6C4-0A055E637809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032DA898-2B5C-6EB7-F6C4-0A055E637809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032DA898-2B5C-6EB7-F6C4-0A055E637809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032DA898-2B5C-6EB7-F6C4-0A055E637809}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{55947AA8-7976-4A09-BB38-B3F2168F14F7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67BD5436-B495-453A-9102-CE656FB22826}
+	EndGlobalSection
+EndGlobal
