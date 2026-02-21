@@ -30,9 +30,9 @@ public class ItemConfiguration : IEntityTypeConfiguration<Item>
             .HasForeignKey(i => i.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        builder.HasOne(i => i.Supplier)
+        builder.HasOne(i => i.Vendor)
             .WithMany()
-            .HasForeignKey(i => i.SupplierId)
+            .HasForeignKey(i => i.VendorId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }

@@ -62,18 +62,18 @@ namespace CRM.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
             // Apply global tenant query filters
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-            {
-                if (typeof(TenantEntity<>).IsAssignableFrom(entityType.ClrType))
-                {
-                    var method = typeof(ApplicationDbContext)
-                        .GetMethod(nameof(ApplyTenantFilter),
-                            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!
-                        .MakeGenericMethod(entityType.ClrType);
+            //foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            //{
+            //    if (typeof(TenantEntity<>).IsAssignableFrom(entityType.ClrType))
+            //    {
+            //        var method = typeof(ApplicationDbContext)
+            //            .GetMethod(nameof(ApplyTenantFilter),
+            //                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!
+            //            .MakeGenericMethod(entityType.ClrType);
 
-                    method.Invoke(this, [modelBuilder]);
-                }
-            }
+            //        method.Invoke(this, [modelBuilder]);
+            //    }
+            //}
 
             // Apply soft-delete filter for all BaseEntity types
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
@@ -90,11 +90,11 @@ namespace CRM.Data
             }
         }
 
-        private void ApplyTenantFilter<T, J>(ModelBuilder modelBuilder) where T : TenantEntity<J>
-        {
-            modelBuilder.Entity<T>().HasQueryFilter(e =>
-                e.TenantId == tenantProvider.TenantId && !e.IsDeleted);
-        }
+        //private void ApplyTenantFilter<T, J>(ModelBuilder modelBuilder) where T : TenantEntity<J>
+        //{
+        //    modelBuilder.Entity<T>().HasQueryFilter(e =>
+        //        e.TenantId == tenantProvider.TenantId && !e.IsDeleted);
+        //}
 
         private void ApplySoftDeleteFilter<T, J>(ModelBuilder modelBuilder) where T : BaseEntity<J>
         {
