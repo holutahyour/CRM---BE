@@ -1,8 +1,8 @@
 ﻿namespace CRM.Base.Common.Domain.Entities;
 
-public class AuditableEntity
+public class AuditableEntity : ISoftDelete
 {
-    public DateTime CreatedOn { get; set; } = DateTime.Now;
+    public DateTime CreatedOn { get; set; }
 
     public string? CreatedBy { get; set; }
 

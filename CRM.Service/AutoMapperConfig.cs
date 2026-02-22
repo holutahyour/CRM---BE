@@ -25,6 +25,17 @@
             CreateMap<UpdateEthnicityRequest, Ethnicity>();
             CreateMap<CreateEthnicityRequest, Ethnicity>();
 
+            //Core/Access Control
+            CreateMap<MenuDTO, Menu>();
+
+            CreateMap<UserDTO, User>();
+            CreateMap<UpdateUserRequest, User>();
+            CreateMap<CreateUserRequest, User>();
+
+            CreateMap<RoleDTO, Role>();
+            CreateMap<UpdateRoleRequest, Role>();
+            CreateMap<CreateRoleRequest, Role>();
+
             //finance and revenue
             CreateMap<ParameterValue, ParameterValueResponse>();
             CreateMap<UpdateParameterValueRequest, ParameterValue>();

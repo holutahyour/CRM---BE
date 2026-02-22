@@ -13,7 +13,7 @@ namespace CRM.Domain.Entities
         public required string Value { get; set; }
 
         [MaxLength(50)]
-        public string UserCode { get; set; }
+        public string UserCode { get; set; } = string.Empty;
 
     }
 }

@@ -405,10 +405,13 @@ public static class MenuSeedData
 Call all seed methods from `ImsDbContext.OnModelCreating()`:
 
 ```csharp
-// At the end of OnModelCreating
+// ... at the end of OnModelCreating
 ModuleSeedData.Seed(modelBuilder);
 PermissionSeedData.Seed(modelBuilder);
 MenuSeedData.Seed(modelBuilder);
+
+// Optional: Seed the first system tenant and its admin role permissions
+// RolePermissionSeedData.Seed(modelBuilder);
 ```
 
 ---

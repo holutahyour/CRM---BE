@@ -1,5 +1,6 @@
 ﻿using CRM.Base.Common.Domain.Entities;
 using CRM.Base.Domain.Entities;
+using CRM.Data.Seeds.Access_Control;
 using CRM.Domain.Entities.Inventory;
 using CRM.Domain.Entities.Orders;
 using CRM.Services.Services.Interfaces.Common;
@@ -8,11 +9,31 @@ namespace CRM.Data
 {
     public class ApplicationDbContext : Base.Common.Repositories.ApplicationDbContext
     {
-        private readonly DbContextOptions<ApplicationDbContext> options;
+        private readonly ITenantProvider _tenantProvider;
+
+        public ApplicationDbContext() : base(new DbContextOptionsBuilder<ApplicationDbContext>().Options)
+        {
+            _tenantProvider = new DesignTimeTenantProvider();
+        }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ITenantProvider tenantProvider) : base(options)
         {
-            this.options = options;
+            _tenantProvider = tenantProvider;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                // Design-time fallback
+                optionsBuilder.UseSqlServer("Server=localhost,1433;Database=crm_dev;User ID=sa;Password=YourPassword123!;MultipleActiveResultSets=true;TrustServerCertificate=True");
+            }
+        }
+
+        private class DesignTimeTenantProvider : ITenantProvider
+        {
+            public Guid TenantId => Guid.Empty;
+            public string? UserId => null;
         }
 
         //Core
@@ -61,24 +82,21 @@ namespace CRM.Data
             // Apply all IEntityTypeConfiguration classes from this assembly
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
-            // Apply global tenant query filters
-            //foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-            //{
-            //    if (typeof(TenantEntity<>).IsAssignableFrom(entityType.ClrType))
-            //    {
-            //        var method = typeof(ApplicationDbContext)
-            //            .GetMethod(nameof(ApplyTenantFilter),
-            //                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!
-            //            .MakeGenericMethod(entityType.ClrType);
-
-            //        method.Invoke(this, [modelBuilder]);
-            //    }
-            //}
-
-            // Apply soft-delete filter for all BaseEntity types
+            // Apply global filters
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
-                if (typeof(BaseEntity<>).IsAssignableFrom(entityType.ClrType))
+                // Multi-tenancy filter
+                if (typeof(ITenantEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    var method = typeof(ApplicationDbContext)
+                        .GetMethod(nameof(ApplyTenantFilter),
+                            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!
+                        .MakeGenericMethod(entityType.ClrType);
+
+                    method.Invoke(this, [modelBuilder]);
+                }
+                // Soft-delete filter (only if not already handled by tenant filter which includes it)
+                else if (typeof(ISoftDelete).IsAssignableFrom(entityType.ClrType))
                 {
                     var method = typeof(ApplicationDbContext)
                         .GetMethod(nameof(ApplySoftDeleteFilter),
@@ -88,21 +106,23 @@ namespace CRM.Data
                     method.Invoke(this, [modelBuilder]);
                 }
             }
+
+            ModuleSeedData.Seed(modelBuilder);
+            PermissionSeedData.Seed(modelBuilder);
+            MenuSeedData.Seed(modelBuilder);
+            //RolePermissionSeedData.Seed(modelBuilder);
+
         }
 
-        //private void ApplyTenantFilter<T, J>(ModelBuilder modelBuilder) where T : TenantEntity<J>
-        //{
-        //    modelBuilder.Entity<T>().HasQueryFilter(e =>
-        //        e.TenantId == tenantProvider.TenantId && !e.IsDeleted);
-        //}
-
-        private void ApplySoftDeleteFilter<T, J>(ModelBuilder modelBuilder) where T : BaseEntity<J>
+        private void ApplyTenantFilter<T>(ModelBuilder modelBuilder) where T : class, ITenantEntity, ISoftDelete
         {
-            // Only apply if not already filtered by tenant (which includes IsDeleted)
-            if (!typeof(TenantEntity<>).IsAssignableFrom(typeof(T)))
-            {
-                modelBuilder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
-            }
+            modelBuilder.Entity<T>().HasQueryFilter(e =>
+                e.TenantId == _tenantProvider.TenantId && !e.IsDeleted);
+        }
+
+        private void ApplySoftDeleteFilter<T>(ModelBuilder modelBuilder) where T : class, ISoftDelete
+        {
+            modelBuilder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
         }
     }
 }

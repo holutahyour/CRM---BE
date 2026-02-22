@@ -12,22 +12,22 @@ public partial class Country : BaseEntity<long>
     public required string CountryName { get; set; }
 
     [MaxLength(100)]
-    public string Capital { get; set; }
+    public string Capital { get; set; } = string.Empty;
 
     [MaxLength(50)]
-    public string CountryCode { get; set; }
+    public string CountryCode { get; set; } = string.Empty;
 
     [MaxLength(50)]
-    public string Currency { get; set; }
+    public string Currency { get; set; } = string.Empty;
 
     [MaxLength(50)]
-    public string Flag { get; set; }
+    public string Flag { get; set; } = string.Empty;
 
     [MaxLength(50)]
-    public string PhoneCode { get; set; }
+    public string PhoneCode { get; set; } = string.Empty;
 
     [MaxLength(50)]
-    public string TimeZone { get; set; }
+    public string TimeZone { get; set; } = string.Empty;
 
     [MaxLength(50)]
     public string Continent { get; set; }

@@ -12,21 +12,21 @@ public partial class State : BaseEntity<long>
     public required string Name { get; set; }
 
     [MaxLength(50)]
-    public string Abbreviation { get; set; }
+    public string Abbreviation { get; set; } = string.Empty;
 
     [MaxLength(500)]
-    public string Capital { get; set; }
+    public string Capital { get; set; } = string.Empty;
 
-    public string Population { get; set; }
+    public string Population { get; set; } = string.Empty;
 
     [MaxLength(500)]
-    public string Area { get; set; }
+    public string Area { get; set; } = string.Empty;
 
     [MaxLength(50)]
     public required string CountryCode { get; set; }
 
-    [ForeignKey("CountryCode")]
-    public Country Country { get; set; }
+    [ForeignKey("CountryId")]
+    public Country Country { get; set; } = null!;
 
 }
 

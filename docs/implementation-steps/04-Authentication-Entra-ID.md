@@ -148,6 +148,11 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
 
         context.Items["CurrentUser"] = user;
         context.Items["TenantId"] = user.TenantId;
+
+        // CRITICAL: If tenantId is 0, the user is in "limbo" and will be filtered out
+        // by the EF Core global query filters. Consider redirecting to /onboarding
+        // if context.Request.Path does not contain "onboarding" or "logout".
+
         await next(context);
     }
 
@@ -156,6 +161,9 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
         // Priority: JWT claim → Header → Subdomain
         if (int.TryParse(context.User.FindFirst("tenant_id")?.Value, out var c)) return c;
         if (int.TryParse(context.Request.Headers["X-Tenant-Id"].FirstOrDefault(), out var h)) return h;
+
+        // WARNING: Returning 0 will lead to most queries returning empty results
+        // due to global query filters.
         return 0;
     }
 }

@@ -12,7 +12,7 @@ public class TenantMiddleware(RequestDelegate next, ILogger<TenantMiddleware> lo
 
         var tenantId = ResolveTenantId(context);
 
-        if (tenantId > 0)
+        if (tenantId != Guid.Empty)
         {
             context.Items["TenantId"] = tenantId;
             logger.LogDebug("Resolved tenant: {TenantId}", tenantId);
@@ -21,14 +21,14 @@ public class TenantMiddleware(RequestDelegate next, ILogger<TenantMiddleware> lo
         await next(context);
     }
 
-    private static int ResolveTenantId(HttpContext context)
+    private static Guid ResolveTenantId(HttpContext context)
     {
         // 1. JWT custom claim (ideal for production)
-        if (int.TryParse(context.User.FindFirst("tenant_id")?.Value, out var fromClaim))
+        if (Guid.TryParse(context.User.FindFirst("tenant_id")?.Value, out var fromClaim))
             return fromClaim;
 
         // 2. Request header (useful during development / multi-tenant testing)
-        if (int.TryParse(context.Request.Headers["X-Tenant-Id"].FirstOrDefault(), out var fromHeader))
+        if (Guid.TryParse(context.Request.Headers["X-Tenant-Id"].FirstOrDefault(), out var fromHeader))
             return fromHeader;
 
         // 3. Subdomain parsing (farm1.app.com → resolve via DB)
@@ -40,6 +40,6 @@ public class TenantMiddleware(RequestDelegate next, ILogger<TenantMiddleware> lo
             // In production, cache subdomain→tenantId mapping.
         }
 
-        return 0;
+        return Guid.Empty;
     }
 }

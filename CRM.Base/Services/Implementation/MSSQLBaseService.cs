@@ -90,12 +90,12 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
         return result;
     }
     public virtual async Task<Result<dynamic>> GetAllAsync<TResponse>(
-        string search = null,
-        string filter = null,
+        string? search = null,
+        string? filter = null,
         int page = 1,
         int pageSize = 10,
-        string select = null,
-        string orderBy = null,
+        string? select = null,
+        string? orderBy = null,
         OrderDirectionEnum orderDirection = OrderDirectionEnum.Asc,
         string baseUrl = "{app_url}")
     {

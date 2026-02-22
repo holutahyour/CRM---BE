@@ -21,7 +21,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 builder.Host.UseSerilog();
 
-// === Services registered in Phases 3–6 ===
+// === Services registered in Phases 3-6 ===
 // builder.Services.AddInfrastructure(builder.Configuration);  // Phase 3
 
 // Add services to the container.
@@ -84,7 +84,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseSerilogRequestLogging();
 
-// === Middleware registered in Phases 4–6 ===
+// === Middleware registered in Phases 4-6 ===
 // app.UseAuthentication();                                    // Phase 4
 // app.UseMiddleware<TenantMiddleware>();                      // Phase 6
 // app.UseMiddleware<UserProvisioningMiddleware>();             // Phase 4

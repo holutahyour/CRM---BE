@@ -82,11 +82,11 @@ public class MongoBaseService<T> : IMongoBaseService<T>
     }
 
     public virtual async Task<Result<dynamic>> GetAllAsync<TResponse>(
-        string search = null,
-        string filter = null,
+        string? search = null,
+        string? filter = null,
         int page = 1,
         int pageSize = 10,
-        string select = null)
+        string? select = null)
     {
         Result<dynamic> result = new(false);
 

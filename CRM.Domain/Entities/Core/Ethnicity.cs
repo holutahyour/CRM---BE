@@ -11,7 +11,7 @@ public partial class Ethnicity : BaseEntity<long>
     public required string Name { get; set; }
 
     [MaxLength(500)]
-    public required string Description { get; set; }
+    public required string Description { get; set; } = string.Empty;
 
 }
 

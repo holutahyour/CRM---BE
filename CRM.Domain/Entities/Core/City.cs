@@ -11,21 +11,21 @@ public partial class City : BaseEntity<long>
     [MaxLength(500)]
     public required string Name { get; set; }
 
-    public string Population { get; set; }
+    public string Population { get; set; } = string.Empty;
 
     [MaxLength(100)]
-    public string Area { get; set; }
+    public string Area { get; set; } = string.Empty;
 
     [MaxLength(50)]
-    public string CountryCode { get; set; }
+    public string CountryCode { get; set; } = string.Empty;
 
-    [ForeignKey("CountryCode")]
-    public Country Country { get; set; }
+    [ForeignKey("CountryId")]
+    public Country Country { get; set; } = null!;
 
     [MaxLength(50)]
-    public string StateCode { get; set; }
+    public string StateCode { get; set; } = string.Empty;
 
-    [ForeignKey("StateCode")]
-    public State State { get; set; }
+    [ForeignKey("StateId")]
+    public State State { get; set; } = null!;
 }
 

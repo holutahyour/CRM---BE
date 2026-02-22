@@ -19,12 +19,12 @@ public class MSSQLBaseController<TEntity, TResponse, TId> : ControllerBase
 
     [HttpGet]
     public virtual async Task<ActionResult> GetAllAsync(
-             [FromQuery] string search = null,   // Generic search across all properties
-             [FromQuery] string filter = null,  // Specific filtering (e.g., "Department=Accounting")
+             [FromQuery] string? search = null,   // Generic search across all properties
+             [FromQuery] string? filter = null,  // Specific filtering (e.g., "Department=Accounting")
              [FromQuery] int page = 1,           // Page number
              [FromQuery] int pageSize = 100,      // Items per page
-             [FromQuery] string select = null,
-             [FromQuery] string orderBy = null,
+             [FromQuery] string? select = null,
+             [FromQuery] string? orderBy = null,
              [FromQuery] OrderDirectionEnum orderDirection = OrderDirectionEnum.Asc)
     {
         var request = HttpContext.Request;

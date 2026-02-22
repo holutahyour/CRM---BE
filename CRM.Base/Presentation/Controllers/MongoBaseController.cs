@@ -13,11 +13,11 @@ public class MongoBaseController<T, TResponse> : ControllerBase
 
     [HttpGet]
     public virtual async Task<ActionResult> GetAllAsync(
-        [FromQuery] string search = null,   // Generic search across all properties
-        [FromQuery] string filter = null,  // Specific filtering (e.g., "Department=Accounting")
+        [FromQuery] string? search = null,   // Generic search across all properties
+        [FromQuery] string? filter = null,  // Specific filtering (e.g., "Department=Accounting")
         [FromQuery] int page = 1,           // Page number
         [FromQuery] int pageSize = 100,      // Items per page
-        [FromQuery] string select = null)
+        [FromQuery] string? select = null)
     {
         var result = new Result<dynamic>();
         result.RequestTime = DateTime.UtcNow;

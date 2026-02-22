@@ -16,11 +16,13 @@ public class TenantController : ControllerBase
         _service = service;
     }
 
-    protected async Task<ActionResult> OnboardAsync<TRequest>([FromBody] string name, [FromBody] string? code, [FromBody] string adminEmail)
+    [HttpPost]
+    [Route("onboarding")]
+    public async Task<ActionResult> OnboardAsync(TenantOnboardingDTO tenantOnboarding)
     {
 
         var requestTime = DateTime.UtcNow;
-        var response = await _service.OnboardAsync(name, code, adminEmail);
+        var response = await _service.OnboardAsync(tenantOnboarding.name, tenantOnboarding.code, tenantOnboarding.adminEmail);
         var responseTime = DateTime.UtcNow;
 
         response.RequestTime = requestTime;
@@ -33,3 +35,7 @@ public class TenantController : ControllerBase
             return BadRequest(response);
     }
 }
+
+public record TenantOnboardingDTO(string name, string? code, string adminEmail);
+
+

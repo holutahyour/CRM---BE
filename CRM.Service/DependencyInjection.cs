@@ -16,7 +16,10 @@ public static class DependencyInjection
         services.AddScoped<IParameterValueService, ParameterValueService>();
 
         //Core/Access Control
+        services.AddScoped<IMenuService, MenuService>();
         services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<ITenantService, TenantService>();
+        services.AddScoped<IUserService, UserService>();
 
         var mapperConfig = new MapperConfiguration(cfg =>
         {

@@ -2,6 +2,6 @@
 
 public interface ITenantProvider
 {
-    int TenantId { get; }
+    Guid TenantId { get; }
     string? UserId { get; }  // Entra OID
 }

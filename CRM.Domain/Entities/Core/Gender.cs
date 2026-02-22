@@ -12,7 +12,7 @@ public partial class Gender : BaseEntity<long>
     public required string Name { get; set; }
 
     [MaxLength(500)]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
 }
 

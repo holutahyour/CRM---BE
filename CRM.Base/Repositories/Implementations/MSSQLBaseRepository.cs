@@ -18,11 +18,11 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
     }
 
     public async Task<IList<T>> GetAllAsync(
-           string search = null,
-           string filter = null,
+           string? search = null,
+           string? filter = null,
            int page = 1,
            int pageSize = 10,
-           string orderBy = null,
+           string? orderBy = null,
            OrderDirectionEnum orderDirection = OrderDirectionEnum.Asc,
            string baseUrl = "{app_url}")
     {
@@ -35,11 +35,11 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
     }
 
     public async Task<Result<List<T>>> GetAllWithMetaAsync(
-        string search = null,
-        string filter = null,
+        string? search = null,
+        string? filter = null,
         int page = 1,
         int pageSize = 10,
-        string orderBy = null,
+        string? orderBy = null,
         OrderDirectionEnum orderDirection = OrderDirectionEnum.Asc,
         string baseUrl = "{app_url}")
     {

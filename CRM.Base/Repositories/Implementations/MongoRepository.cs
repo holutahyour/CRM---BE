@@ -69,7 +69,7 @@ public class MongoRepository<T> : IMongoRepository<T> where T : BaseEntity<long>
         return await mongoCollection.Find(expression).ToListAsync();
     }
 
-    public async Task<IList<T>> GetAllAsync(string search = null, string filter = null, int page = 1, int pageSize = 10)
+    public async Task<IList<T>> GetAllAsync(string? search = null, string? filter = null, int page = 1, int pageSize = 10)
     {
         var query = await mongoCollection.Find(filterDefinitionBuilder.Empty).ToListAsync();
 
@@ -185,10 +185,10 @@ public class MongoRepository<T> : IMongoRepository<T> where T : BaseEntity<long>
 
 public class Item : BaseEntity<long>
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 }
 
 public class ItemDTO
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 }

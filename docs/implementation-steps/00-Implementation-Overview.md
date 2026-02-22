@@ -19,8 +19,9 @@
 | **8**  | [Inventory Module](file:///c:/1%20-Tahyour/8%20-%20Projects/CRM/CRM%20-%20BE/docs/implementation-steps/08-Inventory-Module.md)                           | Items, categories, batches, stock levels, barcode scanning, locations | 4–5 days         |
 | **9**  | [Orders & Supply Chain Module](file:///c:/1%20-Tahyour/8%20-%20Projects/CRM/CRM%20-%20BE/docs/implementation-steps/09-Orders-Supply-Chain.md)            | Purchase orders, sales orders, suppliers, e-commerce integration      | 3–4 days         |
 | **10** | [Reporting, Audit & Deployment](file:///c:/1%20-Tahyour/8%20-%20Projects/CRM/CRM%20-%20BE/docs/implementation-steps/10-Reporting-Audit-Deployment.md)    | Reports, audit trail, logging, CI/CD, Azure deployment, testing       | 3–4 days         |
+| **11** | [Postman Testing Guide](file:///c:/1%20-Tahyour/8%20-%20Projects/CRM/CRM%20-%20BE/docs/implementation-steps/11-Postman-Testing-Guide.md)                 | Token acquisition, multi-tenant headers, RBAC testing                 | 1 day            |
 
-**Total estimated effort: 23–33 working days**
+**Total estimated effort: 24–34 working days**
 
 ---
 
@@ -39,6 +40,7 @@ flowchart LR
     P7 --> P9["Phase 9\nOrders"]
     P8 --> P10["Phase 10\nReports & Deploy"]
     P9 --> P10
+    P10 --> P11["Phase 11\nPostman Testing"]
 ```
 
 ## Conventions Used Across All Phases
