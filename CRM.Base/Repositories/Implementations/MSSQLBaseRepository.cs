@@ -111,13 +111,30 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
             }
         }
 
-        // INCLUDE nav props
+        // INCLUDE nav props (up to 2 levels deep)
         var navigationProperties = typeof(T).GetProperties()
             .Where(p => typeof(IEnumerable<object>).IsAssignableFrom(p.PropertyType) ||
                        (p.PropertyType.IsClass && p.PropertyType != typeof(string)));
 
         foreach (var nav in navigationProperties)
+        {
             query = query.Include(nav.Name);
+
+            var navType = nav.PropertyType.IsGenericType
+                ? nav.PropertyType.GetGenericArguments().FirstOrDefault()
+                : nav.PropertyType;
+
+            if (navType != null && navType != typeof(string))
+            {
+                var childNavs = navType.GetProperties()
+                    .Where(p => (typeof(IEnumerable<object>).IsAssignableFrom(p.PropertyType) ||
+                                (p.PropertyType.IsClass && p.PropertyType != typeof(string)))
+                                && p.PropertyType != typeof(T)); // Avoid circular includes back to parent
+
+                foreach (var childNav in childNavs)
+                    query = query.Include($"{nav.Name}.{childNav.Name}");
+            }
+        }
 
         // Total BEFORE pagination (note: search is applied in-memory below)
         var totalCount = await query.CountAsync();
@@ -215,15 +232,30 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
         // Start query
         IQueryable<T> query = _context.Set<T>();
 
-        // Dynamically include all navigation properties
+        // Dynamically include all navigation properties (up to 2 levels deep)
         var navigationProperties = typeof(T).GetProperties()
             .Where(prop =>
                 typeof(IEnumerable<object>).IsAssignableFrom(prop.PropertyType) ||
                 (prop.PropertyType.IsClass && prop.PropertyType != typeof(string)));
 
-        foreach (var navigationProperty in navigationProperties)
+        foreach (var nav in navigationProperties)
         {
-            query = query.Include(navigationProperty.Name);
+            query = query.Include(nav.Name);
+
+            var navType = nav.PropertyType.IsGenericType
+                ? nav.PropertyType.GetGenericArguments().FirstOrDefault()
+                : nav.PropertyType;
+
+            if (navType != null && navType != typeof(string))
+            {
+                var childNavs = navType.GetProperties()
+                    .Where(p => (typeof(IEnumerable<object>).IsAssignableFrom(p.PropertyType) ||
+                                (p.PropertyType.IsClass && p.PropertyType != typeof(string)))
+                                && p.PropertyType != typeof(T)); // Avoid circular includes back to parent
+
+                foreach (var childNav in childNavs)
+                    query = query.Include($"{nav.Name}.{childNav.Name}");
+            }
         }
 
         // Apply ID filter
@@ -292,9 +324,7 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
     {
         ArgumentValidatorHelpers.ValidateArgument(id, nameof(id));
 
-        var entity = await GetByIdAsync(id);
-        if (entity == null)
-            throw new KeyNotFoundException("Entity not found.");
+        var entity = await GetByIdAsync(id) ?? throw new KeyNotFoundException("Entity not found.");
 
         if (entity.IsDeleted)
             return true;
@@ -309,7 +339,17 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
     {
         try
         {
-            _context.Set<T>().RemoveRange(entities);
+
+            foreach (var entity in entities)
+            {
+                ArgumentValidatorHelpers.ValidateArgument(entity.Id, nameof(entity.Id));
+
+                if (entity.IsDeleted)
+                    continue;
+
+                entity.IsDeleted = true;
+
+            }
 
             return true;
 
@@ -326,9 +366,11 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
 
         var entities = await GetAllAsync(expression);
 
-        var ids = entities.Select(e => e.Id?.ToString()).ToList();
+        if (entities.Count == 0) throw new ArgumentException("No matching records found.");
 
-        await DeleteEntitiesAsync(expression);
+        DeleteAsync(entities);
+
+        var ids = entities.Select(e => e.Id?.ToString()).ToList();
 
         return ids;
     }
@@ -343,17 +385,6 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
 
         var lambda = ExpressionGenerator.GenerateLambda<T>(fieldValues);
         return await _context.Set<T>().Where(lambda).ToListAsync();
-    }
-
-    private async Task<IList<T>> DeleteEntitiesAsync(Expression<Func<T, bool>> expression)
-    {
-        var entitiesToDelete = await _context.Set<T>().Where(expression).ToListAsync();
-        if (entitiesToDelete.Count == 0) throw new ArgumentException("No matching records found.");
-
-        _context.Set<T>().RemoveRange(entitiesToDelete);
-        await _context.SaveChangesAsync();
-
-        return entitiesToDelete;
     }
 
     #endregion

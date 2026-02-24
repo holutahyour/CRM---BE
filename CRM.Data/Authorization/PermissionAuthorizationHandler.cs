@@ -19,17 +19,17 @@ public class PermissionAuthorizationHandler(ApplicationDbContext db) : Authoriza
         if (oid == null) return;
 
         // Check if user's roles contain the required permission
+        // We use IgnoreQueryFilters on the navigation properties as well to ensure 
+        // that the authorization check works even if the TenantProvider isn't fully stable yet
+        // and because the user might be in a "System" tenant while checking against a filtered set.
         var hasPermission = await db.Users
             .IgnoreQueryFilters()
             .Where(u => u.EntraObjectId == oid && !u.IsDeleted)
-            .SelectMany(u => u.UserRoles.Where(ur => !ur.IsDeleted))
-            .SelectMany(ur => ur.Role.RolePermissions.Where(rp => !rp.IsDeleted))
-            .AnyAsync(rp => rp.Permission.Code == requirement.Permission);
+            .AnyAsync(u => u.UserRoles
+                .Any(ur => !ur.IsDeleted && ur.Role.RolePermissions
+                    .Any(rp => !rp.IsDeleted && rp.Permission.Code == requirement.Permission)));
 
-        // Also check Entra ID Admin role (bypass)
-        var isAdmin = context.User.IsInRole("Admin");
-
-        if (hasPermission || isAdmin)
+        if (hasPermission)
             context.Succeed(requirement);
     }
 }

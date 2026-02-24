@@ -31,17 +31,22 @@ public class MenuService : MSSQLBaseService<Menu, Guid>, IMenuService
         _tenantModuleRepository = tenantModuleRepository;
     }
 
-    public virtual async Task<Result<IEnumerable<MenuDTO>>> GetMyMenusAsync(string oid, Guid tenantId, bool isAdmin)
+    public virtual async Task<Result<IEnumerable<MenuDTO>>> GetMyMenusAsync(string oid, Guid tenantId)
     {
         Result<IEnumerable<MenuDTO>> result = new(false);
 
         try
         {
-            // 1. Get user's permissions
+            // 1. Get user with roles
+            var user = await _userRepository.GetAsync(u => u.EntraObjectId == oid && u.TenantId == tenantId);
+            if (user == null) { result.SetError("User not found", ""); return result; }
+
+            var isAdmin = user.UserRoles.Any(ur => ur.Role.Code == "ADMIN");
+
+            // 2. Get user's permissions
             var userPermissions = isAdmin
                 ? new HashSet<string>((await _permissionRepository.GetAllAsync()).Select(p => p.Code).ToList())
-                : [.. (await _userRepository.GetAllAsync(u => u.EntraObjectId == oid && u.TenantId == tenantId))
-                    .SelectMany(u => u.UserRoles)
+                : [.. user.UserRoles
                     .SelectMany(ur => ur.Role.RolePermissions)
                     .Select(rp => rp.Permission.Code)
                     .Distinct()];

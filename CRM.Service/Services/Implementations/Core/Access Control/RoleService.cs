@@ -2,7 +2,9 @@
 using CRM.Base.Common.Repositories;
 using CRM.Base.Common.Repositories.Interfaces;
 using CRM.Base.Common.Services.Implementation;
+using CRM.Base.Enums;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 public class RoleService : MSSQLBaseService<Role, Guid>, IRoleService
 {
@@ -15,7 +17,5 @@ public class RoleService : MSSQLBaseService<Role, Guid>, IRoleService
     )
         : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
     {
-
     }
-
 }

@@ -1,18 +1,23 @@
-﻿using CRM.Base.Common.Domain.Common;
+﻿using CRM.Base.Common;
+using CRM.Base.Common.Domain.Common;
 using CRM.Base.Common.Domain.Entities;
 using CRM.Base.Common.Repositories;
 using CRM.Base.Common.Repositories.Interfaces;
 using CRM.Base.Common.Services.Implementation;
-using CRM.Domain.DTOs.Core;
+using CRM.Base.Enums;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 public class UserService : MSSQLBaseService<User, Guid>, IUserService
 {
     private readonly IMSSQLRepository<User, Guid> _repository;
+    private readonly IMSSQLRepository<UserRole, Guid> _userRoleRepository;
+    private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
     public UserService(
     IMSSQLRepository<User, Guid> repository,
+    IMSSQLRepository<UserRole, Guid> userRoleRepository,
     IMSSQLRepository<AuditLog, long> auditLogRepository,
     IApplicationDbContext context,
     IMapper mapper,
@@ -21,8 +26,11 @@ public class UserService : MSSQLBaseService<User, Guid>, IUserService
         : base(repository, auditLogRepository, context, mapper, httpContextAccessor)
     {
         _repository = repository;
+        _userRoleRepository = userRoleRepository;
+        _context = context;
         _mapper = mapper;
     }
+
     public virtual async Task<Result<UserProfileDTO>> GetMeAsync(string oid)
     {
         Result<UserProfileDTO> result = new(false);
@@ -54,6 +62,70 @@ public class UserService : MSSQLBaseService<User, Guid>, IUserService
         catch (Exception ex)
         {
             result.SetError(ex.ToString(), "Error while retrieving Base");
+        }
+
+        return result;
+    }
+
+    public virtual async Task<Result<UserRoleDTO>> AssignUserRoleAsync(Guid userId, Guid roleId)
+    {
+        Result<UserRoleDTO> result = new(false);
+
+        try
+        {
+
+            if (userId == Guid.Empty)
+            {
+                result.SetError("Invalid OID", "The provided OID is null or empty.");
+                return result;
+            }
+            else if (roleId == Guid.Empty)
+            {
+                result.SetError("Invalid Role ID", "The provided Role ID is empty.");
+                return result;
+            }
+
+            var userRole = await _userRoleRepository.CreateAsync(new UserRole { Code = RandomGenerator.RandomString(10), RoleId = roleId, UserId = userId });
+            await _context.SaveChangesAsync();
+
+            result.SetSuccess(_mapper.Map<UserRoleDTO>(userRole), "User role assigned successfully.");
+
+        }
+        catch (Exception ex)
+        {
+            result.SetError(ex.ToString(), "Error while assigning user role");
+        }
+
+        return result;
+    }
+
+    public virtual async Task<Result<UserRoleDTO>> RemoveUserRoleAsync(Guid userId, Guid roleId)
+    {
+        Result<UserRoleDTO> result = new(false);
+
+        try
+        {
+
+            if (userId == Guid.Empty)
+            {
+                result.SetError("Invalid OID", "The provided OID is null or empty.");
+                return result;
+            }
+            else if (roleId == Guid.Empty)
+            {
+                result.SetError("Invalid Role ID", "The provided Role ID is empty.");
+                return result;
+            }
+
+            var userRole = await _userRoleRepository.DeleteAsync(x => x.UserId == userId && x.RoleId == roleId);
+            await _context.SaveChangesAsync();
+
+            result.SetSuccess(_mapper.Map<UserRoleDTO>(userRole), "User role removed successfully.");
+
+        }
+        catch (Exception ex)
+        {
+            result.SetError(ex.ToString(), "Error while removing user role");
         }
 
         return result;

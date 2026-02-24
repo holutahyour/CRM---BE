@@ -12,11 +12,12 @@ namespace CRM.API.Controllers.v1;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class UserController : MSSQLBaseController<User, UserDTO, Guid>
+public class MenusController : MSSQLBaseController<Menu, MenuDTO, Guid>
 {
-    private readonly IUserService _service;
+    private readonly IMenuService _service;
+    private const string RoleAdmin = "Admin";
 
-    public UserController(IUserService service) : base(service)
+    public MenusController(IMenuService service) : base(service)
     {
         _service = service;
     }
@@ -42,16 +43,15 @@ public class UserController : MSSQLBaseController<User, UserDTO, Guid>
     {
         return await base.GetByIdAsync(id);
     }
-
     [Authorize(Policy = "AdminOnly")]
     [HttpGet]
-    [Route("me")]
-    public async Task<ActionResult> GetMeAsync()
+    [Route("my-menus")]
+    public async Task<ActionResult> GetMyMenusAsync()
     {
         var oid = GetCurrentUserOid();
-
+        var tenantId = GetCurrentTenantId();
         var requestTime = DateTime.UtcNow;
-        var response = await _service.GetMeAsync(oid);
+        var response = await _service.GetMyMenusAsync(oid, tenantId);
         var responseTime = DateTime.UtcNow;
 
         response.RequestTime = requestTime;
@@ -64,42 +64,4 @@ public class UserController : MSSQLBaseController<User, UserDTO, Guid>
             return BadRequest(response);
     }
 
-    [HttpPost]
-    public async Task<ActionResult> CreateUser([FromBody] CreateUserRequest request)
-    {
-
-        var response = await CreateAsync(request);
-
-        return Ok(response);
-    }
-
-    [Authorize(Policy = "AdminOnly")]
-    [HttpPut]
-    public async Task<ActionResult> UpdateUser(Guid id, [FromBody] UpdateUserRequest request)
-    {
-
-        var response = await UpdateAsync(id, request);
-
-        return Ok(response);
-    }
-
-    [Authorize(Policy = "AdminOnly")]
-    [HttpDelete]
-    public async Task<ActionResult> RemoveUser(Guid id)
-    {
-
-        var response = await RemoveAsync(id);
-
-        return Ok(response);
-    }
-
-    [Authorize(Policy = "AdminOnly")]
-    [HttpPost("import")]
-    public async Task<ActionResult> Import([FromBody] CreateUserRequest[] requests)
-    {
-
-        var response = await ImportAsync(requests);
-
-        return Ok(response);
-    }
 }

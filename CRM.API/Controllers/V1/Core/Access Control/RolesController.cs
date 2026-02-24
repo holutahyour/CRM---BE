@@ -12,11 +12,11 @@ namespace CRM.API.Controllers.v1;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class RoleController : MSSQLBaseController<Role, RoleDTO, Guid>
+public class RolesController : MSSQLBaseController<Role, RoleDTO, Guid>
 {
     private readonly IRoleService _service;
 
-    public RoleController(IRoleService service) : base(service)
+    public RolesController(IRoleService service) : base(service)
     {
         _service = service;
     }

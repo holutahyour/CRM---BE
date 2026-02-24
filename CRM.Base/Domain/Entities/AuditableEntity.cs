@@ -12,6 +12,7 @@ public class AuditableEntity : ISoftDelete
 
     public bool IsDeleted { get; set; } = false;
 
-    public byte[] RowVersion { get; set; } = [];
+    //[Timestamp]
+    //public byte[] RowVersion { get; set; } = [];
 
 }

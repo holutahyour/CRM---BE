@@ -69,9 +69,6 @@ namespace CRM.Data.Migrations
                     b.Property<string>("OldValues")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime2");
 
@@ -128,9 +125,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<string>("Population")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("StateCode")
                         .HasMaxLength(50)
@@ -215,9 +209,6 @@ namespace CRM.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("TimeZone")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -262,9 +253,6 @@ namespace CRM.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("cor_ethnicities");
@@ -304,9 +292,6 @@ namespace CRM.Data.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -362,9 +347,6 @@ namespace CRM.Data.Migrations
                     b.Property<DateTime?>("ReceivedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("SupplierBatchId")
                         .HasColumnType("nvarchar(max)");
 
@@ -411,9 +393,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
@@ -476,9 +455,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<int?>("ReferenceId")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
@@ -561,11 +537,6 @@ namespace CRM.Data.Migrations
                     b.Property<decimal?>("ReorderQuantity")
                         .HasPrecision(18, 4)
                         .HasColumnType("decimal(18,4)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.Property<decimal?>("SellingPrice")
                         .HasPrecision(18, 4)
@@ -653,9 +624,6 @@ namespace CRM.Data.Migrations
                     b.Property<decimal>("Reserved")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
 
@@ -706,9 +674,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("TemperatureControl")
                         .HasColumnType("bit");
@@ -773,9 +738,6 @@ namespace CRM.Data.Migrations
                     b.Property<string>("Route")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
@@ -796,8 +758,7 @@ namespace CRM.Data.Migrations
                             ModuleCode = "CORE",
                             Name = "DASHBOARD",
                             Position = 0,
-                            Route = "/dashboard",
-                            RowVersion = new byte[0]
+                            Route = "/dashboard"
                         },
                         new
                         {
@@ -811,8 +772,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
                             Name = "INVENTORY",
-                            Position = 1,
-                            RowVersion = new byte[0]
+                            Position = 1
                         },
                         new
                         {
@@ -826,8 +786,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "WAREHOUSE",
                             Name = "LOCATIONS",
-                            Position = 2,
-                            RowVersion = new byte[0]
+                            Position = 2
                         },
                         new
                         {
@@ -841,8 +800,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "SUPPLIERS",
                             Name = "SUPPLIERS",
-                            Position = 3,
-                            RowVersion = new byte[0]
+                            Position = 3
                         },
                         new
                         {
@@ -855,8 +813,7 @@ namespace CRM.Data.Migrations
                             Label = "Orders",
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "ORDERS",
-                            Position = 4,
-                            RowVersion = new byte[0]
+                            Position = 4
                         },
                         new
                         {
@@ -870,8 +827,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "REPORTS",
                             Name = "REPORTS",
-                            Position = 5,
-                            RowVersion = new byte[0]
+                            Position = 5
                         },
                         new
                         {
@@ -885,8 +841,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
                             Name = "ADMIN",
-                            Position = 6,
-                            RowVersion = new byte[0]
+                            Position = 6
                         },
                         new
                         {
@@ -901,8 +856,7 @@ namespace CRM.Data.Migrations
                             Name = "INVENTORY_ITEMS",
                             ParentId = new Guid("22222222-2222-2222-2222-222222222222"),
                             Position = 0,
-                            Route = "/inventory/items",
-                            RowVersion = new byte[0]
+                            Route = "/inventory/items"
                         },
                         new
                         {
@@ -917,8 +871,7 @@ namespace CRM.Data.Migrations
                             Name = "INVENTORY_CATEGORIES",
                             ParentId = new Guid("22222222-2222-2222-2222-222222222222"),
                             Position = 1,
-                            Route = "/inventory/categories",
-                            RowVersion = new byte[0]
+                            Route = "/inventory/categories"
                         },
                         new
                         {
@@ -933,8 +886,7 @@ namespace CRM.Data.Migrations
                             Name = "INVENTORY_BATCHES",
                             ParentId = new Guid("22222222-2222-2222-2222-222222222222"),
                             Position = 2,
-                            Route = "/inventory/batches",
-                            RowVersion = new byte[0]
+                            Route = "/inventory/batches"
                         },
                         new
                         {
@@ -949,8 +901,7 @@ namespace CRM.Data.Migrations
                             Name = "INVENTORY_STOCK",
                             ParentId = new Guid("22222222-2222-2222-2222-222222222222"),
                             Position = 3,
-                            Route = "/inventory/stock",
-                            RowVersion = new byte[0]
+                            Route = "/inventory/stock"
                         },
                         new
                         {
@@ -966,8 +917,7 @@ namespace CRM.Data.Migrations
                             Name = "INVENTORY_SCANNER",
                             ParentId = new Guid("22222222-2222-2222-2222-222222222222"),
                             Position = 4,
-                            Route = "/inventory/scanner",
-                            RowVersion = new byte[0]
+                            Route = "/inventory/scanner"
                         },
                         new
                         {
@@ -982,8 +932,7 @@ namespace CRM.Data.Migrations
                             Name = "LOCATIONS_ALL",
                             ParentId = new Guid("33333333-3333-3333-3333-333333333333"),
                             Position = 0,
-                            Route = "/locations",
-                            RowVersion = new byte[0]
+                            Route = "/locations"
                         },
                         new
                         {
@@ -998,8 +947,7 @@ namespace CRM.Data.Migrations
                             Name = "LOCATIONS_TRANSFERS",
                             ParentId = new Guid("33333333-3333-3333-3333-333333333333"),
                             Position = 1,
-                            Route = "/locations/transfers",
-                            RowVersion = new byte[0]
+                            Route = "/locations/transfers"
                         },
                         new
                         {
@@ -1014,8 +962,7 @@ namespace CRM.Data.Migrations
                             Name = "SUPPLIERS_LIST",
                             ParentId = new Guid("44444444-4444-4444-4444-444444444444"),
                             Position = 0,
-                            Route = "/suppliers",
-                            RowVersion = new byte[0]
+                            Route = "/suppliers"
                         },
                         new
                         {
@@ -1030,8 +977,7 @@ namespace CRM.Data.Migrations
                             Name = "SUPPLIERS_PERFORMANCE",
                             ParentId = new Guid("44444444-4444-4444-4444-444444444444"),
                             Position = 1,
-                            Route = "/suppliers/performance",
-                            RowVersion = new byte[0]
+                            Route = "/suppliers/performance"
                         },
                         new
                         {
@@ -1047,8 +993,7 @@ namespace CRM.Data.Migrations
                             Name = "ORDERS_PURCHASE",
                             ParentId = new Guid("55555555-5555-5555-5555-555555555555"),
                             Position = 0,
-                            Route = "/orders/purchase",
-                            RowVersion = new byte[0]
+                            Route = "/orders/purchase"
                         },
                         new
                         {
@@ -1064,8 +1009,7 @@ namespace CRM.Data.Migrations
                             Name = "ORDERS_SALES",
                             ParentId = new Guid("55555555-5555-5555-5555-555555555555"),
                             Position = 1,
-                            Route = "/orders/sales",
-                            RowVersion = new byte[0]
+                            Route = "/orders/sales"
                         },
                         new
                         {
@@ -1081,8 +1025,7 @@ namespace CRM.Data.Migrations
                             Name = "ORDERS_ECOM",
                             ParentId = new Guid("55555555-5555-5555-5555-555555555555"),
                             Position = 2,
-                            Route = "/orders/ecommerce",
-                            RowVersion = new byte[0]
+                            Route = "/orders/ecommerce"
                         },
                         new
                         {
@@ -1097,8 +1040,7 @@ namespace CRM.Data.Migrations
                             Name = "REPORTS_STOCK",
                             ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
                             Position = 0,
-                            Route = "/reports/stock",
-                            RowVersion = new byte[0]
+                            Route = "/reports/stock"
                         },
                         new
                         {
@@ -1113,8 +1055,7 @@ namespace CRM.Data.Migrations
                             Name = "REPORTS_EXPIRATION",
                             ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
                             Position = 1,
-                            Route = "/reports/expiration",
-                            RowVersion = new byte[0]
+                            Route = "/reports/expiration"
                         },
                         new
                         {
@@ -1129,8 +1070,7 @@ namespace CRM.Data.Migrations
                             Name = "REPORTS_MOVEMENTS",
                             ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
                             Position = 2,
-                            Route = "/reports/movements",
-                            RowVersion = new byte[0]
+                            Route = "/reports/movements"
                         },
                         new
                         {
@@ -1145,8 +1085,7 @@ namespace CRM.Data.Migrations
                             Name = "REPORTS_SALES",
                             ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
                             Position = 3,
-                            Route = "/reports/sales-trends",
-                            RowVersion = new byte[0]
+                            Route = "/reports/sales-trends"
                         },
                         new
                         {
@@ -1161,8 +1100,7 @@ namespace CRM.Data.Migrations
                             Name = "REPORTS_TRACEABILITY",
                             ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
                             Position = 4,
-                            Route = "/reports/traceability",
-                            RowVersion = new byte[0]
+                            Route = "/reports/traceability"
                         },
                         new
                         {
@@ -1177,8 +1115,7 @@ namespace CRM.Data.Migrations
                             Name = "ADMIN_USERS",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
                             Position = 0,
-                            Route = "/admin/users",
-                            RowVersion = new byte[0]
+                            Route = "/admin/users"
                         },
                         new
                         {
@@ -1193,8 +1130,7 @@ namespace CRM.Data.Migrations
                             Name = "ADMIN_ROLES",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
                             Position = 1,
-                            Route = "/admin/roles",
-                            RowVersion = new byte[0]
+                            Route = "/admin/roles"
                         },
                         new
                         {
@@ -1209,8 +1145,7 @@ namespace CRM.Data.Migrations
                             Name = "ADMIN_MODULES",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
                             Position = 2,
-                            Route = "/admin/modules",
-                            RowVersion = new byte[0]
+                            Route = "/admin/modules"
                         },
                         new
                         {
@@ -1225,8 +1160,7 @@ namespace CRM.Data.Migrations
                             Name = "ADMIN_SETTINGS",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
                             Position = 3,
-                            Route = "/admin/settings",
-                            RowVersion = new byte[0]
+                            Route = "/admin/settings"
                         },
                         new
                         {
@@ -1241,8 +1175,7 @@ namespace CRM.Data.Migrations
                             Name = "ADMIN_AUDIT",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
                             Position = 4,
-                            Route = "/admin/audit",
-                            RowVersion = new byte[0]
+                            Route = "/admin/audit"
                         });
                 });
 
@@ -1282,9 +1215,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<Guid?>("PermissionId1")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -1331,9 +1261,6 @@ namespace CRM.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("Version")
                         .HasColumnType("nvarchar(max)");
 
@@ -1354,7 +1281,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Core & Administration",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         },
                         new
@@ -1367,7 +1293,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Inventory Management",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         },
                         new
@@ -1380,7 +1305,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Warehouse & Locations",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         },
                         new
@@ -1393,7 +1317,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Procurement",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         },
                         new
@@ -1406,7 +1329,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Sales & Orders",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         },
                         new
@@ -1419,7 +1341,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Supplier Management",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         },
                         new
@@ -1432,7 +1353,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Reporting & Analytics",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         },
                         new
@@ -1445,7 +1365,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "E-Commerce Integration",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         },
                         new
@@ -1458,7 +1377,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Barcode & Scanning",
-                            RowVersion = new byte[0],
                             Version = "1.0"
                         });
                 });
@@ -1496,9 +1414,6 @@ namespace CRM.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("ModuleCategories");
@@ -1512,8 +1427,7 @@ namespace CRM.Data.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Core",
-                            RowVersion = new byte[0]
+                            Name = "Core"
                         },
                         new
                         {
@@ -1523,8 +1437,7 @@ namespace CRM.Data.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Operations",
-                            RowVersion = new byte[0]
+                            Name = "Operations"
                         },
                         new
                         {
@@ -1534,8 +1447,7 @@ namespace CRM.Data.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Supply Chain",
-                            RowVersion = new byte[0]
+                            Name = "Supply Chain"
                         },
                         new
                         {
@@ -1545,8 +1457,7 @@ namespace CRM.Data.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Sales",
-                            RowVersion = new byte[0]
+                            Name = "Sales"
                         },
                         new
                         {
@@ -1556,8 +1467,7 @@ namespace CRM.Data.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Intelligence",
-                            RowVersion = new byte[0]
+                            Name = "Intelligence"
                         },
                         new
                         {
@@ -1567,8 +1477,7 @@ namespace CRM.Data.Migrations
                             IsActive = true,
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Integrations",
-                            RowVersion = new byte[0]
+                            Name = "Integrations"
                         });
                 });
 
@@ -1614,9 +1523,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<DateTime?>("ReceivedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -1692,9 +1598,6 @@ namespace CRM.Data.Migrations
                     b.Property<decimal>("ReceivedQuantity")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1761,9 +1664,6 @@ namespace CRM.Data.Migrations
                     b.Property<string>("OrderNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -1820,9 +1720,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("SalesOrderId")
                         .HasColumnType("int");
@@ -1889,9 +1786,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("TaxId")
                         .HasColumnType("nvarchar(max)");
@@ -2007,9 +1901,6 @@ namespace CRM.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("UserCode")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -2055,9 +1946,6 @@ namespace CRM.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Permissions");
@@ -2071,8 +1959,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
-                            Name = "View Audit",
-                            RowVersion = new byte[0]
+                            Name = "View Audit"
                         },
                         new
                         {
@@ -2082,8 +1969,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
-                            Name = "Manage Modules",
-                            RowVersion = new byte[0]
+                            Name = "Manage Modules"
                         },
                         new
                         {
@@ -2093,8 +1979,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
-                            Name = "Manage Roles",
-                            RowVersion = new byte[0]
+                            Name = "Manage Roles"
                         },
                         new
                         {
@@ -2104,8 +1989,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
-                            Name = "Manage Settings",
-                            RowVersion = new byte[0]
+                            Name = "Manage Settings"
                         },
                         new
                         {
@@ -2115,8 +1999,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
-                            Name = "Manage Users",
-                            RowVersion = new byte[0]
+                            Name = "Manage Users"
                         },
                         new
                         {
@@ -2126,8 +2009,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "Manage Batches",
-                            RowVersion = new byte[0]
+                            Name = "Manage Batches"
                         },
                         new
                         {
@@ -2137,8 +2019,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "View Batches",
-                            RowVersion = new byte[0]
+                            Name = "View Batches"
                         },
                         new
                         {
@@ -2148,8 +2029,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "Manage Categories",
-                            RowVersion = new byte[0]
+                            Name = "Manage Categories"
                         },
                         new
                         {
@@ -2159,8 +2039,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "View Categories",
-                            RowVersion = new byte[0]
+                            Name = "View Categories"
                         },
                         new
                         {
@@ -2170,8 +2049,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "Create Items",
-                            RowVersion = new byte[0]
+                            Name = "Create Items"
                         },
                         new
                         {
@@ -2181,8 +2059,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "Delete Items",
-                            RowVersion = new byte[0]
+                            Name = "Delete Items"
                         },
                         new
                         {
@@ -2192,8 +2069,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "Edit Items",
-                            RowVersion = new byte[0]
+                            Name = "Edit Items"
                         },
                         new
                         {
@@ -2203,8 +2079,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "View Items",
-                            RowVersion = new byte[0]
+                            Name = "View Items"
                         },
                         new
                         {
@@ -2214,8 +2089,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "Manage Locations",
-                            RowVersion = new byte[0]
+                            Name = "Manage Locations"
                         },
                         new
                         {
@@ -2225,8 +2099,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "View Locations",
-                            RowVersion = new byte[0]
+                            Name = "View Locations"
                         },
                         new
                         {
@@ -2236,8 +2109,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
-                            Name = "Create Transfers",
-                            RowVersion = new byte[0]
+                            Name = "Create Transfers"
                         },
                         new
                         {
@@ -2247,8 +2119,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "PROCUREMENT",
-                            Name = "Approve Purchase",
-                            RowVersion = new byte[0]
+                            Name = "Approve Purchase"
                         },
                         new
                         {
@@ -2258,8 +2129,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "PROCUREMENT",
-                            Name = "Create Purchase",
-                            RowVersion = new byte[0]
+                            Name = "Create Purchase"
                         },
                         new
                         {
@@ -2269,8 +2139,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "PROCUREMENT",
-                            Name = "View Purchase",
-                            RowVersion = new byte[0]
+                            Name = "View Purchase"
                         },
                         new
                         {
@@ -2280,8 +2149,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "SALES",
-                            Name = "Create Sales",
-                            RowVersion = new byte[0]
+                            Name = "Create Sales"
                         },
                         new
                         {
@@ -2291,8 +2159,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "SALES",
-                            Name = "Fulfill Sales",
-                            RowVersion = new byte[0]
+                            Name = "Fulfill Sales"
                         },
                         new
                         {
@@ -2302,8 +2169,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "SALES",
-                            Name = "View Sales",
-                            RowVersion = new byte[0]
+                            Name = "View Sales"
                         },
                         new
                         {
@@ -2313,8 +2179,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "REPORTS",
-                            Name = "Export Reports",
-                            RowVersion = new byte[0]
+                            Name = "Export Reports"
                         },
                         new
                         {
@@ -2324,8 +2189,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "REPORTS",
-                            Name = "View Reports",
-                            RowVersion = new byte[0]
+                            Name = "View Reports"
                         },
                         new
                         {
@@ -2335,8 +2199,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "SUPPLIERS",
-                            Name = "Manage Suppliers",
-                            RowVersion = new byte[0]
+                            Name = "Manage Suppliers"
                         },
                         new
                         {
@@ -2346,8 +2209,7 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "SUPPLIERS",
-                            Name = "View Suppliers",
-                            RowVersion = new byte[0]
+                            Name = "View Suppliers"
                         });
                 });
 
@@ -2387,15 +2249,27 @@ namespace CRM.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            Code = "ADMIN",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Full system access with all permissions.",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsSystem = true,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Administrator",
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.RolePermission", b =>
@@ -2429,9 +2303,6 @@ namespace CRM.Data.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
 
@@ -2442,6 +2313,294 @@ namespace CRM.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("RolePermissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("cc6e8723-206a-1fcb-20ff-2c1e451ee5fe"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("16f14b31-e5b1-816f-ce63-815b91385119"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("23e45de9-17e0-bce6-e01b-9c67486cbe7d"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("0f5f7960-ff37-1d18-b8db-a247701c15aa"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("0b8fd6dd-07c2-5d79-3ac7-40d7db8c7f53"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("4d52e873-15c9-927f-150d-6a3d845b791d"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("18fe911a-0308-0eb3-2f35-6c6df96ab157"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("4905eb25-4c3b-fee3-c118-fb8437c960f2"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("3b502264-534b-0c74-0b33-b45d6a56d87f"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("0febd349-7a8c-da4e-6c49-c59d0b2caf39"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("2d7759a7-727d-68e2-0308-2d786025274c"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("cfc5e373-ce58-09d6-514b-0edaa65f32cf"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("6efe856d-f8d9-2e14-386c-e12ccdb7980c"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("52e3aefd-24df-a0cd-b523-647fccbbd979"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("85fb8c28-c531-be5f-6142-c9cd18378f3e"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("5885c1f5-1cfb-864b-5d5b-32b485ea4ea3"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("7f7453a4-617a-ee59-7a7c-6a3a02df13d9"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("f82b18de-ffa1-02ae-09f6-59a09a30ba70"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("cddc4370-67ae-1e99-e187-a60417f0338d"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("64aa126d-66f3-f310-9be3-6014e06a7ff3"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("af4f6306-90c0-dd81-7466-785762661367"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("949f5297-cb11-55fe-0577-363d69638021"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("d5d86a39-af55-b3b3-3406-0278a75c3383"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("76b6526d-cff0-4796-1f68-bb2aecd6c9ed"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("4d0da7b0-b60c-4672-0658-ea29724a3aca"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("4bc55478-400f-5672-96c1-450a1eef64b2"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("e6623c9b-5b44-c46a-2a35-2fb4c19ef0e9"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("04bbf5bd-add2-5e8e-2da8-f0e4c24fab23"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("bdf05014-43bc-55c5-f439-3d880d428876"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("24d5a78c-c422-a826-9daf-33d84d3797af"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("ea7217c2-e0b9-ee4e-46c2-d8ed8a2e5733"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("231369c2-7d5a-f017-1141-9304b242160b"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("1462d9e9-c4b1-915b-59d0-5242eeb00253"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("0f0500ec-ace8-e29c-2cf5-430b2118bf1f"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("c4916c38-16e4-bd6f-29f6-b246e76eba58"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("7ebbd306-4474-04a0-a693-50add4cd7c07"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("91ad5643-9847-0be7-a6fd-2363094c8fc7"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("5dee7547-6261-e622-7cf2-55a186da93e2"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("fa927e20-71a8-1156-efbd-2f5f3de22055"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("f80de477-9774-d44c-52e8-dafaa1b3780c"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("4cdd0e15-99f2-163d-bf02-7f9c7085639b"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("6aee37f4-b60a-1362-5aae-ac1f67e9cbec"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("bbbfe961-127d-5c27-bd5e-babc2e2b0a6c"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("14a70583-b385-fd5b-9336-b1048ab9651c"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("e0a63f57-fb0b-4f4e-2d69-a523aa73f746"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("de9f1bd2-d18a-5c11-d362-bd61e6eddcd6"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("dd6be378-a8bb-c2de-632e-1e8a1ad24913"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("d5cce05d-c6d5-a7c4-7330-3dafb9dd45fd"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("250563d5-86c5-2fc4-e574-8189d0c03b3b"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("83485ef2-65c3-a1cd-2387-16356d9579f6"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("3d8a7d5e-b379-dd8e-431c-314b7a6040ae"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.State", b =>
@@ -2496,9 +2655,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<string>("Population")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
@@ -2557,11 +2713,6 @@ namespace CRM.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.Property<string>("SubscriptionPlan")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -2619,9 +2770,6 @@ namespace CRM.Data.Migrations
 
                     b.Property<Guid>("ModuleId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
@@ -2692,11 +2840,6 @@ namespace CRM.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
 
@@ -2736,29 +2879,20 @@ namespace CRM.Data.Migrations
                     b.Property<DateTime>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("RoleId1")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("RowVersion")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("UserId1")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId1");
+                    b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
                 });
@@ -2991,11 +3125,15 @@ namespace CRM.Data.Migrations
                 {
                     b.HasOne("CRM.Domain.Entities.Role", "Role")
                         .WithMany("UserRoles")
-                        .HasForeignKey("RoleId1");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CRM.Domain.Entities.User", "User")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
 

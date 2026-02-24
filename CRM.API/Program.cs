@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using CRM.API.Middleware;
 using CRM.Base.Domain.Common;
 using CRM.Data;
 using CRM.Data.Authorization;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web;
 using Serilog;
 using System.Text.Json.Serialization;
+using CRM.API.Infrastructure;
+using CRM.Services.Services.Interfaces.Common;
 using static CRM.Data.Helpers.ServiceProviderExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,10 +31,10 @@ builder.Host.UseSerilog();
 builder.Services.AddControllers()
 .AddJsonOptions(options =>
 {
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
-builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
@@ -40,13 +43,28 @@ builder.Services
     .AddDataDependencies(builder.Configuration)
     .AddServiceDependencies(builder.Configuration);
 
+builder.Services.AddScoped<ITenantProvider, TenantProvider>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
+// Optional: Configure strict audience validation
+builder.Services.Configure<JwtBearerOptions>(
+    JwtBearerDefaults.AuthenticationScheme,
+    options =>
+    {
+        options.TokenValidationParameters.ValidateAudience = true;
+        options.TokenValidationParameters.ValidAudiences = new[]
+        {
+            builder.Configuration["AzureAd:ClientId"],
+            $"api://{builder.Configuration["AzureAd:ClientId"]}"
+        };
+    });
+
 builder.Services.AddAuthorizationBuilder()
-    .AddPolicy("AdminOnly", p => p.RequireRole("Admin"))
-    .AddPolicy("ManagerOrAbove", p => p.RequireRole("Admin", "Manager"))
-    .AddPolicy("SupervisorOrAbove", p => p.RequireRole("Admin", "Manager", "Supervisor"))
+    .AddPolicy("AdminOnly", p => p.AddRequirements(new PermissionRequirement(Permissions.UsersManage)))
+    .AddPolicy("ManagerOrAbove", p => p.AddRequirements(new PermissionRequirement(Permissions.ItemsEdit)))
+    .AddPolicy("SupervisorOrAbove", p => p.AddRequirements(new PermissionRequirement(Permissions.ItemsView)))
     .AddPolicy("InventoryRead", p => p.AddRequirements(new PermissionRequirement(Permissions.ItemsView)))
     .AddPolicy("InventoryWrite", p => p.AddRequirements(new PermissionRequirement(Permissions.ItemsCreate)))
     .AddPolicy("PurchaseOrderApprove", p => p.AddRequirements(new PermissionRequirement(Permissions.PurchaseOrdersApprove)))
@@ -60,6 +78,11 @@ builder.Services.AddApiVersioning(options =>
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ReportApiVersions = true;
 });
+
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
 
 var app = builder.Build();
 
@@ -81,14 +104,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("corsapp");
+
 app.UseHttpsRedirection();
 app.UseSerilogRequestLogging();
 
 // === Middleware registered in Phases 4-6 ===
-// app.UseAuthentication();                                    // Phase 4
-// app.UseMiddleware<TenantMiddleware>();                      // Phase 6
-// app.UseMiddleware<UserProvisioningMiddleware>();             // Phase 4
-// app.UseAuthorization();                                     // Phase 5
+app.UseAuthentication();                                    // Phase 4
+app.UseMiddleware<TenantMiddleware>();                      // Phase 6
+app.UseMiddleware<UserProvisioningMiddleware>();             // Phase 4
+app.UseAuthorization();                                     // Phase 5
 
 app.MapControllers();
 app.MapHealthChecks("/health");

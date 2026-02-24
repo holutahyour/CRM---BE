@@ -110,7 +110,8 @@ namespace CRM.Data
             ModuleSeedData.Seed(modelBuilder);
             PermissionSeedData.Seed(modelBuilder);
             MenuSeedData.Seed(modelBuilder);
-            //RolePermissionSeedData.Seed(modelBuilder);
+            RoleSeedData.Seed(modelBuilder);
+            RolePermissionSeedData.Seed(modelBuilder);
 
         }
 

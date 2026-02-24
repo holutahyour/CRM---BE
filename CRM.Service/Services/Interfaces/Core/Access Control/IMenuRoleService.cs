@@ -1,10 +1,9 @@
 ﻿using CRM.Base.Common.Domain.Common;
 using CRM.Base.Common.Services.Interface;
-using CRM.Domain.DTOs.Core;
 
 namespace CRM.Services.Interfaces;
 
 public interface IMenuService : IMSSQLBaseService<Menu, Guid>
 {
-    Task<Result<IEnumerable<MenuDTO>>> GetMyMenusAsync(string oid, Guid tenantId, bool isAdmin);
+    Task<Result<IEnumerable<MenuDTO>>> GetMyMenusAsync(string oid, Guid tenantId);
 }

@@ -19,7 +19,7 @@ public class ItemConfiguration : IEntityTypeConfiguration<Item>
         builder.Property(i => i.ReorderQuantity).HasPrecision(18, 4);
         builder.Property(i => i.CostPrice).HasPrecision(18, 4);
         builder.Property(i => i.SellingPrice).HasPrecision(18, 4);
-        builder.Property(i => i.RowVersion).IsRowVersion();
+        //builder.Property(i => i.RowVersion).IsRowVersion();
 
         builder.HasIndex(i => new { i.TenantId, i.Sku }).IsUnique();
         builder.HasIndex(i => i.Barcode);

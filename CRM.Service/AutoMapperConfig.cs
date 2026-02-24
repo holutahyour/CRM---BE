@@ -9,37 +9,58 @@
         protected override void ConfigureCustomMappings()
         {
             //Core 
-            CreateMap<Country, CountryResponse>();
-            CreateMap<UpdateCountryRequest, Country>();
-            CreateMap<CreateCountryRequest, Country>();
-            CreateMap<City, CityResponse>();
-            CreateMap<UpdateCityRequest, City>();
-            CreateMap<CreateCityRequest, City>();
-            CreateMap<Gender, GenderResponse>();
-            CreateMap<UpdateGenderRequest, Gender>();
-            CreateMap<CreateGenderRequest, Gender>();
-            CreateMap<State, StateResponse>();
-            CreateMap<UpdateStateRequest, State>();
-            CreateMap<CreateStateRequest, State>();
-            CreateMap<Ethnicity, EthnicityResponse>();
-            CreateMap<UpdateEthnicityRequest, Ethnicity>();
-            CreateMap<CreateEthnicityRequest, Ethnicity>();
+            CreateMap<Country, CountryResponse>().ReverseMap();
+            CreateMap<UpdateCountryRequest, Country>().ReverseMap();
+            CreateMap<CreateCountryRequest, Country>().ReverseMap();
+            CreateMap<City, CityResponse>().ReverseMap();
+            CreateMap<UpdateCityRequest, City>().ReverseMap();
+            CreateMap<CreateCityRequest, City>().ReverseMap();
+            CreateMap<Gender, GenderResponse>().ReverseMap();
+            CreateMap<UpdateGenderRequest, Gender>().ReverseMap();
+            CreateMap<CreateGenderRequest, Gender>().ReverseMap();
+            CreateMap<State, StateResponse>().ReverseMap();
+            CreateMap<UpdateStateRequest, State>().ReverseMap();
+            CreateMap<CreateStateRequest, State>().ReverseMap();
+            CreateMap<Ethnicity, EthnicityResponse>().ReverseMap();
+            CreateMap<UpdateEthnicityRequest, Ethnicity>().ReverseMap();
+            CreateMap<CreateEthnicityRequest, Ethnicity>().ReverseMap();
 
             //Core/Access Control
-            CreateMap<MenuDTO, Menu>();
+            CreateMap<Tenant, TenantDTO>().ReverseMap();
+            CreateMap<MenuDTO, Menu>().ReverseMap();
 
-            CreateMap<UserDTO, User>();
-            CreateMap<UpdateUserRequest, User>();
-            CreateMap<CreateUserRequest, User>();
+            // User -> UserDTO: map UserRoles navigation to List<string> of role names
+            CreateMap<User, UserDTO>()
+                .ForCtorParam("Roles",
+                    opt => opt.MapFrom(src => src.UserRoles
+                        .Where(ur => ur.Role != null)
+                        .Select(ur => ur.Role.Name)
+                        .ToList()));
+            // Reverse: UserDTO -> User ignores the computed Roles list
+            CreateMap<UserDTO, User>()
+                .ForMember(dest => dest.UserRoles, opt => opt.Ignore());
 
-            CreateMap<RoleDTO, Role>();
-            CreateMap<UpdateRoleRequest, Role>();
-            CreateMap<CreateRoleRequest, Role>();
+            CreateMap<UpdateUserRequest, User>().ReverseMap();
+            CreateMap<CreateUserRequest, User>().ReverseMap();
+
+            // Role -> RoleDTO: map RolePermissions navigation to List<string> of permission names
+            CreateMap<Role, RoleDTO>()
+                .ForCtorParam("Permissions",
+                    opt => opt.MapFrom(src => src.RolePermissions
+                        .Where(rp => rp.Permission != null)
+                        .Select(rp => rp.Permission.Name)
+                        .ToList()));
+            // Reverse: RoleDTO -> Role ignores the computed Permissions list
+            CreateMap<RoleDTO, Role>()
+                .ForMember(dest => dest.RolePermissions, opt => opt.Ignore());
+
+            CreateMap<UpdateRoleRequest, Role>().ReverseMap();
+            CreateMap<CreateRoleRequest, Role>().ReverseMap();
 
             //finance and revenue
-            CreateMap<ParameterValue, ParameterValueResponse>();
-            CreateMap<UpdateParameterValueRequest, ParameterValue>();
-            CreateMap<CreateParameterValueRequest, ParameterValue>();
+            CreateMap<ParameterValue, ParameterValueResponse>().ReverseMap();
+            CreateMap<UpdateParameterValueRequest, ParameterValue>().ReverseMap();
+            CreateMap<CreateParameterValueRequest, ParameterValue>().ReverseMap();
 
 
         }

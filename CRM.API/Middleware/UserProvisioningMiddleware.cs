@@ -1,5 +1,4 @@
-﻿
-using CRM.Data;
+﻿using CRM.Data;
 using CRM.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,11 +15,14 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
         if (oid == null) { await next(context); return; }
 
         var user = await db.Users.IgnoreQueryFilters()
+            .Include(u => u.UserRoles)
             .FirstOrDefaultAsync(u => u.EntraObjectId == oid);
 
         if (user == null)
         {
-            var tenantId = ResolveTenantId(context);
+            var isFirstUser = !await db.Users.IgnoreQueryFilters().AnyAsync();
+            var tenantId = await ResolveTenantIdAsync(context, db);
+
             user = new User
             {
                 EntraObjectId = oid,
@@ -35,23 +37,61 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
             db.Users.Add(user);
             await db.SaveChangesAsync();
             logger.LogInformation("JIT provisioned user {Email} for tenant {TenantId}", user.Email, tenantId);
+
+            // Auto-assign Admin role to the first system user
+            if (isFirstUser)
+            {
+                await AssignAdminRoleAsync(user, db);
+            }
         }
         else
         {
+            // Recovery: If user exists in System tenant but has no roles, assign Admin
+            if (user.TenantId == Guid.Empty && !user.UserRoles.Any())
+            {
+                await AssignAdminRoleAsync(user, db);
+            }
+
             user.LastLoginAt = DateTime.UtcNow;
             await db.SaveChangesAsync();
         }
 
         context.Items["CurrentUser"] = user;
+        context.Items["oid"] = user.EntraObjectId;
         context.Items["TenantId"] = user.TenantId;
         await next(context);
     }
 
-    private static Guid ResolveTenantId(HttpContext context)
+    private async Task AssignAdminRoleAsync(User user, ApplicationDbContext db)
     {
-        // Priority: JWT claim → Header → Subdomain
-        if (Guid.TryParse(context.User.FindFirst("tenant_id")?.Value, out var c)) return c;
-        if (Guid.TryParse(context.Request.Headers["X-Tenant-Id"].FirstOrDefault(), out var h)) return h;
-        return Guid.Empty;
+        var adminRole = await db.Roles.IgnoreQueryFilters().FirstOrDefaultAsync(r => r.Code == "ADMIN" && r.TenantId == Guid.Empty);
+        if (adminRole != null)
+        {
+            db.UserRoles.Add(new UserRole
+            {
+                UserId = user.Id,
+                RoleId = adminRole.Id,
+                TenantId = Guid.Empty
+            });
+            await db.SaveChangesAsync();
+            logger.LogInformation("Assigned System Administrator role to user {Email}", user.Email);
+        }
+    }
+
+    private static async Task<Guid> ResolveTenantIdAsync(HttpContext context, ApplicationDbContext db)
+    {
+        // 1. Priority: JWT claim
+        if (Guid.TryParse(context.User.FindFirst("tenant_id")?.Value, out var fromClaim)) return fromClaim;
+
+        // 2. Request header
+        if (Guid.TryParse(context.Request.Headers["X-Tenant-Id"].FirstOrDefault(), out var fromHeader)) return fromHeader;
+
+        // 3. Fallback: Search for "System" tenant by code
+        var systemTenant = await db.Tenants.IgnoreQueryFilters().FirstOrDefaultAsync(t => t.Code == "SYSTEM");
+        if (systemTenant != null) return systemTenant.Id;
+
+        // 4. Last resort: Any tenant or Guid.Empty (will fail if no tenants exist)
+        var firstTenant = await db.Tenants.IgnoreQueryFilters().FirstOrDefaultAsync();
+        return firstTenant?.Id ?? Guid.Empty;
     }
 }

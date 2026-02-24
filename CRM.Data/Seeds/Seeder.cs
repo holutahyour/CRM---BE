@@ -1,4 +1,5 @@
 ﻿using CRM.Data.Seeds.Data.Core;
+using CRM.Domain.Enums;
 
 namespace CRM.Data.Seeds;
 
@@ -12,6 +13,40 @@ public class Seeder
     }
     public void Intialize()
     {
+        // Tenants
+        if (!_context.Tenants.IgnoreQueryFilters().Any(t => t.Code == "SYSTEM"))
+        {
+            var tenant = new Tenant
+            {
+                Id = Guid.Empty,
+                Name = "System",
+                Code = "SYSTEM",
+                SubscriptionStatus = SubscriptionStatus.Active,
+            };
+
+            _context.Tenants.Add(tenant);
+            _context.SaveChanges();
+
+            // Seed default roles
+            var adminRole = new Role { TenantId = tenant.Id, Name = "Administrator", Code = "ADMIN", IsSystem = true };
+            var managerRole = new Role { TenantId = tenant.Id, Name = "Manager", Code = "MANAGER", IsSystem = true };
+            var staffRole = new Role { TenantId = tenant.Id, Name = "Staff", Code = "STAFF", IsSystem = true };
+
+            _context.Roles.AddRange([adminRole, managerRole, staffRole]);
+
+            // Assign all permissions to admin role
+            var allPermissions = _context.Permissions.ToList();
+            foreach (var perm in allPermissions)
+                _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = adminRole.Id, PermissionId = perm.Id });
+
+            // Activate default modules
+            var defaultModules = _context.Modules.Where(m => m.Code == "CORE" || m.Code == "INVENTORY");
+            foreach (var mod in defaultModules)
+                _context.TenantModules.Add(new TenantModule { TenantId = tenant.Id, ModuleId = mod.Id, IsActive = true, ActivatedAt = DateTime.UtcNow });
+
+            _context.SaveChanges();
+        }
+
         //Core            
 
         var genders = GenderSeedData.GenerateGenderData();

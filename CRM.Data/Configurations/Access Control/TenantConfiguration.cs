@@ -18,7 +18,7 @@ public class TenantConfiguration : IEntityTypeConfiguration<Tenant>
         builder.Property(t => t.SubscriptionPlan).HasMaxLength(50);
         builder.Property(t => t.SubscriptionStatus)
             .HasConversion<string>().HasMaxLength(20);
-        builder.Property(t => t.RowVersion).IsRowVersion();
+        //builder.Property(t => t.RowVersion).IsRowVersion();
 
         builder.HasIndex(t => t.Code).IsUnique()
             .HasFilter("[Code] IS NOT NULL");
