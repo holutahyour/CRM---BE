@@ -1,5 +1,6 @@
 ﻿global using AutoMapper;
 global using CRM.Base.Common.Services;
+global using CRM.Base.Common.Services.Interface;
 global using CRM.Domain;
 global using CRM.Domain.DTOs.Core;
 global using CRM.Domain.Entities;

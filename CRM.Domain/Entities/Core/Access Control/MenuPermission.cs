@@ -6,8 +6,8 @@ namespace CRM.Domain.Entities;
 [Table("accl_menu_permissions")]
 public class MenuPermission : BaseEntity<Guid>  // Global
 {
-    public int MenuId { get; set; }
-    public int PermissionId { get; set; }
+    public Guid MenuId { get; set; }
+    public Guid PermissionId { get; set; }
 
     public Menu Menu { get; set; } = null!;
     public Permission Permission { get; set; } = null!;

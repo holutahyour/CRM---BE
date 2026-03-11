@@ -36,6 +36,9 @@
                     opt => opt.MapFrom(src => src.Children))
                 .ReverseMap();
 
+            CreateMap<CreateMenuRequest, Menu>().ReverseMap();
+            CreateMap<UpdateMenuRequest, Menu>().ReverseMap();
+
             // User -> UserDTO: map UserRoles navigation to List<string> of role names
             CreateMap<User, UserDTO>()
                 .ForCtorParam("Roles",

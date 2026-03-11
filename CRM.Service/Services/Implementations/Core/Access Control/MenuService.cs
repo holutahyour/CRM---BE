@@ -3,11 +3,13 @@ using CRM.Base.Common.Domain.Entities;
 using CRM.Base.Common.Repositories;
 using CRM.Base.Common.Repositories.Interfaces;
 using CRM.Base.Common.Services.Implementation;
-using CRM.Domain.DTOs.Core;
 using Microsoft.AspNetCore.Http;
 
 public class MenuService : MSSQLBaseService<Menu, Guid>, IMenuService
 {
+    private readonly IMSSQLRepository<MenuPermission, Guid> _menuPermissionRepository;
+    private readonly IMapper _mapper;
+    private readonly IApplicationDbContext _context;
     private readonly IMSSQLRepository<Menu, Guid> _repository;
     private readonly IMSSQLRepository<User, Guid> _userRepository;
     private readonly IMSSQLRepository<Permission, Guid> _permissionRepository;
@@ -18,6 +20,7 @@ public class MenuService : MSSQLBaseService<Menu, Guid>, IMenuService
     IMSSQLRepository<User, Guid> userRepository,
     IMSSQLRepository<Permission, Guid> permissionRepository,
     IMSSQLRepository<TenantModule, Guid> tenantModuleRepository,
+    IMSSQLRepository<MenuPermission, Guid> menuPermissionRepository,
     IMSSQLRepository<AuditLog, long> auditLogRepository,
     IApplicationDbContext context,
     IMapper mapper,
@@ -29,6 +32,94 @@ public class MenuService : MSSQLBaseService<Menu, Guid>, IMenuService
         _userRepository = userRepository;
         _permissionRepository = permissionRepository;
         _tenantModuleRepository = tenantModuleRepository;
+        _menuPermissionRepository = menuPermissionRepository;
+        _mapper = mapper;
+        _context = context;
+    }
+
+    public override async Task<Result<TResponse>> CreateAsync<TResponse, TRequest>(TRequest request)
+    {
+        if (request is CreateMenuRequest createRequest)
+        {
+            var result = new Result<TResponse>(false);
+            try
+            {
+                var menu = _mapper.Map<Menu>(createRequest);
+                var response = await _repository.CreateAsync(menu);
+
+                if (createRequest.PermissionIds != null && createRequest.PermissionIds.Any())
+                {
+                    foreach (var permissionId in createRequest.PermissionIds)
+                    {
+                        await _menuPermissionRepository.CreateAsync(new MenuPermission
+                        {
+                            MenuId = menu.Id,
+                            PermissionId = permissionId
+                        });
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                result.SetSuccess(_mapper.Map<TResponse>(response), "Menu created successfully with permissions.");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.SetError(ex.ToString(), "Error while creating Menu");
+                return result;
+            }
+        }
+
+        return await base.CreateAsync<TResponse, TRequest>(request);
+    }
+
+    public override async Task<Result<bool>> UpdateAsync<TRequest>(Guid id, TRequest request)
+    {
+        if (request is UpdateMenuRequest updateRequest)
+        {
+            var result = new Result<bool>(false);
+            try
+            {
+                var existingMenu = await _repository.GetByIdAsync(id);
+                if (existingMenu == null)
+                {
+                    result.SetError("Menu not found", "Menu not found");
+                    return result;
+                }
+
+                _mapper.Map(updateRequest, existingMenu);
+
+                // Update permissions
+                var existingPermissions = await _menuPermissionRepository.GetAllAsync(mp => mp.MenuId == id);
+                foreach (var ep in existingPermissions)
+                {
+                    await _menuPermissionRepository.DeleteAsync(ep.Id);
+                }
+
+                if (updateRequest.PermissionIds != null && updateRequest.PermissionIds.Any())
+                {
+                    foreach (var permissionId in updateRequest.PermissionIds)
+                    {
+                        await _menuPermissionRepository.CreateAsync(new MenuPermission
+                        {
+                            MenuId = id,
+                            PermissionId = permissionId
+                        });
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                result.SetSuccess(true, "Menu updated successfully with permissions.");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.SetError(ex.ToString(), "Error while updating Menu");
+                return result;
+            }
+        }
+
+        return await base.UpdateAsync(id, request);
     }
 
     public virtual async Task<Result<IEnumerable<MenuDTO>>> GetMyMenusAsync(string oid, Guid tenantId)
