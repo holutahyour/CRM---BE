@@ -1,6 +1,4 @@
-using CRM.Domain.Entities;
 using CRM.Domain.Constants;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
 

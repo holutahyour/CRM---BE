@@ -3,12 +3,10 @@ using CRM.Base.Common.Presentation;
 using CRM.Domain;
 using CRM.Domain.Entities;
 using CRM.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+
 namespace CRM.API.Controllers.v1;
 
-[ApiController]
 [ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
 public class CountriesController : MSSQLBaseController<Country, CountryResponse, long>
 {
     private readonly ICountryService _service;

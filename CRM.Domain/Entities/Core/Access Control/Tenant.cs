@@ -1,10 +1,11 @@
 ﻿using CRM.Base.Common.Domain.Entities;
 using CRM.Domain.Enums;
-using Microsoft.Graph.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
 
-public class Tenant : BaseEntity<Guid>  // NOT TenantEntity — this IS the tenant
+[Table("sys_tenants")]
+public partial class Tenant : BaseEntity<Guid>  // NOT TenantEntity — this IS the tenant
 {
     public string Name { get; set; } = "";
     public string? Code { get; set; }

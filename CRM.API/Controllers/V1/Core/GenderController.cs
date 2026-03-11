@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers.v1;
 
-[ApiController]
 [ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
 public class GendersController : MSSQLBaseController<Gender, GenderResponse, long>
 {
     private readonly IGenderService _service;

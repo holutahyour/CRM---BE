@@ -1,7 +1,9 @@
 ﻿using CRM.Base.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CRM.Domain.Entities.Inventory;
+namespace CRM.Domain.Entities;
 
+[Table("invtry_categories")]
 public class Category : TenantEntity<Guid>
 {
     public string Name { get; set; } = "";

@@ -1,5 +1,4 @@
-﻿using CRM.Domain.Entities.Inventory;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CRM.Data.Configurations;
 

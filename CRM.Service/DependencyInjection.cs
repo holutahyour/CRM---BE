@@ -20,6 +20,30 @@ public static class DependencyInjection
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<ITenantService, TenantService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IPermissionService, PermissionService>();
+
+        //Organization
+        services.AddScoped<IDepartmentService, DepartmentService>();
+
+        //Inventory
+        services.AddScoped<ILocationService, LocationService>();
+        services.AddScoped<IItemService, ItemService>();
+        services.AddScoped<IBatchService, BatchService>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IItemLocationService, ItemLocationService>();
+        services.AddScoped<IInventoryTransactionService, InventoryTransactionService>();
+        services.AddScoped<IItemLocationService, ItemLocationService>();
+
+        //Requistions
+        services.AddScoped<IActivityService, ActivityService>();
+        services.AddScoped<IDashboardSummaryService, DashboardSummaryService>();
+        services.AddScoped<IIncidentService, IncidentService>();
+        services.AddScoped<IItemRequestService, ItemRequestService>();
+        services.AddScoped<IMonthlyReportService, MonthlyReportService>();
+        services.AddScoped<IRequisitionService, RequisitionService>();
+
+
+
 
         var mapperConfig = new MapperConfiguration(cfg =>
         {

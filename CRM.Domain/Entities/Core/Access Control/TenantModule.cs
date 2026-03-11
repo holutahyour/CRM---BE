@@ -1,8 +1,10 @@
 ﻿using CRM.Base.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
 
-public class TenantModule : TenantEntity<Guid>
+[Table("sys_tenant_modules")]
+public partial class TenantModule : TenantEntity<Guid>
 {
     public Guid ModuleId { get; set; }
     public bool IsActive { get; set; } = true;

@@ -1,8 +1,10 @@
 ﻿using CRM.Base.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
 
-public class Role : TenantEntity<Guid>
+[Table("accl_roles")]
+public partial class Role : TenantEntity<Guid>
 {
     public string Name { get; set; } = "";
     public string Code { get; set; } = "";

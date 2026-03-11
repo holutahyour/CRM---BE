@@ -1,8 +1,10 @@
 ﻿using CRM.Base.Domain.Entities;
 using CRM.Domain.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities.Orders;
 
+[Table("ordr_sales_orders")]
 public class SalesOrder : TenantEntity<Guid>
 {
     public string OrderNumber { get; set; } = "";

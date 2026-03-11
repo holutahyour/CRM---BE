@@ -1,7 +1,9 @@
 ﻿using CRM.Base.Common.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
 
+[Table("accl_menus")]
 public class Menu : BaseEntity<Guid>  // Global — not tenant-scoped
 {
     public string Name { get; set; } = "";

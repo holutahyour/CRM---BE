@@ -1,4 +1,6 @@
-﻿namespace CRM.Base.Common.Domain.Entities;
+﻿using CRM.Base.Domain.Entities;
+
+namespace CRM.Base.Common.Domain.Entities;
 
 public class AuditableEntity : ISoftDelete
 {

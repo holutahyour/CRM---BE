@@ -81,6 +81,112 @@ namespace CRM.Data.Migrations
                     b.ToTable("cor_audit_logs");
                 });
 
+            modelBuilder.Entity("CRM.Domain.Entities.Batch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BatchNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("CurrentQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("InitialQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ItemId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ManufactureDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ReceivedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SupplierBatchId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId1");
+
+                    b.ToTable("invtry_batches");
+                });
+
+            modelBuilder.Entity("CRM.Domain.Entities.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("invtry_categories");
+                });
+
             modelBuilder.Entity("CRM.Domain.Entities.City", b =>
                 {
                     b.Property<long>("Id")
@@ -298,113 +404,7 @@ namespace CRM.Data.Migrations
                     b.ToTable("cor_genders");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Batch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("BatchNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("CurrentQuantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("ExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("InitialQuantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ItemId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ManufactureDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ReceivedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SupplierBatchId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId1");
-
-                    b.ToTable("Batches");
-                });
-
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ParentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.InventoryTransaction", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.InventoryTransaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -473,10 +473,10 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("LocationId1");
 
-                    b.ToTable("InventoryTransactions");
+                    b.ToTable("invtry_inventory_transactions");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Item", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.Item", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -578,7 +578,7 @@ namespace CRM.Data.Migrations
                     b.ToTable("items", (string)null);
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.ItemLocation", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.ItemLocation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -633,10 +633,10 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("LocationId1");
 
-                    b.ToTable("ItemLocations");
+                    b.ToTable("invtry_item_locations");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Location", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.Location", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -686,7 +686,7 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations");
+                    b.ToTable("invtry_locations");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Menu", b =>
@@ -742,7 +742,7 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Menus");
+                    b.ToTable("accl_menus");
 
                     b.HasData(
                         new
@@ -1222,7 +1222,7 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("PermissionId1");
 
-                    b.ToTable("MenuPermissions");
+                    b.ToTable("accl_menu_permissions");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Module", b =>
@@ -1268,7 +1268,7 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Modules");
+                    b.ToTable("sys_modules");
 
                     b.HasData(
                         new
@@ -1416,7 +1416,7 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ModuleCategories");
+                    b.ToTable("sys_module_categories");
 
                     b.HasData(
                         new
@@ -1543,7 +1543,7 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("VendorId1");
 
-                    b.ToTable("PurchaseOrders");
+                    b.ToTable("ordr_purchase_orders");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Orders.PurchaseOrderItem", b =>
@@ -1612,7 +1612,7 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("PurchaseOrderId1");
 
-                    b.ToTable("PurchaseOrderItems");
+                    b.ToTable("ordr_purchase_order_items");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Orders.SalesOrder", b =>
@@ -1675,7 +1675,7 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SalesOrders");
+                    b.ToTable("ordr_sales_orders");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Orders.SalesOrderItem", b =>
@@ -1741,7 +1741,7 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("SalesOrderId1");
 
-                    b.ToTable("SalesOrderItems");
+                    b.ToTable("ordr_sales_order_items");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Orders.Vendor", b =>
@@ -1798,7 +1798,7 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vendors");
+                    b.ToTable("ordr_vendors");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.ParameterDefinition", b =>
@@ -1948,7 +1948,7 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("accl_permissions");
 
                     b.HasData(
                         new
@@ -2254,7 +2254,7 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("accl_roles");
 
                     b.HasData(
                         new
@@ -2312,7 +2312,7 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RolePermissions");
+                    b.ToTable("accl_role_permissions");
 
                     b.HasData(
                         new
@@ -2780,7 +2780,7 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("TenantId");
 
-                    b.ToTable("TenantModules");
+                    b.ToTable("sys_tenant_modules");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.User", b =>
@@ -2788,6 +2788,9 @@ namespace CRM.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessLevel")
+                        .HasColumnType("int");
 
                     b.Property<string>("AvatarUrl")
                         .HasMaxLength(500)
@@ -2836,9 +2839,15 @@ namespace CRM.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("Onboarded")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Phone")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uniqueidentifier");
@@ -2894,7 +2903,25 @@ namespace CRM.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("accl_user_roles");
+                });
+
+            modelBuilder.Entity("CRM.Domain.Entities.Batch", b =>
+                {
+                    b.HasOne("CRM.Domain.Entities.Item", "Item")
+                        .WithMany("Batches")
+                        .HasForeignKey("ItemId1");
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("CRM.Domain.Entities.Category", b =>
+                {
+                    b.HasOne("CRM.Domain.Entities.Category", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.City", b =>
@@ -2912,35 +2939,17 @@ namespace CRM.Data.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Batch", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.InventoryTransaction", b =>
                 {
-                    b.HasOne("CRM.Domain.Entities.Inventory.Item", "Item")
-                        .WithMany("Batches")
-                        .HasForeignKey("ItemId1");
-
-                    b.Navigation("Item");
-                });
-
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Category", b =>
-                {
-                    b.HasOne("CRM.Domain.Entities.Inventory.Category", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.InventoryTransaction", b =>
-                {
-                    b.HasOne("CRM.Domain.Entities.Inventory.Batch", "Batch")
+                    b.HasOne("CRM.Domain.Entities.Batch", "Batch")
                         .WithMany()
                         .HasForeignKey("BatchId1");
 
-                    b.HasOne("CRM.Domain.Entities.Inventory.Item", "Item")
+                    b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany("Transactions")
                         .HasForeignKey("ItemId1");
 
-                    b.HasOne("CRM.Domain.Entities.Inventory.Location", "Location")
+                    b.HasOne("CRM.Domain.Entities.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId1");
 
@@ -2951,9 +2960,9 @@ namespace CRM.Data.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Item", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.Item", b =>
                 {
-                    b.HasOne("CRM.Domain.Entities.Inventory.Category", "Category")
+                    b.HasOne("CRM.Domain.Entities.Category", "Category")
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -2968,13 +2977,13 @@ namespace CRM.Data.Migrations
                     b.Navigation("Vendor");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.ItemLocation", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.ItemLocation", b =>
                 {
-                    b.HasOne("CRM.Domain.Entities.Inventory.Item", "Item")
+                    b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany("ItemLocations")
                         .HasForeignKey("ItemId1");
 
-                    b.HasOne("CRM.Domain.Entities.Inventory.Location", "Location")
+                    b.HasOne("CRM.Domain.Entities.Location", "Location")
                         .WithMany("ItemLocations")
                         .HasForeignKey("LocationId1");
 
@@ -3027,11 +3036,11 @@ namespace CRM.Data.Migrations
 
             modelBuilder.Entity("CRM.Domain.Entities.Orders.PurchaseOrderItem", b =>
                 {
-                    b.HasOne("CRM.Domain.Entities.Inventory.Item", "Item")
+                    b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany()
                         .HasForeignKey("ItemId1");
 
-                    b.HasOne("CRM.Domain.Entities.Inventory.Location", "Location")
+                    b.HasOne("CRM.Domain.Entities.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId1");
 
@@ -3048,11 +3057,11 @@ namespace CRM.Data.Migrations
 
             modelBuilder.Entity("CRM.Domain.Entities.Orders.SalesOrderItem", b =>
                 {
-                    b.HasOne("CRM.Domain.Entities.Inventory.Batch", "Batch")
+                    b.HasOne("CRM.Domain.Entities.Batch", "Batch")
                         .WithMany()
                         .HasForeignKey("BatchId1");
 
-                    b.HasOne("CRM.Domain.Entities.Inventory.Item", "Item")
+                    b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany()
                         .HasForeignKey("ItemId1");
 
@@ -3140,14 +3149,14 @@ namespace CRM.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Category", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Children");
 
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Item", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.Item", b =>
                 {
                     b.Navigation("Batches");
 
@@ -3156,7 +3165,7 @@ namespace CRM.Data.Migrations
                     b.Navigation("Transactions");
                 });
 
-            modelBuilder.Entity("CRM.Domain.Entities.Inventory.Location", b =>
+            modelBuilder.Entity("CRM.Domain.Entities.Location", b =>
                 {
                     b.Navigation("ItemLocations");
                 });

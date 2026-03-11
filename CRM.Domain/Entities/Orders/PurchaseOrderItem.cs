@@ -1,8 +1,9 @@
 ﻿using CRM.Base.Domain.Entities;
-using CRM.Domain.Entities.Inventory;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities.Orders;
 
+[Table("ordr_purchase_order_items")]
 public class PurchaseOrderItem : TenantEntity<Guid>
 {
     public int PurchaseOrderId { get; set; }

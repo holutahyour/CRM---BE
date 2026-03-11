@@ -1,7 +1,9 @@
 ﻿using CRM.Base.Common.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
 
+[Table("accl_menu_permissions")]
 public class MenuPermission : BaseEntity<Guid>  // Global
 {
     public int MenuId { get; set; }

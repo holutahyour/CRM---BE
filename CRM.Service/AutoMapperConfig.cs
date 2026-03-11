@@ -27,7 +27,14 @@
 
             //Core/Access Control
             CreateMap<Tenant, TenantDTO>().ReverseMap();
-            CreateMap<MenuDTO, Menu>().ReverseMap();
+            CreateMap<Menu, MenuDTO>()
+                .ForCtorParam("PermissionIds",
+                    opt => opt.MapFrom(src => src.MenuPermissions
+                        .Select(mp => mp.PermissionId)
+                        .ToList()))
+                .ForCtorParam("Children",
+                    opt => opt.MapFrom(src => src.Children))
+                .ReverseMap();
 
             // User -> UserDTO: map UserRoles navigation to List<string> of role names
             CreateMap<User, UserDTO>()
@@ -49,6 +56,10 @@
                     opt => opt.MapFrom(src => src.RolePermissions
                         .Where(rp => rp.Permission != null)
                         .Select(rp => rp.Permission.Name)
+                        .ToList()))
+                .ForCtorParam("PermissionIds",
+                    opt => opt.MapFrom(src => src.RolePermissions
+                        .Select(rp => rp.PermissionId)
                         .ToList()));
             // Reverse: RoleDTO -> Role ignores the computed Permissions list
             CreateMap<RoleDTO, Role>()
@@ -61,8 +72,7 @@
             CreateMap<ParameterValue, ParameterValueResponse>().ReverseMap();
             CreateMap<UpdateParameterValueRequest, ParameterValue>().ReverseMap();
             CreateMap<CreateParameterValueRequest, ParameterValue>().ReverseMap();
-
-
+            CreateMap<Permission, PermissionDTO>().ReverseMap();
         }
     }
 }

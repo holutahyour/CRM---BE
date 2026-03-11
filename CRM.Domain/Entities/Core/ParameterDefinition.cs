@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CRM.Domain.Entities;
 
 [Table("fr_parameter_definitions")]
-public class ParameterDefinition
+public partial class ParameterDefinition
 {
     [Key]
     [StringLength(50)]

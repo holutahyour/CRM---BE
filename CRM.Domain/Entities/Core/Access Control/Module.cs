@@ -1,8 +1,10 @@
 ﻿using CRM.Base.Common.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
 
-public class Module : BaseEntity<Guid>  // Global
+[Table("sys_modules")]
+public partial class Module : BaseEntity<Guid>  // Global
 {
     public string Name { get; set; } = "";
     public string Code { get; set; } = "";

@@ -35,8 +35,7 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
                 CreatedOn = DateTime.UtcNow
             };
             db.Users.Add(user);
-            await db.SaveChangesAsync();
-            logger.LogInformation("JIT provisioned user {Email} for tenant {TenantId}", user.Email, tenantId);
+            await db.SaveChangesAsync(); logger.LogInformation("JIT provisioned user {Email} for tenant {TenantId}", user.Email, tenantId);
 
             // Auto-assign Admin role to the first system user
             if (isFirstUser)

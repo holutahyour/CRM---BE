@@ -1,7 +1,6 @@
 ﻿using CRM.Base.Common.Domain.Entities;
 using CRM.Base.Domain.Entities;
 using CRM.Data.Seeds.Access_Control;
-using CRM.Domain.Entities.Inventory;
 using CRM.Domain.Entities.Orders;
 using CRM.Services.Services.Interfaces.Common;
 

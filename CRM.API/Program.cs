@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using CRM.API.Infrastructure;
 using CRM.API.Middleware;
 using CRM.Base.Domain.Common;
 using CRM.Data;
@@ -6,13 +7,13 @@ using CRM.Data.Authorization;
 using CRM.Data.Helpers;
 using CRM.Domain.Constants;
 using CRM.Service;
+using CRM.Services.Services.Interfaces.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text.Json.Serialization;
-using CRM.API.Infrastructure;
-using CRM.Services.Services.Interfaces.Common;
 using static CRM.Data.Helpers.ServiceProviderExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,8 +37,32 @@ builder.Services.AddControllers()
 });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddHealthChecks();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "CRM", Version = "v1" });
+    c.AddSecurityDefinition("AzureAD", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+
+    // Configure Swagger to use the Azure AD Bearer token security globally
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "AzureAD"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+}); builder.Services.AddHealthChecks();
 
 builder.Services
     .AddDataDependencies(builder.Configuration)
@@ -101,7 +126,14 @@ if (args.Contains("--seed"))
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI((c =>
+    {
+        // Enable the "Authorize" button in the Swagger UI
+        c.OAuthClientId("swagger");
+        c.OAuthClientSecret("secret");
+        c.OAuthAppName("Swagger UI");
+        c.OAuthUsePkce();
+    }));
 }
 
 app.UseCors("corsapp");

@@ -86,7 +86,8 @@ public class MenuService : MSSQLBaseService<Menu, Guid>, IMenuService
         return menus
             .Where(m => m.ParentId == parentId)
             .Select(m => new MenuDTO(m.Id, m.Name, m.Label, m.Icon, m.Route, m.Position,
-                BuildTree(menus, m.Id)))
+                BuildTree(menus, m.Id),
+                m.MenuPermissions.Select(mp => mp.PermissionId).ToList()))
             .OrderBy(m => m.Position)
             .ToList();
     }

@@ -3,7 +3,7 @@ using Microsoft.Graph.Models;
 
 namespace CRM.Base.Common.Presentation;
 
-[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
 public class MSSQLBaseController<TEntity, TResponse, TId> : ControllerBase
 {

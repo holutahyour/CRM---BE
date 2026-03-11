@@ -1,4 +1,4 @@
-namespace CRM.Base.Common.Domain.Entities;
+namespace CRM.Base.Domain.Entities;
 
 public interface ISoftDelete
 {

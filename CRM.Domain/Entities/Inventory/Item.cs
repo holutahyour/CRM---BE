@@ -1,8 +1,10 @@
 ﻿using CRM.Base.Domain.Entities;
 using CRM.Domain.Entities.Orders;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CRM.Domain.Entities.Inventory;
+namespace CRM.Domain.Entities;
 
+[Table("invtry_items")]
 public class Item : TenantEntity<Guid>
 {
     public string Sku { get; set; } = "";

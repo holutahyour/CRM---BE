@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers.v1;
 
-[ApiController]
 [ApiVersion("1.0")]
-[Route("api/v{version:apiVersion}/[controller]")]
 public class ParamaterValuesController : MSSQLBaseController<ParameterValue, ParameterValueResponse, long>
 {
     private readonly IParameterValueService _service;

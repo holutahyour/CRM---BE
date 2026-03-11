@@ -1,7 +1,9 @@
 ﻿using CRM.Base.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CRM.Domain.Entities.Inventory;
+namespace CRM.Domain.Entities;
 
+[Table("invtry_item_locations")]
 public class ItemLocation : TenantEntity<Guid>
 {
     public int ItemId { get; set; }
