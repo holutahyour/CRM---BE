@@ -1,7 +1,8 @@
-﻿using CRM.Base.Common.Domain.Entities;
+using CRM.Base.Common.Domain.Entities;
 using CRM.Base.Domain.Entities;
 using CRM.Data.Seeds.Access_Control;
 using CRM.Domain.Entities.Orders;
+using CRM.Domain.Entities;
 using CRM.Services.Services.Interfaces.Common;
 
 namespace CRM.Data
@@ -75,9 +76,19 @@ namespace CRM.Data
         public DbSet<ParameterDefinition> ParameterDefinitions { get; set; }
         public DbSet<ParameterValue> ParameterValues { get; set; }
 
+        // Requisitions
+        public DbSet<Activity> Activities => Set<Activity>();
+        public DbSet<DashboardSummary> DashboardSummaries => Set<DashboardSummary>();
+        public DbSet<Incident> Incidents => Set<Incident>();
+        public DbSet<ItemRequest> ItemRequests => Set<ItemRequest>();
+        public DbSet<MonthlyReport> MonthlyReports => Set<MonthlyReport>();
+        public DbSet<Requisition> Requisitions => Set<Requisition>();
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<DashboardSummary>().HasNoKey().ToView(null);
+
             // Apply all IEntityTypeConfiguration classes from this assembly
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
@@ -109,6 +120,7 @@ namespace CRM.Data
             ModuleSeedData.Seed(modelBuilder);
             PermissionSeedData.Seed(modelBuilder);
             MenuSeedData.Seed(modelBuilder);
+            MenuPermissionSeedData.Seed(modelBuilder);
             RoleSeedData.Seed(modelBuilder);
             RolePermissionSeedData.Seed(modelBuilder);
 

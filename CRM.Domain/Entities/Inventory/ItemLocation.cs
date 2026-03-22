@@ -6,8 +6,8 @@ namespace CRM.Domain.Entities;
 [Table("invtry_item_locations")]
 public class ItemLocation : TenantEntity<Guid>
 {
-    public int ItemId { get; set; }
-    public int LocationId { get; set; }
+    public Guid ItemId { get; set; }
+    public Guid LocationId { get; set; }
     public decimal Quantity { get; set; }
     public decimal Reserved { get; set; }
     public decimal Damaged { get; set; }

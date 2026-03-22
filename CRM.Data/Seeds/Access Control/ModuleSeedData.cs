@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 using System.Text;
 using CRM.Domain.Constants;
 
@@ -158,7 +158,87 @@ public static class MenuSeedData
             new Menu { Id = new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"), Name = "ADMIN_ROLES", Label = "Roles & Permissions", Icon = "shield", Route = "/admin/roles", ParentId = MenuAdmId, Position = 1 },
             new Menu { Id = new Guid("3f3f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f"), Name = "ADMIN_MODULES", Label = "Modules", Icon = "puzzle", Route = "/admin/modules", ParentId = MenuAdmId, Position = 2 },
             new Menu { Id = new Guid("4f4f4f4f-4f4f-4f4f-4f4f-4f4f4f4f4f4f"), Name = "ADMIN_SETTINGS", Label = "Tenant Settings", Icon = "sliders", Route = "/admin/settings", ParentId = MenuAdmId, Position = 3 },
-            new Menu { Id = new Guid("5f5f5f5f-5f5f-5f5f-5f5f-5f5f5f5f5f5f"), Name = "ADMIN_AUDIT", Label = "Audit Logs", Icon = "scroll", Route = "/admin/audit", ParentId = MenuAdmId, Position = 4 }
+            new Menu { Id = new Guid("5f5f5f5f-5f5f-5f5f-5f5f-5f5f5f5f5f5f"), Name = "ADMIN_AUDIT", Label = "Audit Logs", Icon = "scroll", Route = "/admin/audit", ParentId = MenuAdmId, Position = 4 },
+            new Menu { Id = new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"), Name = "ADMIN_MENUS", Label = "Menu Management", Icon = "layout-grid", Route = "/admin/menus", ParentId = MenuAdmId, Position = 5 }
         );
+    }
+}
+
+public static class MenuPermissionSeedData
+{
+    public static void Seed(ModelBuilder modelBuilder)
+    {
+        var menuPermissions = new List<MenuPermission>();
+
+        // We use deterministic GUIDs based on the MenuId + Permission Code
+        void AddMapping(Guid menuId, string permissionCode)
+        {
+            menuPermissions.Add(new MenuPermission
+            {
+                Id = CreateDeterministicGuid($"{menuId}_{permissionCode}"),
+                MenuId = menuId,
+                PermissionId = CreateDeterministicGuid(permissionCode) // Needs to match Permission ID generation
+            });
+        }
+
+        // Inventory Module
+        AddMapping(new Guid("22222222-2222-2222-2222-222222222222"), Permissions.ItemsView); // Root Inventory
+        AddMapping(new Guid("b1b1b1b1-1b1b-1b1b-1b1b-b1b1b1b1b1b1"), Permissions.ItemsView);
+        AddMapping(new Guid("b2b2b2b2-2b2b-2b2b-2b2b-b2b2b2b2b2b2"), Permissions.CategoriesView);
+        AddMapping(new Guid("b3b3b3b3-3b3b-3b3b-3b3b-b3b3b3b3b3b3"), Permissions.BatchesView);
+        AddMapping(new Guid("b4b4b4b4-4b4b-4b4b-4b4b-b4b4b4b4b4b4"), Permissions.StockView);
+        AddMapping(new Guid("b5b5b5b5-5b5b-5b5b-5b5b-b5b5b5b5b5b5"), Permissions.ScannerUse);
+
+        // Locations Module
+        AddMapping(new Guid("33333333-3333-3333-3333-333333333333"), Permissions.LocationsView); // Root Locations
+        AddMapping(new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1"), Permissions.LocationsView);
+        AddMapping(new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Permissions.TransfersView);
+        AddMapping(new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Permissions.TransfersCreate);
+
+        // Suppliers Module
+        AddMapping(new Guid("44444444-4444-4444-4444-444444444444"), Permissions.SuppliersView); // Root Suppliers
+        AddMapping(new Guid("d2d2d2d2-2d2d-2d2d-2d2d-d2d2d2d2d2d2"), Permissions.SuppliersView);
+        AddMapping(new Guid("d3d3d3d3-3d3d-3d3d-3d3d-d3d3d3d3d3d3"), Permissions.SuppliersPerformanceView);
+
+        // Orders Module
+        AddMapping(new Guid("55555555-5555-5555-5555-555555555555"), Permissions.PurchaseOrdersView); // Root Orders
+        AddMapping(new Guid("55555555-5555-5555-5555-555555555555"), Permissions.SalesOrdersView);   // Root Orders (allow sales too)
+        AddMapping(new Guid("e1e1e1e1-1e1e-1e1e-1e1e-e1e1e1e1e1e1"), Permissions.PurchaseOrdersView);
+        AddMapping(new Guid("e2e2e2e2-2e2e-2e2e-2e2e-e2e2e2e2e2e2"), Permissions.SalesOrdersView);
+        AddMapping(new Guid("e3e3e3e3-3e3e-3e3e-3e3e-e3e3e3e3e3e3"), Permissions.EcommerceManage);
+
+        // Reports Module
+        AddMapping(new Guid("66666666-6666-6666-6666-666666666666"), Permissions.ReportsView); // Root Reports
+        AddMapping(new Guid("f1f1f1f1-1f1f-1f1f-1f1f-f1f1f1f1f1f1"), Permissions.ReportsView);
+        AddMapping(new Guid("f2f2f2f2-2f2f-2f2f-2f2f-f2f2f2f2f2f2"), Permissions.ReportsView);
+        AddMapping(new Guid("f3f3f3f3-3f3f-3f3f-3f3f-f3f3f3f3f3f3"), Permissions.ReportsView);
+        AddMapping(new Guid("f4f4f4f4-4f4f-4f4f-4f4f-f4f4f4f4f4f4"), Permissions.ReportsView);
+        AddMapping(new Guid("f5f5f5f5-5f5f-5f5f-5f5f-f5f5f5f5f5f5"), Permissions.ReportsView);
+
+        // Administration Module
+        AddMapping(new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"), Permissions.UsersView);  // Root Admin
+        AddMapping(new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"), Permissions.RolesView);  // Root Admin
+        AddMapping(new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"), Permissions.UsersView);
+        AddMapping(new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"), Permissions.UsersManage);
+        AddMapping(new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"), Permissions.RolesView);
+        AddMapping(new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"), Permissions.RolesManage);
+        AddMapping(new Guid("3f3f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f"), Permissions.ModulesView);
+        AddMapping(new Guid("3f3f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f"), Permissions.ModulesManage);
+        AddMapping(new Guid("4f4f4f4f-4f4f-4f4f-4f4f-4f4f4f4f4f4f"), Permissions.SettingsView);
+        AddMapping(new Guid("4f4f4f4f-4f4f-4f4f-4f4f-4f4f4f4f4f4f"), Permissions.SettingsManage);
+        AddMapping(new Guid("5f5f5f5f-5f5f-5f5f-5f5f-5f5f5f5f5f5f"), Permissions.AuditView);
+        AddMapping(new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"), Permissions.MenusView);
+        AddMapping(new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"), Permissions.MenusManage);
+
+        modelBuilder.Entity<MenuPermission>().HasData(menuPermissions.ToArray());
+    }
+
+    private static Guid CreateDeterministicGuid(string input)
+    {
+        using (MD5 md5 = MD5.Create())
+        {
+            byte[] hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+            return new Guid(hash);
+        }
     }
 }

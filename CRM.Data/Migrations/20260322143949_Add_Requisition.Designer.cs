@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260308141659_Add_Requisitions")]
-    partial class Add_Requisitions
+    [Migration("20260322143949_Add_Requisition")]
+    partial class Add_Requisition
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,6 +84,54 @@ namespace CRM.Data.Migrations
                     b.ToTable("cor_audit_logs");
                 });
 
+            modelBuilder.Entity("CRM.Domain.Entities.Activity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("RelatedEntityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("req_activities");
+                });
+
             modelBuilder.Entity("CRM.Domain.Entities.Batch", b =>
                 {
                     b.Property<Guid>("Id")
@@ -115,10 +163,7 @@ namespace CRM.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ItemId1")
+                    b.Property<Guid>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastModifiedBy")
@@ -141,7 +186,7 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemId1");
+                    b.HasIndex("ItemId");
 
                     b.ToTable("invtry_batches");
                 });
@@ -327,6 +372,108 @@ namespace CRM.Data.Migrations
                     b.ToTable("cor_countries");
                 });
 
+            modelBuilder.Entity("CRM.Domain.Entities.DashboardSummary", b =>
+                {
+                    b.Property<int>("ApprovedRequisitions")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ItemRequests")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LowStock")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MonthlyGoalsAchieved")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("OpenIncidents")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PendingRequisitions")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.ToTable((string)null);
+
+                    b.ToView(null, (string)null);
+                });
+
+            modelBuilder.Entity("CRM.Domain.Entities.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PercentOfTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProjectsCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StaffCount")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("org_departments");
+                });
+
             modelBuilder.Entity("CRM.Domain.Entities.Ethnicity", b =>
                 {
                     b.Property<long>("Id")
@@ -407,16 +554,75 @@ namespace CRM.Data.Migrations
                     b.ToTable("cor_genders");
                 });
 
+            modelBuilder.Entity("CRM.Domain.Entities.Incident", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DeviceId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeviceType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("IssueDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ReportedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Resolution")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("req_incidents");
+                });
+
             modelBuilder.Entity("CRM.Domain.Entities.InventoryTransaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("BatchId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("BatchId1")
+                    b.Property<Guid?>("BatchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -432,10 +638,7 @@ namespace CRM.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ItemId1")
+                    b.Property<Guid>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastModifiedBy")
@@ -444,10 +647,7 @@ namespace CRM.Data.Migrations
                     b.Property<DateTime>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("LocationId1")
+                    b.Property<Guid?>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Notes")
@@ -470,11 +670,11 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BatchId1");
+                    b.HasIndex("BatchId");
 
-                    b.HasIndex("ItemId1");
+                    b.HasIndex("ItemId");
 
-                    b.HasIndex("LocationId1");
+                    b.HasIndex("LocationId");
 
                     b.ToTable("invtry_inventory_transactions");
                 });
@@ -603,10 +803,7 @@ namespace CRM.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ItemId1")
+                    b.Property<Guid>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastModifiedBy")
@@ -615,10 +812,7 @@ namespace CRM.Data.Migrations
                     b.Property<DateTime>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("LocationId1")
+                    b.Property<Guid>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Quantity")
@@ -632,11 +826,75 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemId1");
+                    b.HasIndex("ItemId");
 
-                    b.HasIndex("LocationId1");
+                    b.HasIndex("LocationId");
 
                     b.ToTable("invtry_item_locations");
+                });
+
+            modelBuilder.Entity("CRM.Domain.Entities.ItemRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ItemName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Purpose")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("SubmittedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("ItemRequests");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Location", b =>
@@ -1179,6 +1437,21 @@ namespace CRM.Data.Migrations
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
                             Position = 4,
                             Route = "/admin/audit"
+                        },
+                        new
+                        {
+                            Id = new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "layout-grid",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Menu Management",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "ADMIN_MENUS",
+                            ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
+                            Position = 5,
+                            Route = "/admin/menus"
                         });
                 });
 
@@ -1207,25 +1480,391 @@ namespace CRM.Data.Migrations
                     b.Property<DateTime>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MenuId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("MenuId1")
+                    b.Property<Guid>("MenuId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("PermissionId1")
+                    b.Property<Guid>("PermissionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MenuId1");
+                    b.HasIndex("MenuId");
 
-                    b.HasIndex("PermissionId1");
+                    b.HasIndex("PermissionId");
 
                     b.ToTable("accl_menu_permissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("138633e2-a265-943f-57e4-647777879796"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("22222222-2222-2222-2222-222222222222"),
+                            PermissionId = new Guid("16f14b31-e5b1-816f-ce63-815b91385119")
+                        },
+                        new
+                        {
+                            Id = new Guid("2a7023c9-2819-407f-4f15-0eaa824f5399"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("b1b1b1b1-1b1b-1b1b-1b1b-b1b1b1b1b1b1"),
+                            PermissionId = new Guid("16f14b31-e5b1-816f-ce63-815b91385119")
+                        },
+                        new
+                        {
+                            Id = new Guid("84503eae-cc09-fd42-af20-de83a0f85360"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("b2b2b2b2-2b2b-2b2b-2b2b-b2b2b2b2b2b2"),
+                            PermissionId = new Guid("0febd349-7a8c-da4e-6c49-c59d0b2caf39")
+                        },
+                        new
+                        {
+                            Id = new Guid("01df28b8-5e81-1e02-b5a7-3c6bf1b457ac"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("b3b3b3b3-3b3b-3b3b-3b3b-b3b3b3b3b3b3"),
+                            PermissionId = new Guid("52e3aefd-24df-a0cd-b523-647fccbbd979")
+                        },
+                        new
+                        {
+                            Id = new Guid("426ed3f4-a800-954f-d24a-f4808c03f9b7"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("b4b4b4b4-4b4b-4b4b-4b4b-b4b4b4b4b4b4"),
+                            PermissionId = new Guid("12d040d1-56fa-8c03-95d7-983522eca589")
+                        },
+                        new
+                        {
+                            Id = new Guid("e3abb29b-1c11-c123-8394-baae23cbb8d1"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("b5b5b5b5-5b5b-5b5b-5b5b-b5b5b5b5b5b5"),
+                            PermissionId = new Guid("9fe16d16-8634-6c0b-453a-32df8bb4beab")
+                        },
+                        new
+                        {
+                            Id = new Guid("54d48df9-b29b-8b59-35b0-4554ab7db644"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = new Guid("f82b18de-ffa1-02ae-09f6-59a09a30ba70")
+                        },
+                        new
+                        {
+                            Id = new Guid("4fb2a604-9441-d43b-d9f3-ed310c93e290"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1"),
+                            PermissionId = new Guid("f82b18de-ffa1-02ae-09f6-59a09a30ba70")
+                        },
+                        new
+                        {
+                            Id = new Guid("f1d52b69-e129-58ca-3c56-179948a2960e"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"),
+                            PermissionId = new Guid("2bc6429d-df19-9dd1-66f4-c980e29d888c")
+                        },
+                        new
+                        {
+                            Id = new Guid("6564aafb-c32f-9241-db36-2b7248794e6d"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"),
+                            PermissionId = new Guid("949f5297-cb11-55fe-0577-363d69638021")
+                        },
+                        new
+                        {
+                            Id = new Guid("b9ec6448-8bb8-f0aa-2156-1d9d8a8b1ce5"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("44444444-4444-4444-4444-444444444444"),
+                            PermissionId = new Guid("76b6526d-cff0-4796-1f68-bb2aecd6c9ed")
+                        },
+                        new
+                        {
+                            Id = new Guid("84926b1e-6f88-eeea-8bf0-73c86e2a3e47"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("d2d2d2d2-2d2d-2d2d-2d2d-d2d2d2d2d2d2"),
+                            PermissionId = new Guid("76b6526d-cff0-4796-1f68-bb2aecd6c9ed")
+                        },
+                        new
+                        {
+                            Id = new Guid("9bc03684-568f-ab12-7bea-fac623ab5190"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("d3d3d3d3-3d3d-3d3d-3d3d-d3d3d3d3d3d3"),
+                            PermissionId = new Guid("d2402427-5846-8d62-24d8-816c327db0a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("7416247e-12f3-f95c-959d-5eee316a70bb"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("55555555-5555-5555-5555-555555555555"),
+                            PermissionId = new Guid("04bbf5bd-add2-5e8e-2da8-f0e4c24fab23")
+                        },
+                        new
+                        {
+                            Id = new Guid("cfa93872-5de0-c245-94c3-b1b881f80d5f"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("55555555-5555-5555-5555-555555555555"),
+                            PermissionId = new Guid("0f0500ec-ace8-e29c-2cf5-430b2118bf1f")
+                        },
+                        new
+                        {
+                            Id = new Guid("a1931099-0a4b-295e-1c54-f9016e9ab5f3"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("e1e1e1e1-1e1e-1e1e-1e1e-e1e1e1e1e1e1"),
+                            PermissionId = new Guid("04bbf5bd-add2-5e8e-2da8-f0e4c24fab23")
+                        },
+                        new
+                        {
+                            Id = new Guid("0519010f-24a0-d469-9623-9389456dc15e"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("e2e2e2e2-2e2e-2e2e-2e2e-e2e2e2e2e2e2"),
+                            PermissionId = new Guid("0f0500ec-ace8-e29c-2cf5-430b2118bf1f")
+                        },
+                        new
+                        {
+                            Id = new Guid("ac1d266b-afe5-85a4-f13b-4f9417636965"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("e3e3e3e3-3e3e-3e3e-3e3e-e3e3e3e3e3e3"),
+                            PermissionId = new Guid("8ab5a10d-ba3b-fca2-9ccf-a3e08daa3003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c12a8a57-1009-a25f-fb60-dbfb582043cd"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("66666666-6666-6666-6666-666666666666"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("e8365eb4-db49-bf4a-a604-1b4d1afd3830"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f1f1f1f1-1f1f-1f1f-1f1f-f1f1f1f1f1f1"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("8d08d4b4-c35f-7b8d-9afe-b8322f94ba3d"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f2f2f2f2-2f2f-2f2f-2f2f-f2f2f2f2f2f2"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("6e9b3035-ce9e-73f3-734f-597d8f9c477c"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f3f3f3f3-3f3f-3f3f-3f3f-f3f3f3f3f3f3"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("3c517ad2-064b-b36b-c774-7fa2c4212383"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f4f4f4f4-4f4f-4f4f-4f4f-f4f4f4f4f4f4"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("1b04d704-9398-dcec-74f4-8ea315a5056c"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f5f5f5f5-5f5f-5f5f-5f5f-f5f5f5f5f5f5"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("30a7c24f-24b3-229d-f2da-62f3a22e47cf"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
+                            PermissionId = new Guid("a6144ccf-d362-4ed1-cb01-8207890bea3a")
+                        },
+                        new
+                        {
+                            Id = new Guid("52087f6d-eba0-2192-b72c-01016b67f673"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
+                            PermissionId = new Guid("6ff25cfe-2e1f-a30f-f183-8794a4ece371")
+                        },
+                        new
+                        {
+                            Id = new Guid("0c8e43cd-a64d-76d1-02a4-88ac8e8c8845"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"),
+                            PermissionId = new Guid("a6144ccf-d362-4ed1-cb01-8207890bea3a")
+                        },
+                        new
+                        {
+                            Id = new Guid("00344a75-ff2e-2874-569e-baaa7c7109d3"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"),
+                            PermissionId = new Guid("bbbfe961-127d-5c27-bd5e-babc2e2b0a6c")
+                        },
+                        new
+                        {
+                            Id = new Guid("25f4f475-3d13-1863-b93d-aa7c4b7a34a1"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"),
+                            PermissionId = new Guid("6ff25cfe-2e1f-a30f-f183-8794a4ece371")
+                        },
+                        new
+                        {
+                            Id = new Guid("8f4a871e-7eea-6c45-3b6c-b26be969fe8a"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"),
+                            PermissionId = new Guid("e0a63f57-fb0b-4f4e-2d69-a523aa73f746")
+                        },
+                        new
+                        {
+                            Id = new Guid("40798021-fd96-6a82-a31b-777d5c47f94f"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("3f3f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f"),
+                            PermissionId = new Guid("7d34b8d7-1cea-b7c4-235e-2a5f64da143d")
+                        },
+                        new
+                        {
+                            Id = new Guid("ee7c0d86-942a-dc8d-d75f-b34475bcb0d3"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("3f3f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f"),
+                            PermissionId = new Guid("3d8a7d5e-b379-dd8e-431c-314b7a6040ae")
+                        },
+                        new
+                        {
+                            Id = new Guid("e84cba74-0271-9dfc-27b5-047f532da84b"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("4f4f4f4f-4f4f-4f4f-4f4f-4f4f4f4f4f4f"),
+                            PermissionId = new Guid("aeab1df7-0060-894b-1cce-0e35c5baaec9")
+                        },
+                        new
+                        {
+                            Id = new Guid("b3334095-9d48-330c-9fe7-1a76e8fa67eb"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("4f4f4f4f-4f4f-4f4f-4f4f-4f4f4f4f4f4f"),
+                            PermissionId = new Guid("dd6be378-a8bb-c2de-632e-1e8a1ad24913")
+                        },
+                        new
+                        {
+                            Id = new Guid("7821143d-c371-6419-52bd-9234da82ac98"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("5f5f5f5f-5f5f-5f5f-5f5f-5f5f5f5f5f5f"),
+                            PermissionId = new Guid("250563d5-86c5-2fc4-e574-8189d0c03b3b")
+                        },
+                        new
+                        {
+                            Id = new Guid("ca19857b-d0e6-c2f4-f27d-7e9de9d6ce93"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"),
+                            PermissionId = new Guid("26d249f1-7257-c681-8b3a-63535b1414f2")
+                        },
+                        new
+                        {
+                            Id = new Guid("5e998fb2-c6c2-c181-f22b-33b20f8606a6"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"),
+                            PermissionId = new Guid("d16e5975-dab2-15eb-aeb4-6027aea8eae6")
+                        });
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Module", b =>
@@ -1484,6 +2123,68 @@ namespace CRM.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CRM.Domain.Entities.MonthlyReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("AchievedValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("GoalTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Month")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Progress")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("SubmittedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("TargetValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("MonthlyReports");
+                });
+
             modelBuilder.Entity("CRM.Domain.Entities.Orders.PurchaseOrder", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1536,15 +2237,12 @@ namespace CRM.Data.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("VendorId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("VendorId1")
+                    b.Property<Guid>("VendorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VendorId1");
+                    b.HasIndex("VendorId");
 
                     b.ToTable("ordr_purchase_orders");
                 });
@@ -1571,10 +2269,7 @@ namespace CRM.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ItemId1")
+                    b.Property<Guid>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastModifiedBy")
@@ -1583,16 +2278,10 @@ namespace CRM.Data.Migrations
                     b.Property<DateTime>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("LocationId1")
+                    b.Property<Guid?>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("PurchaseOrderId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("PurchaseOrderId1")
+                    b.Property<Guid>("PurchaseOrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Quantity")
@@ -1609,11 +2298,11 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemId1");
+                    b.HasIndex("ItemId");
 
-                    b.HasIndex("LocationId1");
+                    b.HasIndex("LocationId");
 
-                    b.HasIndex("PurchaseOrderId1");
+                    b.HasIndex("PurchaseOrderId");
 
                     b.ToTable("ordr_purchase_order_items");
                 });
@@ -1643,8 +2332,8 @@ namespace CRM.Data.Migrations
                     b.Property<string>("CustomerPhone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DeliveryLocationId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("DeliveryLocationId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("EcomOrderId")
                         .HasColumnType("nvarchar(max)");
@@ -1687,10 +2376,7 @@ namespace CRM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("BatchId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("BatchId1")
+                    b.Property<Guid?>("BatchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -1709,10 +2395,7 @@ namespace CRM.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ItemId1")
+                    b.Property<Guid>("ItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LastModifiedBy")
@@ -1724,10 +2407,7 @@ namespace CRM.Data.Migrations
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("SalesOrderId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("SalesOrderId1")
+                    b.Property<Guid>("SalesOrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TenantId")
@@ -1738,11 +2418,11 @@ namespace CRM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BatchId1");
+                    b.HasIndex("BatchId");
 
-                    b.HasIndex("ItemId1");
+                    b.HasIndex("ItemId");
 
-                    b.HasIndex("SalesOrderId1");
+                    b.HasIndex("SalesOrderId");
 
                     b.ToTable("ordr_sales_order_items");
                 });
@@ -1966,6 +2646,26 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("d16e5975-dab2-15eb-aeb4-6027aea8eae6"),
+                            Code = "admin.menus.manage",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "CORE",
+                            Name = "Manage Menus"
+                        },
+                        new
+                        {
+                            Id = new Guid("26d249f1-7257-c681-8b3a-63535b1414f2"),
+                            Code = "admin.menus.view",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "CORE",
+                            Name = "View Menus"
+                        },
+                        new
+                        {
                             Id = new Guid("3d8a7d5e-b379-dd8e-431c-314b7a6040ae"),
                             Code = "admin.modules.manage",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1973,6 +2673,16 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
                             Name = "Manage Modules"
+                        },
+                        new
+                        {
+                            Id = new Guid("7d34b8d7-1cea-b7c4-235e-2a5f64da143d"),
+                            Code = "admin.modules.view",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "CORE",
+                            Name = "View Modules"
                         },
                         new
                         {
@@ -1986,6 +2696,16 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("6ff25cfe-2e1f-a30f-f183-8794a4ece371"),
+                            Code = "admin.roles.view",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "CORE",
+                            Name = "View Roles"
+                        },
+                        new
+                        {
                             Id = new Guid("dd6be378-a8bb-c2de-632e-1e8a1ad24913"),
                             Code = "admin.settings.manage",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1996,6 +2716,16 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("aeab1df7-0060-894b-1cce-0e35c5baaec9"),
+                            Code = "admin.settings.view",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "CORE",
+                            Name = "View Settings"
+                        },
+                        new
+                        {
                             Id = new Guid("bbbfe961-127d-5c27-bd5e-babc2e2b0a6c"),
                             Code = "admin.users.manage",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2003,6 +2733,16 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
                             Name = "Manage Users"
+                        },
+                        new
+                        {
+                            Id = new Guid("a6144ccf-d362-4ed1-cb01-8207890bea3a"),
+                            Code = "admin.users.view",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "CORE",
+                            Name = "View Users"
                         },
                         new
                         {
@@ -2106,6 +2846,26 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("9fe16d16-8634-6c0b-453a-32df8bb4beab"),
+                            Code = "inventory.scanner.use",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "INVENTORY",
+                            Name = "Use Scanner"
+                        },
+                        new
+                        {
+                            Id = new Guid("12d040d1-56fa-8c03-95d7-983522eca589"),
+                            Code = "inventory.stock.view",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "INVENTORY",
+                            Name = "View Stock"
+                        },
+                        new
+                        {
                             Id = new Guid("949f5297-cb11-55fe-0577-363d69638021"),
                             Code = "inventory.transfers.create",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2113,6 +2873,26 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
                             Name = "Create Transfers"
+                        },
+                        new
+                        {
+                            Id = new Guid("2bc6429d-df19-9dd1-66f4-c980e29d888c"),
+                            Code = "inventory.transfers.view",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "INVENTORY",
+                            Name = "View Transfers"
+                        },
+                        new
+                        {
+                            Id = new Guid("8ab5a10d-ba3b-fca2-9ccf-a3e08daa3003"),
+                            Code = "orders.ecommerce.manage",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "SALES",
+                            Name = "Manage Ecommerce"
                         },
                         new
                         {
@@ -2206,6 +2986,16 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("d2402427-5846-8d62-24d8-816c327db0a8"),
+                            Code = "suppliers.performance.view",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "SUPPLIERS",
+                            Name = "View Performance"
+                        },
+                        new
+                        {
                             Id = new Guid("76b6526d-cff0-4796-1f68-bb2aecd6c9ed"),
                             Code = "suppliers.view",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2214,6 +3004,65 @@ namespace CRM.Data.Migrations
                             ModuleCode = "SUPPLIERS",
                             Name = "View Suppliers"
                         });
+                });
+
+            modelBuilder.Entity("CRM.Domain.Entities.Requisition", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("SubmittedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("Requisitions");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Role", b =>
@@ -2408,6 +3257,28 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("21eb0740-68a0-2022-be10-174036a55555"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("12d040d1-56fa-8c03-95d7-983522eca589"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("40638e77-7340-4345-5776-0d23fbdb1f44"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("9fe16d16-8634-6c0b-453a-32df8bb4beab"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
                             Id = new Guid("7f7453a4-617a-ee59-7a7c-6a3a02df13d9"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2425,6 +3296,17 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PermissionId = new Guid("64aa126d-66f3-f310-9be3-6014e06a7ff3"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("c5bf0aa4-de54-a8d9-8ae3-aef574645366"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("2bc6429d-df19-9dd1-66f4-c980e29d888c"),
                             RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
                             TenantId = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -2458,6 +3340,17 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PermissionId = new Guid("4bc55478-400f-5672-96c1-450a1eef64b2"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("89860ce1-5556-3468-012a-a23c1a468488"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("d2402427-5846-8d62-24d8-816c327db0a8"),
                             RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
                             TenantId = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -2529,6 +3422,17 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("80522781-32da-d24e-8b28-3fe4f2a6abf6"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("8ab5a10d-ba3b-fca2-9ccf-a3e08daa3003"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
                             Id = new Guid("fa927e20-71a8-1156-efbd-2f5f3de22055"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2551,6 +3455,17 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("b25181c5-d124-4c73-3616-106d5afcd80f"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("a6144ccf-d362-4ed1-cb01-8207890bea3a"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
                             Id = new Guid("6aee37f4-b60a-1362-5aae-ac1f67e9cbec"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2562,12 +3477,34 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("c7c63106-0ce3-7652-e203-52c00ebfa237"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("6ff25cfe-2e1f-a30f-f183-8794a4ece371"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
                             Id = new Guid("14a70583-b385-fd5b-9336-b1048ab9651c"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PermissionId = new Guid("e0a63f57-fb0b-4f4e-2d69-a523aa73f746"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("ea1d5d81-bc69-7fb9-aa8c-e7db27d7ed57"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("aeab1df7-0060-894b-1cce-0e35c5baaec9"),
                             RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
                             TenantId = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -2595,12 +3532,45 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("8bad99b6-56b5-2664-a7f1-679bb87678e4"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("7d34b8d7-1cea-b7c4-235e-2a5f64da143d"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
                             Id = new Guid("83485ef2-65c3-a1cd-2387-16356d9579f6"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PermissionId = new Guid("3d8a7d5e-b379-dd8e-431c-314b7a6040ae"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("e9d39772-088c-d4a5-4cf7-4a70a227c966"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("26d249f1-7257-c681-8b3a-63535b1414f2"),
+                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
+                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("89cd3c32-66f4-6b83-19d2-8ee78c7235f2"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermissionId = new Guid("d16e5975-dab2-15eb-aeb4-6027aea8eae6"),
                             RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
                             TenantId = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -2913,7 +3883,9 @@ namespace CRM.Data.Migrations
                 {
                     b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany("Batches")
-                        .HasForeignKey("ItemId1");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Item");
                 });
@@ -2942,19 +3914,32 @@ namespace CRM.Data.Migrations
                     b.Navigation("State");
                 });
 
+            modelBuilder.Entity("CRM.Domain.Entities.Incident", b =>
+                {
+                    b.HasOne("CRM.Domain.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("CRM.Domain.Entities.InventoryTransaction", b =>
                 {
                     b.HasOne("CRM.Domain.Entities.Batch", "Batch")
                         .WithMany()
-                        .HasForeignKey("BatchId1");
+                        .HasForeignKey("BatchId");
 
                     b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany("Transactions")
-                        .HasForeignKey("ItemId1");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CRM.Domain.Entities.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationId1");
+                        .HasForeignKey("LocationId");
 
                     b.Navigation("Batch");
 
@@ -2984,15 +3969,36 @@ namespace CRM.Data.Migrations
                 {
                     b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany("ItemLocations")
-                        .HasForeignKey("ItemId1");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CRM.Domain.Entities.Location", "Location")
                         .WithMany("ItemLocations")
-                        .HasForeignKey("LocationId1");
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Item");
 
                     b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("CRM.Domain.Entities.ItemRequest", b =>
+                {
+                    b.HasOne("CRM.Domain.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CRM.Domain.Entities.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.Menu", b =>
@@ -3008,11 +4014,15 @@ namespace CRM.Data.Migrations
                 {
                     b.HasOne("CRM.Domain.Entities.Menu", "Menu")
                         .WithMany("MenuPermissions")
-                        .HasForeignKey("MenuId1");
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CRM.Domain.Entities.Permission", "Permission")
                         .WithMany("MenuPermissions")
-                        .HasForeignKey("PermissionId1");
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Menu");
 
@@ -3028,11 +4038,24 @@ namespace CRM.Data.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("CRM.Domain.Entities.MonthlyReport", b =>
+                {
+                    b.HasOne("CRM.Domain.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("CRM.Domain.Entities.Orders.PurchaseOrder", b =>
                 {
                     b.HasOne("CRM.Domain.Entities.Orders.Vendor", "Vendor")
                         .WithMany("PurchaseOrders")
-                        .HasForeignKey("VendorId1");
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Vendor");
                 });
@@ -3041,15 +4064,19 @@ namespace CRM.Data.Migrations
                 {
                     b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany()
-                        .HasForeignKey("ItemId1");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CRM.Domain.Entities.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationId1");
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("CRM.Domain.Entities.Orders.PurchaseOrder", "PurchaseOrder")
                         .WithMany("Items")
-                        .HasForeignKey("PurchaseOrderId1");
+                        .HasForeignKey("PurchaseOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Item");
 
@@ -3062,21 +4089,36 @@ namespace CRM.Data.Migrations
                 {
                     b.HasOne("CRM.Domain.Entities.Batch", "Batch")
                         .WithMany()
-                        .HasForeignKey("BatchId1");
+                        .HasForeignKey("BatchId");
 
                     b.HasOne("CRM.Domain.Entities.Item", "Item")
                         .WithMany()
-                        .HasForeignKey("ItemId1");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CRM.Domain.Entities.Orders.SalesOrder", "SalesOrder")
                         .WithMany("Items")
-                        .HasForeignKey("SalesOrderId1");
+                        .HasForeignKey("SalesOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Batch");
 
                     b.Navigation("Item");
 
                     b.Navigation("SalesOrder");
+                });
+
+            modelBuilder.Entity("CRM.Domain.Entities.Requisition", b =>
+                {
+                    b.HasOne("CRM.Domain.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("CRM.Domain.Entities.RolePermission", b =>

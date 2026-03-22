@@ -1,6 +1,3 @@
-﻿using CRM.Data.Seeds.Data.Core;
-using CRM.Domain.Enums;
-
 namespace CRM.Data.Seeds;
 
 public class Seeder
@@ -34,10 +31,48 @@ public class Seeder
 
             _context.Roles.AddRange([adminRole, managerRole, staffRole]);
 
-            // Assign all permissions to admin role
+            // Assign permissions to Admin
             var allPermissions = _context.Permissions.ToList();
             foreach (var perm in allPermissions)
                 _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = adminRole.Id, PermissionId = perm.Id });
+
+            // Assign permissions to Manager
+            string[] managerPerms = [
+                Permissions.ItemsView, Permissions.ItemsCreate, Permissions.ItemsEdit,
+                Permissions.CategoriesView, Permissions.BatchesView,
+                Permissions.StockView, Permissions.ScannerUse,
+                Permissions.LocationsView, Permissions.TransfersView, Permissions.TransfersCreate,
+                Permissions.SuppliersView, Permissions.SuppliersManage, Permissions.SuppliersPerformanceView,
+                Permissions.PurchaseOrdersView, Permissions.PurchaseOrdersCreate, Permissions.PurchaseOrdersApprove,
+                Permissions.SalesOrdersView, Permissions.SalesOrdersCreate, Permissions.SalesOrdersFulfill,
+                Permissions.ReportsView, Permissions.ReportsExport,
+                Permissions.UsersView
+            ];
+
+            foreach (var code in managerPerms)
+            {
+                var perm = allPermissions.FirstOrDefault(p => p.Code == code);
+                if (perm != null)
+                    _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = managerRole.Id, PermissionId = perm.Id });
+            }
+
+            // Assign permissions to Staff
+            string[] staffPerms = [
+                Permissions.ItemsView,
+                Permissions.CategoriesView,
+                Permissions.BatchesView,
+                Permissions.StockView,
+                Permissions.ScannerUse,
+                Permissions.LocationsView,
+                Permissions.SalesOrdersView, Permissions.SalesOrdersCreate
+            ];
+
+            foreach (var code in staffPerms)
+            {
+                var perm = allPermissions.FirstOrDefault(p => p.Code == code);
+                if (perm != null)
+                    _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = staffRole.Id, PermissionId = perm.Id });
+            }
 
             // Activate default modules
             var defaultModules = _context.Modules.Where(m => m.Code == "CORE" || m.Code == "INVENTORY");

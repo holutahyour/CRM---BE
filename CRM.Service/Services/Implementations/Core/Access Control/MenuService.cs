@@ -1,4 +1,4 @@
-﻿using CRM.Base.Common.Domain.Common;
+using CRM.Base.Common.Domain.Common;
 using CRM.Base.Common.Domain.Entities;
 using CRM.Base.Common.Repositories;
 using CRM.Base.Common.Repositories.Interfaces;
@@ -129,17 +129,20 @@ public class MenuService : MSSQLBaseService<Menu, Guid>, IMenuService
         try
         {
             // 1. Get user with roles
-            var user = await _userRepository.GetAsync(u => u.EntraObjectId == oid && u.TenantId == tenantId);
+            var user = await _userRepository.GetAsync(
+                u => u.EntraObjectId == oid && u.TenantId == tenantId,
+                "UserRoles.Role.RolePermissions"
+            );
             if (user == null) { result.SetError("User not found", ""); return result; }
 
             var isAdmin = user.UserRoles.Any(ur => ur.Role.Code == "ADMIN");
 
             // 2. Get user's permissions
-            var userPermissions = isAdmin
-                ? new HashSet<string>((await _permissionRepository.GetAllAsync()).Select(p => p.Code).ToList())
+            var userPermissionIds = isAdmin
+                ? new HashSet<Guid>((await _permissionRepository.GetAllAsync()).Select(p => p.Id).ToList())
                 : [.. user.UserRoles
                     .SelectMany(ur => ur.Role.RolePermissions)
-                    .Select(rp => rp.Permission.Code)
+                    .Select(rp => rp.PermissionId)
                     .Distinct()];
 
             // 2. Get tenant's active modules
@@ -155,7 +158,7 @@ public class MenuService : MSSQLBaseService<Menu, Guid>, IMenuService
 
             var accessible = allMenus
                 .Where(m => !m.MenuPermissions.Any() ||
-                             m.MenuPermissions.Any(mp => userPermissions.Contains(mp.Permission.Code)))
+                             m.MenuPermissions.Any(mp => userPermissionIds.Contains(mp.PermissionId)))
                 .ToList();
 
             // 4. Build tree

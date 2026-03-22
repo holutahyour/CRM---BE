@@ -8,7 +8,7 @@ namespace CRM.Domain.Entities.Orders;
 public class PurchaseOrder : TenantEntity<Guid>
 {
     public string OrderNumber { get; set; } = "";
-    public int VendorId { get; set; }
+    public Guid VendorId { get; set; }
     public DateTime OrderDate { get; set; }
     public DateTime? ExpectedDeliveryDate { get; set; }
     public DateTime? ReceivedDate { get; set; }

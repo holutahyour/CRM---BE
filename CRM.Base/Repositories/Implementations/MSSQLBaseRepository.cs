@@ -1,4 +1,4 @@
-﻿
+
 using CRM.Base.Enums;
 
 namespace CRM.Base.Common.Repositories.Implementations;
@@ -12,9 +12,9 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
 
     #region CRUD Operations
 
-    public virtual async Task<IList<T>> GetAllAsync()
+    public virtual async Task<IQueryable<T>> GetAllAsync()
     {
-        return await _context.Set<T>().ToListAsync();
+        return await Task.FromResult(_context.Set<T>());
     }
 
     public async Task<IList<T>> GetAllAsync(
@@ -371,8 +371,37 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
         DeleteAsync(entities);
 
         var ids = entities.Select(e => e.Id?.ToString()).ToList();
-
         return ids;
+    }
+
+    public virtual async Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> expression, params string[] includes)
+    {
+        var query = _context.Set<T>().Where(expression);
+
+        if (includes != null)
+        {
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+        }
+
+        return await query.ToListAsync();
+    }
+
+    public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> expression, params string[] includes)
+    {
+        IQueryable<T> query = _context.Set<T>();
+
+        if (includes != null)
+        {
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+        }
+
+        return await query.FirstOrDefaultAsync(expression);
     }
 
     #endregion

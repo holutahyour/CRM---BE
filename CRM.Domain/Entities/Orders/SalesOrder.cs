@@ -15,7 +15,7 @@ public class SalesOrder : TenantEntity<Guid>
     public SalesOrderStatus Status { get; set; } = SalesOrderStatus.Draft;
     public decimal TotalAmount { get; set; }
     public string? EcomOrderId { get; set; }
-    public int? DeliveryLocationId { get; set; }
+    public Guid? DeliveryLocationId { get; set; }
     public string? Notes { get; set; }
 
     // Navigation

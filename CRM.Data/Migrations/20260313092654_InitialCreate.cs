@@ -14,29 +14,75 @@ namespace CRM.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "accl_menus",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Label = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Route = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModuleCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Position = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_accl_menus", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_accl_menus_accl_menus_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "accl_menus",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "accl_permissions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModuleCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_accl_permissions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "accl_roles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsSystem = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Categories_Categories_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
+                    table.PrimaryKey("PK_accl_roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,7 +228,33 @@ namespace CRM.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Locations",
+                name: "invtry_categories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_invtry_categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_invtry_categories_invtry_categories_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "invtry_categories",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "invtry_locations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -203,103 +275,11 @@ namespace CRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Locations", x => x.Id);
+                    table.PrimaryKey("PK_invtry_locations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Menus",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Label = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Route = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModuleCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Position = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Menus", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Menus_Menus_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Menus",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ModuleCategories",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ModuleCategories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permissions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ModuleCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsSystem = table.Column<bool>(type: "bit", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SalesOrders",
+                name: "ordr_sales_orders",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -311,7 +291,7 @@ namespace CRM.Data.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     EcomOrderId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeliveryLocationId = table.Column<int>(type: "int", nullable: true),
+                    DeliveryLocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -323,7 +303,53 @@ namespace CRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SalesOrders", x => x.Id);
+                    table.PrimaryKey("PK_ordr_sales_orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ordr_vendors",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VendorCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaxId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentTermsDays = table.Column<int>(type: "int", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ordr_vendors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "sys_module_categories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_sys_module_categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -353,18 +379,43 @@ namespace CRM.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vendors",
+                name: "accl_menu_permissions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VendorCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaxId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentTermsDays = table.Column<int>(type: "int", nullable: true),
+                    MenuId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PermissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_accl_menu_permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_accl_menu_permissions_accl_menus_MenuId",
+                        column: x => x.MenuId,
+                        principalTable: "accl_menus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_accl_menu_permissions_accl_permissions_PermissionId",
+                        column: x => x.PermissionId,
+                        principalTable: "accl_permissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "accl_role_permissions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PermissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -375,7 +426,19 @@ namespace CRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vendors", x => x.Id);
+                    table.PrimaryKey("PK_accl_role_permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_accl_role_permissions_accl_permissions_PermissionId",
+                        column: x => x.PermissionId,
+                        principalTable: "accl_permissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_accl_role_permissions_accl_roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "accl_roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -406,128 +469,6 @@ namespace CRM.Data.Migrations
                         column: x => x.CountryId,
                         principalTable: "cor_countries",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Modules",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Version = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Modules", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Modules_ModuleCategories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "ModuleCategories",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MenuPermissions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MenuId = table.Column<int>(type: "int", nullable: false),
-                    PermissionId = table.Column<int>(type: "int", nullable: false),
-                    MenuId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    PermissionId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MenuPermissions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MenuPermissions_Menus_MenuId1",
-                        column: x => x.MenuId1,
-                        principalTable: "Menus",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_MenuPermissions_Permissions_PermissionId1",
-                        column: x => x.PermissionId1,
-                        principalTable: "Permissions",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RolePermissions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PermissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RolePermissions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RolePermissions_Permissions_PermissionId",
-                        column: x => x.PermissionId,
-                        principalTable: "Permissions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RolePermissions_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "users",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EntraObjectId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    AvatarUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    LastLoginAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_users_tenants_TenantId",
-                        column: x => x.TenantId,
-                        principalTable: "tenants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -562,26 +503,26 @@ namespace CRM.Data.Migrations
                 {
                     table.PrimaryKey("PK_items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_items_Categories_CategoryId",
+                        name: "FK_items_invtry_categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        principalTable: "invtry_categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
-                        name: "FK_items_Vendors_VendorId",
+                        name: "FK_items_ordr_vendors_VendorId",
                         column: x => x.VendorId,
-                        principalTable: "Vendors",
+                        principalTable: "ordr_vendors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PurchaseOrders",
+                name: "ordr_purchase_orders",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VendorId = table.Column<int>(type: "int", nullable: false),
+                    VendorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ExpectedDeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ReceivedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -589,7 +530,6 @@ namespace CRM.Data.Migrations
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QualityNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VendorId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -600,12 +540,75 @@ namespace CRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PurchaseOrders", x => x.Id);
+                    table.PrimaryKey("PK_ordr_purchase_orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PurchaseOrders_Vendors_VendorId1",
-                        column: x => x.VendorId1,
-                        principalTable: "Vendors",
+                        name: "FK_ordr_purchase_orders_ordr_vendors_VendorId",
+                        column: x => x.VendorId,
+                        principalTable: "ordr_vendors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "sys_modules",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Version = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_sys_modules", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_sys_modules_sys_module_categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "sys_module_categories",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EntraObjectId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    AccessLevel = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Onboarded = table.Column<bool>(type: "bit", nullable: false),
+                    AvatarUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    LastLoginAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_users_tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "tenants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -644,7 +647,116 @@ namespace CRM.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TenantModules",
+                name: "invtry_batches",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BatchNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ManufactureDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ReceivedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    InitialQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CurrentQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SupplierBatchId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_invtry_batches", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_invtry_batches_items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "invtry_item_locations",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Reserved = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Damaged = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_invtry_item_locations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_invtry_item_locations_invtry_locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "invtry_locations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_invtry_item_locations_items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ordr_purchase_order_items",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PurchaseOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ReceivedQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BatchNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ordr_purchase_order_items", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ordr_purchase_order_items_invtry_locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "invtry_locations",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ordr_purchase_order_items_items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ordr_purchase_order_items_ordr_purchase_orders_PurchaseOrderId",
+                        column: x => x.PurchaseOrderId,
+                        principalTable: "ordr_purchase_orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "sys_tenant_modules",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -662,15 +774,15 @@ namespace CRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TenantModules", x => x.Id);
+                    table.PrimaryKey("PK_sys_tenant_modules", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TenantModules_Modules_ModuleId",
+                        name: "FK_sys_tenant_modules_sys_modules_ModuleId",
                         column: x => x.ModuleId,
-                        principalTable: "Modules",
+                        principalTable: "sys_modules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TenantModules_tenants_TenantId",
+                        name: "FK_sys_tenant_modules_tenants_TenantId",
                         column: x => x.TenantId,
                         principalTable: "tenants",
                         principalColumn: "Id",
@@ -678,7 +790,7 @@ namespace CRM.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRoles",
+                name: "accl_user_roles",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -694,15 +806,15 @@ namespace CRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRoles", x => x.Id);
+                    table.PrimaryKey("PK_accl_user_roles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserRoles_Roles_RoleId",
+                        name: "FK_accl_user_roles_accl_roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Roles",
+                        principalTable: "accl_roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserRoles_users_UserId",
+                        name: "FK_accl_user_roles_users_UserId",
                         column: x => x.UserId,
                         principalTable: "users",
                         principalColumn: "Id",
@@ -710,131 +822,18 @@ namespace CRM.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Batches",
+                name: "invtry_inventory_transactions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    BatchNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ManufactureDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ReceivedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    InitialQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    CurrentQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SupplierBatchId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ItemId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Batches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Batches_items_ItemId1",
-                        column: x => x.ItemId1,
-                        principalTable: "items",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ItemLocations",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    LocationId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Reserved = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Damaged = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ItemId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LocationId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItemLocations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ItemLocations_Locations_LocationId1",
-                        column: x => x.LocationId1,
-                        principalTable: "Locations",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ItemLocations_items_ItemId1",
-                        column: x => x.ItemId1,
-                        principalTable: "items",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PurchaseOrderItems",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PurchaseOrderId = table.Column<int>(type: "int", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ReceivedQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    LocationId = table.Column<int>(type: "int", nullable: true),
-                    BatchNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PurchaseOrderId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ItemId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LocationId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PurchaseOrderItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PurchaseOrderItems_Locations_LocationId1",
-                        column: x => x.LocationId1,
-                        principalTable: "Locations",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_PurchaseOrderItems_PurchaseOrders_PurchaseOrderId1",
-                        column: x => x.PurchaseOrderId1,
-                        principalTable: "PurchaseOrders",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_PurchaseOrderItems_items_ItemId1",
-                        column: x => x.ItemId1,
-                        principalTable: "items",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InventoryTransactions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    BatchId = table.Column<int>(type: "int", nullable: true),
-                    LocationId = table.Column<int>(type: "int", nullable: true),
+                    ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BatchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     TransactionType = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ReferenceId = table.Column<int>(type: "int", nullable: true),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ItemId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    BatchId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LocationId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -845,38 +844,36 @@ namespace CRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InventoryTransactions", x => x.Id);
+                    table.PrimaryKey("PK_invtry_inventory_transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InventoryTransactions_Batches_BatchId1",
-                        column: x => x.BatchId1,
-                        principalTable: "Batches",
+                        name: "FK_invtry_inventory_transactions_invtry_batches_BatchId",
+                        column: x => x.BatchId,
+                        principalTable: "invtry_batches",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InventoryTransactions_Locations_LocationId1",
-                        column: x => x.LocationId1,
-                        principalTable: "Locations",
+                        name: "FK_invtry_inventory_transactions_invtry_locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "invtry_locations",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InventoryTransactions_items_ItemId1",
-                        column: x => x.ItemId1,
+                        name: "FK_invtry_inventory_transactions_items_ItemId",
+                        column: x => x.ItemId,
                         principalTable: "items",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SalesOrderItems",
+                name: "ordr_sales_order_items",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SalesOrderId = table.Column<int>(type: "int", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    SalesOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     FulfilledQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BatchId = table.Column<int>(type: "int", nullable: true),
-                    SalesOrderId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ItemId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    BatchId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BatchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -887,26 +884,28 @@ namespace CRM.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SalesOrderItems", x => x.Id);
+                    table.PrimaryKey("PK_ordr_sales_order_items", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SalesOrderItems_Batches_BatchId1",
-                        column: x => x.BatchId1,
-                        principalTable: "Batches",
+                        name: "FK_ordr_sales_order_items_invtry_batches_BatchId",
+                        column: x => x.BatchId,
+                        principalTable: "invtry_batches",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_SalesOrderItems_SalesOrders_SalesOrderId1",
-                        column: x => x.SalesOrderId1,
-                        principalTable: "SalesOrders",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SalesOrderItems_items_ItemId1",
-                        column: x => x.ItemId1,
+                        name: "FK_ordr_sales_order_items_items_ItemId",
+                        column: x => x.ItemId,
                         principalTable: "items",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ordr_sales_order_items_ordr_sales_orders_SalesOrderId",
+                        column: x => x.SalesOrderId,
+                        principalTable: "ordr_sales_orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "Menus",
+                table: "accl_menus",
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedOn", "Icon", "IsActive", "IsDeleted", "Label", "LastModifiedBy", "LastModifiedOn", "ModuleCode", "Name", "ParentId", "Position", "Route" },
                 values: new object[,]
                 {
@@ -920,20 +919,7 @@ namespace CRM.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ModuleCategories",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedOn", "Description", "IsActive", "IsDeleted", "LastModifiedBy", "LastModifiedOn", "Name" },
-                values: new object[,]
-                {
-                    { new Guid("0c1d2e3f-4a5b-6c7d-8e9f-0a1b2c3d4e5f"), "SALES", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sales" },
-                    { new Guid("1d2e3f4a-5b6c-7d8e-9f0a-1b2c3d4e5f6a"), "INTEL", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Intelligence" },
-                    { new Guid("2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b"), "INTEG", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Integrations" },
-                    { new Guid("7f9e8a7d-1c3b-4e1a-8c2d-5b6a7d8e9f0a"), "CORE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Core" },
-                    { new Guid("8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d"), "OPS", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operations" },
-                    { new Guid("9b0c1d2e-3f4a-5b6c-7d8e-9f0a1b2c3d4e"), "SUPPLY", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Supply Chain" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Permissions",
+                table: "accl_permissions",
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedOn", "Description", "IsDeleted", "LastModifiedBy", "LastModifiedOn", "ModuleCode", "Name" },
                 values: new object[,]
                 {
@@ -966,12 +952,25 @@ namespace CRM.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Roles",
+                table: "accl_roles",
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedOn", "Description", "IsActive", "IsDeleted", "IsSystem", "LastModifiedBy", "LastModifiedOn", "Name", "TenantId" },
                 values: new object[] { new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"), "ADMIN", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Full system access with all permissions.", true, false, true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrator", new Guid("00000000-0000-0000-0000-000000000000") });
 
             migrationBuilder.InsertData(
-                table: "Menus",
+                table: "sys_module_categories",
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedOn", "Description", "IsActive", "IsDeleted", "LastModifiedBy", "LastModifiedOn", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("0c1d2e3f-4a5b-6c7d-8e9f-0a1b2c3d4e5f"), "SALES", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sales" },
+                    { new Guid("1d2e3f4a-5b6c-7d8e-9f0a-1b2c3d4e5f6a"), "INTEL", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Intelligence" },
+                    { new Guid("2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b"), "INTEG", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Integrations" },
+                    { new Guid("7f9e8a7d-1c3b-4e1a-8c2d-5b6a7d8e9f0a"), "CORE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Core" },
+                    { new Guid("8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d"), "OPS", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operations" },
+                    { new Guid("9b0c1d2e-3f4a-5b6c-7d8e-9f0a1b2c3d4e"), "SUPPLY", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Supply Chain" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "accl_menus",
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedOn", "Icon", "IsActive", "IsDeleted", "Label", "LastModifiedBy", "LastModifiedOn", "ModuleCode", "Name", "ParentId", "Position", "Route" },
                 values: new object[,]
                 {
@@ -1000,23 +999,7 @@ namespace CRM.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Modules",
-                columns: new[] { "Id", "CategoryId", "Code", "CreatedBy", "CreatedOn", "Description", "IsActive", "IsDeleted", "LastModifiedBy", "LastModifiedOn", "Name", "Version" },
-                values: new object[,]
-                {
-                    { new Guid("0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"), new Guid("2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b"), "ECOMMERCE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "E-Commerce Integration", "1.0" },
-                    { new Guid("1b2c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e"), new Guid("2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b"), "BARCODE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Barcode & Scanning", "1.0" },
-                    { new Guid("3f4a5b6c-7d8e-9f0a-1b2c-3d4e5f6a7b8c"), new Guid("7f9e8a7d-1c3b-4e1a-8c2d-5b6a7d8e9f0a"), "CORE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Core & Administration", "1.0" },
-                    { new Guid("4a5b6c7d-8e9f-0a1b-2c3d-4e5f6a7b8c9d"), new Guid("8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d"), "INVENTORY", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Inventory Management", "1.0" },
-                    { new Guid("5b6c7d8e-9f0a-1b2c-3d4e-5f6a7b8c9d0a"), new Guid("8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d"), "WAREHOUSE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Warehouse & Locations", "1.0" },
-                    { new Guid("6c7d8e9f-0a1b-2c3d-4e5f-6a7b8c9d0a1b"), new Guid("9b0c1d2e-3f4a-5b6c-7d8e-9f0a1b2c3d4e"), "PROCUREMENT", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Procurement", "1.0" },
-                    { new Guid("7d8e9f0a-1b2c-3d4e-5f6a-7b8c9d0a1b2c"), new Guid("0c1d2e3f-4a5b-6c7d-8e9f-0a1b2c3d4e5f"), "SALES", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sales & Orders", "1.0" },
-                    { new Guid("8e9f0a1b-2c3d-4e5f-6a7b-8c9d0a1b2c3d"), new Guid("9b0c1d2e-3f4a-5b6c-7d8e-9f0a1b2c3d4e"), "SUPPLIERS", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Supplier Management", "1.0" },
-                    { new Guid("9f0a1b2c-3d4e-5f6a-7b8c-9a0b1c2d3e4f"), new Guid("1d2e3f4a-5b6c-7d8e-9f0a-1b2c3d4e5f6a"), "REPORTS", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Reporting & Analytics", "1.0" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "RolePermissions",
+                table: "accl_role_permissions",
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedOn", "IsDeleted", "LastModifiedBy", "LastModifiedOn", "PermissionId", "RoleId", "TenantId" },
                 values: new object[,]
                 {
@@ -1048,15 +1031,56 @@ namespace CRM.Data.Migrations
                     { new Guid("fa927e20-71a8-1156-efbd-2f5f3de22055"), "", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("f5d6ff33-b330-1586-1090-119609bb94a8"), new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"), new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Batches_ItemId1",
-                table: "Batches",
-                column: "ItemId1");
+            migrationBuilder.InsertData(
+                table: "sys_modules",
+                columns: new[] { "Id", "CategoryId", "Code", "CreatedBy", "CreatedOn", "Description", "IsActive", "IsDeleted", "LastModifiedBy", "LastModifiedOn", "Name", "Version" },
+                values: new object[,]
+                {
+                    { new Guid("0a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d"), new Guid("2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b"), "ECOMMERCE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "E-Commerce Integration", "1.0" },
+                    { new Guid("1b2c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e"), new Guid("2e3f4a5b-6c7d-8e9f-0a1b-2c3d4e5f6a7b"), "BARCODE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Barcode & Scanning", "1.0" },
+                    { new Guid("3f4a5b6c-7d8e-9f0a-1b2c-3d4e5f6a7b8c"), new Guid("7f9e8a7d-1c3b-4e1a-8c2d-5b6a7d8e9f0a"), "CORE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Core & Administration", "1.0" },
+                    { new Guid("4a5b6c7d-8e9f-0a1b-2c3d-4e5f6a7b8c9d"), new Guid("8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d"), "INVENTORY", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Inventory Management", "1.0" },
+                    { new Guid("5b6c7d8e-9f0a-1b2c-3d4e-5f6a7b8c9d0a"), new Guid("8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d"), "WAREHOUSE", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Warehouse & Locations", "1.0" },
+                    { new Guid("6c7d8e9f-0a1b-2c3d-4e5f-6a7b8c9d0a1b"), new Guid("9b0c1d2e-3f4a-5b6c-7d8e-9f0a1b2c3d4e"), "PROCUREMENT", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Procurement", "1.0" },
+                    { new Guid("7d8e9f0a-1b2c-3d4e-5f6a-7b8c9d0a1b2c"), new Guid("0c1d2e3f-4a5b-6c7d-8e9f-0a1b2c3d4e5f"), "SALES", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sales & Orders", "1.0" },
+                    { new Guid("8e9f0a1b-2c3d-4e5f-6a7b-8c9d0a1b2c3d"), new Guid("9b0c1d2e-3f4a-5b6c-7d8e-9f0a1b2c3d4e"), "SUPPLIERS", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Supplier Management", "1.0" },
+                    { new Guid("9f0a1b2c-3d4e-5f6a-7b8c-9a0b1c2d3e4f"), new Guid("1d2e3f4a-5b6c-7d8e-9f0a-1b2c3d4e5f6a"), "REPORTS", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Reporting & Analytics", "1.0" }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_ParentId",
-                table: "Categories",
+                name: "IX_accl_menu_permissions_MenuId",
+                table: "accl_menu_permissions",
+                column: "MenuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accl_menu_permissions_PermissionId",
+                table: "accl_menu_permissions",
+                column: "PermissionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accl_menus_ParentId",
+                table: "accl_menus",
                 column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accl_role_permissions_PermissionId",
+                table: "accl_role_permissions",
+                column: "PermissionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accl_role_permissions_RoleId",
+                table: "accl_role_permissions",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accl_user_roles_RoleId",
+                table: "accl_user_roles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accl_user_roles_UserId",
+                table: "accl_user_roles",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cor_cities_CountryId",
@@ -1074,29 +1098,39 @@ namespace CRM.Data.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryTransactions_BatchId1",
-                table: "InventoryTransactions",
-                column: "BatchId1");
+                name: "IX_invtry_batches_ItemId",
+                table: "invtry_batches",
+                column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryTransactions_ItemId1",
-                table: "InventoryTransactions",
-                column: "ItemId1");
+                name: "IX_invtry_categories_ParentId",
+                table: "invtry_categories",
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryTransactions_LocationId1",
-                table: "InventoryTransactions",
-                column: "LocationId1");
+                name: "IX_invtry_inventory_transactions_BatchId",
+                table: "invtry_inventory_transactions",
+                column: "BatchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemLocations_ItemId1",
-                table: "ItemLocations",
-                column: "ItemId1");
+                name: "IX_invtry_inventory_transactions_ItemId",
+                table: "invtry_inventory_transactions",
+                column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemLocations_LocationId1",
-                table: "ItemLocations",
-                column: "LocationId1");
+                name: "IX_invtry_inventory_transactions_LocationId",
+                table: "invtry_inventory_transactions",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_invtry_item_locations_ItemId",
+                table: "invtry_item_locations",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_invtry_item_locations_LocationId",
+                table: "invtry_item_locations",
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_items_Barcode",
@@ -1125,78 +1159,53 @@ namespace CRM.Data.Migrations
                 column: "VendorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MenuPermissions_MenuId1",
-                table: "MenuPermissions",
-                column: "MenuId1");
+                name: "IX_ordr_purchase_order_items_ItemId",
+                table: "ordr_purchase_order_items",
+                column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MenuPermissions_PermissionId1",
-                table: "MenuPermissions",
-                column: "PermissionId1");
+                name: "IX_ordr_purchase_order_items_LocationId",
+                table: "ordr_purchase_order_items",
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Menus_ParentId",
-                table: "Menus",
-                column: "ParentId");
+                name: "IX_ordr_purchase_order_items_PurchaseOrderId",
+                table: "ordr_purchase_order_items",
+                column: "PurchaseOrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Modules_CategoryId",
-                table: "Modules",
+                name: "IX_ordr_purchase_orders_VendorId",
+                table: "ordr_purchase_orders",
+                column: "VendorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ordr_sales_order_items_BatchId",
+                table: "ordr_sales_order_items",
+                column: "BatchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ordr_sales_order_items_ItemId",
+                table: "ordr_sales_order_items",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ordr_sales_order_items_SalesOrderId",
+                table: "ordr_sales_order_items",
+                column: "SalesOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_sys_modules_CategoryId",
+                table: "sys_modules",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PurchaseOrderItems_ItemId1",
-                table: "PurchaseOrderItems",
-                column: "ItemId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PurchaseOrderItems_LocationId1",
-                table: "PurchaseOrderItems",
-                column: "LocationId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PurchaseOrderItems_PurchaseOrderId1",
-                table: "PurchaseOrderItems",
-                column: "PurchaseOrderId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PurchaseOrders_VendorId1",
-                table: "PurchaseOrders",
-                column: "VendorId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RolePermissions_PermissionId",
-                table: "RolePermissions",
-                column: "PermissionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RolePermissions_RoleId",
-                table: "RolePermissions",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SalesOrderItems_BatchId1",
-                table: "SalesOrderItems",
-                column: "BatchId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SalesOrderItems_ItemId1",
-                table: "SalesOrderItems",
-                column: "ItemId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SalesOrderItems_SalesOrderId1",
-                table: "SalesOrderItems",
-                column: "SalesOrderId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TenantModules_ModuleId",
-                table: "TenantModules",
+                name: "IX_sys_tenant_modules_ModuleId",
+                table: "sys_tenant_modules",
                 column: "ModuleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TenantModules_TenantId",
-                table: "TenantModules",
+                name: "IX_sys_tenant_modules_TenantId",
+                table: "sys_tenant_modules",
                 column: "TenantId");
 
             migrationBuilder.CreateIndex(
@@ -1205,16 +1214,6 @@ namespace CRM.Data.Migrations
                 column: "Code",
                 unique: true,
                 filter: "[Code] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_RoleId",
-                table: "UserRoles",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_UserId",
-                table: "UserRoles",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_users_EntraObjectId",
@@ -1232,6 +1231,15 @@ namespace CRM.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "accl_menu_permissions");
+
+            migrationBuilder.DropTable(
+                name: "accl_role_permissions");
+
+            migrationBuilder.DropTable(
+                name: "accl_user_roles");
+
             migrationBuilder.DropTable(
                 name: "cor_audit_logs");
 
@@ -1251,58 +1259,52 @@ namespace CRM.Data.Migrations
                 name: "fr_parameter_values");
 
             migrationBuilder.DropTable(
-                name: "InventoryTransactions");
+                name: "invtry_inventory_transactions");
 
             migrationBuilder.DropTable(
-                name: "ItemLocations");
+                name: "invtry_item_locations");
 
             migrationBuilder.DropTable(
-                name: "MenuPermissions");
+                name: "ordr_purchase_order_items");
 
             migrationBuilder.DropTable(
-                name: "PurchaseOrderItems");
+                name: "ordr_sales_order_items");
 
             migrationBuilder.DropTable(
-                name: "RolePermissions");
+                name: "sys_tenant_modules");
 
             migrationBuilder.DropTable(
-                name: "SalesOrderItems");
+                name: "accl_menus");
 
             migrationBuilder.DropTable(
-                name: "TenantModules");
+                name: "accl_permissions");
 
             migrationBuilder.DropTable(
-                name: "UserRoles");
+                name: "accl_roles");
+
+            migrationBuilder.DropTable(
+                name: "users");
 
             migrationBuilder.DropTable(
                 name: "cor_states");
 
             migrationBuilder.DropTable(
-                name: "Menus");
+                name: "invtry_locations");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "ordr_purchase_orders");
 
             migrationBuilder.DropTable(
-                name: "PurchaseOrders");
+                name: "invtry_batches");
 
             migrationBuilder.DropTable(
-                name: "Permissions");
+                name: "ordr_sales_orders");
 
             migrationBuilder.DropTable(
-                name: "Batches");
+                name: "sys_modules");
 
             migrationBuilder.DropTable(
-                name: "SalesOrders");
-
-            migrationBuilder.DropTable(
-                name: "Modules");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
-
-            migrationBuilder.DropTable(
-                name: "users");
+                name: "tenants");
 
             migrationBuilder.DropTable(
                 name: "cor_countries");
@@ -1311,16 +1313,13 @@ namespace CRM.Data.Migrations
                 name: "items");
 
             migrationBuilder.DropTable(
-                name: "ModuleCategories");
+                name: "sys_module_categories");
 
             migrationBuilder.DropTable(
-                name: "tenants");
+                name: "invtry_categories");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Vendors");
+                name: "ordr_vendors");
         }
     }
 }

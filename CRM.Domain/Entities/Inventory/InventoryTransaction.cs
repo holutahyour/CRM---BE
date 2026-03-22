@@ -7,9 +7,9 @@ namespace CRM.Domain.Entities;
 [Table("invtry_inventory_transactions")]
 public class InventoryTransaction : TenantEntity<Guid>
 {
-    public int ItemId { get; set; }
-    public int? BatchId { get; set; }
-    public int? LocationId { get; set; }
+    public Guid ItemId { get; set; }
+    public Guid? BatchId { get; set; }
+    public Guid? LocationId { get; set; }
     public TransactionType TransactionType { get; set; }
     public decimal Quantity { get; set; }
     public int? ReferenceId { get; set; }

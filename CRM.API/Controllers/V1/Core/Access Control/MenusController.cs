@@ -60,4 +60,27 @@ public class MenusController : MSSQLBaseController<Menu, MenuDTO, Guid>
             return BadRequest(response);
     }
 
+    [Authorize(Policy = "AdminOnly")]
+    [HttpPost]
+    public async Task<ActionResult> CreateMenu([FromBody] CreateMenuRequest request)
+    {
+        var response = await CreateAsync(request);
+        return Ok(response);
+    }
+
+    [Authorize(Policy = "AdminOnly")]
+    [HttpPut]
+    public async Task<ActionResult> UpdateMenu(Guid id, [FromBody] UpdateMenuRequest request)
+    {
+        var response = await UpdateAsync(id, request);
+        return Ok(response);
+    }
+
+    [Authorize(Policy = "AdminOnly")]
+    [HttpDelete]
+    public async Task<ActionResult> RemoveMenu(Guid id)
+    {
+        var response = await RemoveAsync(id);
+        return Ok(response);
+    }
 }

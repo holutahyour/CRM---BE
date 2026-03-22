@@ -1,9 +1,8 @@
-﻿using CRM.Base.Domain.Entities;
+using CRM.Base.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
 
-[Table("dash_dashboard_summaries")]
 public class DashboardSummary : TenantEntity<Guid>
 {
     public int PendingRequisitions { get; set; }

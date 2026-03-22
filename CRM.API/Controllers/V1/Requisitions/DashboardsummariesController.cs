@@ -9,5 +9,4 @@ public class DashboardSummariesController : MSSQLBaseController<DashboardSummary
     {
         _service = service;
     }
-
 }

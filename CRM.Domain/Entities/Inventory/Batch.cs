@@ -6,7 +6,7 @@ namespace CRM.Domain.Entities;
 [Table("invtry_batches")]
 public class Batch : TenantEntity<Guid>
 {
-    public int ItemId { get; set; }
+    public Guid ItemId { get; set; }
     public string BatchNumber { get; set; } = "";
     public DateTime? ManufactureDate { get; set; }
     public DateTime? ExpiryDate { get; set; }

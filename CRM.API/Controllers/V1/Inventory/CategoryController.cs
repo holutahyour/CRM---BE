@@ -1,18 +1,11 @@
-using Asp.Versioning;
-using CRM.Base.Common.Presentation;
-using CRM.Domain.DTOs;
-using CRM.Domain.Entities;
-using CRM.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-
 namespace CRM.API.Controllers.v1;
 
 [ApiVersion("1.0")]
-public class categoriesController : MSSQLBaseController<Category, CategoryResponse, Guid>
+public class CategoriesController : MSSQLBaseController<Category, CategoryResponse, Guid>
 {
     private readonly ICategoryService _service;
 
-    public categoriesController(ICategoryService service) : base(service)
+    public CategoriesController(ICategoryService service) : base(service)
     {
         _service = service;
     }

@@ -1,4 +1,4 @@
-﻿using CRM.Data;
+using CRM.Data;
 using CRM.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,9 +26,19 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
             user = new User
             {
                 EntraObjectId = oid,
-                Email = context.User.FindFirst("email")?.Value ?? context.User.FindFirst("preferred_username")?.Value ?? "",
-                FirstName = context.User.FindFirst("given_name")?.Value,
-                LastName = context.User.FindFirst("family_name")?.Value,
+                Email = context.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? 
+                        context.User.FindFirst("email")?.Value ?? 
+                        context.User.FindFirst("preferred_username")?.Value ?? 
+                        context.User.FindFirst(System.Security.Claims.ClaimTypes.Upn)?.Value ?? "",
+                FirstName = context.User.FindFirst(System.Security.Claims.ClaimTypes.GivenName)?.Value ?? 
+                            context.User.FindFirst("given_name")?.Value ?? 
+                            context.User.FindFirst("name")?.Value ?? 
+                            context.User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value,
+                LastName = context.User.FindFirst(System.Security.Claims.ClaimTypes.Surname)?.Value ?? 
+                           context.User.FindFirst("family_name")?.Value,
+                Phone = context.User.FindFirst(System.Security.Claims.ClaimTypes.MobilePhone)?.Value ??
+                        context.User.FindFirst(System.Security.Claims.ClaimTypes.HomePhone)?.Value ??
+                        context.User.FindFirst("phone")?.Value ?? "",
                 TenantId = tenantId,
                 IsActive = true,
                 LastLoginAt = DateTime.UtcNow,
@@ -63,14 +73,14 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
 
     private async Task AssignAdminRoleAsync(User user, ApplicationDbContext db)
     {
-        var adminRole = await db.Roles.IgnoreQueryFilters().FirstOrDefaultAsync(r => r.Code == "ADMIN" && r.TenantId == Guid.Empty);
+        var adminRole = await db.Roles.IgnoreQueryFilters().FirstOrDefaultAsync(r => r.Code == "ADMIN" && (r.TenantId == user.TenantId || r.TenantId == Guid.Empty));
         if (adminRole != null)
         {
             db.UserRoles.Add(new UserRole
             {
                 UserId = user.Id,
                 RoleId = adminRole.Id,
-                TenantId = Guid.Empty
+                TenantId = user.TenantId
             });
             await db.SaveChangesAsync();
             logger.LogInformation("Assigned System Administrator role to user {Email}", user.Email);

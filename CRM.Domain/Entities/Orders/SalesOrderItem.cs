@@ -6,12 +6,12 @@ namespace CRM.Domain.Entities.Orders;
 [Table("ordr_sales_order_items")]
 public class SalesOrderItem : TenantEntity<Guid>
 {
-    public int SalesOrderId { get; set; }
-    public int ItemId { get; set; }
+    public Guid SalesOrderId { get; set; }
+    public Guid ItemId { get; set; }
     public decimal Quantity { get; set; }
     public decimal UnitPrice { get; set; }
     public decimal FulfilledQuantity { get; set; }
-    public int? BatchId { get; set; }
+    public Guid? BatchId { get; set; }
 
     // Computed
     public decimal LineTotal => Quantity * UnitPrice;
