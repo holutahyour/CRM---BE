@@ -1,4 +1,4 @@
-﻿using CRM.Base.Domain.Entities;
+using CRM.Base.Domain.Entities;
 using CRM.Domain.Entities.Orders;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +18,7 @@ public class Item : TenantEntity<Guid>
     public bool ExpiryTracked { get; set; }
     public decimal? MinStockLevel { get; set; }
     public decimal? ReorderQuantity { get; set; }
+    public decimal QuantityOnHand { get; set; } = 0; // Materialized exact quantity
     public decimal? CostPrice { get; set; }
     public decimal? SellingPrice { get; set; }
     public string? ImageUrl { get; set; }

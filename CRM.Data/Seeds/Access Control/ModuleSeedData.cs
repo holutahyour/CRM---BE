@@ -106,60 +106,43 @@ public static class PermissionSeedData
 public static class MenuSeedData
 {
     // Root Menu IDs
-    private static readonly Guid MenuDashId = new Guid("d1d1d1d1-1d1d-1d1d-1d1d-d1d1d1d1d1d1");
-    private static readonly Guid MenuInvId = new Guid("22222222-2222-2222-2222-222222222222");
-    private static readonly Guid MenuLocId = new Guid("33333333-3333-3333-3333-333333333333");
-    private static readonly Guid MenuSupId = new Guid("44444444-4444-4444-4444-444444444444");
-    private static readonly Guid MenuOrdId = new Guid("55555555-5555-5555-5555-555555555555");
-    private static readonly Guid MenuRepId = new Guid("66666666-6666-6666-6666-666666666666");
-    private static readonly Guid MenuAdmId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7");
+    private static readonly Guid MenuDashId      = new Guid("d1d1d1d1-1d1d-1d1d-1d1d-d1d1d1d1d1d1");
+    private static readonly Guid MenuReqId       = new Guid("a0a0a0a0-0a0a-0a0a-0a0a-a0a0a0a0a0a0");
+    private static readonly Guid MenuItemReqId   = new Guid("b0b0b0b0-0b0b-0b0b-0b0b-b0b0b0b0b0b0");
+    private static readonly Guid MenuMonRepId    = new Guid("c0c0c0c0-0c0c-0c0c-0c0c-c0c0c0c0c0c0");
+    private static readonly Guid MenuInvId       = new Guid("22222222-2222-2222-2222-222222222222");
+    private static readonly Guid MenuIncId       = new Guid("d0d0d0d0-0d0d-0d0d-0d0d-d0d0d0d0d0d0");
+    private static readonly Guid MenuUsrMgmtId   = new Guid("e0e0e0e0-0e0e-0e0e-0e0e-e0e0e0e0e0e0");
+    private static readonly Guid MenuDeptId      = new Guid("f0f0f0f0-0f0f-0f0f-0f0f-f0f0f0f0f0f0");
+    private static readonly Guid MenuAdmId       = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7");
 
     public static void Seed(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Menu>().HasData(
-            // Root menus
-            new Menu { Id = MenuDashId, Name = "DASHBOARD", Label = "Dashboard", Icon = "layout-dashboard", Route = "/dashboard", Position = 0, ModuleCode = ModuleCodes.Core },
-            new Menu { Id = MenuInvId, Name = "INVENTORY", Label = "Inventory", Icon = "package", Position = 1, ModuleCode = ModuleCodes.Inventory },
-            new Menu { Id = MenuLocId, Name = "LOCATIONS", Label = "Locations", Icon = "map-pin", Position = 2, ModuleCode = ModuleCodes.Warehouse },
-            new Menu { Id = MenuSupId, Name = "SUPPLIERS", Label = "Suppliers", Icon = "truck", Position = 3, ModuleCode = ModuleCodes.Suppliers },
-            new Menu { Id = MenuOrdId, Name = "ORDERS", Label = "Orders", Icon = "clipboard-list", Position = 4 },
-            new Menu { Id = MenuRepId, Name = "REPORTS", Label = "Reports", Icon = "bar-chart-3", Position = 5, ModuleCode = ModuleCodes.Reports },
-            new Menu { Id = MenuAdmId, Name = "ADMIN", Label = "Administration", Icon = "settings", Position = 6, ModuleCode = ModuleCodes.Core },
+            // Root menus — ordered to match the sidebar screenshot
+            new Menu { Id = MenuDashId,    Name = "DASHBOARD",       Label = "Dashboard",       Icon = "layout-dashboard",  Route = "/dashboard",        Position = 0, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuReqId,     Name = "REQUISITIONS",    Label = "Requisitions",    Icon = "file-text",          Route = "/requisitions",     Position = 1, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuItemReqId, Name = "ITEM_REQUESTS",   Label = "Item Requests",   Icon = "package",            Route = "/item-requests",    Position = 2, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuMonRepId,  Name = "MONTHLY_REPORTS", Label = "Monthly Reports", Icon = "bar-chart-2",         Route = "/reports/monthly",  Position = 3, ModuleCode = ModuleCodes.Reports },
+            new Menu { Id = MenuInvId,     Name = "INVENTORY",       Label = "Inventory",       Icon = "archive",                                         Position = 4, ModuleCode = ModuleCodes.Inventory },
+            new Menu { Id = MenuIncId,     Name = "INCIDENT_REPORTS",Label = "Incident Reports",Icon = "alert-circle",        Route = "/incidents",        Position = 5, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuUsrMgmtId, Name = "USER_MANAGEMENT", Label = "User Management", Icon = "users",               Route = "/admin/users",      Position = 6, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuDeptId,    Name = "DEPARTMENTS",     Label = "Departments",     Icon = "building-2",          Route = "/departments",      Position = 7, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuAdmId,     Name = "ADMIN",           Label = "Administration",  Icon = "settings",                                        Position = 8, ModuleCode = ModuleCodes.Core },
 
-            // Inventory children
-            new Menu { Id = new Guid("b1b1b1b1-1b1b-1b1b-1b1b-b1b1b1b1b1b1"), Name = "INVENTORY_ITEMS", Label = "Items", Icon = "box", Route = "/inventory/items", ParentId = MenuInvId, Position = 0 },
-            new Menu { Id = new Guid("b2b2b2b2-2b2b-2b2b-2b2b-b2b2b2b2b2b2"), Name = "INVENTORY_CATEGORIES", Label = "Categories", Icon = "tags", Route = "/inventory/categories", ParentId = MenuInvId, Position = 1 },
-            new Menu { Id = new Guid("b3b3b3b3-3b3b-3b3b-3b3b-b3b3b3b3b3b3"), Name = "INVENTORY_BATCHES", Label = "Batches & Lots", Icon = "layers", Route = "/inventory/batches", ParentId = MenuInvId, Position = 2 },
-            new Menu { Id = new Guid("b4b4b4b4-4b4b-4b4b-4b4b-b4b4b4b4b4b4"), Name = "INVENTORY_STOCK", Label = "Stock Levels", Icon = "bar-chart", Route = "/inventory/stock", ParentId = MenuInvId, Position = 3 },
-            new Menu { Id = new Guid("b5b5b5b5-5b5b-5b5b-5b5b-b5b5b5b5b5b5"), Name = "INVENTORY_SCANNER", Label = "Barcode Scanner", Icon = "scan", Route = "/inventory/scanner", ParentId = MenuInvId, Position = 4, ModuleCode = ModuleCodes.Barcode },
+            // Inventory children (unchanged)
+            new Menu { Id = new Guid("b1b1b1b1-1b1b-1b1b-1b1b-b1b1b1b1b1b1"), Name = "INVENTORY_ITEMS",      Label = "Items",           Icon = "box",           Route = "/inventory/items",       ParentId = MenuInvId, Position = 0 },
+            new Menu { Id = new Guid("b2b2b2b2-2b2b-2b2b-2b2b-b2b2b2b2b2b2"), Name = "INVENTORY_CATEGORIES", Label = "Categories",      Icon = "tags",          Route = "/inventory/categories",  ParentId = MenuInvId, Position = 1 },
+            new Menu { Id = new Guid("b3b3b3b3-3b3b-3b3b-3b3b-b3b3b3b3b3b3"), Name = "INVENTORY_BATCHES",    Label = "Batches & Lots",  Icon = "layers",        Route = "/inventory/batches",     ParentId = MenuInvId, Position = 2 },
+            new Menu { Id = new Guid("b4b4b4b4-4b4b-4b4b-4b4b-b4b4b4b4b4b4"), Name = "INVENTORY_STOCK",      Label = "Stock Levels",    Icon = "bar-chart",     Route = "/inventory/stock",       ParentId = MenuInvId, Position = 3 },
+            new Menu { Id = new Guid("b5b5b5b5-5b5b-5b5b-5b5b-b5b5b5b5b5b5"), Name = "INVENTORY_SCANNER",    Label = "Barcode Scanner", Icon = "scan",          Route = "/inventory/scanner",     ParentId = MenuInvId, Position = 4, ModuleCode = ModuleCodes.Barcode },
 
-            // Locations children
-            new Menu { Id = new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1"), Name = "LOCATIONS_ALL", Label = "All Locations", Icon = "building", Route = "/locations", ParentId = MenuLocId, Position = 0 },
-            new Menu { Id = new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Name = "LOCATIONS_TRANSFERS", Label = "Stock Transfers", Icon = "arrow-right-left", Route = "/locations/transfers", ParentId = MenuLocId, Position = 1 },
-
-            // Suppliers children
-            new Menu { Id = new Guid("d2d2d2d2-2d2d-2d2d-2d2d-d2d2d2d2d2d2"), Name = "SUPPLIERS_LIST", Label = "Supplier List", Icon = "users", Route = "/suppliers", ParentId = MenuSupId, Position = 0 },
-            new Menu { Id = new Guid("d3d3d3d3-3d3d-3d3d-3d3d-d3d3d3d3d3d3"), Name = "SUPPLIERS_PERFORMANCE", Label = "Supplier Performance", Icon = "trending-up", Route = "/suppliers/performance", ParentId = MenuSupId, Position = 1 },
-
-            // Orders children
-            new Menu { Id = new Guid("e1e1e1e1-1e1e-1e1e-1e1e-e1e1e1e1e1e1"), Name = "ORDERS_PURCHASE", Label = "Purchase Orders", Icon = "shopping-cart", Route = "/orders/purchase", ParentId = MenuOrdId, Position = 0, ModuleCode = ModuleCodes.Procurement },
-            new Menu { Id = new Guid("e2e2e2e2-2e2e-2e2e-2e2e-e2e2e2e2e2e2"), Name = "ORDERS_SALES", Label = "Sales Orders", Icon = "receipt", Route = "/orders/sales", ParentId = MenuOrdId, Position = 1, ModuleCode = ModuleCodes.Sales },
-            new Menu { Id = new Guid("e3e3e3e3-3e3e-3e3e-3e3e-e3e3e3e3e3e3"), Name = "ORDERS_ECOM", Label = "E-Commerce Sync", Icon = "globe", Route = "/orders/ecommerce", ParentId = MenuOrdId, Position = 2, ModuleCode = ModuleCodes.ECommerce },
-
-            // Reports children
-            new Menu { Id = new Guid("f1f1f1f1-1f1f-1f1f-1f1f-f1f1f1f1f1f1"), Name = "REPORTS_STOCK", Label = "Stock Report", Icon = "file-bar-chart", Route = "/reports/stock", ParentId = MenuRepId, Position = 0 },
-            new Menu { Id = new Guid("f2f2f2f2-2f2f-2f2f-2f2f-f2f2f2f2f2f2"), Name = "REPORTS_EXPIRATION", Label = "Expiration Alerts", Icon = "alert-triangle", Route = "/reports/expiration", ParentId = MenuRepId, Position = 1 },
-            new Menu { Id = new Guid("f3f3f3f3-3f3f-3f3f-3f3f-f3f3f3f3f3f3"), Name = "REPORTS_MOVEMENTS", Label = "Movement History", Icon = "history", Route = "/reports/movements", ParentId = MenuRepId, Position = 2 },
-            new Menu { Id = new Guid("f4f4f4f4-4f4f-4f4f-4f4f-f4f4f4f4f4f4"), Name = "REPORTS_SALES", Label = "Sales Trends", Icon = "trending-up", Route = "/reports/sales-trends", ParentId = MenuRepId, Position = 3 },
-            new Menu { Id = new Guid("f5f5f5f5-5f5f-5f5f-5f5f-f5f5f5f5f5f5"), Name = "REPORTS_TRACEABILITY", Label = "Traceability", Icon = "search", Route = "/reports/traceability", ParentId = MenuRepId, Position = 4 },
-
-            // Admin children
-            new Menu { Id = new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"), Name = "ADMIN_USERS", Label = "Users", Icon = "users", Route = "/admin/users", ParentId = MenuAdmId, Position = 0 },
-            new Menu { Id = new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"), Name = "ADMIN_ROLES", Label = "Roles & Permissions", Icon = "shield", Route = "/admin/roles", ParentId = MenuAdmId, Position = 1 },
-            new Menu { Id = new Guid("3f3f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f"), Name = "ADMIN_MODULES", Label = "Modules", Icon = "puzzle", Route = "/admin/modules", ParentId = MenuAdmId, Position = 2 },
-            new Menu { Id = new Guid("4f4f4f4f-4f4f-4f4f-4f4f-4f4f4f4f4f4f"), Name = "ADMIN_SETTINGS", Label = "Tenant Settings", Icon = "sliders", Route = "/admin/settings", ParentId = MenuAdmId, Position = 3 },
-            new Menu { Id = new Guid("5f5f5f5f-5f5f-5f5f-5f5f-5f5f5f5f5f5f"), Name = "ADMIN_AUDIT", Label = "Audit Logs", Icon = "scroll", Route = "/admin/audit", ParentId = MenuAdmId, Position = 4 },
-            new Menu { Id = new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"), Name = "ADMIN_MENUS", Label = "Menu Management", Icon = "layout-grid", Route = "/admin/menus", ParentId = MenuAdmId, Position = 5 }
+            // Administration children (unchanged)
+            new Menu { Id = new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"), Name = "ADMIN_ROLES",    Label = "Roles & Permissions", Icon = "shield",       Route = "/admin/roles",     ParentId = MenuAdmId, Position = 0 },
+            new Menu { Id = new Guid("3f3f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f"), Name = "ADMIN_MODULES", Label = "Modules",             Icon = "puzzle",       Route = "/admin/modules",   ParentId = MenuAdmId, Position = 1 },
+            new Menu { Id = new Guid("4f4f4f4f-4f4f-4f4f-4f4f-4f4f4f4f4f4f"), Name = "ADMIN_SETTINGS",Label = "Tenant Settings",     Icon = "sliders",      Route = "/admin/settings",  ParentId = MenuAdmId, Position = 2 },
+            new Menu { Id = new Guid("5f5f5f5f-5f5f-5f5f-5f5f-5f5f5f5f5f5f"), Name = "ADMIN_AUDIT",   Label = "Audit Logs",          Icon = "scroll",       Route = "/admin/audit",     ParentId = MenuAdmId, Position = 3 },
+            new Menu { Id = new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"), Name = "ADMIN_MENUS",   Label = "Menu Management",     Icon = "layout-grid",  Route = "/admin/menus",     ParentId = MenuAdmId, Position = 4 }
         );
     }
 }
@@ -181,45 +164,38 @@ public static class MenuPermissionSeedData
             });
         }
 
-        // Inventory Module
-        AddMapping(new Guid("22222222-2222-2222-2222-222222222222"), Permissions.ItemsView); // Root Inventory
+        // Dashboard
+        AddMapping(new Guid("d1d1d1d1-1d1d-1d1d-1d1d-d1d1d1d1d1d1"), Permissions.UsersView); // Everyone who can log in sees dashboard
+
+        // Requisitions
+        AddMapping(new Guid("a0a0a0a0-0a0a-0a0a-0a0a-a0a0a0a0a0a0"), Permissions.RequisitionsView);
+
+        // Item Requests
+        AddMapping(new Guid("b0b0b0b0-0b0b-0b0b-0b0b-b0b0b0b0b0b0"), Permissions.ItemRequestsView);
+
+        // Monthly Reports
+        AddMapping(new Guid("c0c0c0c0-0c0c-0c0c-0c0c-c0c0c0c0c0c0"), Permissions.MonthlyReportsView);
+
+        // Inventory
+        AddMapping(new Guid("22222222-2222-2222-2222-222222222222"), Permissions.ItemsView);
         AddMapping(new Guid("b1b1b1b1-1b1b-1b1b-1b1b-b1b1b1b1b1b1"), Permissions.ItemsView);
         AddMapping(new Guid("b2b2b2b2-2b2b-2b2b-2b2b-b2b2b2b2b2b2"), Permissions.CategoriesView);
         AddMapping(new Guid("b3b3b3b3-3b3b-3b3b-3b3b-b3b3b3b3b3b3"), Permissions.BatchesView);
         AddMapping(new Guid("b4b4b4b4-4b4b-4b4b-4b4b-b4b4b4b4b4b4"), Permissions.StockView);
         AddMapping(new Guid("b5b5b5b5-5b5b-5b5b-5b5b-b5b5b5b5b5b5"), Permissions.ScannerUse);
 
-        // Locations Module
-        AddMapping(new Guid("33333333-3333-3333-3333-333333333333"), Permissions.LocationsView); // Root Locations
-        AddMapping(new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1"), Permissions.LocationsView);
-        AddMapping(new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Permissions.TransfersView);
-        AddMapping(new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Permissions.TransfersCreate);
+        // Incident Reports
+        AddMapping(new Guid("d0d0d0d0-0d0d-0d0d-0d0d-d0d0d0d0d0d0"), Permissions.IncidentsView);
 
-        // Suppliers Module
-        AddMapping(new Guid("44444444-4444-4444-4444-444444444444"), Permissions.SuppliersView); // Root Suppliers
-        AddMapping(new Guid("d2d2d2d2-2d2d-2d2d-2d2d-d2d2d2d2d2d2"), Permissions.SuppliersView);
-        AddMapping(new Guid("d3d3d3d3-3d3d-3d3d-3d3d-d3d3d3d3d3d3"), Permissions.SuppliersPerformanceView);
+        // User Management
+        AddMapping(new Guid("e0e0e0e0-0e0e-0e0e-0e0e-e0e0e0e0e0e0"), Permissions.UsersView);
+        AddMapping(new Guid("e0e0e0e0-0e0e-0e0e-0e0e-e0e0e0e0e0e0"), Permissions.UsersManage);
 
-        // Orders Module
-        AddMapping(new Guid("55555555-5555-5555-5555-555555555555"), Permissions.PurchaseOrdersView); // Root Orders
-        AddMapping(new Guid("55555555-5555-5555-5555-555555555555"), Permissions.SalesOrdersView);   // Root Orders (allow sales too)
-        AddMapping(new Guid("e1e1e1e1-1e1e-1e1e-1e1e-e1e1e1e1e1e1"), Permissions.PurchaseOrdersView);
-        AddMapping(new Guid("e2e2e2e2-2e2e-2e2e-2e2e-e2e2e2e2e2e2"), Permissions.SalesOrdersView);
-        AddMapping(new Guid("e3e3e3e3-3e3e-3e3e-3e3e-e3e3e3e3e3e3"), Permissions.EcommerceManage);
+        // Departments
+        AddMapping(new Guid("f0f0f0f0-0f0f-0f0f-0f0f-f0f0f0f0f0f0"), Permissions.DepartmentsView);
 
-        // Reports Module
-        AddMapping(new Guid("66666666-6666-6666-6666-666666666666"), Permissions.ReportsView); // Root Reports
-        AddMapping(new Guid("f1f1f1f1-1f1f-1f1f-1f1f-f1f1f1f1f1f1"), Permissions.ReportsView);
-        AddMapping(new Guid("f2f2f2f2-2f2f-2f2f-2f2f-f2f2f2f2f2f2"), Permissions.ReportsView);
-        AddMapping(new Guid("f3f3f3f3-3f3f-3f3f-3f3f-f3f3f3f3f3f3"), Permissions.ReportsView);
-        AddMapping(new Guid("f4f4f4f4-4f4f-4f4f-4f4f-f4f4f4f4f4f4"), Permissions.ReportsView);
-        AddMapping(new Guid("f5f5f5f5-5f5f-5f5f-5f5f-f5f5f5f5f5f5"), Permissions.ReportsView);
-
-        // Administration Module
-        AddMapping(new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"), Permissions.UsersView);  // Root Admin
-        AddMapping(new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"), Permissions.RolesView);  // Root Admin
-        AddMapping(new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"), Permissions.UsersView);
-        AddMapping(new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"), Permissions.UsersManage);
+        // Administration
+        AddMapping(new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"), Permissions.RolesView);
         AddMapping(new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"), Permissions.RolesView);
         AddMapping(new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"), Permissions.RolesManage);
         AddMapping(new Guid("3f3f3f3f-3f3f-3f3f-3f3f-3f3f3f3f3f3f"), Permissions.ModulesView);

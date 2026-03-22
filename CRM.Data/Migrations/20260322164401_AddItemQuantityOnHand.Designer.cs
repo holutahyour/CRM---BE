@@ -4,6 +4,7 @@ using CRM.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260322164401_AddItemQuantityOnHand")]
+    partial class AddItemQuantityOnHand
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1031,107 +1034,72 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a0a0a0a0-0a0a-0a0a-0a0a-a0a0a0a0a0a0"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "file-text",
-                            IsActive = true,
-                            IsDeleted = false,
-                            Label = "Requisitions",
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "REQUISITIONS",
-                            Position = 1,
-                            Route = "/requisitions"
-                        },
-                        new
-                        {
-                            Id = new Guid("b0b0b0b0-0b0b-0b0b-0b0b-b0b0b0b0b0b0"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "package",
-                            IsActive = true,
-                            IsDeleted = false,
-                            Label = "Item Requests",
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "ITEM_REQUESTS",
-                            Position = 2,
-                            Route = "/item-requests"
-                        },
-                        new
-                        {
-                            Id = new Guid("c0c0c0c0-0c0c-0c0c-0c0c-c0c0c0c0c0c0"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "bar-chart-2",
-                            IsActive = true,
-                            IsDeleted = false,
-                            Label = "Monthly Reports",
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "REPORTS",
-                            Name = "MONTHLY_REPORTS",
-                            Position = 3,
-                            Route = "/reports/monthly"
-                        },
-                        new
-                        {
                             Id = new Guid("22222222-2222-2222-2222-222222222222"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "archive",
+                            Icon = "package",
                             IsActive = true,
                             IsDeleted = false,
                             Label = "Inventory",
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "INVENTORY",
                             Name = "INVENTORY",
+                            Position = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "map-pin",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Locations",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "WAREHOUSE",
+                            Name = "LOCATIONS",
+                            Position = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444444"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "truck",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Suppliers",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "SUPPLIERS",
+                            Name = "SUPPLIERS",
+                            Position = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("55555555-5555-5555-5555-555555555555"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "clipboard-list",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Orders",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "ORDERS",
                             Position = 4
                         },
                         new
                         {
-                            Id = new Guid("d0d0d0d0-0d0d-0d0d-0d0d-d0d0d0d0d0d0"),
+                            Id = new Guid("66666666-6666-6666-6666-666666666666"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "alert-circle",
+                            Icon = "bar-chart-3",
                             IsActive = true,
                             IsDeleted = false,
-                            Label = "Incident Reports",
+                            Label = "Reports",
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "INCIDENT_REPORTS",
-                            Position = 5,
-                            Route = "/incidents"
-                        },
-                        new
-                        {
-                            Id = new Guid("e0e0e0e0-0e0e-0e0e-0e0e-e0e0e0e0e0e0"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "users",
-                            IsActive = true,
-                            IsDeleted = false,
-                            Label = "User Management",
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "USER_MANAGEMENT",
-                            Position = 6,
-                            Route = "/admin/users"
-                        },
-                        new
-                        {
-                            Id = new Guid("f0f0f0f0-0f0f-0f0f-0f0f-f0f0f0f0f0f0"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "building-2",
-                            IsActive = true,
-                            IsDeleted = false,
-                            Label = "Departments",
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "DEPARTMENTS",
-                            Position = 7,
-                            Route = "/departments"
+                            ModuleCode = "REPORTS",
+                            Name = "REPORTS",
+                            Position = 5
                         },
                         new
                         {
@@ -1145,7 +1113,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
                             Name = "ADMIN",
-                            Position = 8
+                            Position = 6
                         },
                         new
                         {
@@ -1225,6 +1193,204 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "building",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "All Locations",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "LOCATIONS_ALL",
+                            ParentId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Position = 0,
+                            Route = "/locations"
+                        },
+                        new
+                        {
+                            Id = new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "arrow-right-left",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Stock Transfers",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "LOCATIONS_TRANSFERS",
+                            ParentId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Position = 1,
+                            Route = "/locations/transfers"
+                        },
+                        new
+                        {
+                            Id = new Guid("d2d2d2d2-2d2d-2d2d-2d2d-d2d2d2d2d2d2"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "users",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Supplier List",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "SUPPLIERS_LIST",
+                            ParentId = new Guid("44444444-4444-4444-4444-444444444444"),
+                            Position = 0,
+                            Route = "/suppliers"
+                        },
+                        new
+                        {
+                            Id = new Guid("d3d3d3d3-3d3d-3d3d-3d3d-d3d3d3d3d3d3"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "trending-up",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Supplier Performance",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "SUPPLIERS_PERFORMANCE",
+                            ParentId = new Guid("44444444-4444-4444-4444-444444444444"),
+                            Position = 1,
+                            Route = "/suppliers/performance"
+                        },
+                        new
+                        {
+                            Id = new Guid("e1e1e1e1-1e1e-1e1e-1e1e-e1e1e1e1e1e1"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "shopping-cart",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Purchase Orders",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "PROCUREMENT",
+                            Name = "ORDERS_PURCHASE",
+                            ParentId = new Guid("55555555-5555-5555-5555-555555555555"),
+                            Position = 0,
+                            Route = "/orders/purchase"
+                        },
+                        new
+                        {
+                            Id = new Guid("e2e2e2e2-2e2e-2e2e-2e2e-e2e2e2e2e2e2"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "receipt",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Sales Orders",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "SALES",
+                            Name = "ORDERS_SALES",
+                            ParentId = new Guid("55555555-5555-5555-5555-555555555555"),
+                            Position = 1,
+                            Route = "/orders/sales"
+                        },
+                        new
+                        {
+                            Id = new Guid("e3e3e3e3-3e3e-3e3e-3e3e-e3e3e3e3e3e3"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "globe",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "E-Commerce Sync",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModuleCode = "ECOMMERCE",
+                            Name = "ORDERS_ECOM",
+                            ParentId = new Guid("55555555-5555-5555-5555-555555555555"),
+                            Position = 2,
+                            Route = "/orders/ecommerce"
+                        },
+                        new
+                        {
+                            Id = new Guid("f1f1f1f1-1f1f-1f1f-1f1f-f1f1f1f1f1f1"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "file-bar-chart",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Stock Report",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "REPORTS_STOCK",
+                            ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
+                            Position = 0,
+                            Route = "/reports/stock"
+                        },
+                        new
+                        {
+                            Id = new Guid("f2f2f2f2-2f2f-2f2f-2f2f-f2f2f2f2f2f2"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "alert-triangle",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Expiration Alerts",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "REPORTS_EXPIRATION",
+                            ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
+                            Position = 1,
+                            Route = "/reports/expiration"
+                        },
+                        new
+                        {
+                            Id = new Guid("f3f3f3f3-3f3f-3f3f-3f3f-f3f3f3f3f3f3"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "history",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Movement History",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "REPORTS_MOVEMENTS",
+                            ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
+                            Position = 2,
+                            Route = "/reports/movements"
+                        },
+                        new
+                        {
+                            Id = new Guid("f4f4f4f4-4f4f-4f4f-4f4f-f4f4f4f4f4f4"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "trending-up",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Sales Trends",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "REPORTS_SALES",
+                            ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
+                            Position = 3,
+                            Route = "/reports/sales-trends"
+                        },
+                        new
+                        {
+                            Id = new Guid("f5f5f5f5-5f5f-5f5f-5f5f-f5f5f5f5f5f5"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "search",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Traceability",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "REPORTS_TRACEABILITY",
+                            ParentId = new Guid("66666666-6666-6666-6666-666666666666"),
+                            Position = 4,
+                            Route = "/reports/traceability"
+                        },
+                        new
+                        {
+                            Id = new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Icon = "users",
+                            IsActive = true,
+                            IsDeleted = false,
+                            Label = "Users",
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "ADMIN_USERS",
+                            ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
+                            Position = 0,
+                            Route = "/admin/users"
+                        },
+                        new
+                        {
                             Id = new Guid("2f2f2f2f-2f2f-2f2f-2f2f-2f2f2f2f2f2f"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1235,7 +1401,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "ADMIN_ROLES",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
-                            Position = 0,
+                            Position = 1,
                             Route = "/admin/roles"
                         },
                         new
@@ -1250,7 +1416,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "ADMIN_MODULES",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
-                            Position = 1,
+                            Position = 2,
                             Route = "/admin/modules"
                         },
                         new
@@ -1265,7 +1431,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "ADMIN_SETTINGS",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
-                            Position = 2,
+                            Position = 3,
                             Route = "/admin/settings"
                         },
                         new
@@ -1280,7 +1446,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "ADMIN_AUDIT",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
-                            Position = 3,
+                            Position = 4,
                             Route = "/admin/audit"
                         },
                         new
@@ -1295,7 +1461,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "ADMIN_MENUS",
                             ParentId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
-                            Position = 4,
+                            Position = 5,
                             Route = "/admin/menus"
                         });
                 });
@@ -1340,46 +1506,6 @@ namespace CRM.Data.Migrations
                     b.ToTable("accl_menu_permissions");
 
                     b.HasData(
-                        new
-                        {
-                            Id = new Guid("fa374732-77cc-85e2-4588-5401ea35eeb8"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MenuId = new Guid("d1d1d1d1-1d1d-1d1d-1d1d-d1d1d1d1d1d1"),
-                            PermissionId = new Guid("a6144ccf-d362-4ed1-cb01-8207890bea3a")
-                        },
-                        new
-                        {
-                            Id = new Guid("d3587342-c2df-d73f-6202-ac33f92cd05c"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MenuId = new Guid("a0a0a0a0-0a0a-0a0a-0a0a-a0a0a0a0a0a0"),
-                            PermissionId = new Guid("37d70f0e-4b74-7001-95db-139216845aa0")
-                        },
-                        new
-                        {
-                            Id = new Guid("1093e7cd-e261-70ee-e0d5-f0f960f8b22d"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MenuId = new Guid("b0b0b0b0-0b0b-0b0b-0b0b-b0b0b0b0b0b0"),
-                            PermissionId = new Guid("27f71bec-8fdb-bd8b-7f43-719e72b591bf")
-                        },
-                        new
-                        {
-                            Id = new Guid("823d58d4-565d-dca1-8c69-ab881fddfee3"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MenuId = new Guid("c0c0c0c0-0c0c-0c0c-0c0c-c0c0c0c0c0c0"),
-                            PermissionId = new Guid("61fbd42f-6d0e-f433-0c79-1bb9186ae253")
-                        },
                         new
                         {
                             Id = new Guid("138633e2-a265-943f-57e4-647777879796"),
@@ -1442,43 +1568,193 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bfac4efe-b040-f079-ca1a-91f3b664a118"),
+                            Id = new Guid("54d48df9-b29b-8b59-35b0-4554ab7db644"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MenuId = new Guid("d0d0d0d0-0d0d-0d0d-0d0d-d0d0d0d0d0d0"),
-                            PermissionId = new Guid("d74f385f-999c-f66f-2034-604ff8d5269c")
+                            MenuId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            PermissionId = new Guid("f82b18de-ffa1-02ae-09f6-59a09a30ba70")
                         },
                         new
                         {
-                            Id = new Guid("81ca8e94-0732-f2a8-798a-438dd8c65d88"),
+                            Id = new Guid("4fb2a604-9441-d43b-d9f3-ed310c93e290"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MenuId = new Guid("e0e0e0e0-0e0e-0e0e-0e0e-e0e0e0e0e0e0"),
+                            MenuId = new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1"),
+                            PermissionId = new Guid("f82b18de-ffa1-02ae-09f6-59a09a30ba70")
+                        },
+                        new
+                        {
+                            Id = new Guid("f1d52b69-e129-58ca-3c56-179948a2960e"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"),
+                            PermissionId = new Guid("2bc6429d-df19-9dd1-66f4-c980e29d888c")
+                        },
+                        new
+                        {
+                            Id = new Guid("6564aafb-c32f-9241-db36-2b7248794e6d"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"),
+                            PermissionId = new Guid("949f5297-cb11-55fe-0577-363d69638021")
+                        },
+                        new
+                        {
+                            Id = new Guid("b9ec6448-8bb8-f0aa-2156-1d9d8a8b1ce5"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("44444444-4444-4444-4444-444444444444"),
+                            PermissionId = new Guid("76b6526d-cff0-4796-1f68-bb2aecd6c9ed")
+                        },
+                        new
+                        {
+                            Id = new Guid("84926b1e-6f88-eeea-8bf0-73c86e2a3e47"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("d2d2d2d2-2d2d-2d2d-2d2d-d2d2d2d2d2d2"),
+                            PermissionId = new Guid("76b6526d-cff0-4796-1f68-bb2aecd6c9ed")
+                        },
+                        new
+                        {
+                            Id = new Guid("9bc03684-568f-ab12-7bea-fac623ab5190"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("d3d3d3d3-3d3d-3d3d-3d3d-d3d3d3d3d3d3"),
+                            PermissionId = new Guid("d2402427-5846-8d62-24d8-816c327db0a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("7416247e-12f3-f95c-959d-5eee316a70bb"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("55555555-5555-5555-5555-555555555555"),
+                            PermissionId = new Guid("04bbf5bd-add2-5e8e-2da8-f0e4c24fab23")
+                        },
+                        new
+                        {
+                            Id = new Guid("cfa93872-5de0-c245-94c3-b1b881f80d5f"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("55555555-5555-5555-5555-555555555555"),
+                            PermissionId = new Guid("0f0500ec-ace8-e29c-2cf5-430b2118bf1f")
+                        },
+                        new
+                        {
+                            Id = new Guid("a1931099-0a4b-295e-1c54-f9016e9ab5f3"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("e1e1e1e1-1e1e-1e1e-1e1e-e1e1e1e1e1e1"),
+                            PermissionId = new Guid("04bbf5bd-add2-5e8e-2da8-f0e4c24fab23")
+                        },
+                        new
+                        {
+                            Id = new Guid("0519010f-24a0-d469-9623-9389456dc15e"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("e2e2e2e2-2e2e-2e2e-2e2e-e2e2e2e2e2e2"),
+                            PermissionId = new Guid("0f0500ec-ace8-e29c-2cf5-430b2118bf1f")
+                        },
+                        new
+                        {
+                            Id = new Guid("ac1d266b-afe5-85a4-f13b-4f9417636965"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("e3e3e3e3-3e3e-3e3e-3e3e-e3e3e3e3e3e3"),
+                            PermissionId = new Guid("8ab5a10d-ba3b-fca2-9ccf-a3e08daa3003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c12a8a57-1009-a25f-fb60-dbfb582043cd"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("66666666-6666-6666-6666-666666666666"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("e8365eb4-db49-bf4a-a604-1b4d1afd3830"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f1f1f1f1-1f1f-1f1f-1f1f-f1f1f1f1f1f1"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("8d08d4b4-c35f-7b8d-9afe-b8322f94ba3d"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f2f2f2f2-2f2f-2f2f-2f2f-f2f2f2f2f2f2"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("6e9b3035-ce9e-73f3-734f-597d8f9c477c"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f3f3f3f3-3f3f-3f3f-3f3f-f3f3f3f3f3f3"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("3c517ad2-064b-b36b-c774-7fa2c4212383"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f4f4f4f4-4f4f-4f4f-4f4f-f4f4f4f4f4f4"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("1b04d704-9398-dcec-74f4-8ea315a5056c"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("f5f5f5f5-5f5f-5f5f-5f5f-f5f5f5f5f5f5"),
+                            PermissionId = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8")
+                        },
+                        new
+                        {
+                            Id = new Guid("30a7c24f-24b3-229d-f2da-62f3a22e47cf"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
                             PermissionId = new Guid("a6144ccf-d362-4ed1-cb01-8207890bea3a")
-                        },
-                        new
-                        {
-                            Id = new Guid("f3040e78-1fe9-f972-83fb-79b0cc03162b"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MenuId = new Guid("e0e0e0e0-0e0e-0e0e-0e0e-e0e0e0e0e0e0"),
-                            PermissionId = new Guid("bbbfe961-127d-5c27-bd5e-babc2e2b0a6c")
-                        },
-                        new
-                        {
-                            Id = new Guid("5a2419bd-b6f6-d4cc-415a-ba0d88a96378"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            MenuId = new Guid("f0f0f0f0-0f0f-0f0f-0f0f-f0f0f0f0f0f0"),
-                            PermissionId = new Guid("1dbad435-1f48-7a2e-6353-8c4f135ad3cf")
                         },
                         new
                         {
@@ -1489,6 +1765,26 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MenuId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7"),
                             PermissionId = new Guid("6ff25cfe-2e1f-a30f-f183-8794a4ece371")
+                        },
+                        new
+                        {
+                            Id = new Guid("0c8e43cd-a64d-76d1-02a4-88ac8e8c8845"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"),
+                            PermissionId = new Guid("a6144ccf-d362-4ed1-cb01-8207890bea3a")
+                        },
+                        new
+                        {
+                            Id = new Guid("00344a75-ff2e-2874-569e-baaa7c7109d3"),
+                            Code = "",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MenuId = new Guid("1f1f1f1f-1f1f-1f1f-1f1f-1f1f1f1f1f1f"),
+                            PermissionId = new Guid("bbbfe961-127d-5c27-bd5e-babc2e2b0a6c")
                         },
                         new
                         {
@@ -2461,56 +2757,6 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("90002ea6-55f1-fdd1-637b-2d315c2e566d"),
-                            Code = "departments.manage",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "Manage Departments"
-                        },
-                        new
-                        {
-                            Id = new Guid("1dbad435-1f48-7a2e-6353-8c4f135ad3cf"),
-                            Code = "departments.view",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "View Departments"
-                        },
-                        new
-                        {
-                            Id = new Guid("515e8274-7978-7bf1-bf92-04e2d60bd874"),
-                            Code = "incidents.create",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "Create Incidents"
-                        },
-                        new
-                        {
-                            Id = new Guid("07b69eec-3d2d-cbc5-6fd9-824559c15c21"),
-                            Code = "incidents.resolve",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "Resolve Incidents"
-                        },
-                        new
-                        {
-                            Id = new Guid("d74f385f-999c-f66f-2034-604ff8d5269c"),
-                            Code = "incidents.view",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "View Incidents"
-                        },
-                        new
-                        {
                             Id = new Guid("5885c1f5-1cfb-864b-5d5b-32b485ea4ea3"),
                             Code = "inventory.batches.manage",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2651,26 +2897,6 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("145982d7-9af7-2943-e9ab-639b3972f84d"),
-                            Code = "itemrequests.create",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "Create Itemrequests"
-                        },
-                        new
-                        {
-                            Id = new Guid("27f71bec-8fdb-bd8b-7f43-719e72b591bf"),
-                            Code = "itemrequests.view",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "View Itemrequests"
-                        },
-                        new
-                        {
                             Id = new Guid("8ab5a10d-ba3b-fca2-9ccf-a3e08daa3003"),
                             Code = "orders.ecommerce.manage",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2751,16 +2977,6 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("61fbd42f-6d0e-f433-0c79-1bb9186ae253"),
-                            Code = "reports.monthly.view",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "REPORTS",
-                            Name = "View Monthly"
-                        },
-                        new
-                        {
                             Id = new Guid("f5d6ff33-b330-1586-1090-119609bb94a8"),
                             Code = "reports.view",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -2768,36 +2984,6 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "REPORTS",
                             Name = "View Reports"
-                        },
-                        new
-                        {
-                            Id = new Guid("2f103dbd-cf76-5f45-b619-a3bc3656e0f8"),
-                            Code = "requisitions.approve",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "Approve Requisitions"
-                        },
-                        new
-                        {
-                            Id = new Guid("ccdc1260-220f-3e1b-2122-d125ce548976"),
-                            Code = "requisitions.create",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "Create Requisitions"
-                        },
-                        new
-                        {
-                            Id = new Guid("37d70f0e-4b74-7001-95db-139216845aa0"),
-                            Code = "requisitions.view",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "View Requisitions"
                         },
                         new
                         {
@@ -3000,127 +3186,6 @@ namespace CRM.Data.Migrations
                             IsDeleted = false,
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PermissionId = new Guid("16f14b31-e5b1-816f-ce63-815b91385119"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("c9ea40b7-f594-86b7-2d20-b1f9748ecc20"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("37d70f0e-4b74-7001-95db-139216845aa0"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("124d9088-8b1d-6c1b-05e8-2bdb8686a478"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("ccdc1260-220f-3e1b-2122-d125ce548976"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("57a3ea05-5817-9ccf-8eea-a714b6568cc5"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("2f103dbd-cf76-5f45-b619-a3bc3656e0f8"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("eac98a98-b715-6af2-f86a-c7d73629e847"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("27f71bec-8fdb-bd8b-7f43-719e72b591bf"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("7e873ed6-56f5-6ecc-c4e2-51db21ab47fb"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("145982d7-9af7-2943-e9ab-639b3972f84d"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("e8120980-02b3-9587-8349-9a4b4dc7ebfa"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("d74f385f-999c-f66f-2034-604ff8d5269c"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("907eb9b6-2c90-ed71-6c0a-dbada9b350f8"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("515e8274-7978-7bf1-bf92-04e2d60bd874"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("39ec8bba-9341-5dce-fd58-05285ffee050"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("07b69eec-3d2d-cbc5-6fd9-824559c15c21"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("756d613c-67bc-f6c6-fccc-b0c9ed986259"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("1dbad435-1f48-7a2e-6353-8c4f135ad3cf"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("fc71dba4-de48-2c0e-1927-96d00fa3a976"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("90002ea6-55f1-fdd1-637b-2d315c2e566d"),
-                            RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
-                            TenantId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            Id = new Guid("b2a0243a-042f-894e-3919-1083b0180841"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = new Guid("61fbd42f-6d0e-f433-0c79-1bb9186ae253"),
                             RoleId = new Guid("f0f0f0f0-f0f0-f0f0-f0f0-f0f0f0f0f0f0"),
                             TenantId = new Guid("00000000-0000-0000-0000-000000000000")
                         },

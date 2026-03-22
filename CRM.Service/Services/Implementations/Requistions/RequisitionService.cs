@@ -1,18 +1,11 @@
-using CRM.Base.Common.Domain.Common;
-using CRM.Base.Common.Domain.Entities;
-using CRM.Base.Common.Repositories;
-using CRM.Base.Common.Repositories.Interfaces;
-using CRM.Base.Common.Services.Implementation;
-using CRM.Domain.Enums;
-using Microsoft.AspNetCore.Http;
-using System.Text.Json;
-
 namespace CRM.Services.Implementations;
 
 public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisitionService
 {
+    private readonly IMSSQLRepository<Requisition, Guid> _baseRepository;
     private readonly IMSSQLRepository<Activity, Guid> _activityRepository;
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
     public RequisitionService(
     IMSSQLRepository<Requisition, Guid> baseRepository,
@@ -24,8 +17,10 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
     )
         : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
     {
+        _baseRepository = baseRepository;
         _activityRepository = activityRepository;
         _context = context;
+        _mapper = mapper;
     }
 
     public override async Task<Result<TResponse>> CreateAsync<TResponse, TRequest>(TRequest request)
@@ -41,7 +36,7 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
                     var title = dict.ContainsKey("title") ? dict["title"].ToString() : "Requisition";
                     var activity = new Activity
                     {
-                        Type = ActivityType.Requistion,
+                        Type = Domain.Enums.ActivityType.Requistion,
                         Description = $"New Requisition '{title}' submitted",
                         Status = "Pending",
                         RelatedEntityId = dict.ContainsKey("id") && dict["id"] != null ? Guid.Parse(dict["id"].ToString()) : null,
@@ -73,7 +68,7 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
                     {
                         var activity = new Activity
                         {
-                            Type = ActivityType.Requistion,
+                            Type = Domain.Enums.ActivityType.Requistion,
                             Description = $"Requisition marked as {status}",
                             Status = status,
                             RelatedEntityId = id,
@@ -86,6 +81,103 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
             }
             catch { }
         }
+        return result;
+    }
+
+    public async Task<Result<RequisitionResponse>> ApproveAsync(Guid id)
+    {
+        Result<RequisitionResponse> result = new(false);
+
+        try
+        {
+            var requisition = await GetByIdAsync<RequisitionResponse>(id);
+            if (!requisition.IsSuccess || requisition.Content == null)
+                result.SetError($"Requisition not found", "Requisition not found");
+
+            var updateResult = await base.UpdateAsync<UpdateRequisitionRequest>(
+                id,
+                new UpdateRequisitionRequest
+                {
+                    Title = requisition.Content.Title,
+                    Amount = requisition.Content.Amount,
+                    Description = requisition.Content.Description,
+                }
+            );
+
+            // Update status directly via the base repository
+            var entity = await _baseRepository.GetByIdAsync(id);
+            if (entity != null)
+            {
+                entity.Status = RequisitionStatus.Approved;
+                await _baseRepository.UpdateAsync(id, entity);
+
+                try
+                {
+                    var activity = new Activity
+                    {
+                        Type = Domain.Enums.ActivityType.Requistion,
+                        Description = $"Requisition '{entity.Title}' approved",
+                        Status = "Approved",
+                        RelatedEntityId = id,
+                        DepartmentId = entity.DepartmentId,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await _activityRepository.CreateAsync(activity);
+                }
+                catch { }
+
+                await _context.SaveChangesAsync();
+            }
+
+            result.SetSuccess(_mapper.Map<RequisitionResponse>(entity), $"{entity.Title} is approved!");
+
+            return await GetByIdAsync<RequisitionResponse>(id);
+        }
+        catch (Exception ex)
+        {
+            result.SetError(ex.ToString(), $"Requisition approval failed");
+        }
+
+        return result;
+    }
+
+    public async Task<Result<RequisitionResponse>> RejectAsync(Guid id, string reason)
+    {
+        Result<RequisitionResponse> result = new(false);
+
+        try
+        {
+            var entity = await _baseRepository.GetByIdAsync(id);
+            if (entity == null)
+                result.SetError($"Requisition not found", "Requisition not found");
+
+            entity.Status = RequisitionStatus.Rejected;
+            entity.Reason = reason;
+            await _baseRepository.UpdateAsync(id, entity);
+
+            try
+            {
+                var activity = new Activity
+                {
+                    Type = Domain.Enums.ActivityType.Requistion,
+                    Description = $"Requisition '{entity.Title}' rejected",
+                    Status = "Rejected",
+                    RelatedEntityId = id,
+                    DepartmentId = entity.DepartmentId,
+                    Timestamp = DateTime.UtcNow
+                };
+                await _activityRepository.CreateAsync(activity);
+                await _context.SaveChangesAsync();
+            }
+            catch { }
+
+            result.SetSuccess(_mapper.Map<RequisitionResponse>(entity), $"{entity.Title} is rejected!");
+        }
+        catch (Exception ex)
+        {
+            result.SetError(ex.ToString(), $"Requisition rejection failed");
+        }
+
         return result;
     }
 }

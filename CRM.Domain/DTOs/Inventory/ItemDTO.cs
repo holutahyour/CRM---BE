@@ -39,3 +39,13 @@ public class UpdateItemRequest
     public string? ImageUrl { get; set; }
     public string? StorageConditions { get; set; }
 }
+
+public class LowStockItemResponse
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = "";
+    public decimal? MinStockLevel { get; set; }
+    public decimal? ReorderQuantity { get; set; }
+    public decimal? QuantityOnHand { get; set; }
+    public string? ImageUrl { get; set; }
+}

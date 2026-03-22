@@ -8,6 +8,28 @@ public static class Permissions
 {
     // Inventory
     public const string ItemsView = "inventory.items.view";
+
+    // Requisitions
+    public const string RequisitionsView = "requisitions.view";
+    public const string RequisitionsCreate = "requisitions.create";
+    public const string RequisitionsApprove = "requisitions.approve";
+
+    // Item Requests
+    public const string ItemRequestsView = "itemrequests.view";
+    public const string ItemRequestsCreate = "itemrequests.create";
+
+    // Incidents
+    public const string IncidentsView = "incidents.view";
+    public const string IncidentsCreate = "incidents.create";
+    public const string IncidentsResolve = "incidents.resolve";
+
+    // Departments
+    public const string DepartmentsView = "departments.view";
+    public const string DepartmentsManage = "departments.manage";
+
+    // Monthly Reports
+    public const string MonthlyReportsView = "reports.monthly.view";
+
     public const string ItemsCreate = "inventory.items.create";
     public const string ItemsEdit = "inventory.items.edit";
     public const string ItemsDelete = "inventory.items.delete";

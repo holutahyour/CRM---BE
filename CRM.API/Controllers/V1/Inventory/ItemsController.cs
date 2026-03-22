@@ -17,6 +17,13 @@ public class ItemsController : MSSQLBaseController<Item, ItemResponse, Guid>
         _service = service;
     }
 
+    [HttpGet("low-stock")]
+    public async Task<ActionResult> GetLowStockItems()
+    {
+        var response = await _service.GetLowStockAsync();
+        return Ok(response);
+    }
+
     [HttpPost]
     public async Task<ActionResult> CreateItem([FromBody] CreateItemRequest request)
     {
