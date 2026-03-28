@@ -60,34 +60,48 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
                     var propertyValue = filterParts[1];
 
                     var parameter = Expression.Parameter(typeof(T), nameof(T));
-                    var property = Expression.Property(parameter, propertyName);
-
-                    Expression constant;
-                    Expression equalsExpression;
-
-                    if (property.Type == typeof(bool) && bool.TryParse(propertyValue, out var boolValue))
+                    
+                    // Allow case-insensitive property resolution
+                    var propInfo = typeof(T).GetProperty(propertyName, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+                    if (propInfo != null)
                     {
-                        constant = Expression.Constant(boolValue, typeof(bool));
-                        equalsExpression = Expression.Equal(property, constant);
-                    }
-                    else if (property.Type == typeof(DateTimeOffset) && DateTimeOffset.TryParse(propertyValue, out var dto))
-                    {
-                        constant = Expression.Constant(dto, typeof(DateTimeOffset));
-                        equalsExpression = Expression.Equal(property, constant);
-                    }
-                    else
-                    {
-                        constant = Expression.Constant(propertyValue, typeof(string));
-                        equalsExpression = Expression.Equal(property, constant);
-                    }
+                        var property = Expression.Property(parameter, propInfo);
 
-                    var lambda = Expression.Lambda<Func<T, bool>>(equalsExpression, parameter);
-                    query = query.Where(lambda);
+                        Expression constant;
+                        Expression equalsExpression;
+
+                        if (propInfo.PropertyType == typeof(bool) && bool.TryParse(propertyValue, out var boolValue))
+                        {
+                            constant = Expression.Constant(boolValue, typeof(bool));
+                            equalsExpression = Expression.Equal(property, constant);
+                        }
+                        else if (propInfo.PropertyType == typeof(DateTimeOffset) && DateTimeOffset.TryParse(propertyValue, out var dto))
+                        {
+                            constant = Expression.Constant(dto, typeof(DateTimeOffset));
+                            equalsExpression = Expression.Equal(property, constant);
+                        }
+                        else if (propInfo.PropertyType.IsEnum)
+                        {
+                            var enumValue = Enum.Parse(propInfo.PropertyType, propertyValue, true);
+                            constant = Expression.Constant(enumValue, propInfo.PropertyType);
+                            // Enum values are technically integers, ensuring strong comparison:
+                            equalsExpression = Expression.Equal(Expression.Convert(property, propInfo.PropertyType), constant);
+                        }
+                        else
+                        {
+                            constant = Expression.Constant(propertyValue, typeof(string));
+                            equalsExpression = Expression.Equal(property, constant);
+                        }
+
+                        var lambda = Expression.Lambda<Func<T, bool>>(equalsExpression, parameter);
+                        query = query.Where(lambda);
+                    }
                 }
             }
-            catch
+            // Explicitly swallow invalid filters gracefully without crashing
+            catch (Exception ex)
             {
-                throw new Exception("Provide a valid filter parameter.");
+                Console.WriteLine($"Filter skipped due to error: {ex.Message}");
             }
         }
 

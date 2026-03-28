@@ -6,6 +6,7 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
     private readonly IMSSQLRepository<Activity, Guid> _activityRepository;
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public RequisitionService(
     IMSSQLRepository<Requisition, Guid> baseRepository,
@@ -21,10 +22,20 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
         _activityRepository = activityRepository;
         _context = context;
         _mapper = mapper;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public override async Task<Result<TResponse>> CreateAsync<TResponse, TRequest>(TRequest request)
     {
+        if (request is CreateRequisitionRequest createReq)
+        {
+            var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
+            if (user != null)
+            {
+                createReq.SubmittedBy = user.Id;
+            }
+        }
+
         var result = await base.CreateAsync<TResponse, TRequest>(request);
         if (result.IsSuccess && result.Content != null)
         {
@@ -109,6 +120,11 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
             if (entity != null)
             {
                 entity.Status = RequisitionStatus.Approved;
+                var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
+                if (user != null)
+                {
+                    entity.ActionedBy = user.Id;
+                }
                 await _baseRepository.UpdateAsync(id, entity);
 
                 try
@@ -153,6 +169,11 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
 
             entity.Status = RequisitionStatus.Rejected;
             entity.Reason = reason;
+            var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
+            if (user != null)
+            {
+                entity.ActionedBy = user.Id;
+            }
             await _baseRepository.UpdateAsync(id, entity);
 
             try

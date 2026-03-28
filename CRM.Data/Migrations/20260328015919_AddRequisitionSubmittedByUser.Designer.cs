@@ -4,6 +4,7 @@ using CRM.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260328015919_AddRequisitionSubmittedByUser")]
+    partial class AddRequisitionSubmittedByUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2837,9 +2840,6 @@ namespace CRM.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ActionedBy")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
@@ -2887,8 +2887,6 @@ namespace CRM.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActionedBy");
 
                     b.HasIndex("DepartmentId");
 
@@ -4074,10 +4072,6 @@ namespace CRM.Data.Migrations
 
             modelBuilder.Entity("CRM.Domain.Entities.Requisition", b =>
                 {
-                    b.HasOne("CRM.Domain.Entities.User", "ActionedByUser")
-                        .WithMany()
-                        .HasForeignKey("ActionedBy");
-
                     b.HasOne("CRM.Domain.Entities.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
@@ -4087,8 +4081,6 @@ namespace CRM.Data.Migrations
                     b.HasOne("CRM.Domain.Entities.User", "SubmittedByUser")
                         .WithMany()
                         .HasForeignKey("SubmittedBy");
-
-                    b.Navigation("ActionedByUser");
 
                     b.Navigation("Department");
 

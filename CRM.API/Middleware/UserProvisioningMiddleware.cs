@@ -55,10 +55,20 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
         }
         else
         {
-            // Recovery: If user exists in System tenant but has no roles, assign Admin
-            if (user.TenantId == Guid.Empty && !user.UserRoles.Any())
+            // Self-healing: If user has empty TenantId, assign them to the System tenant
+            if (user.TenantId == Guid.Empty)
             {
-                await AssignAdminRoleAsync(user, db);
+                var systemTenant = await db.Tenants.IgnoreQueryFilters().FirstOrDefaultAsync(t => t.Code == "SYSTEM");
+                if (systemTenant != null)
+                {
+                    user.TenantId = systemTenant.Id;
+                }
+                
+                // Recovery: If user exists in System tenant but has no roles, assign Admin
+                if (!user.UserRoles.Any())
+                {
+                    await AssignAdminRoleAsync(user, db);
+                }
             }
 
             user.LastLoginAt = DateTime.UtcNow;

@@ -21,6 +21,26 @@ namespace CRM.Data
             _tenantProvider = tenantProvider;
         }
 
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            var tenantId = _tenantProvider?.TenantId ?? Guid.Empty;
+            if (tenantId != Guid.Empty)
+            {
+                foreach (var entry in ChangeTracker.Entries<ITenantEntity>())
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        if (entry.Entity.TenantId == Guid.Empty)
+                        {
+                            entry.Entity.TenantId = tenantId;
+                        }
+                    }
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

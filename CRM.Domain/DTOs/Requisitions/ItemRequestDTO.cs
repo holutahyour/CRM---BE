@@ -1,9 +1,10 @@
-﻿using CRM.Domain.Enums;
+using CRM.Domain.Enums;
 
 namespace CRM.Domain.DTOs;
 
 public partial class ItemRequestResponse : CreateItemRequestRequest
 {
+    public Guid Id { get; set; }
 }
 
 public partial class CreateItemRequestRequest

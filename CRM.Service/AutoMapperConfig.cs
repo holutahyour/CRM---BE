@@ -1,4 +1,4 @@
-﻿namespace CRM.Service
+namespace CRM.Service
 {
     public class AutoMapperConfig : MapperConfig
     {
@@ -76,6 +76,61 @@
             CreateMap<UpdateParameterValueRequest, ParameterValue>().ReverseMap();
             CreateMap<CreateParameterValueRequest, ParameterValue>().ReverseMap();
             CreateMap<Permission, PermissionDTO>().ReverseMap();
+
+            // Inventory
+            CreateMap<Item, ItemResponse>().ReverseMap();
+            CreateMap<CreateItemRequest, Item>().ReverseMap();
+            CreateMap<UpdateItemRequest, Item>().ReverseMap();
+
+            CreateMap<Category, CategoryResponse>().ReverseMap();
+            CreateMap<CreateCategoryRequest, Category>().ReverseMap();
+            CreateMap<UpdateCategoryRequest, Category>().ReverseMap();
+
+            CreateMap<Location, LocationResponse>().ReverseMap();
+            CreateMap<CreateLocationRequest, Location>().ReverseMap();
+            CreateMap<UpdateLocationRequest, Location>().ReverseMap();
+
+            CreateMap<Batch, BatchResponse>().ReverseMap();
+            CreateMap<CreateBatchRequest, Batch>().ReverseMap();
+            CreateMap<UpdateBatchRequest, Batch>().ReverseMap();
+
+            CreateMap<ItemLocation, ItemLocationResponse>().ReverseMap();
+            CreateMap<CreateItemLocationRequest, ItemLocation>().ReverseMap();
+            CreateMap<UpdateItemLocationRequest, ItemLocation>().ReverseMap();
+
+            CreateMap<InventoryTransaction, InventoryTransactionResponse>().ReverseMap();
+            CreateMap<CreateInventoryTransactionRequest, InventoryTransaction>().ReverseMap();
+            CreateMap<UpdateInventoryTransactionRequest, InventoryTransaction>().ReverseMap();
+
+            // Organization
+            CreateMap<Department, DepartmentResponse>().ReverseMap();
+            CreateMap<CreateDepartmentRequest, Department>().ReverseMap();
+            CreateMap<UpdateDepartmentRequest, Department>().ReverseMap();
+
+            // Requisitions
+            CreateMap<Requisition, RequisitionResponse>()
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department != null ? src.Department.Name : null))
+                .ForMember(dest => dest.SubmittedByName, opt => opt.MapFrom(src => src.SubmittedByUser != null ? src.SubmittedByUser.FullName : null))
+                .ForMember(dest => dest.ActionedByName, opt => opt.MapFrom(src => src.ActionedByUser != null ? src.ActionedByUser.FullName : null))
+                .ReverseMap();
+            CreateMap<CreateRequisitionRequest, Requisition>().ReverseMap();
+            CreateMap<UpdateRequisitionRequest, Requisition>().ReverseMap();
+
+            CreateMap<Activity, ActivityResponse>().ReverseMap();
+            CreateMap<CreateActivityRequest, Activity>().ReverseMap();
+            CreateMap<UpdateActivityRequest, Activity>().ReverseMap();
+
+            CreateMap<Incident, IncidentResponse>().ReverseMap();
+            CreateMap<CreateIncidentRequest, Incident>().ReverseMap();
+            CreateMap<UpdateIncidentRequest, Incident>().ReverseMap();
+
+            CreateMap<ItemRequest, ItemRequestResponse>().ReverseMap();
+            CreateMap<CreateItemRequestRequest, ItemRequest>().ReverseMap();
+            CreateMap<UpdateItemRequestRequest, ItemRequest>().ReverseMap();
+
+            CreateMap<MonthlyReport, MonthlyReportResponse>().ReverseMap();
+            CreateMap<CreateMonthlyReportRequest, MonthlyReport>().ReverseMap();
+            CreateMap<UpdateMonthlyReportRequest, MonthlyReport>().ReverseMap();
         }
     }
 }
