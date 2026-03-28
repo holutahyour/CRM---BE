@@ -15,11 +15,11 @@ public class Requisition : TenantEntity<Guid>
     public RequisitionStatus Status { get; set; } = RequisitionStatus.Pending;
     public string Reason { get; set; } // For rejected
     public Guid? SubmittedBy { get; set; } // User Id
+    public Guid? ActionedBy { get; set; } // User who approved or rejected
 
     [ForeignKey("SubmittedBy")]
     public User SubmittedByUser { get; set; }
 
-    public Guid? ActionedBy { get; set; } // User who approved or rejected
 
     [ForeignKey("ActionedBy")]
     public User ActionedByUser { get; set; }

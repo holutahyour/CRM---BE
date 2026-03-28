@@ -45,5 +45,19 @@ public class ItemRequestsController : MSSQLBaseController<ItemRequest, ItemReque
 
         return Ok(response);
     }
+
+    [HttpPut("{id}/approve")]
+    public async Task<ActionResult> ApproveItemRequest(Guid id)
+    {
+        var response = await _service.ApproveAsync(id);
+        return Ok(response);
+    }
+
+    [HttpPut("{id}/reject")]
+    public async Task<ActionResult> RejectItemRequest(Guid id, [FromBody] RejectItemRequestRequest request)
+    {
+        var response = await _service.RejectAsync(id, request.Reason);
+        return Ok(response);
+    }
 }
 

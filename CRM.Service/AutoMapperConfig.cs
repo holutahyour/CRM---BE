@@ -124,7 +124,11 @@ namespace CRM.Service
             CreateMap<CreateIncidentRequest, Incident>().ReverseMap();
             CreateMap<UpdateIncidentRequest, Incident>().ReverseMap();
 
-            CreateMap<ItemRequest, ItemRequestResponse>().ReverseMap();
+            CreateMap<ItemRequest, ItemRequestResponse>()
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department != null ? src.Department.Name : null))
+                .ForMember(dest => dest.CreatedByName, opt => opt.MapFrom(src => src.SubmittedByUser != null ? src.SubmittedByUser.FullName : null))
+                .ForMember(dest => dest.ActionedByName, opt => opt.MapFrom(src => src.ActionedByUser != null ? src.ActionedByUser.FullName : null))
+                .ReverseMap();
             CreateMap<CreateItemRequestRequest, ItemRequest>().ReverseMap();
             CreateMap<UpdateItemRequestRequest, ItemRequest>().ReverseMap();
 
