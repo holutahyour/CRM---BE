@@ -44,8 +44,7 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
                 var dict = JsonSerializer.Deserialize<Dictionary<string, object>>(JsonSerializer.Serialize(result.Content));
                 if (dict != null)
                 {
-                    var title = dict.ContainsKey("title") ? dict["title"].ToString() :
-                                dict.ContainsKey("itemName") ? dict["itemName"].ToString() : "Item Request";
+                    var title = dict.ContainsKey("itemName") ? dict["itemName"].ToString() : "Item Request";
                     var activity = new Activity
                     {
                         Type = ActivityType.ItemRequest,
