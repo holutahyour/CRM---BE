@@ -1,10 +1,3 @@
-using Asp.Versioning;
-using CRM.Base.Common.Presentation;
-using CRM.Domain.DTOs;
-using CRM.Domain.Entities;
-using CRM.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-
 namespace CRM.API.Controllers.v1;
 
 [ApiVersion("1.0")]
@@ -23,7 +16,7 @@ public class BatchesController : MSSQLBaseController<Batch, BatchResponse, Guid>
 
         var response = await CreateAsync(request);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpPut]
@@ -32,7 +25,7 @@ public class BatchesController : MSSQLBaseController<Batch, BatchResponse, Guid>
 
         var response = await UpdateAsync(id, request);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpDelete]
@@ -41,7 +34,7 @@ public class BatchesController : MSSQLBaseController<Batch, BatchResponse, Guid>
 
         var response = await RemoveAsync(id);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpPost("import")]
@@ -50,6 +43,6 @@ public class BatchesController : MSSQLBaseController<Batch, BatchResponse, Guid>
 
         var response = await ImportAsync(requests);
 
-        return Ok(response);
+        return response;
     }
 }

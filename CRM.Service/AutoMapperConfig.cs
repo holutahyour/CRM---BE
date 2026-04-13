@@ -78,7 +78,11 @@ namespace CRM.Service
             CreateMap<Permission, PermissionDTO>().ReverseMap();
 
             // Inventory
-            CreateMap<Item, ItemResponse>().ReverseMap();
+            CreateMap<Item, ItemResponse>()
+                .ForMember(dest => dest.LocationName, opt => opt.MapFrom(src => src.Location != null ? src.Location.Name : null))
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : null))
+                .ForMember(dest => dest.VendorName, opt => opt.MapFrom(src => src.Vendor != null ? src.Vendor.Name : null))
+                .ReverseMap();
             CreateMap<CreateItemRequest, Item>().ReverseMap();
             CreateMap<UpdateItemRequest, Item>().ReverseMap();
 
@@ -135,6 +139,11 @@ namespace CRM.Service
             CreateMap<MonthlyReport, MonthlyReportResponse>().ReverseMap();
             CreateMap<CreateMonthlyReportRequest, MonthlyReport>().ReverseMap();
             CreateMap<UpdateMonthlyReportRequest, MonthlyReport>().ReverseMap();
+
+            // Orders
+            CreateMap<Vendor, VendorResponse>().ReverseMap();
+            CreateMap<CreateVendorRequest, Vendor>().ReverseMap();
+            CreateMap<UpdateVendorRequest, Vendor>().ReverseMap();
         }
     }
 }

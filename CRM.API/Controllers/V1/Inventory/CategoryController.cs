@@ -16,7 +16,7 @@ public class CategoriesController : MSSQLBaseController<Category, CategoryRespon
 
         var response = await CreateAsync(request);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpPut]
@@ -25,7 +25,7 @@ public class CategoriesController : MSSQLBaseController<Category, CategoryRespon
 
         var response = await UpdateAsync(id, request);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpDelete]
@@ -34,7 +34,7 @@ public class CategoriesController : MSSQLBaseController<Category, CategoryRespon
 
         var response = await RemoveAsync(id);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpPost("import")]
@@ -43,6 +43,6 @@ public class CategoriesController : MSSQLBaseController<Category, CategoryRespon
 
         var response = await ImportAsync(requests);
 
-        return Ok(response);
+        return response;
     }
 }

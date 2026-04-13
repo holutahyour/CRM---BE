@@ -1,4 +1,4 @@
-﻿namespace CRM.Service;
+namespace CRM.Service;
 
 public static class DependencyInjection
 {
@@ -44,15 +44,14 @@ public static class DependencyInjection
 
 
 
+        //Orders
+        services.AddScoped<IVendorService, VendorService>();
 
-        var mapperConfig = new MapperConfiguration(cfg =>
+
+        services.AddAutoMapper(mc =>
         {
-            cfg.AddProfile<AutoMapperConfig>();
+            mc.AddProfile(new AutoMapperConfig());
         });
-
-        // Register IMapper
-        var mapper = mapperConfig.CreateMapper();
-        services.AddSingleton(mapper);
 
         //services.AddAutoMapper(typeof(DependencyInjection));
         services.AddControllersWithViews();

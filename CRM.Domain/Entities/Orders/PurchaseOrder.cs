@@ -2,7 +2,7 @@
 using CRM.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CRM.Domain.Entities.Orders;
+namespace CRM.Domain.Entities;
 
 [Table("ordr_purchase_orders")]
 public class PurchaseOrder : TenantEntity<Guid>

@@ -1,7 +1,7 @@
 ﻿using CRM.Base.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CRM.Domain.Entities.Orders;
+namespace CRM.Domain.Entities;
 
 [Table("ordr_vendors")]
 public class Vendor : TenantEntity<Guid>

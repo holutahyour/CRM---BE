@@ -1,9 +1,4 @@
-using Asp.Versioning;
-using CRM.Base.Common.Presentation;
 using CRM.Domain;
-using CRM.Domain.Entities;
-using CRM.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.API.Controllers.v1;
 
@@ -23,7 +18,7 @@ public class CitiesController : MSSQLBaseController<City, CityResponse, long>
 
         var response = await CreateAsync(request);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpPut]
@@ -32,7 +27,7 @@ public class CitiesController : MSSQLBaseController<City, CityResponse, long>
 
         var response = await UpdateAsync(id, request);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpDelete]
@@ -41,7 +36,7 @@ public class CitiesController : MSSQLBaseController<City, CityResponse, long>
 
         var response = await RemoveAsync(id);
 
-        return Ok(response);
+        return response;
     }
 
     [HttpPost("import")]
@@ -50,6 +45,6 @@ public class CitiesController : MSSQLBaseController<City, CityResponse, long>
 
         var response = await ImportAsync(requests);
 
-        return Ok(response);
+        return response;
     }
 }

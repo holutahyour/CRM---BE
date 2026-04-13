@@ -7,11 +7,13 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IMSSQLRepository<Item, Guid> _itemRepository;
 
     public ItemRequestService(
     IMSSQLRepository<ItemRequest, Guid> baseRepository,
     IMSSQLRepository<Activity, Guid> activityRepository,
     IMSSQLRepository<AuditLog, long> auditLogRepository,
+    IMSSQLRepository<Item, Guid> itemRepository,
     IApplicationDbContext context,
     IMapper mapper,
     IHttpContextAccessor httpContextAccessor
@@ -21,6 +23,7 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
         _baseRepository = baseRepository;
         _context = context;
         _activityRepository = activityRepository;
+        _itemRepository = itemRepository;
         _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
     }
@@ -114,6 +117,17 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
                 entity.ActionedBy = user.Id;
             }
             await _baseRepository.UpdateAsync(id, entity);
+
+            if (entity.ItemId.HasValue)
+            {
+                var item = await _itemRepository.GetByIdAsync(entity.ItemId.Value);
+                if (item != null)
+                {
+                    item.QuantityOnHand -= entity.Quantity;
+                    if (item.QuantityOnHand < 0) item.QuantityOnHand = 0;
+                    await _itemRepository.UpdateAsync(item.Id, item);
+                }
+            }
 
             try
             {

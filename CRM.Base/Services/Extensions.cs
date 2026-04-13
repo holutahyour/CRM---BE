@@ -29,14 +29,11 @@ public static class Extensions
 
     public static IServiceCollection AddMongoService<T>(this IServiceCollection services, string collectionName) where T : BaseEntity<long>
     {
-        var mapperConfig = new MapperConfiguration(mc =>
-        {
-            mc.AddProfile(new MapperConfig());
-        });
+        //services.AddAutoMapper(mc =>
+        //{
+        //    mc.AddProfile(new MapperConfig());
+        //});
 
-        IMapper mapper = mapperConfig.CreateMapper();
-
-        services.AddSingleton(mapper);
         services.AddHttpContextAccessor();
 
         services.AddSingleton<IMongoRepository<T>>(serviceProvider =>

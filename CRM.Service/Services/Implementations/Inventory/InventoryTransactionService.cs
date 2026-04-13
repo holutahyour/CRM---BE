@@ -13,11 +13,15 @@ namespace CRM.Services.Implementations;
 public class InventoryTransactionService : MSSQLBaseService<InventoryTransaction, Guid>, IInventoryTransactionService
 {
     private readonly IMSSQLRepository<Item, Guid> _itemRepository;
+    private readonly IMSSQLRepository<ItemLocation, Guid> _itemLocationRepository;
+    private readonly IMSSQLRepository<Batch, Guid> _batchRepository;
     private readonly IApplicationDbContext _context;
 
     public InventoryTransactionService(
     IMSSQLRepository<InventoryTransaction, Guid> baseRepository,
     IMSSQLRepository<Item, Guid> itemRepository,
+    IMSSQLRepository<ItemLocation, Guid> itemLocationRepository,
+    IMSSQLRepository<Batch, Guid> batchRepository,
     IMSSQLRepository<AuditLog, long> auditLogRepository,
     IApplicationDbContext context,
     IMapper mapper,
@@ -26,7 +30,74 @@ public class InventoryTransactionService : MSSQLBaseService<InventoryTransaction
         : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
     {
         _itemRepository = itemRepository;
+        _itemLocationRepository = itemLocationRepository;
+        _batchRepository = batchRepository;
         _context = context;
+    }
+
+    public async Task<Result<bool>> RecordTransactionAsync(
+        Guid itemId, 
+        CRM.Domain.Enums.TransactionType type,
+        decimal quantity, 
+        Guid? locationId = null, 
+        Guid? batchId = null,
+        bool autoAllocate = false,
+        string? notes = null)
+    {
+        Result<bool> result = new(false);
+        try
+        {
+            var item = await _itemRepository.GetByIdAsync(itemId);
+            if (item == null)
+            {
+                result.SetError("Item not found", "Item not found");
+                return result;
+            }
+
+            bool isAdd = type == CRM.Domain.Enums.TransactionType.Purchase || 
+                         type == CRM.Domain.Enums.TransactionType.TransferIn || 
+                         type == CRM.Domain.Enums.TransactionType.Return || 
+                         type == CRM.Domain.Enums.TransactionType.Production;
+                         
+            if (type == CRM.Domain.Enums.TransactionType.Adjustment && quantity > 0) isAdd = true;
+            if (type == CRM.Domain.Enums.TransactionType.Adjustment && quantity <= 0) 
+            {
+                isAdd = false;
+                quantity = Math.Abs(quantity);
+            }
+
+            // Simple implementation for Manual/Auto (In a full implementation, auto Allocate fetches locations/batches via FIFO)
+            // For now, mapping directly if provided, optionally checking ItemLocations.
+            var transaction = new InventoryTransaction
+            {
+                ItemId = itemId,
+                TransactionType = type,
+                Quantity = quantity,
+                LocationId = locationId,
+                BatchId = batchId,
+                Notes = notes ?? (autoAllocate ? "Auto Allocated" : "Manual Allocation"),
+                TransactionDate = DateTime.UtcNow
+            };
+
+            await _baseRepository.CreateAsync(transaction);
+
+            // Update item global stock
+            decimal change = isAdd ? quantity : -quantity;
+            item.QuantityOnHand += change;
+            if (item.QuantityOnHand < 0) item.QuantityOnHand = 0;
+            
+            await _itemRepository.UpdateAsync(itemId, item);
+
+            // Detailed ItemLocation and Batch tracking would apply changes here
+            await _context.SaveChangesAsync();
+
+            result.SetSuccess(true, "Transaction recorded successfully.");
+        }
+        catch (Exception ex)
+        {
+            result.SetError(ex.Message, "Failed to record transaction");
+        }
+        return result;
     }
 
     public override async Task<Result<TResponse>> CreateAsync<TResponse, TRequest>(TRequest request)

@@ -1,5 +1,4 @@
 using CRM.Base.Domain.Entities;
-using CRM.Domain.Entities.Orders;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
@@ -23,10 +22,13 @@ public class Item : TenantEntity<Guid>
     public decimal? SellingPrice { get; set; }
     public string? ImageUrl { get; set; }
     public string? StorageConditions { get; set; }
+    public Guid? LocationId { get; set; }
+    public string? ItemLocation { get; set; }
 
     // Navigation
     public Category? Category { get; set; }
     public Vendor? Vendor { get; set; }
+    public Location? Location { get; set; }
     public ICollection<ItemLocation> ItemLocations { get; set; } = [];
     public ICollection<Batch> Batches { get; set; } = [];
     public ICollection<InventoryTransaction> Transactions { get; set; } = [];

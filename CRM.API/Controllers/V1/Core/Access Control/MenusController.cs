@@ -65,7 +65,7 @@ public class MenusController : MSSQLBaseController<Menu, MenuDTO, Guid>
     public async Task<ActionResult> CreateMenu([FromBody] CreateMenuRequest request)
     {
         var response = await CreateAsync(request);
-        return Ok(response);
+        return response;
     }
 
     [Authorize(Policy = "AdminOnly")]
@@ -73,7 +73,7 @@ public class MenusController : MSSQLBaseController<Menu, MenuDTO, Guid>
     public async Task<ActionResult> UpdateMenu(Guid id, [FromBody] UpdateMenuRequest request)
     {
         var response = await UpdateAsync(id, request);
-        return Ok(response);
+        return response;
     }
 
     [Authorize(Policy = "AdminOnly")]
@@ -81,6 +81,6 @@ public class MenusController : MSSQLBaseController<Menu, MenuDTO, Guid>
     public async Task<ActionResult> RemoveMenu(Guid id)
     {
         var response = await RemoveAsync(id);
-        return Ok(response);
+        return response;
     }
 }

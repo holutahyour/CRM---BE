@@ -1,0 +1,30 @@
+namespace CRM.Domain.DTOs;
+
+public class VendorResponse : CreateVendorRequest
+{
+    public Guid Id { get; set; }
+}
+
+public class CreateVendorRequest
+{
+    public string Name { get; set; } = "";
+    public string? VendorCode { get; set; }
+    public string? ContactPerson { get; set; }
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public string? Address { get; set; }
+    public string? TaxId { get; set; }
+    public int? PaymentTermsDays { get; set; }
+}
+
+public class UpdateVendorRequest
+{
+    public string Name { get; set; } = "";
+    public string? VendorCode { get; set; }
+    public string? ContactPerson { get; set; }
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
+    public string? Address { get; set; }
+    public string? TaxId { get; set; }
+    public int? PaymentTermsDays { get; set; }
+}

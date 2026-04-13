@@ -1,4 +1,3 @@
-using Asp.Versioning;
 using CRM.API.Infrastructure;
 using CRM.API.Middleware;
 using CRM.Base.Domain.Common;
@@ -106,7 +105,10 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
-    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+    builder
+    //.WithOrigins("http://localhost:3000")
+    .WithOrigins("*")
+    .AllowAnyMethod().AllowAnyHeader();
 }));
 
 var app = builder.Build();

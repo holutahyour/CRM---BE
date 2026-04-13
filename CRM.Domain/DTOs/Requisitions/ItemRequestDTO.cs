@@ -42,3 +42,10 @@ public class RejectItemRequestRequest
     public string Reason { get; set; }
 }
 
+public class ApproveItemRequestRequest
+{
+    public bool AutoAllocate { get; set; }
+    public Guid? LocationId { get; set; }
+    public Guid? BatchId { get; set; }
+}
+

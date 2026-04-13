@@ -47,9 +47,9 @@ public class ItemRequestsController : MSSQLBaseController<ItemRequest, ItemReque
     }
 
     [HttpPut("{id}/approve")]
-    public async Task<ActionResult> ApproveItemRequest(Guid id)
+    public async Task<ActionResult> ApproveItemRequest(Guid id, [FromBody] ApproveItemRequestRequest request)
     {
-        var response = await _service.ApproveAsync(id);
+        var response = await _service.ApproveAsync(id, request);
         return Ok(response);
     }
 

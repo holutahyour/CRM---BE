@@ -1,5 +1,4 @@
 using CRM.Data;
-using CRM.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRM.API.Middleware;
@@ -26,15 +25,15 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
             user = new User
             {
                 EntraObjectId = oid,
-                Email = context.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? 
-                        context.User.FindFirst("email")?.Value ?? 
-                        context.User.FindFirst("preferred_username")?.Value ?? 
+                Email = context.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ??
+                        context.User.FindFirst("email")?.Value ??
+                        context.User.FindFirst("preferred_username")?.Value ??
                         context.User.FindFirst(System.Security.Claims.ClaimTypes.Upn)?.Value ?? "",
-                FirstName = context.User.FindFirst(System.Security.Claims.ClaimTypes.GivenName)?.Value ?? 
-                            context.User.FindFirst("given_name")?.Value ?? 
-                            context.User.FindFirst("name")?.Value ?? 
+                FirstName = context.User.FindFirst(System.Security.Claims.ClaimTypes.GivenName)?.Value ??
+                            context.User.FindFirst("given_name")?.Value ??
+                            context.User.FindFirst("name")?.Value ??
                             context.User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value,
-                LastName = context.User.FindFirst(System.Security.Claims.ClaimTypes.Surname)?.Value ?? 
+                LastName = context.User.FindFirst(System.Security.Claims.ClaimTypes.Surname)?.Value ??
                            context.User.FindFirst("family_name")?.Value,
                 Phone = context.User.FindFirst(System.Security.Claims.ClaimTypes.MobilePhone)?.Value ??
                         context.User.FindFirst(System.Security.Claims.ClaimTypes.HomePhone)?.Value ??
@@ -47,11 +46,13 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
             db.Users.Add(user);
             await db.SaveChangesAsync(); logger.LogInformation("JIT provisioned user {Email} for tenant {TenantId}", user.Email, tenantId);
 
-            // Auto-assign Admin role to the first system user
-            if (isFirstUser)
-            {
-                await AssignAdminRoleAsync(user, db);
-            }
+            await AssignAdminRoleAsync(user, db);
+
+            //// Auto-assign Admin role to the first system user
+            //if (isFirstUser)
+            //{
+            //    await AssignAdminRoleAsync(user, db);
+            //}
         }
         else
         {
@@ -63,7 +64,7 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
                 {
                     user.TenantId = systemTenant.Id;
                 }
-                
+
                 // Recovery: If user exists in System tenant but has no roles, assign Admin
                 if (!user.UserRoles.Any())
                 {

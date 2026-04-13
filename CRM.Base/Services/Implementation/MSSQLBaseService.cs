@@ -1,4 +1,6 @@
-﻿using CRM.Base.Enums;
+using CRM.Base.Enums;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CRM.Base.Common.Services.Implementation;
 
@@ -10,6 +12,12 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
+
+    private static readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        ReferenceHandler = ReferenceHandler.IgnoreCycles,
+        WriteIndented = false
+    };
 
     protected MSSQLBaseService(
         IMSSQLRepository<TEntity, TId> baseRepository,
@@ -47,7 +55,7 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
                 UserId = _httpContextAccessor.HttpContext?.User.Identity?.Name ?? "SYSTEM",
                 Timestamp = DateTime.UtcNow,
                 OldValues = null,
-                NewValues = JsonSerializer.Serialize(entity),
+                NewValues = JsonSerializer.Serialize(entity, _jsonOptions),
                 IpAddress = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "Unknown"
             };
 
@@ -169,7 +177,7 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
         try
         {
             var existingEntity = await _baseRepository.GetByIdAsync(id);
-            var oldValues = JsonSerializer.Serialize(existingEntity);
+            var oldValues = JsonSerializer.Serialize(existingEntity, _jsonOptions);
 
             var response = await _baseRepository.DeleteAsync(id);
 
@@ -214,7 +222,7 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
         try
         {
             var existingEntity = await _baseRepository.GetByIdAsync(id);
-            var oldValues = JsonSerializer.Serialize(existingEntity);
+            var oldValues = JsonSerializer.Serialize(existingEntity, _jsonOptions);
 
             if (existingEntity == null)
             {
@@ -223,7 +231,7 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
             }
 
             var updatedEntity = _mapper.Map(request, existingEntity);
-            var newValues = JsonSerializer.Serialize(updatedEntity);
+            var newValues = JsonSerializer.Serialize(updatedEntity, _jsonOptions);
 
             var auditLog = new AuditLog
             {
