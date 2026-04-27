@@ -1,17 +1,8 @@
-using CRM.Base.Common.Domain.Common;
-using CRM.Base.Common.Domain.Entities;
-using CRM.Base.Common.Repositories;
-using CRM.Base.Common.Repositories.Interfaces;
-using CRM.Base.Common.Services.Implementation;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-using CRM.Domain.Entities;
-
 namespace CRM.Services.Implementations;
 
 public class InventoryTransactionService : MSSQLBaseService<InventoryTransaction, Guid>, IInventoryTransactionService
 {
+    private readonly IMSSQLRepository<InventoryTransaction, Guid> _baseRepository;
     private readonly IMSSQLRepository<Item, Guid> _itemRepository;
     private readonly IMSSQLRepository<ItemLocation, Guid> _itemLocationRepository;
     private readonly IMSSQLRepository<Batch, Guid> _batchRepository;
@@ -29,6 +20,7 @@ public class InventoryTransactionService : MSSQLBaseService<InventoryTransaction
     )
         : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
     {
+        _baseRepository = baseRepository;
         _itemRepository = itemRepository;
         _itemLocationRepository = itemLocationRepository;
         _batchRepository = batchRepository;
@@ -36,10 +28,10 @@ public class InventoryTransactionService : MSSQLBaseService<InventoryTransaction
     }
 
     public async Task<Result<bool>> RecordTransactionAsync(
-        Guid itemId, 
-        CRM.Domain.Enums.TransactionType type,
-        decimal quantity, 
-        Guid? locationId = null, 
+        Guid itemId,
+        TransactionType type,
+        decimal quantity,
+        Guid? locationId = null,
         Guid? batchId = null,
         bool autoAllocate = false,
         string? notes = null)
@@ -54,13 +46,13 @@ public class InventoryTransactionService : MSSQLBaseService<InventoryTransaction
                 return result;
             }
 
-            bool isAdd = type == CRM.Domain.Enums.TransactionType.Purchase || 
-                         type == CRM.Domain.Enums.TransactionType.TransferIn || 
-                         type == CRM.Domain.Enums.TransactionType.Return || 
-                         type == CRM.Domain.Enums.TransactionType.Production;
-                         
-            if (type == CRM.Domain.Enums.TransactionType.Adjustment && quantity > 0) isAdd = true;
-            if (type == CRM.Domain.Enums.TransactionType.Adjustment && quantity <= 0) 
+            bool isAdd = type == TransactionType.Purchase ||
+                         type == TransactionType.TransferIn ||
+                         type == TransactionType.Return ||
+                         type == TransactionType.Production;
+
+            if (type == TransactionType.Adjustment && quantity > 0) isAdd = true;
+            if (type == TransactionType.Adjustment && quantity <= 0)
             {
                 isAdd = false;
                 quantity = Math.Abs(quantity);
@@ -85,7 +77,7 @@ public class InventoryTransactionService : MSSQLBaseService<InventoryTransaction
             decimal change = isAdd ? quantity : -quantity;
             item.QuantityOnHand += change;
             if (item.QuantityOnHand < 0) item.QuantityOnHand = 0;
-            
+
             await _itemRepository.UpdateAsync(itemId, item);
 
             // Detailed ItemLocation and Batch tracking would apply changes here
