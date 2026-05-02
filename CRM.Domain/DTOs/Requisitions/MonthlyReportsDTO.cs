@@ -1,4 +1,4 @@
-﻿namespace CRM.Domain.DTOs;
+namespace CRM.Domain.DTOs;
 
 public partial class MonthlyReportResponse : CreateMonthlyReportRequest
 {
@@ -6,6 +6,8 @@ public partial class MonthlyReportResponse : CreateMonthlyReportRequest
 
     public decimal Progress { get; set; } // e.g., 65 (percentage)
     public Guid? SubmittedBy { get; set; } // User Id
+    public string SubmittedByName { get; set; }
+    public string DepartmentName { get; set; }
 }
 
 public partial class CreateMonthlyReportRequest

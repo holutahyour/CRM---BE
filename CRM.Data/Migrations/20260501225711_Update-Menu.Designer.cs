@@ -4,6 +4,7 @@ using CRM.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260501225711_Update-Menu")]
+    partial class UpdateMenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1105,21 +1108,6 @@ namespace CRM.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d1d1d1d1-1d1d-1d1d-1d1d-d1d1d1d1d1d2"),
-                            Code = "",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "chart-column",
-                            IsActive = true,
-                            IsDeleted = false,
-                            Label = "Monthly Reports",
-                            LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModuleCode = "CORE",
-                            Name = "MONTHLY_REPORTS",
-                            Position = 5,
-                            Route = "/monthly-reports"
-                        },
-                        new
-                        {
                             Id = new Guid("d0d0d0d0-0d0d-0d0d-0d0d-d0d0d0d0d0d0"),
                             Code = "",
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1130,7 +1118,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
                             Name = "INCIDENT_REPORTS",
-                            Position = 6,
+                            Position = 5,
                             Route = "/incident-reports"
                         },
                         new
@@ -1145,7 +1133,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
                             Name = "USER_MANAGEMENT",
-                            Position = 7,
+                            Position = 6,
                             Route = "/admin/users"
                         },
                         new
@@ -1160,7 +1148,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
                             Name = "DEPARTMENTS",
-                            Position = 8,
+                            Position = 7,
                             Route = "/departments"
                         },
                         new
@@ -1175,7 +1163,7 @@ namespace CRM.Data.Migrations
                             LastModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModuleCode = "CORE",
                             Name = "ADMIN",
-                            Position = 9
+                            Position = 8
                         },
                         new
                         {
