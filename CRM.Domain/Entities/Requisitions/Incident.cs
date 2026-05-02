@@ -1,4 +1,4 @@
-﻿using CRM.Base.Domain.Entities;
+using CRM.Base.Domain.Entities;
 using CRM.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,4 +18,6 @@ public class Incident : TenantEntity<Guid>
     public Guid? ReportedBy { get; set; } // User Id
 
     public Department Department { get; set; }
+    [ForeignKey("ReportedBy")]
+    public User ReportedByUser { get; set; }
 }

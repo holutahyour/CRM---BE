@@ -1,18 +1,12 @@
-using CRM.Base.Common.Domain.Common;
-using CRM.Base.Common.Domain.Entities;
-using CRM.Base.Common.Repositories;
-using CRM.Base.Common.Repositories.Interfaces;
-using CRM.Base.Common.Services.Implementation;
-using CRM.Domain.Enums;
-using Microsoft.AspNetCore.Http;
-using System.Text.Json;
-
 namespace CRM.Services.Implementations;
 
 public class IncidentService : MSSQLBaseService<Incident, Guid>, IIncidentService
 {
+    private readonly IMSSQLRepository<Incident, Guid> _baseRepository;
     private readonly IMSSQLRepository<Activity, Guid> _activityRepository;
     private readonly IApplicationDbContext _context;
+    private readonly IMapper _mapper;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public IncidentService(
     IMSSQLRepository<Incident, Guid> baseRepository,
@@ -24,12 +18,24 @@ public class IncidentService : MSSQLBaseService<Incident, Guid>, IIncidentServic
     )
         : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
     {
+        _baseRepository = baseRepository;
         _activityRepository = activityRepository;
         _context = context;
+        _mapper = mapper;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public override async Task<Result<TResponse>> CreateAsync<TResponse, TRequest>(TRequest request)
     {
+        if (request is CreateIncidentRequest createReq)
+        {
+            var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
+            if (user != null)
+            {
+                createReq.ReportedBy = user.Id;
+            }
+        }
+
         var result = await base.CreateAsync<TResponse, TRequest>(request);
         if (result.IsSuccess && result.Content != null)
         {
@@ -84,6 +90,87 @@ public class IncidentService : MSSQLBaseService<Incident, Guid>, IIncidentServic
                 }
             }
             catch { }
+        }
+        return result;
+    }
+
+    public async Task<Result<IncidentResponse>> MarkInProgressAsync(Guid id)
+    {
+        Result<IncidentResponse> result = new(false);
+        try
+        {
+            var entity = await _baseRepository.GetByIdAsync(id);
+            if (entity == null)
+            {
+                result.SetError("Incident not found", "Incident not found");
+                return result;
+            }
+
+            entity.Status = IncidentStatus.InProgress;
+            await _baseRepository.UpdateAsync(id, entity);
+
+            try
+            {
+                var activity = new Activity
+                {
+                    Type = ActivityType.Incident,
+                    Description = $"Incident '{entity.DeviceType} - {entity.DeviceId}' marked as In Progress",
+                    Status = "In Progress",
+                    RelatedEntityId = id,
+                    DepartmentId = entity.DepartmentId,
+                    Timestamp = DateTime.UtcNow
+                };
+                await _activityRepository.CreateAsync(activity);
+                await _context.SaveChangesAsync();
+            }
+            catch { }
+
+            result.SetSuccess(_mapper.Map<IncidentResponse>(entity), "Incident marked as In Progress");
+        }
+        catch (Exception ex)
+        {
+            result.SetError(ex.ToString(), "Failed to mark as In Progress");
+        }
+        return result;
+    }
+
+    public async Task<Result<IncidentResponse>> MarkResolvedAsync(Guid id, string resolution)
+    {
+        Result<IncidentResponse> result = new(false);
+        try
+        {
+            var entity = await _baseRepository.GetByIdAsync(id);
+            if (entity == null)
+            {
+                result.SetError("Incident not found", "Incident not found");
+                return result;
+            }
+
+            entity.Status = IncidentStatus.Resolved;
+            entity.Resolution = resolution;
+            await _baseRepository.UpdateAsync(id, entity);
+
+            try
+            {
+                var activity = new Activity
+                {
+                    Type = ActivityType.Incident,
+                    Description = $"Incident '{entity.DeviceType} - {entity.DeviceId}' marked as Resolved",
+                    Status = "Resolved",
+                    RelatedEntityId = id,
+                    DepartmentId = entity.DepartmentId,
+                    Timestamp = DateTime.UtcNow
+                };
+                await _activityRepository.CreateAsync(activity);
+                await _context.SaveChangesAsync();
+            }
+            catch { }
+
+            result.SetSuccess(_mapper.Map<IncidentResponse>(entity), "Incident marked as Resolved");
+        }
+        catch (Exception ex)
+        {
+            result.SetError(ex.ToString(), "Failed to mark as Resolved");
         }
         return result;
     }

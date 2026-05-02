@@ -5,7 +5,6 @@ public partial class MonthlyReportResponse : CreateMonthlyReportRequest
     public Guid Id { get; set; } // User Id
 
     public decimal Progress { get; set; } // e.g., 65 (percentage)
-    public Guid? SubmittedBy { get; set; } // User Id
     public string SubmittedByName { get; set; }
     public string DepartmentName { get; set; }
 }
@@ -20,6 +19,7 @@ public partial class CreateMonthlyReportRequest
     public decimal AchievedValue { get; set; } // e.g., 65
     public string Notes { get; set; }
     public Guid DepartmentId { get; set; }
+    public Guid? SubmittedBy { get; set; } // User Id
 
 }
 

@@ -1,4 +1,5 @@
-﻿using CRM.Base.Domain.Entities;
+using CRM.Base.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Domain.Entities;
 
@@ -14,6 +15,9 @@ public class MonthlyReport : TenantEntity<Guid>
     public decimal Progress { get; set; } // e.g., 65 (percentage)
     public Guid DepartmentId { get; set; }
     public Guid? SubmittedBy { get; set; } // User Id
+
+    [ForeignKey("SubmittedBy")]
+    public User SubmittedByUser { get; set; }
 
     public Department Department { get; set; }
 }

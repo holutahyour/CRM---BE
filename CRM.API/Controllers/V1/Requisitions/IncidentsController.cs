@@ -45,4 +45,22 @@ public class IncidentsController : MSSQLBaseController<Incident, IncidentRespons
 
         return Ok(response);
     }
+
+    [HttpPut("{id}/in-progress")]
+    public async Task<ActionResult> MarkInProgress(Guid id)
+    {
+        var response = await _service.MarkInProgressAsync(id);
+        if (response.IsSuccess)
+            return Ok(response);
+        return BadRequest(response);
+    }
+
+    [HttpPut("{id}/resolve")]
+    public async Task<ActionResult> MarkResolved(Guid id, [FromBody] MarkIncidentResolvedRequest request)
+    {
+        var response = await _service.MarkResolvedAsync(id, request.Resolution);
+        if (response.IsSuccess)
+            return Ok(response);
+        return BadRequest(response);
+    }
 }

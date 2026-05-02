@@ -22,6 +22,25 @@ namespace CRM.Data
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var tenantId = _tenantProvider?.TenantId ?? Guid.Empty;
+            var userId = _tenantProvider?.UserId ?? "SYSTEM";
+
+            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedBy = userId;
+                        entry.Entity.CreatedOn = DateTime.UtcNow;
+                        entry.Entity.LastModifiedBy = userId;
+                        entry.Entity.LastModifiedOn = DateTime.UtcNow;
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.LastModifiedBy = userId;
+                        entry.Entity.LastModifiedOn = DateTime.UtcNow;
+                        break;
+                }
+            }
+
             if (tenantId != Guid.Empty)
             {
                 foreach (var entry in ChangeTracker.Entries<ITenantEntity>())
@@ -93,6 +112,9 @@ namespace CRM.Data
         //Parameter
         public DbSet<ParameterDefinition> ParameterDefinitions { get; set; }
         public DbSet<ParameterValue> ParameterValues { get; set; }
+
+        // Organization
+        public DbSet<Department> Departments => Set<Department>();
 
         // Requisitions
         public DbSet<Activity> Activities => Set<Activity>();

@@ -124,7 +124,10 @@ namespace CRM.Service
             CreateMap<CreateActivityRequest, Activity>().ReverseMap();
             CreateMap<UpdateActivityRequest, Activity>().ReverseMap();
 
-            CreateMap<Incident, IncidentResponse>().ReverseMap();
+            CreateMap<Incident, IncidentResponse>()
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department != null ? src.Department.Name : null))
+                .ForMember(dest => dest.ReportedByName, opt => opt.MapFrom(src => src.ReportedByUser != null ? src.ReportedByUser.FullName : null))
+                .ReverseMap();
             CreateMap<CreateIncidentRequest, Incident>().ReverseMap();
             CreateMap<UpdateIncidentRequest, Incident>().ReverseMap();
 
@@ -136,7 +139,10 @@ namespace CRM.Service
             CreateMap<CreateItemRequestRequest, ItemRequest>().ReverseMap();
             CreateMap<UpdateItemRequestRequest, ItemRequest>().ReverseMap();
 
-            CreateMap<MonthlyReport, MonthlyReportResponse>().ReverseMap();
+            CreateMap<MonthlyReport, MonthlyReportResponse>()
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department != null ? src.Department.Name : null))
+                .ForMember(dest => dest.SubmittedByName, opt => opt.MapFrom(src => src.SubmittedByUser != null ? src.SubmittedByUser.FullName : null))
+                .ReverseMap();
             CreateMap<CreateMonthlyReportRequest, MonthlyReport>().ReverseMap();
             CreateMap<UpdateMonthlyReportRequest, MonthlyReport>().ReverseMap();
 
