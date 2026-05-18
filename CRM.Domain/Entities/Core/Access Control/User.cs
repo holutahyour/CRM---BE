@@ -1,4 +1,4 @@
-﻿using CRM.Base.Domain.Entities;
+using CRM.Base.Domain.Entities;
 using CRM.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,10 +18,13 @@ public class User : TenantEntity<Guid>
     public string? AvatarUrl { get; set; }
     public bool IsActive { get; set; } = true;
     public DateTime? LastLoginAt { get; set; }
+    public Guid? DepartmentId { get; set; }
 
     // Computed
     public string FullName => $"{FirstName} {LastName}".Trim();
 
     // Navigation
+    [ForeignKey("DepartmentId")]
+    public Department? Department { get; set; }
     public ICollection<UserRole> UserRoles { get; set; } = [];
 }

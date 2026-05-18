@@ -1,4 +1,4 @@
-﻿using CRM.Base.Common;
+using CRM.Base.Common;
 using CRM.Base.Common.Domain.Common;
 using CRM.Base.Common.Domain.Entities;
 using CRM.Base.Common.Repositories;
@@ -99,6 +99,50 @@ public class UserService : MSSQLBaseService<User, Guid>, IUserService
         return result;
     }
 
+    public override async Task<Result<TResponse>> CreateAsync<TResponse, TRequest>(TRequest request)
+    {
+        var result = await base.CreateAsync<TResponse, TRequest>(request);
+
+        if (result.IsSuccess && request is CreateUserRequest createUserRequest && createUserRequest.RoleIds != null)
+        {
+            if (result.Content is UserDTO userDto)
+            {
+                foreach (var roleId in createUserRequest.RoleIds)
+                {
+                    await AssignUserRoleAsync(userDto.Id, roleId);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public override async Task<Result<bool>> UpdateAsync<TRequest>(Guid id, TRequest request)
+    {
+        var result = await base.UpdateAsync(id, request);
+
+        if (result.IsSuccess && request is UpdateUserRequest updateUserRequest && updateUserRequest.RoleIds != null)
+        {
+            var existingRoles = await _userRoleRepository.GetAllAsync(ur => ur.UserId == id);
+            var existingRoleIds = existingRoles.Select(ur => ur.RoleId).ToList();
+            
+            var rolesToAdd = updateUserRequest.RoleIds.Except(existingRoleIds).ToList();
+            var rolesToRemove = existingRoleIds.Except(updateUserRequest.RoleIds).ToList();
+
+            foreach (var roleId in rolesToAdd)
+            {
+                await AssignUserRoleAsync(id, roleId);
+            }
+            
+            foreach (var roleId in rolesToRemove)
+            {
+                await RemoveUserRoleAsync(id, roleId);
+            }
+        }
+
+        return result;
+    }
+
     public virtual async Task<Result<UserRoleDTO>> RemoveUserRoleAsync(Guid userId, Guid roleId)
     {
         Result<UserRoleDTO> result = new(false);
@@ -120,7 +164,13 @@ public class UserService : MSSQLBaseService<User, Guid>, IUserService
             var userRole = await _userRoleRepository.DeleteAsync(x => x.UserId == userId && x.RoleId == roleId);
             await _context.SaveChangesAsync();
 
-            result.SetSuccess(_mapper.Map<UserRoleDTO>(userRole), "User role removed successfully.");
+            // userRole is likely an IList<string> or similar if DeleteAsync with expression is called.
+            // Oh wait, DeleteAsync(Expression) returns Task<IList<string>>
+            // Actually, existing code says:
+            // var userRole = await _userRoleRepository.DeleteAsync(x => x.UserId == userId && x.RoleId == roleId);
+            // result.SetSuccess(_mapper.Map<UserRoleDTO>(userRole), "User role removed successfully.");
+            
+            result.SetSuccess(new UserRoleDTO(Guid.Empty, userId, roleId, null, null), "User role removed successfully.");
 
         }
         catch (Exception ex)
