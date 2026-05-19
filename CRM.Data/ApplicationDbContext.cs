@@ -124,6 +124,11 @@ namespace CRM.Data
         public DbSet<MonthlyReport> MonthlyReports => Set<MonthlyReport>();
         public DbSet<Requisition> Requisitions => Set<Requisition>();
 
+        // Workflow
+        public DbSet<WorkflowTemplate> WorkflowTemplates => Set<WorkflowTemplate>();
+        public DbSet<WorkflowStep> WorkflowSteps => Set<WorkflowStep>();
+        public DbSet<ApprovalRecord> ApprovalRecords => Set<ApprovalRecord>();
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
