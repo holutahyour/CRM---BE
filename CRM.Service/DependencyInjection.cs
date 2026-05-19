@@ -34,6 +34,11 @@ public static class DependencyInjection
         services.AddScoped<IInventoryTransactionService, InventoryTransactionService>();
         services.AddScoped<IItemLocationService, ItemLocationService>();
 
+        //Workflow
+        services.AddScoped<IBlobStorageService, BlobStorageService>();
+        services.AddScoped<IWorkflowService, WorkflowService>();
+        services.AddScoped<IApprovalService, ApprovalService>();
+
         //Requistions
         services.AddScoped<IActivityService, ActivityService>();
         services.AddScoped<IDashboardSummaryService, DashboardSummaryService>();

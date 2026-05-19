@@ -8,6 +8,7 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IMSSQLRepository<Item, Guid> _itemRepository;
+    private readonly IApprovalService _approvalService;
 
     public ItemRequestService(
     IMSSQLRepository<ItemRequest, Guid> baseRepository,
@@ -16,7 +17,8 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
     IMSSQLRepository<Item, Guid> itemRepository,
     IApplicationDbContext context,
     IMapper mapper,
-    IHttpContextAccessor httpContextAccessor
+    IHttpContextAccessor httpContextAccessor,
+    IApprovalService approvalService
     )
         : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
     {
@@ -26,6 +28,7 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
         _itemRepository = itemRepository;
         _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
+        _approvalService = approvalService;
     }
 
     public override async Task<Result<TResponse>> CreateAsync<TResponse, TRequest>(TRequest request)
@@ -103,50 +106,13 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
 
         try
         {
-            var entity = await _baseRepository.GetByIdAsync(id);
-            if (entity == null)
-            {
-                result.SetError("Item request not found", "Item request not found");
-                return result;
-            }
-
-            entity.Status = ItemRequestStatus.Approved;
             var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
-            if (user != null)
-            {
-                entity.ActionedBy = user.Id;
-            }
-            await _baseRepository.UpdateAsync(id, entity);
+            var userId = user?.Id ?? Guid.Empty;
+            var tenantId = _httpContextAccessor.HttpContext?.Items["TenantId"] is Guid tid ? tid : Guid.Empty;
 
-            if (entity.ItemId.HasValue)
-            {
-                var item = await _itemRepository.GetByIdAsync(entity.ItemId.Value);
-                if (item != null)
-                {
-                    item.QuantityOnHand -= entity.Quantity;
-                    if (item.QuantityOnHand < 0) item.QuantityOnHand = 0;
-                    await _itemRepository.UpdateAsync(item.Id, item);
-                }
-            }
+            await _approvalService.ApproveAsync(WorkflowType.ItemRequest, id, userId, tenantId);
 
-            try
-            {
-                var activity = new Activity
-                {
-                    Type = ActivityType.ItemRequest,
-                    Description = $"Item Request '{entity.ItemName}' approved",
-                    Status = "Approved",
-                    RelatedEntityId = id,
-                    DepartmentId = entity.DepartmentId,
-                    Timestamp = DateTime.UtcNow
-                };
-                await _activityRepository.CreateAsync(activity);
-            }
-            catch { }
-
-            await _context.SaveChangesAsync();
-
-            result.SetSuccess(_mapper.Map<ItemRequestResponse>(entity), $"{entity.ItemName} is approved!");
+            return await GetByIdAsync<ItemRequestResponse>(id);
         }
         catch (Exception ex)
         {
@@ -162,39 +128,13 @@ public class ItemRequestService : MSSQLBaseService<ItemRequest, Guid>, IItemRequ
 
         try
         {
-            var entity = await _baseRepository.GetByIdAsync(id);
-            if (entity == null)
-            {
-                result.SetError("Item request not found", "Item request not found");
-                return result;
-            }
-
-            entity.Status = ItemRequestStatus.Rejected;
-            entity.Reason = reason;
             var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
-            if (user != null)
-            {
-                entity.ActionedBy = user.Id;
-            }
-            await _baseRepository.UpdateAsync(id, entity);
+            var userId = user?.Id ?? Guid.Empty;
+            var tenantId = _httpContextAccessor.HttpContext?.Items["TenantId"] is Guid tid ? tid : Guid.Empty;
 
-            try
-            {
-                var activity = new Activity
-                {
-                    Type = ActivityType.ItemRequest,
-                    Description = $"Item Request '{entity.ItemName}' rejected",
-                    Status = "Rejected",
-                    RelatedEntityId = id,
-                    DepartmentId = entity.DepartmentId,
-                    Timestamp = DateTime.UtcNow
-                };
-                await _activityRepository.CreateAsync(activity);
-                await _context.SaveChangesAsync();
-            }
-            catch { }
+            await _approvalService.RejectAsync(WorkflowType.ItemRequest, id, userId, reason, tenantId);
 
-            result.SetSuccess(_mapper.Map<ItemRequestResponse>(entity), $"{entity.ItemName} is rejected!");
+            return await GetByIdAsync<ItemRequestResponse>(id);
         }
         catch (Exception ex)
         {

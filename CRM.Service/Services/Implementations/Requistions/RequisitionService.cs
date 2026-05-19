@@ -7,6 +7,8 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IBlobStorageService _blobStorage;
+    private readonly IApprovalService _approvalService;
 
     public RequisitionService(
     IMSSQLRepository<Requisition, Guid> baseRepository,
@@ -14,7 +16,9 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
     IMSSQLRepository<AuditLog, long> auditLogRepository,
     IApplicationDbContext context,
     IMapper mapper,
-    IHttpContextAccessor httpContextAccessor
+    IHttpContextAccessor httpContextAccessor,
+    IBlobStorageService blobStorage,
+    IApprovalService approvalService
     )
         : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
     {
@@ -23,6 +27,24 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
         _context = context;
         _mapper = mapper;
         _httpContextAccessor = httpContextAccessor;
+        _blobStorage = blobStorage;
+        _approvalService = approvalService;
+    }
+
+    public async Task<Result<RequisitionResponse>> CreateWithFileAsync(
+        CreateRequisitionRequest request,
+        Stream? fileStream,
+        string? fileName,
+        string? contentType)
+    {
+        if (fileStream != null && !string.IsNullOrEmpty(fileName) && !string.IsNullOrEmpty(contentType))
+        {
+            var fileUrl = await _blobStorage.UploadAsync(fileStream, fileName, contentType);
+            request.FileUrl = fileUrl;
+            request.FileOriginalName = fileName;
+        }
+
+        return await CreateAsync<RequisitionResponse, CreateRequisitionRequest>(request);
     }
 
     public override async Task<Result<TResponse>> CreateAsync<TResponse, TRequest>(TRequest request)
@@ -101,51 +123,11 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
 
         try
         {
-            var requisition = await GetByIdAsync<RequisitionResponse>(id);
-            if (!requisition.IsSuccess || requisition.Content == null)
-                result.SetError($"Requisition not found", "Requisition not found");
+            var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
+            var userId = user?.Id ?? Guid.Empty;
+            var tenantId = _httpContextAccessor.HttpContext?.Items["TenantId"] is Guid tid ? tid : Guid.Empty;
 
-            var updateResult = await base.UpdateAsync<UpdateRequisitionRequest>(
-                id,
-                new UpdateRequisitionRequest
-                {
-                    Title = requisition.Content.Title,
-                    Amount = requisition.Content.Amount,
-                    Description = requisition.Content.Description,
-                }
-            );
-
-            // Update status directly via the base repository
-            var entity = await _baseRepository.GetByIdAsync(id);
-            if (entity != null)
-            {
-                entity.Status = RequisitionStatus.Approved;
-                var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
-                if (user != null)
-                {
-                    entity.ActionedBy = user.Id;
-                }
-                await _baseRepository.UpdateAsync(id, entity);
-
-                try
-                {
-                    var activity = new Activity
-                    {
-                        Type = Domain.Enums.ActivityType.Requistion,
-                        Description = $"Requisition '{entity.Title}' approved",
-                        Status = "Approved",
-                        RelatedEntityId = id,
-                        DepartmentId = entity.DepartmentId,
-                        Timestamp = DateTime.UtcNow
-                    };
-                    await _activityRepository.CreateAsync(activity);
-                }
-                catch { }
-
-                await _context.SaveChangesAsync();
-            }
-
-            result.SetSuccess(_mapper.Map<RequisitionResponse>(entity), $"{entity.Title} is approved!");
+            await _approvalService.ApproveAsync(WorkflowType.Requisition, id, userId, tenantId);
 
             return await GetByIdAsync<RequisitionResponse>(id);
         }
@@ -163,36 +145,13 @@ public class RequisitionService : MSSQLBaseService<Requisition, Guid>, IRequisit
 
         try
         {
-            var entity = await _baseRepository.GetByIdAsync(id);
-            if (entity == null)
-                result.SetError($"Requisition not found", "Requisition not found");
-
-            entity.Status = RequisitionStatus.Rejected;
-            entity.Reason = reason;
             var user = _httpContextAccessor.HttpContext?.Items["CurrentUser"] as User;
-            if (user != null)
-            {
-                entity.ActionedBy = user.Id;
-            }
-            await _baseRepository.UpdateAsync(id, entity);
+            var userId = user?.Id ?? Guid.Empty;
+            var tenantId = _httpContextAccessor.HttpContext?.Items["TenantId"] is Guid tid ? tid : Guid.Empty;
 
-            try
-            {
-                var activity = new Activity
-                {
-                    Type = Domain.Enums.ActivityType.Requistion,
-                    Description = $"Requisition '{entity.Title}' rejected",
-                    Status = "Rejected",
-                    RelatedEntityId = id,
-                    DepartmentId = entity.DepartmentId,
-                    Timestamp = DateTime.UtcNow
-                };
-                await _activityRepository.CreateAsync(activity);
-                await _context.SaveChangesAsync();
-            }
-            catch { }
+            await _approvalService.RejectAsync(WorkflowType.Requisition, id, userId, reason, tenantId);
 
-            result.SetSuccess(_mapper.Map<RequisitionResponse>(entity), $"{entity.Title} is rejected!");
+            return await GetByIdAsync<RequisitionResponse>(id);
         }
         catch (Exception ex)
         {

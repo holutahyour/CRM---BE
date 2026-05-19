@@ -29,6 +29,8 @@ public class CreateRequisitionRequest
     public string Description { get; set; }
     public Guid? DepartmentId { get; set; }
     public Guid? SubmittedBy { get; set; }
+    public string? FileUrl { get; set; }
+    public string? FileOriginalName { get; set; }
 }
 
 public class UpdateRequisitionRequest

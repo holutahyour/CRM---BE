@@ -7,4 +7,5 @@ public interface IRequisitionService : IMSSQLBaseService<Requisition, Guid>
 {
     Task<Result<RequisitionResponse>> ApproveAsync(Guid id);
     Task<Result<RequisitionResponse>> RejectAsync(Guid id, string reason);
+    Task<Result<RequisitionResponse>> CreateWithFileAsync(CreateRequisitionRequest request, Stream? fileStream, string? fileName, string? contentType);
 }
