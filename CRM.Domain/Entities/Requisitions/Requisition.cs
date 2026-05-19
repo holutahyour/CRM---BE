@@ -16,6 +16,9 @@ public class Requisition : TenantEntity<Guid>
     public string Reason { get; set; } // For rejected
     public Guid? SubmittedBy { get; set; } // User Id
     public Guid? ActionedBy { get; set; } // User who approved or rejected
+    public string? FileUrl { get; set; }
+    public string? FileOriginalName { get; set; }
+    public int CurrentStepOrder { get; set; } = 1;
 
     [ForeignKey("SubmittedBy")]
     public User SubmittedByUser { get; set; }
