@@ -92,7 +92,9 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("InventoryRead", p => p.AddRequirements(new PermissionRequirement(Permissions.ItemsView)))
     .AddPolicy("InventoryWrite", p => p.AddRequirements(new PermissionRequirement(Permissions.ItemsCreate)))
     .AddPolicy("PurchaseOrderApprove", p => p.AddRequirements(new PermissionRequirement(Permissions.PurchaseOrdersApprove)))
-    .AddPolicy("ReportsView", p => p.AddRequirements(new PermissionRequirement(Permissions.ReportsView)));
+    .AddPolicy("ReportsView", p => p.AddRequirements(new PermissionRequirement(Permissions.ReportsView)))
+    .AddPolicy("WorkflowTemplatesView", p => p.AddRequirements(new PermissionRequirement(Permissions.WorkflowTemplatesView)))
+    .AddPolicy("WorkflowTemplatesManage", p => p.AddRequirements(new PermissionRequirement(Permissions.WorkflowTemplatesManage)));
 
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 

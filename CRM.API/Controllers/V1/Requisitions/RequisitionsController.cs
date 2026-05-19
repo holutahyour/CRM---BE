@@ -1,20 +1,39 @@
+using CRM.Domain.Enums.Workflow;
+using Microsoft.AspNetCore.Http;
+
 namespace CRM.API.Controllers.v1;
 
 [ApiVersion("1.0")]
 public class RequisitionsController : MSSQLBaseController<Requisition, RequisitionResponse, Guid>
 {
     private readonly IRequisitionService _service;
+    private readonly IApprovalService _approvalService;
 
-    public RequisitionsController(IRequisitionService service) : base(service)
+    public RequisitionsController(IRequisitionService service, IApprovalService approvalService) : base(service)
     {
         _service = service;
+        _approvalService = approvalService;
     }
 
     [HttpPost]
-    public async Task<ActionResult> CreateRequisition([FromBody] CreateRequisitionRequest request)
+    [Consumes("multipart/form-data")]
+    public async Task<ActionResult> CreateRequisition([FromForm] CreateRequisitionRequest request, IFormFile? file)
     {
-        var response = await CreateAsync(request);
-        return response;
+        Stream? fileStream = file?.OpenReadStream();
+        try
+        {
+            var response = await _service.CreateWithFileAsync(request, fileStream, file?.FileName, file?.ContentType);
+
+            if (response.IsSuccess)
+                return Ok(response);
+            else
+                return BadRequest(response);
+        }
+        finally
+        {
+            if (fileStream != null)
+                await fileStream.DisposeAsync();
+        }
     }
 
     [HttpPut]
@@ -65,5 +84,13 @@ public class RequisitionsController : MSSQLBaseController<Requisition, Requisiti
 
         var response = await ImportAsync(requests);
         return response;
+    }
+
+    [HttpGet("{id}/approval-history")]
+    public async Task<ActionResult> GetApprovalHistory(Guid id)
+    {
+        var tenantId = GetCurrentTenantId();
+        var history = await _approvalService.GetHistoryAsync(WorkflowType.Requisition, id, tenantId);
+        return Ok(history);
     }
 }

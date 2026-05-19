@@ -1,13 +1,17 @@
+using CRM.Domain.Enums.Workflow;
+
 namespace CRM.API.Controllers.v1;
 
 [ApiVersion("1.0")]
 public class ItemRequestsController : MSSQLBaseController<ItemRequest, ItemRequestResponse, Guid>
 {
     private readonly IItemRequestService _service;
+    private readonly IApprovalService _approvalService;
 
-    public ItemRequestsController(IItemRequestService service) : base(service)
+    public ItemRequestsController(IItemRequestService service, IApprovalService approvalService) : base(service)
     {
         _service = service;
+        _approvalService = approvalService;
     }
 
     [HttpPost]
@@ -58,6 +62,14 @@ public class ItemRequestsController : MSSQLBaseController<ItemRequest, ItemReque
     {
         var response = await _service.RejectAsync(id, request.Reason);
         return Ok(response);
+    }
+
+    [HttpGet("{id}/approval-history")]
+    public async Task<ActionResult> GetApprovalHistory(Guid id)
+    {
+        var tenantId = GetCurrentTenantId();
+        var history = await _approvalService.GetHistoryAsync(WorkflowType.ItemRequest, id, tenantId);
+        return Ok(history);
     }
 }
 
