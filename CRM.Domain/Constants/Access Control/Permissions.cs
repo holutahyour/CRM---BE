@@ -87,6 +87,10 @@ public static class Permissions
     public const string MenusView = "admin.menus.view";
     public const string MenusManage = "admin.menus.manage";
 
+    // Workflow Templates
+    public const string WorkflowTemplatesView = "workflows.templates.view";
+    public const string WorkflowTemplatesManage = "workflows.templates.manage";
+
     /// <summary>Returns all permission codes as a flat list (useful for seeding).</summary>
     public static IReadOnlyList<string> All => typeof(Permissions)
         .GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)
