@@ -69,7 +69,7 @@ public class ItemRequestsController : MSSQLBaseController<ItemRequest, ItemReque
     {
         var tenantId = GetCurrentTenantId();
         var history = await _approvalService.GetHistoryAsync(WorkflowType.ItemRequest, id, tenantId);
-        return Ok(history);
+        return Ok(new { isSuccess = true, content = history });
     }
 }
 

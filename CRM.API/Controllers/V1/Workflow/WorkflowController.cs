@@ -47,7 +47,9 @@ public class WorkflowController : ControllerBase
     {
         var tenantId = GetCurrentTenantId();
         var template = await _workflowService.CreateTemplateAsync(request, tenantId);
-        return Ok(template);
+        // Wrap in the standard IApiResponse envelope so the frontend can read
+        // createRes.isSuccess and createRes.content (WorkflowStepsDrawer.tsx).
+        return Ok(new { isSuccess = true, content = template });
     }
 
     [Authorize(Policy = "WorkflowTemplatesManage")]

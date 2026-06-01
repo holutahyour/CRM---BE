@@ -21,6 +21,27 @@ public class RolesController : MSSQLBaseController<Role, RoleDTO, Guid>
         _service = service;
     }
 
+    /// <summary>
+    /// Lightweight endpoint returning only id + name pairs.
+    /// Accessible to any authenticated user (needed for workflow step assignment dropdowns).
+    /// Does NOT expose sensitive permission details.
+    /// </summary>
+    [Authorize]
+    [HttpGet("names")]
+    public async Task<ActionResult> GetRoleNames()
+    {
+        var result = await _service.GetAllAsync<RoleDTO>();
+        if (!result.IsSuccess)
+            return BadRequest(new { isSuccess = false, content = Array.Empty<object>() });
+
+        var slim = result.Content
+            .Select(r => new { id = r.Id, name = r.Name })
+            .OrderBy(r => r.name)
+            .ToList();
+
+        return Ok(new { isSuccess = true, content = slim });
+    }
+
     [Authorize(Policy = "AdminOnly")]
     [HttpGet]
     public override async Task<ActionResult> GetAllAsync(

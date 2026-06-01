@@ -82,7 +82,12 @@ public class Seeder
             _context.SaveChanges();
         }
 
-        //Core            
+        // Always sync: ensure every Admin role has ALL current permissions.
+        // This handles new permissions added via migrations after the initial seeding
+        // (the block above only runs once, so this catch-all keeps Admin roles current).
+        SyncAdminRolePermissions();
+
+        //Core
 
         var genders = GenderSeedData.GenerateGenderData();
 
@@ -138,5 +143,47 @@ public class Seeder
         }
 
         _context.SaveChanges();
+    }
+
+    /// <summary>
+    /// Idempotently ensures every Admin role has all permissions that currently exist in the
+    /// database. Safe to call on every startup — it only INSERTs missing links, never duplicates.
+    /// </summary>
+    private void SyncAdminRolePermissions()
+    {
+        var allPermissions = _context.Permissions
+            .IgnoreQueryFilters()
+            .Where(p => !p.IsDeleted)
+            .ToList();
+
+        var adminRoles = _context.Roles
+            .IgnoreQueryFilters()
+            .Where(r => r.Code == "ADMIN" && !r.IsDeleted)
+            .ToList();
+
+        bool changed = false;
+
+        foreach (var adminRole in adminRoles)
+        {
+            var existingPermIds = _context.RolePermissions
+                .IgnoreQueryFilters()
+                .Where(rp => rp.RoleId == adminRole.Id && !rp.IsDeleted)
+                .Select(rp => rp.PermissionId)
+                .ToHashSet();
+
+            foreach (var perm in allPermissions.Where(p => !existingPermIds.Contains(p.Id)))
+            {
+                _context.RolePermissions.Add(new RolePermission
+                {
+                    TenantId = adminRole.TenantId,
+                    RoleId = adminRole.Id,
+                    PermissionId = perm.Id
+                });
+                changed = true;
+            }
+        }
+
+        if (changed)
+            _context.SaveChanges();
     }
 }

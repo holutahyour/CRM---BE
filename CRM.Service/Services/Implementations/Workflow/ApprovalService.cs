@@ -120,6 +120,7 @@ public class ApprovalService : IApprovalService
 
         var records = await _db.ApprovalRecords
             .IgnoreQueryFilters()
+            .Include(r => r.ActionedByUser)
             .Where(r => r.WorkflowType == workflowType && r.EntityId == entityId && r.TenantId == tenantId)
             .OrderBy(r => r.StepOrder)
             .ToListAsync();
@@ -157,7 +158,7 @@ public class ApprovalService : IApprovalService
                 Id = r.Id,
                 StepOrder = r.StepOrder,
                 StepName = r.StepName,
-                ActionedByName = r.ActionedBy.ToString(),
+                ActionedByName = r.ActionedByUser?.FullName ?? r.ActionedBy.ToString(),
                 ActionedOn = r.ActionedOn,
                 Status = r.Status,
                 Notes = r.Notes
