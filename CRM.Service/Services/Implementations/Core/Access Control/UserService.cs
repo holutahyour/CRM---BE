@@ -143,6 +143,39 @@ public class UserService : MSSQLBaseService<User, Guid>, IUserService
         return result;
     }
 
+    public virtual async Task<Result<bool>> OnboardAsync(Guid userId)
+    {
+        Result<bool> result = new(false);
+
+        try
+        {
+            if (userId == Guid.Empty)
+            {
+                result.SetError("Invalid user id", "The provided user id is empty.");
+                return result;
+            }
+
+            var user = await _repository.GetByIdAsync(userId);
+            if (user == null)
+            {
+                result.SetError("User not found", $"User with Id {userId} not found.");
+                return result;
+            }
+
+            user.Onboarded = true;
+            user.Status = CRM.Domain.Enums.UserStatus.Onboarded;
+            await _context.SaveChangesAsync();
+
+            result.SetSuccess(true, "User onboarded successfully.");
+        }
+        catch (Exception ex)
+        {
+            result.SetError(ex.ToString(), "Error while onboarding user");
+        }
+
+        return result;
+    }
+
     public virtual async Task<Result<UserRoleDTO>> RemoveUserRoleAsync(Guid userId, Guid roleId)
     {
         Result<UserRoleDTO> result = new(false);

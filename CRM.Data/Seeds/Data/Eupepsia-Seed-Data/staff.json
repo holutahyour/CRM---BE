@@ -1,0 +1,707 @@
+[
+  {
+    "sn": 1,
+    "name": "Peace Okwara",
+    "position": "Manager",
+    "docRoleTier": "ADMIN",
+    "roleCode": "ADMIN",
+    "departmentName": "Administration & Management",
+    "downliners": "Covers Everyone in the Org",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 2,
+    "name": "Emmanuel Atolagbe",
+    "position": "COO",
+    "docRoleTier": "ADMIN",
+    "roleCode": "ADMIN",
+    "departmentName": "Administration & Management",
+    "downliners": "Covers Everyone in the Org",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 3,
+    "name": "Edebeatu Chekwube",
+    "position": "HR",
+    "docRoleTier": "MANAGER",
+    "roleCode": "MANAGER",
+    "departmentName": "Human Resources",
+    "downliners": "Relationship & Communications, CSO, Media Assistant, Admin Officer",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 4,
+    "name": "Buraimoh Oluwatosin Olatubosun",
+    "position": "I.C.T.",
+    "docRoleTier": "SUPER ADMIN",
+    "roleCode": "SUPER_ADMIN",
+    "departmentName": "ICT",
+    "downliners": "Maintenance and Updates",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 5,
+    "name": "Ahmad Jubril Opeoluwa",
+    "position": "Data Administrator",
+    "docRoleTier": "ADMIN",
+    "roleCode": "ADMIN",
+    "departmentName": "ICT",
+    "downliners": "Covers Everyone in the Org",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 6,
+    "name": "Joan Oluwatobi",
+    "position": "BDO",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Business Development",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 7,
+    "name": "Rejoice Ajaegbu Oluomachi",
+    "position": "BDO",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Business Development",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 8,
+    "name": "Nathaniel Edjeba",
+    "position": "BDO",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Business Development",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 9,
+    "name": "Grace Enoidem",
+    "position": "Relationship & Communication",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Relationship & Communications",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 10,
+    "name": "Chinelo Anyaegbuna",
+    "position": "Operations Manager",
+    "docRoleTier": "MANAGER",
+    "roleCode": "MANAGER",
+    "departmentName": "Operations",
+    "downliners": "Logistics Officer, Inventory Officer, Facility Manager, Processing Facility Supervisor, Electricians, Plumbers",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 11,
+    "name": "Ogundeji Oluwabukola Ruth",
+    "position": "Pack House Supervisor",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Operations",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 12,
+    "name": "Alex Tomide Bamidele",
+    "position": "Pack House Supervisor",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Operations",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 13,
+    "name": "Adeola Mutiu Babatunde",
+    "position": "Pack House Supervisor",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Operations",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 14,
+    "name": "Oluwatomilayo Hannah Akintoye",
+    "position": "Pack House Supervisor",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Operations",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 15,
+    "name": "Paul Chika",
+    "position": "Social Mobilization",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Relationship & Communications",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 16,
+    "name": "Joshua Nkem Onu",
+    "position": "Inventory Officer",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Operations",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 17,
+    "name": "Monday Samson Ese",
+    "position": "Logistics/Procurement Officer",
+    "docRoleTier": "MANAGER",
+    "roleCode": "MANAGER",
+    "departmentName": "Operations",
+    "downliners": "Drivers, BAZUKI Operators",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 18,
+    "name": "Amos Akanji",
+    "position": "Internal Auditor",
+    "docRoleTier": "MANAGER",
+    "roleCode": "MANAGER",
+    "departmentName": "Finance & Audit",
+    "downliners": "Finance, Quality Assurance Officers",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 19,
+    "name": "Adewale Adesoji",
+    "position": "Processing Facility Supervisor",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Operations",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 20,
+    "name": "Tolulope Tawakalit Adewale",
+    "position": "Agronomy Manager",
+    "docRoleTier": "MANAGER",
+    "roleCode": "MANAGER",
+    "departmentName": "Agronomy",
+    "downliners": "Agronomists, Pack House Supervisors",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 21,
+    "name": "Afolabi Ismail Adegbayi",
+    "position": "Agronomist",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Agronomy",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 22,
+    "name": "Augustine Ebong",
+    "position": "Agronomist",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Agronomy",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 23,
+    "name": "Jude Ebuka Nwankwo",
+    "position": "Agronomist",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Agronomy",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 24,
+    "name": "Deborah Akintola",
+    "position": "Sales Manager",
+    "docRoleTier": "MANAGER",
+    "roleCode": "MANAGER",
+    "departmentName": "Sales",
+    "downliners": "Sales Team",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 25,
+    "name": "Ruth Eye",
+    "position": "Sales",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Sales",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 26,
+    "name": "Oyeyinka Isaac Adeyemi",
+    "position": "Sales",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Sales",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 27,
+    "name": "Solomon Olakunle",
+    "position": "Sales",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Sales",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 28,
+    "name": "Tom Love Daniel",
+    "position": "Sales",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Sales",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 29,
+    "name": "Ndukwe Lovelyn",
+    "position": "Sales",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Sales",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 30,
+    "name": "Deborah Oyeleje",
+    "position": "Sales",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Sales",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 31,
+    "name": "Jude Bisong",
+    "position": "Facility Manager",
+    "docRoleTier": "MANAGER(ACCESS)",
+    "roleCode": "MANAGER_ACCESS",
+    "departmentName": "Operations",
+    "downliners": "Inventory Officer, Processing Facility Supervisor, Electricians, Plumbers",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 32,
+    "name": "Deborah Oladayo Olayiwola",
+    "position": "Quality Assurance Officer",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Quality Assurance",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 33,
+    "name": "Tomilayo Amzat",
+    "position": "Quality Assurance Officer",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Quality Assurance",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 34,
+    "name": "Amuche Patricia",
+    "position": "Crèche Staff",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Crèche/Clinic",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 35,
+    "name": "Ayileka Michael",
+    "position": "Media Assistant",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Relationship & Communications",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 36,
+    "name": "Ayoola Pelumi",
+    "position": "CSO",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Relationship & Communications",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 37,
+    "name": "Adedayo Ogunade",
+    "position": "Admin Officer",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Administration & Management",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 38,
+    "name": "Oladipupo Lukman",
+    "position": "Driver",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Operations",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 39,
+    "name": "Abiodun Thomas",
+    "position": "Driver",
+    "docRoleTier": "DEPARTMENT USER",
+    "roleCode": "DEPT_USER",
+    "departmentName": "Operations",
+    "downliners": "NIL",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 40,
+    "name": "Olufemi Omoboriowo O.",
+    "position": "Head Electrician",
+    "docRoleTier": "USER",
+    "roleCode": "ARTISAN",
+    "departmentName": "Operations",
+    "downliners": "",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 41,
+    "name": "Emmanuel Akintunde",
+    "position": "Ass. Electrician",
+    "docRoleTier": "USER",
+    "roleCode": "ARTISAN",
+    "departmentName": "Operations",
+    "downliners": "",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 42,
+    "name": "Tosin Salau J.",
+    "position": "Plumber",
+    "docRoleTier": "USER",
+    "roleCode": "ARTISAN",
+    "departmentName": "Operations",
+    "downliners": "",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 43,
+    "name": "Olamide Kazeem T.",
+    "position": "Ass. Plumber",
+    "docRoleTier": "USER",
+    "roleCode": "ARTISAN",
+    "departmentName": "Operations",
+    "downliners": "",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 44,
+    "name": "Ezem Chigbo",
+    "position": "BAZUKI Operator",
+    "docRoleTier": "USER",
+    "roleCode": "ARTISAN",
+    "departmentName": "Operations",
+    "downliners": "",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 45,
+    "name": "Oyetunde Amos",
+    "position": "BAZUKI Operator",
+    "docRoleTier": "USER",
+    "roleCode": "ARTISAN",
+    "departmentName": "Operations",
+    "downliners": "",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 46,
+    "name": "Akibola Rokeeb",
+    "position": "BAZUKI Operator",
+    "docRoleTier": "USER",
+    "roleCode": "ARTISAN",
+    "departmentName": "Operations",
+    "downliners": "",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  },
+  {
+    "sn": 47,
+    "name": "Opeyemi Philips",
+    "position": "BAZUKI Operator",
+    "docRoleTier": "USER",
+    "roleCode": "ARTISAN",
+    "departmentName": "Operations",
+    "downliners": "",
+    "created": {
+      "departmentName_inferred": true,
+      "roleCode_unmapped": false,
+      "email_missing": true,
+      "entraObjectId_missing": true
+    }
+  }
+]

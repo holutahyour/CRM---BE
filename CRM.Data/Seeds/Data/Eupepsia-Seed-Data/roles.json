@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Super Administrator",
+    "code": "SUPER_ADMIN",
+    "docTier": "SUPER ADMIN",
+    "description": "All ADMIN privileges plus onboarding/removing users, configuring system settings, maintenance and updates.",
+    "permissions": "ALL",
+    "created": {
+      "permissions": true
+    }
+  },
+  {
+    "name": "Administrator",
+    "code": "ADMIN",
+    "docTier": "ADMIN",
+    "description": "Full operational visibility and access across all modules.",
+    "permissions": "ALL_EXCEPT_ADMIN_MGMT",
+    "created": {
+      "permissions": true
+    }
+  },
+  {
+    "name": "Manager",
+    "code": "MANAGER",
+    "docTier": "MANAGER",
+    "description": "Department-level oversight; first-level approval/rejection for downliner requests.",
+    "permissions": "MANAGER",
+    "created": {
+      "permissions": true
+    }
+  },
+  {
+    "name": "Manager (Cross-Dept Access)",
+    "code": "MANAGER_ACCESS",
+    "docTier": "MANAGER (ACCESS)",
+    "description": "Same approval authority as Manager, scoped to cross-departmental access.",
+    "permissions": "MANAGER",
+    "created": {
+      "permissions": true,
+      "note": "cross-department scoping is NOT enforced by the system today (flagged G-R3)"
+    }
+  },
+  {
+    "name": "Department User",
+    "code": "DEPT_USER",
+    "docTier": "DEPARTMENT USER",
+    "description": "Standard user limited to own department functions; no approval rights.",
+    "permissions": "DEPT_USER",
+    "created": {
+      "permissions": true
+    }
+  },
+  {
+    "name": "User (Artisan)",
+    "code": "ARTISAN",
+    "docTier": "USER (ARTISAN)",
+    "description": "Basic operational access for artisan/field staff.",
+    "permissions": "ARTISAN",
+    "created": {
+      "permissions": true
+    }
+  }
+]

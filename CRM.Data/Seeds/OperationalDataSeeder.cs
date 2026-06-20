@@ -15,16 +15,33 @@ public class OperationalDataSeeder
         var defaultTenant = await _context.Tenants.IgnoreQueryFilters().FirstOrDefaultAsync(x => x.Code == "SYSTEM");
         if (defaultTenant != null) defaultTenantId = defaultTenant.Id;
 
-        if (!await _context.Set<Department>().AnyAsync())
+        // Departments — Eupepsia / Soilless Farm Lab.
+        // NOTE: the source Role Allocation document has NO department master list; these
+        // departments are INFERRED by grouping each staff member's Position, and StaffCount
+        // is COMPUTED from the 47-person list. Budget/ProjectsCount/PercentOfTotal are NOT in
+        // the source and are seeded as 0 (flagged in departments.json / docs/IMPORT-NOTES.md).
+        // Guard with IgnoreQueryFilters + explicit tenant predicate: during seeding the
+        // ITenantProvider resolves TenantId to Guid.Empty (no HTTP context), which does NOT
+        // match the SYSTEM tenant's real (DB-generated) Id, so a filtered AnyAsync() would never
+        // see existing rows and would duplicate on every run.
+        if (!await _context.Set<Department>().IgnoreQueryFilters().AnyAsync(d => d.TenantId == defaultTenantId))
         {
-            var departments = new List<Department>
+            var departments = EupepsiaSeedData.Departments().Select(d => new Department
             {
-                new Department { Id = Guid.NewGuid(), Code = "FIN", Name = "Finance", Description = "Finance and Accounting", StaffCount = 10, ProjectsCount = 2, Budget = 5000000, PercentOfTotal = 20, TenantId = defaultTenantId},
-                new Department { Id = Guid.NewGuid(), Code = "HR", Name = "Human Resources", Description = "Human Resources Management", StaffCount = 5, ProjectsCount = 1, Budget = 2000000, PercentOfTotal = 10, TenantId = defaultTenantId},
-                new Department { Id = Guid.NewGuid(), Code = "IT", Name = "IT Support", Description = "Information Technology", StaffCount = 15, ProjectsCount = 5, Budget = 10000000, PercentOfTotal = 30, TenantId = defaultTenantId},
-                new Department { Id = Guid.NewGuid(), Code = "MKT", Name = "Marketing", Description = "Marketing and Sales", StaffCount = 8, ProjectsCount = 4, Budget = 4000000, PercentOfTotal = 15, TenantId = defaultTenantId},
-                new Department { Id = Guid.NewGuid(), Code = "OPS", Name = "Operations", Description = "General Operations", StaffCount = 12, ProjectsCount = 3, Budget = 6000000, PercentOfTotal = 25, TenantId = defaultTenantId},
-            };
+                Id = Guid.NewGuid(),
+                Code = d.Code,
+                Name = d.Name,
+                Description = d.Description,
+                StaffCount = d.StaffCount,
+                ProjectsCount = d.ProjectsCount,
+                Budget = d.Budget,
+                PercentOfTotal = d.PercentOfTotal,
+                TenantId = defaultTenantId,
+                CreatedBy = "SYSTEM",
+                CreatedOn = DateTime.UtcNow,
+                LastModifiedBy = "SYSTEM",
+                LastModifiedOn = DateTime.UtcNow,
+            }).ToList();
             await _context.Set<Department>().AddRangeAsync(departments);
         }
 

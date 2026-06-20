@@ -128,6 +128,25 @@ var db = TestDbContext.Create(tenantId, userId);  // both optional Guid?
 - Mocks `ITenantProvider` (namespace: `CRM.Services.Services.Interfaces.Common`).
 - `userId` is a `string?` (parses to Guid or defaults to new Guid if null).
 
+### SqliteTestDb Helper (relational fidelity)
+
+```csharp
+// CRM.Tests/Helpers/SqliteTestDb.cs
+using var sqlite = SqliteTestDb.Create(tenantId, userId);  // IDisposable — dispose it
+var db = sqlite.Context;
+```
+
+- Backed by **in-memory SQLite** (a real relational engine) instead of the EF InMemory provider, so
+  it exercises actual SQL translation, column types and **unique indexes** — catching issues
+  InMemory silently ignores. Schema + static `HasData` reference seed are built via `EnsureCreated()`.
+- Same mocked `ITenantProvider` as `TestDbContext`. The SQLite connection is kept open for the
+  object's lifetime (an in-memory DB drops when its last connection closes) — **always `using`/dispose**.
+- FK enforcement is **disabled** (`Foreign Keys=False`) because the static `HasData` seed contains
+  self-referencing/hierarchical rows (Modules/Menus) SQLite can't insert under strict FK ordering.
+- Prefer `TestDbContext.Create` (InMemory) for fast unit tests; reach for `SqliteTestDb` when a test
+  depends on real relational behaviour. Both require explicit `Id = Guid.NewGuid()` on entities
+  (Guid keys are `Identity` and are not auto-generated under SQLite).
+
 ### Key Testing Patterns
 
 **Always use `.IgnoreQueryFilters()`** when seeding and querying in tests. The global tenant + soft-delete filters will block reads if the seeded `TenantId` doesn't match the mocked provider's `TenantId`. In service implementations that need cross-filter reads (workflow, approval), use `.IgnoreQueryFilters()` with an explicit tenantId predicate to preserve isolation:
@@ -145,6 +164,8 @@ var updated = await db.Requisitions.FindAsync(req.Id);
 **TenantId is auto-assigned by `SaveChangesAsync`** — do NOT set it manually in service implementations. The `ApplicationDbContext` reads it from `ITenantProvider` and applies it to new entities before saving. Setting it manually would conflict with the InMemory test provider.
 
 **`Xunit` namespace must be explicitly imported** in test files — it is not in global usings.
+
+**Seed the principal of a required `.Include()` navigation, or the row disappears.** A non-nullable FK (e.g. `ApprovalRecord.ActionedBy` → required `ActionedByUser`) makes `.Include(r => r.ActionedByUser)` emit an **INNER JOIN**; if the referenced principal (the `User`) was never seeded, the dependent row is silently dropped from the results — not an error, just missing data. When a service reads a dependent via a required include, seed the principal entity it points to, not only its join rows. (This is what bit `ApprovalServiceTests.GetHistory` — it seeded `UserRole` but not the `User`.)
 
 ---
 

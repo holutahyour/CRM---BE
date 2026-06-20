@@ -104,6 +104,23 @@ public class UsersController : MSSQLBaseController<User, UserDTO, Guid>
     }
 
     [Authorize(Policy = "AdminOnly")]
+    [HttpPatch("{id}/onboard")]
+    public async Task<ActionResult> Onboard(Guid id)
+    {
+        var requestTime = DateTime.UtcNow;
+        var response = await _service.OnboardAsync(id);
+        var responseTime = DateTime.UtcNow;
+
+        response.RequestTime = requestTime;
+        response.ResponseTime = responseTime;
+
+        if (response.IsSuccess)
+            return Ok(response);
+        else
+            return BadRequest(response);
+    }
+
+    [Authorize(Policy = "AdminOnly")]
     [HttpPost("{id}/roles")]
     public async Task<ActionResult> AssignUserRole(Guid id, Guid roleId)
     {

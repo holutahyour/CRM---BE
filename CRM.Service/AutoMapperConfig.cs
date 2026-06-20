@@ -42,6 +42,8 @@ namespace CRM.Service
             // User -> UserDTO: map UserRoles navigation to List<string> of role names
             CreateMap<User, UserDTO>()
                 .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department != null ? src.Department.Name : null))
+                .ForCtorParam("ManagerName",
+                    opt => opt.MapFrom(src => src.Manager != null ? src.Manager.FullName : null))
                 .ForCtorParam("Roles",
                     opt => opt.MapFrom(src => src.UserRoles
                         .Where(ur => ur.Role != null)

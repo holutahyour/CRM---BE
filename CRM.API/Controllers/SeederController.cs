@@ -7,10 +7,12 @@ namespace CRM.API.Controllers.v1;
 public class SeedersController : ControllerBase
 {
     private readonly OperationalDataSeeder _service;
+    private readonly InventoryDataSeeder _inventorySeeder;
 
-    public SeedersController(OperationalDataSeeder service)
+    public SeedersController(OperationalDataSeeder service, InventoryDataSeeder inventorySeeder)
     {
         _service = service;
+        _inventorySeeder = inventorySeeder;
     }
 
     [HttpPost("seed-operational-data")]
@@ -19,6 +21,14 @@ public class SeedersController : ControllerBase
         await _service.InitializeAsync();
 
         return Ok("Operational data seeded successfully");
+    }
+
+    [HttpPost("seed-inventory-data")]
+    public async Task<ActionResult> SeedInventoryData()
+    {
+        var summary = await _inventorySeeder.InitializeAsync();
+
+        return Ok(summary);
     }
 
 }

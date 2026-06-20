@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Electricals",
+    "description": "Electricals (from source worksheet).",
+    "created": {
+      "fromSheetName": true
+    }
+  },
+  {
+    "name": "Plumbing Materials",
+    "description": "Plumbing Materials (from source worksheet).",
+    "created": {
+      "fromSheetName": true
+    }
+  },
+  {
+    "name": "Agro-Chemicals, Materials & Seed",
+    "description": "Agro-Chemicals, Materials & Seed (from source worksheet).",
+    "created": {
+      "fromSheetName": true
+    }
+  },
+  {
+    "name": "Other Items",
+    "description": "Other Items (from source worksheet).",
+    "created": {
+      "fromSheetName": true
+    }
+  },
+  {
+    "name": "Working Tools & Construction Materials",
+    "description": "Working Tools & Construction Materials (from source worksheet).",
+    "created": {
+      "fromSheetName": true
+    }
+  },
+  {
+    "name": "Construction Materials",
+    "description": "Construction Materials (from source worksheet).",
+    "created": {
+      "fromSheetName": true
+    }
+  },
+  {
+    "name": "Clinic",
+    "description": "Clinic (from source worksheet).",
+    "created": {
+      "fromSheetName": true
+    }
+  },
+  {
+    "name": "Poultry",
+    "description": "Poultry (from source worksheet).",
+    "created": {
+      "fromSheetName": true
+    }
+  },
+  {
+    "name": "Project Supplies",
+    "description": "Catch-all for items received against projects/shops/returns where the source gives no material category.",
+    "created": {
+      "category_invented_catchall": true
+    }
+  }
+]

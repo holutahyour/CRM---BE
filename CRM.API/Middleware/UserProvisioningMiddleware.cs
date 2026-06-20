@@ -5,7 +5,7 @@ namespace CRM.API.Middleware;
 
 public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvisioningMiddleware> logger)
 {
-    public async Task InvokeAsync(HttpContext context, ApplicationDbContext db)
+    public async Task InvokeAsync(HttpContext context, ApplicationDbContext db, IConfiguration config)
     {
         if (context.User.Identity?.IsAuthenticated != true) { await next(context); return; }
 
@@ -44,9 +44,33 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
                 CreatedOn = DateTime.UtcNow
             };
             db.Users.Add(user);
-            await db.SaveChangesAsync(); logger.LogInformation("JIT provisioned user {Email} for tenant {TenantId}", user.Email, tenantId);
 
-            await AssignAdminRoleAsync(user, db);
+            try
+            {
+                await db.SaveChangesAsync();
+                logger.LogInformation("JIT provisioned user {Email} for tenant {TenantId}", user.Email, tenantId);
+
+                await AssignAdminRoleAsync(user, db);
+            }
+            catch (DbUpdateException)
+            {
+                // A concurrent authenticated request (common on first login: several parallel
+                // calls all see "no user" and race to provision) already inserted this Entra
+                // user, tripping the unique IX_users_EntraObjectId index. Recover idempotently:
+                // detach our failed insert and reuse the record the winning request created.
+                db.Entry(user).State = EntityState.Detached;
+
+                var existing = await db.Users.IgnoreQueryFilters()
+                    .Include(u => u.UserRoles)
+                    .FirstOrDefaultAsync(u => u.EntraObjectId == oid);
+
+                // If no such user exists, the failure was not a duplicate-provisioning race —
+                // surface the original error rather than masking a real problem.
+                if (existing == null) throw;
+
+                user = existing;
+                logger.LogInformation("User {Oid} was provisioned by a concurrent request; reusing existing record.", oid);
+            }
 
             //// Auto-assign Admin role to the first system user
             //if (isFirstUser)
@@ -76,10 +100,44 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
             await db.SaveChangesAsync();
         }
 
+        // Ensure designated owner account(s) carry the SUPER_ADMIN role. The permission handler
+        // reads roles from the DB on every request, so granting it here takes effect immediately
+        // (no re-login). Configured via Auth:SuperAdminEmails in appsettings.
+        var superAdminEmails = config.GetSection("Auth:SuperAdminEmails").Get<string[]>() ?? [];
+        if (!string.IsNullOrWhiteSpace(user.Email) &&
+            superAdminEmails.Any(e => string.Equals(e, user.Email, StringComparison.OrdinalIgnoreCase)))
+        {
+            await EnsureSuperAdminRoleAsync(user, db);
+        }
+
         context.Items["CurrentUser"] = user;
         context.Items["oid"] = user.EntraObjectId;
         context.Items["TenantId"] = user.TenantId;
         await next(context);
+    }
+
+    private async Task EnsureSuperAdminRoleAsync(User user, ApplicationDbContext db)
+    {
+        var superRole = await db.Roles.IgnoreQueryFilters()
+            .FirstOrDefaultAsync(r => r.Code == "SUPER_ADMIN" && (r.TenantId == user.TenantId || r.TenantId == Guid.Empty));
+        if (superRole == null)
+        {
+            logger.LogWarning("SUPER_ADMIN role not found; cannot elevate {Email}", user.Email);
+            return;
+        }
+
+        var alreadyHas = await db.UserRoles.IgnoreQueryFilters()
+            .AnyAsync(ur => ur.UserId == user.Id && ur.RoleId == superRole.Id && !ur.IsDeleted);
+        if (alreadyHas) return;
+
+        db.UserRoles.Add(new UserRole
+        {
+            UserId = user.Id,
+            RoleId = superRole.Id,
+            TenantId = user.TenantId
+        });
+        await db.SaveChangesAsync();
+        logger.LogInformation("Granted SUPER_ADMIN to designated owner {Email}", user.Email);
     }
 
     private async Task AssignAdminRoleAsync(User user, ApplicationDbContext db)

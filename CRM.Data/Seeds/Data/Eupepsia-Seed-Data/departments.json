@@ -1,0 +1,178 @@
+[
+  {
+    "name": "Administration & Management",
+    "code": "ADMINI",
+    "description": "Administration & Management department (grouping inferred from staff positions).",
+    "staffCount": 3,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "ICT",
+    "code": "ICT",
+    "description": "ICT department (grouping inferred from staff positions).",
+    "staffCount": 2,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Human Resources",
+    "code": "HUMANR",
+    "description": "Human Resources department (grouping inferred from staff positions).",
+    "staffCount": 1,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Business Development",
+    "code": "BUSINE",
+    "description": "Business Development department (grouping inferred from staff positions).",
+    "staffCount": 3,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Relationship & Communications",
+    "code": "RELATI",
+    "description": "Relationship & Communications department (grouping inferred from staff positions).",
+    "staffCount": 4,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Operations",
+    "code": "OPERAT",
+    "description": "Operations department (grouping inferred from staff positions).",
+    "staffCount": 19,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Agronomy",
+    "code": "AGRONO",
+    "description": "Agronomy department (grouping inferred from staff positions).",
+    "staffCount": 4,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Sales",
+    "code": "SALES",
+    "description": "Sales department (grouping inferred from staff positions).",
+    "staffCount": 7,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Finance & Audit",
+    "code": "FINANC",
+    "description": "Finance & Audit department (grouping inferred from staff positions).",
+    "staffCount": 1,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Quality Assurance",
+    "code": "QUALIT",
+    "description": "Quality Assurance department (grouping inferred from staff positions).",
+    "staffCount": 2,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  },
+  {
+    "name": "Crèche/Clinic",
+    "code": "CRCHEC",
+    "description": "Crèche/Clinic department (grouping inferred from staff positions).",
+    "staffCount": 1,
+    "budget": 0,
+    "projectsCount": 0,
+    "percentOfTotal": 0,
+    "created": {
+      "department_inferred": true,
+      "staffCount_computed": true,
+      "budget_missing": true,
+      "projectsCount_missing": true,
+      "percentOfTotal_missing": true
+    }
+  }
+]

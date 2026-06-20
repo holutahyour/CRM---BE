@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Main Store",
+    "type": "Warehouse",
+    "created": {
+      "type_inferred": false,
+      "location_default": true
+    }
+  },
+  {
+    "name": "Ibara Project",
+    "type": "Warehouse",
+    "created": {
+      "type_inferred": true,
+      "location_default": false
+    }
+  },
+  {
+    "name": "Lekki Shop",
+    "type": "RetailStore",
+    "created": {
+      "type_inferred": true,
+      "location_default": false
+    }
+  },
+  {
+    "name": "Owiwi",
+    "type": "Warehouse",
+    "created": {
+      "type_inferred": true,
+      "location_default": false
+    }
+  },
+  {
+    "name": "Engr Oyeniyi",
+    "type": "Warehouse",
+    "created": {
+      "type_inferred": true,
+      "location_default": false
+    }
+  }
+]

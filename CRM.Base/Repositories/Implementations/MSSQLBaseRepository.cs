@@ -106,6 +106,7 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
         }
 
         // ORDER
+        var ordered = false;
         if (!string.IsNullOrEmpty(orderBy))
         {
             var prop = typeof(T).GetProperty(orderBy, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
@@ -122,8 +123,15 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
                     query.Expression, Expression.Quote(orderByExp));
 
                 query = query.Provider.CreateQuery<T>(resultExp);
+                ordered = true;
             }
         }
+
+        // Pagination uses Skip/Take below, and split-query mode (set after the includes) REQUIRES a
+        // deterministic ordering — EF Core throws otherwise. When the caller didn't specify one, fall
+        // back to ordering by the primary key so paging is stable and split queries are valid.
+        if (!ordered)
+            query = query.OrderBy(e => e.Id);
 
         // INCLUDE nav props (up to 2 levels deep)
         var navigationProperties = typeof(T).GetProperties()
@@ -149,6 +157,14 @@ public abstract class MSSQLBaseRepository<T, I> : IMSSQLRepository<T, I>
                     query = query.Include($"{nav.Name}.{childNav.Name}");
             }
         }
+
+        // The dynamic includes above eager-load every navigation — including multiple *collection*
+        // navigations and their back-references (e.g. Item -> Transactions AND Item -> Category ->
+        // Category.Items). In a single SQL statement those collections form a cartesian product,
+        // which explodes to millions of rows on large tables (e.g. the seeded ~1,800 items / ~2,400
+        // transactions) and trips the command timeout, surfacing as an empty/failed list. Split the
+        // collection includes into separate queries to keep each result set bounded.
+        query = query.AsSplitQuery();
 
         // Total BEFORE pagination (note: search is applied in-memory below)
         var totalCount = await query.CountAsync();

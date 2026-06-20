@@ -24,19 +24,40 @@ public class Seeder
             _context.Tenants.Add(tenant);
             _context.SaveChanges();
 
-            // Seed default roles
-            var adminRole = new Role { TenantId = tenant.Id, Name = "Administrator", Code = "ADMIN", IsSystem = true };
-            var managerRole = new Role { TenantId = tenant.Id, Name = "Manager", Code = "MANAGER", IsSystem = true };
-            var staffRole = new Role { TenantId = tenant.Id, Name = "Staff", Code = "STAFF", IsSystem = true };
+            // Seed roles. The six documented Eupepsia access tiers (SUPER_ADMIN, ADMIN, MANAGER,
+            // MANAGER_ACCESS, DEPT_USER, ARTISAN) plus the pre-existing generic STAFF role.
+            var superAdminRole    = new Role { TenantId = tenant.Id, Name = "Super Administrator", Code = "SUPER_ADMIN", IsSystem = true };
+            var adminRole         = new Role { TenantId = tenant.Id, Name = "Administrator", Code = "ADMIN", IsSystem = true };
+            var managerRole       = new Role { TenantId = tenant.Id, Name = "Manager", Code = "MANAGER", IsSystem = true };
+            var managerAccessRole = new Role { TenantId = tenant.Id, Name = "Manager (Cross-Dept Access)", Code = "MANAGER_ACCESS", IsSystem = true };
+            var deptUserRole      = new Role { TenantId = tenant.Id, Name = "Department User", Code = "DEPT_USER", IsSystem = true };
+            var artisanRole       = new Role { TenantId = tenant.Id, Name = "User (Artisan)", Code = "ARTISAN", IsSystem = true };
+            var staffRole         = new Role { TenantId = tenant.Id, Name = "Staff", Code = "STAFF", IsSystem = true };
 
-            _context.Roles.AddRange([adminRole, managerRole, staffRole]);
+            _context.Roles.AddRange([superAdminRole, adminRole, managerRole, managerAccessRole, deptUserRole, artisanRole, staffRole]);
 
-            // Assign permissions to Admin
             var allPermissions = _context.Permissions.ToList();
-            foreach (var perm in allPermissions)
-                _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = adminRole.Id, PermissionId = perm.Id });
 
-            // Assign permissions to Manager
+            void Assign(Role role, IEnumerable<string> codes)
+            {
+                foreach (var code in codes.Distinct())
+                {
+                    var perm = allPermissions.FirstOrDefault(p => p.Code == code);
+                    if (perm != null)
+                        _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = role.Id, PermissionId = perm.Id });
+                }
+            }
+
+            // SUPER ADMIN — everything (incl. user/role/settings/module/menu management).
+            foreach (var perm in allPermissions)
+                _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = superAdminRole.Id, PermissionId = perm.Id });
+
+            // ADMIN — full operational visibility but NOT the admin-management actions reserved
+            // for SUPER ADMIN per the Role Allocation doc (onboarding users, settings, etc.).
+            // (CREATED boundary, flagged G-R4 in docs/IMPORT-NOTES.md.)
+            Assign(adminRole, allPermissions.Select(p => p.Code).Where(c => !AdminManagementPermissions.Contains(c)));
+
+            // MANAGER / MANAGER (ACCESS) — department oversight + first-level approvals.
             string[] managerPerms = [
                 Permissions.ItemsView, Permissions.ItemsCreate, Permissions.ItemsEdit,
                 Permissions.CategoriesView, Permissions.BatchesView,
@@ -45,34 +66,42 @@ public class Seeder
                 Permissions.SuppliersView, Permissions.SuppliersManage, Permissions.SuppliersPerformanceView,
                 Permissions.PurchaseOrdersView, Permissions.PurchaseOrdersCreate, Permissions.PurchaseOrdersApprove,
                 Permissions.SalesOrdersView, Permissions.SalesOrdersCreate, Permissions.SalesOrdersFulfill,
+                Permissions.RequisitionsView, Permissions.RequisitionsApprove,
+                Permissions.ItemRequestsView,
+                Permissions.IncidentsView, Permissions.IncidentsCreate, Permissions.IncidentsResolve,
+                Permissions.DepartmentsView, Permissions.MonthlyReportsView,
                 Permissions.ReportsView, Permissions.ReportsExport,
                 Permissions.UsersView
             ];
+            Assign(managerRole, managerPerms);
+            // MANAGER (ACCESS) carries the same permissions; the doc's "cross-departmental" scope
+            // is NOT enforced by the system today (flagged G-R3).
+            Assign(managerAccessRole, managerPerms);
 
-            foreach (var code in managerPerms)
-            {
-                var perm = allPermissions.FirstOrDefault(p => p.Code == code);
-                if (perm != null)
-                    _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = managerRole.Id, PermissionId = perm.Id });
-            }
+            // DEPARTMENT USER — standard own-department user; can raise requests/requisitions.
+            string[] deptUserPerms = [
+                Permissions.ItemsView, Permissions.CategoriesView, Permissions.BatchesView,
+                Permissions.StockView, Permissions.ScannerUse, Permissions.LocationsView,
+                Permissions.SalesOrdersView, Permissions.SalesOrdersCreate,
+                Permissions.RequisitionsView, Permissions.RequisitionsCreate,
+                Permissions.ItemRequestsView, Permissions.ItemRequestsCreate,
+                Permissions.IncidentsView, Permissions.IncidentsCreate
+            ];
+            Assign(deptUserRole, deptUserPerms);
 
-            // Assign permissions to Staff
+            // USER (ARTISAN) — minimal operational access for field/artisan staff.
+            string[] artisanPerms = [
+                Permissions.ItemsView, Permissions.StockView, Permissions.ItemRequestsCreate
+            ];
+            Assign(artisanRole, artisanPerms);
+
+            // STAFF — pre-existing generic limited role (kept for backwards compatibility).
             string[] staffPerms = [
-                Permissions.ItemsView,
-                Permissions.CategoriesView,
-                Permissions.BatchesView,
-                Permissions.StockView,
-                Permissions.ScannerUse,
-                Permissions.LocationsView,
+                Permissions.ItemsView, Permissions.CategoriesView, Permissions.BatchesView,
+                Permissions.StockView, Permissions.ScannerUse, Permissions.LocationsView,
                 Permissions.SalesOrdersView, Permissions.SalesOrdersCreate
             ];
-
-            foreach (var code in staffPerms)
-            {
-                var perm = allPermissions.FirstOrDefault(p => p.Code == code);
-                if (perm != null)
-                    _context.RolePermissions.Add(new RolePermission { TenantId = tenant.Id, RoleId = staffRole.Id, PermissionId = perm.Id });
-            }
+            Assign(staffRole, staffPerms);
 
             // Activate default modules
             var defaultModules = _context.Modules.Where(m => m.Code == "CORE" || m.Code == "INVENTORY");
@@ -82,9 +111,9 @@ public class Seeder
             _context.SaveChanges();
         }
 
-        // Always sync: ensure every Admin role has ALL current permissions.
-        // This handles new permissions added via migrations after the initial seeding
-        // (the block above only runs once, so this catch-all keeps Admin roles current).
+        // Always sync: keep SUPER_ADMIN/ADMIN role permissions current. This handles new
+        // permissions added via migrations after the initial seeding (the block above only
+        // runs once, so this catch-all keeps the high-privilege roles up to date).
         SyncAdminRolePermissions();
 
         //Core
@@ -143,11 +172,30 @@ public class Seeder
         }
 
         _context.SaveChanges();
+
+        // Operational + inventory data for Eupepsia / Soilless Farm Lab (idempotent, guarded).
+        // Departments are also exposed via POST /seed-operational-data and inventory via
+        // POST /seed-inventory-data, but running them here means --seed / dev-startup covers all.
+        new OperationalDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
+        new InventoryDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
     }
 
     /// <summary>
-    /// Idempotently ensures every Admin role has all permissions that currently exist in the
-    /// database. Safe to call on every startup — it only INSERTs missing links, never duplicates.
+    /// Admin-management permission codes that are reserved for SUPER_ADMIN and withheld from
+    /// ADMIN, per the Role Allocation document (only Super Admin/ICT onboards users, configures
+    /// settings, etc.). CREATED boundary — see docs/IMPORT-NOTES.md (G-R4).
+    /// </summary>
+    private static readonly HashSet<string> AdminManagementPermissions = new(StringComparer.OrdinalIgnoreCase)
+    {
+        Permissions.UsersManage, Permissions.RolesManage, Permissions.SettingsManage,
+        Permissions.ModulesManage, Permissions.MenusManage
+    };
+
+    /// <summary>
+    /// Idempotently keeps high-privilege roles current with the permission catalogue. Safe to
+    /// call on every startup — it only INSERTs missing links, never duplicates or removes.
+    /// SUPER_ADMIN receives every permission; ADMIN receives every permission EXCEPT the
+    /// admin-management set reserved for SUPER_ADMIN.
     /// </summary>
     private void SyncAdminRolePermissions()
     {
@@ -156,32 +204,38 @@ public class Seeder
             .Where(p => !p.IsDeleted)
             .ToList();
 
-        var adminRoles = _context.Roles
-            .IgnoreQueryFilters()
-            .Where(r => r.Code == "ADMIN" && !r.IsDeleted)
-            .ToList();
-
         bool changed = false;
 
-        foreach (var adminRole in adminRoles)
+        void Sync(string roleCode, List<Permission> targetPerms)
         {
-            var existingPermIds = _context.RolePermissions
+            var roles = _context.Roles
                 .IgnoreQueryFilters()
-                .Where(rp => rp.RoleId == adminRole.Id && !rp.IsDeleted)
-                .Select(rp => rp.PermissionId)
-                .ToHashSet();
+                .Where(r => r.Code == roleCode && !r.IsDeleted)
+                .ToList();
 
-            foreach (var perm in allPermissions.Where(p => !existingPermIds.Contains(p.Id)))
+            foreach (var role in roles)
             {
-                _context.RolePermissions.Add(new RolePermission
+                var existingPermIds = _context.RolePermissions
+                    .IgnoreQueryFilters()
+                    .Where(rp => rp.RoleId == role.Id && !rp.IsDeleted)
+                    .Select(rp => rp.PermissionId)
+                    .ToHashSet();
+
+                foreach (var perm in targetPerms.Where(p => !existingPermIds.Contains(p.Id)))
                 {
-                    TenantId = adminRole.TenantId,
-                    RoleId = adminRole.Id,
-                    PermissionId = perm.Id
-                });
-                changed = true;
+                    _context.RolePermissions.Add(new RolePermission
+                    {
+                        TenantId = role.TenantId,
+                        RoleId = role.Id,
+                        PermissionId = perm.Id
+                    });
+                    changed = true;
+                }
             }
         }
+
+        Sync("SUPER_ADMIN", allPermissions);
+        Sync("ADMIN", allPermissions.Where(p => !AdminManagementPermissions.Contains(p.Code)).ToList());
 
         if (changed)
             _context.SaveChanges();

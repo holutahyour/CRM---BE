@@ -45,6 +45,19 @@ public class ApprovalServiceTests
 
         db.WorkflowTemplates.Add(template);
 
+        // Seed the approver's User row. ApprovalRecord.ActionedByUser is a required relationship
+        // (FK = ActionedBy), so GetHistoryAsync's .Include(r => r.ActionedByUser) emits an INNER
+        // JOIN — without the actual User the approval record would be dropped from the results.
+        db.Users.Add(new User
+        {
+            Id = _userId,
+            EntraObjectId = $"entra-{_userId}",
+            Email = $"approver-{_userId}@test.local",
+            FirstName = "Test",
+            LastName = "Approver",
+            TenantId = _tenantId
+        });
+
         // Seed the approver's role so the service can verify authorization
         db.UserRoles.Add(new UserRole
         {
