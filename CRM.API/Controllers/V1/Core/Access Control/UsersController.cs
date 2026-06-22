@@ -43,7 +43,9 @@ public class UsersController : MSSQLBaseController<User, UserDTO, Guid>
         return await base.GetByIdAsync(id);
     }
 
-    [Authorize(Policy = "AdminOnly")]
+    // Any authenticated user may fetch their own profile — including newly provisioned,
+    // role-less users awaiting onboarding (who would otherwise be 403'd by AdminOnly).
+    [Authorize]
     [HttpGet]
     [Route("me")]
     public async Task<ActionResult> GetMeAsync()

@@ -178,6 +178,10 @@ public class Seeder
         // POST /seed-inventory-data, but running them here means --seed / dev-startup covers all.
         new OperationalDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
         new InventoryDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
+
+        // Approval workflow templates (Requisition + Item Request → Manager then Admin) per the
+        // Role Allocation document §5.1. Also exposed via POST /seed-workflow-data.
+        new WorkflowDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
     }
 
     /// <summary>

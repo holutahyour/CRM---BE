@@ -40,6 +40,8 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
                         context.User.FindFirst("phone")?.Value ?? "",
                 TenantId = tenantId,
                 IsActive = true,
+                Onboarded = false,
+                Status = CRM.Domain.Enums.UserStatus.NotOnboarded,
                 LastLoginAt = DateTime.UtcNow,
                 CreatedOn = DateTime.UtcNow
             };
@@ -50,7 +52,11 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
                 await db.SaveChangesAsync();
                 logger.LogInformation("JIT provisioned user {Email} for tenant {TenantId}", user.Email, tenantId);
 
-                await AssignAdminRoleAsync(user, db);
+                // Only the very first user to sign in bootstraps as Admin so the system isn't
+                // locked out. Every subsequent user is provisioned with no role and shows up in
+                // User Management as "Not Onboarded" for an administrator to assign roles / onboard.
+                if (isFirstUser)
+                    await AssignAdminRoleAsync(user, db);
             }
             catch (DbUpdateException)
             {
@@ -71,12 +77,6 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
                 user = existing;
                 logger.LogInformation("User {Oid} was provisioned by a concurrent request; reusing existing record.", oid);
             }
-
-            //// Auto-assign Admin role to the first system user
-            //if (isFirstUser)
-            //{
-            //    await AssignAdminRoleAsync(user, db);
-            //}
         }
         else
         {
@@ -87,12 +87,6 @@ public class UserProvisioningMiddleware(RequestDelegate next, ILogger<UserProvis
                 if (systemTenant != null)
                 {
                     user.TenantId = systemTenant.Id;
-                }
-
-                // Recovery: If user exists in System tenant but has no roles, assign Admin
-                if (!user.UserRoles.Any())
-                {
-                    await AssignAdminRoleAsync(user, db);
                 }
             }
 

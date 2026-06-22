@@ -112,6 +112,26 @@ MANAGER 30, MANAGER_ACCESS 30, DEPT_USER 14, ARTISAN 3, STAFF 8.
 - **Transaction type.** All receipts → `Purchase`; the 7 "Item Returned" rows → `Return`.
 - Dispatcher / receiver / comment text from each row is preserved in the transaction `Notes`.
 
+### Approval Workflow (§5.1 of the Role Allocation Document)
+The document specifies the approval flow, so it was configured (it is not invented): **MANAGER /
+MANAGER (ACCESS)** are the first approval layer for requisitions and item requests from their
+downliners ("no bypass"), escalating to the **higher administrative level (ADMIN)**. Seeded by
+`WorkflowDataSeeder` as **two active templates** (Requisition, Item Request) on the SYSTEM tenant,
+each with ordered steps **Department Manager (MANAGER) → Administrative Approval (ADMIN)**. Also
+re-runnable via `POST /seed-workflow-data`; idempotent (guarded on an existing active template per type).
+- **G-W1 — role-based, not per-downliner.** Routing is by role: any MANAGER-role user can approve a
+  Step-1 request; the document's *assigned/direct-downliner* manager is enforced only when a step's
+  `UserId` is pinned to a specific manager (the "line-manager option", set via Approval Workflows →
+  Edit Steps / `PUT /workflows/{id}/steps`). Dynamic "requester's own manager" routing via
+  `User.ManagerId` (column already exists) is a future enhancement, not built.
+- **G-W2 — MANAGER (ACCESS) cross-dept** authority equals MANAGER and is not department-scoped
+  (same limitation as G-R3); it is covered by the MANAGER step unless pinned separately.
+- **G-W3 — "higher administrative level" = ADMIN.** The doc names the level, not exact officers; mapped
+  to the `ADMIN` role (the org-wide "Covers Everyone" tier). SUPER ADMIN (I.C.T.) is intentionally
+  excluded — per §5.2 it handles onboarding/system management, not request approvals.
+- **G-W4 — no approver users yet.** Staff import is deferred (G-U1), so no MANAGER/ADMIN *users* exist
+  today; the templates are valid but won't route to real people until staff are onboarded.
+
 ---
 
 ## Re-running / reset

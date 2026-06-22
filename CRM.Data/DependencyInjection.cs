@@ -7,6 +7,7 @@
 
             services.AddScoped<OperationalDataSeeder>();
             services.AddScoped<InventoryDataSeeder>();
+            services.AddScoped<WorkflowDataSeeder>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
