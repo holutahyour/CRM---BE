@@ -18,15 +18,26 @@ namespace CRM.Data.Helpers
 
                 try
                 {
-                    var pending = dbContext.Database.GetPendingMigrations();
-                    if (pending.Any())
+                    // The migrations in this project are generated for SqlServer and cannot be
+                    // applied to SQLite. For local SQLite development we build the schema directly
+                    // from the model instead (same approach as the SQLite test harness).
+                    if (dbContext.Database.IsSqlite())
                     {
-                        dbContext.Database.Migrate();
-                        result.SetSuccess($"Applied {pending.Count()} migrations for {typeof(TContext).Name}.", "Migrations applied successfully.");
+                        dbContext.Database.EnsureCreated();
+                        result.SetSuccess($"Ensured SQLite schema for {typeof(TContext).Name}.", "SQLite schema created.");
                     }
                     else
                     {
-                        result.SetSuccess($"No pending migrations for {typeof(TContext).Name}.", "No migrations needed.");
+                        var pending = dbContext.Database.GetPendingMigrations();
+                        if (pending.Any())
+                        {
+                            dbContext.Database.Migrate();
+                            result.SetSuccess($"Applied {pending.Count()} migrations for {typeof(TContext).Name}.", "Migrations applied successfully.");
+                        }
+                        else
+                        {
+                            result.SetSuccess($"No pending migrations for {typeof(TContext).Name}.", "No migrations needed.");
+                        }
                     }
                 }
                 catch (Exception ex)

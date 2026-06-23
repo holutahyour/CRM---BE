@@ -74,6 +74,12 @@ namespace CRM.Service
             CreateMap<UpdateRoleRequest, Role>().ReverseMap();
             CreateMap<CreateRoleRequest, Role>().ReverseMap();
 
+            // Module catalog (super-admin CRUD via base service)
+            CreateMap<Module, ModuleDTO>()
+                .ForCtorParam("CategoryName",
+                    opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : null));
+            CreateMap<ModuleCatalogRequest, Module>().ReverseMap();
+
             //finance and revenue
             CreateMap<ParameterValue, ParameterValueResponse>().ReverseMap();
             CreateMap<UpdateParameterValueRequest, ParameterValue>().ReverseMap();

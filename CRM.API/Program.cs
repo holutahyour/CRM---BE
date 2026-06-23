@@ -94,7 +94,13 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("PurchaseOrderApprove", p => p.AddRequirements(new PermissionRequirement(Permissions.PurchaseOrdersApprove)))
     .AddPolicy("ReportsView", p => p.AddRequirements(new PermissionRequirement(Permissions.ReportsView)))
     .AddPolicy("WorkflowTemplatesView", p => p.AddRequirements(new PermissionRequirement(Permissions.WorkflowTemplatesView)))
-    .AddPolicy("WorkflowTemplatesManage", p => p.AddRequirements(new PermissionRequirement(Permissions.WorkflowTemplatesManage)));
+    .AddPolicy("WorkflowTemplatesManage", p => p.AddRequirements(new PermissionRequirement(Permissions.WorkflowTemplatesManage)))
+    .AddPolicy("SuperAdminOnly", p => p.AddRequirements(new PermissionRequirement(Permissions.SystemManage)))
+    .AddPolicy("AuditView", p => p.AddRequirements(new PermissionRequirement(Permissions.AuditView)))
+    .AddPolicy("RolesManage", p => p.AddRequirements(new PermissionRequirement(Permissions.RolesManage)))
+    .AddPolicy("ModulesView", p => p.AddRequirements(new PermissionRequirement(Permissions.ModulesView)))
+    .AddPolicy("ModulesManage", p => p.AddRequirements(new PermissionRequirement(Permissions.ModulesManage)))
+    .AddPolicy("MenusManage", p => p.AddRequirements(new PermissionRequirement(Permissions.MenusManage)));
 
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 

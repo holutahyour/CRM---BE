@@ -87,6 +87,9 @@ public static class Permissions
     public const string MenusView = "admin.menus.view";
     public const string MenusManage = "admin.menus.manage";
 
+    /// <summary>Super-admin: manage global catalogs (module catalog, menu tree) and cross-tenant views.</summary>
+    public const string SystemManage = "admin.system.manage";
+
     // Workflow Templates
     public const string WorkflowTemplatesView = "workflows.templates.view";
     public const string WorkflowTemplatesManage = "workflows.templates.manage";

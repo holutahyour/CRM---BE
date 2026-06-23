@@ -168,6 +168,7 @@ namespace CRM.Data
             MenuPermissionSeedData.Seed(modelBuilder);
             RoleSeedData.Seed(modelBuilder);
             RolePermissionSeedData.Seed(modelBuilder);
+            SuperAdminRoleSeedData.Seed(modelBuilder);
 
         }
 

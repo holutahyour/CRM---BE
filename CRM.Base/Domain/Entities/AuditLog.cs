@@ -22,4 +22,6 @@ public class AuditLog : BaseEntity<long>
     public string? NewValues { get; set; }    // New state of the entity
     public string IpAddress { get; set; } = string.Empty;    // IP address of the user
     public string? AdditionalInfo { get; set; }
+
+    public Guid? TenantId { get; set; }  // Tenant the action belongs to (null for system/cross-tenant actions)
 }

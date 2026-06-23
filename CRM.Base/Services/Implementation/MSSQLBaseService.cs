@@ -56,7 +56,8 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
                 Timestamp = DateTime.UtcNow,
                 OldValues = null,
                 NewValues = JsonSerializer.Serialize(entity, _jsonOptions),
-                IpAddress = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "Unknown"
+                IpAddress = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "Unknown",
+                TenantId = _httpContextAccessor.HttpContext?.Items["TenantId"] as Guid?
             };
 
             await _auditLogRepository.CreateAsync(auditLog);
@@ -197,7 +198,8 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
                     Timestamp = DateTime.UtcNow,
                     OldValues = oldValues,
                     NewValues = null,
-                    IpAddress = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "Unknown"
+                    IpAddress = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "Unknown",
+                    TenantId = _httpContextAccessor.HttpContext?.Items["TenantId"] as Guid?
                 };
 
                 await _auditLogRepository.CreateAsync(auditLog);
@@ -242,7 +244,8 @@ public abstract class MSSQLBaseService<TEntity, TId> : IMSSQLBaseService<TEntity
                 Timestamp = DateTime.UtcNow,
                 OldValues = oldValues,
                 NewValues = newValues,
-                IpAddress = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "Unknown"
+                IpAddress = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "Unknown",
+                TenantId = _httpContextAccessor.HttpContext?.Items["TenantId"] as Guid?
             };
 
             await _auditLogRepository.CreateAsync(auditLog);
