@@ -116,6 +116,7 @@ public static class MenuSeedData
     private static readonly Guid MenuDeptId = new Guid("f0f0f0f0-0f0f-0f0f-0f0f-f0f0f0f0f0f0");
     private static readonly Guid MenuAdmId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7");
     private static readonly Guid MenuApprovalWorkflowsId = new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1");
+    private static readonly Guid MenuOpsId = new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2");
 
     public static void Seed(ModelBuilder modelBuilder)
     {
@@ -130,8 +131,9 @@ public static class MenuSeedData
             new Menu { Id = MenuIncId, Name = "INCIDENT_REPORTS", Label = "Incident Reports", Icon = "alert-circle", Route = "/incident-reports", Position = 6, ModuleCode = ModuleCodes.Core },
             new Menu { Id = MenuUsrMgmtId, Name = "USER_MANAGEMENT", Label = "User Management", Icon = "users", Route = "/admin/users", Position = 7, ModuleCode = ModuleCodes.Core },
             new Menu { Id = MenuDeptId, Name = "DEPARTMENTS", Label = "Departments", Icon = "building-2", Route = "/departments", Position = 8, ModuleCode = ModuleCodes.Core },
-            new Menu { Id = MenuAdmId, Name = "ADMIN", Label = "Administration", Icon = "settings", Position = 9, ModuleCode = ModuleCodes.Core },
-            new Menu { Id = MenuApprovalWorkflowsId, Name = "APPROVAL_WORKFLOWS", Label = "Approval Workflows", Icon = "git-branch", Route = "/approval-workflows", Position = 10, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuOpsId, Name = "OPERATIONS", Label = "Operations", Icon = "home", Route = "/operations", Position = 9, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuAdmId, Name = "ADMIN", Label = "Administration", Icon = "settings", Position = 10, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuApprovalWorkflowsId, Name = "APPROVAL_WORKFLOWS", Label = "Approval Workflows", Icon = "git-branch", Route = "/approval-workflows", Position = 11, ModuleCode = ModuleCodes.Core },
 
             // Inventory children (unchanged)
             new Menu { Id = new Guid("b1b1b1b1-1b1b-1b1b-1b1b-b1b1b1b1b1b1"), Name = "INVENTORY_ITEMS", Label = "Items", Icon = "box", Route = "/inventory/items", ParentId = MenuInvId, Position = 0 },
@@ -208,6 +210,10 @@ public static class MenuPermissionSeedData
         AddMapping(new Guid("5f5f5f5f-5f5f-5f5f-5f5f-5f5f5f5f5f5f"), Permissions.AuditView);
         AddMapping(new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"), Permissions.MenusView);
         AddMapping(new Guid("6f6f6f6f-6f6f-6f6f-6f6f-6f6f6f6f6f6f"), Permissions.MenusManage);
+
+        // Operations
+        AddMapping(new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Permissions.OperationsView);
+        AddMapping(new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Permissions.OperationsManage);
 
         // Approval Workflows
         AddMapping(new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1"), Permissions.WorkflowTemplatesView);

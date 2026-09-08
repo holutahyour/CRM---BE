@@ -27,6 +27,10 @@ public static class Permissions
     public const string DepartmentsView = "departments.view";
     public const string DepartmentsManage = "departments.manage";
 
+    // Operations (facility management, processing, logistics)
+    public const string OperationsView = "operations.view";
+    public const string OperationsManage = "operations.manage";
+
     // Monthly Reports
     public const string MonthlyReportsView = "reports.monthly.view";
 
