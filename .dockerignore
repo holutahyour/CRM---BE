@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.git/
+**/.github/
+**/*.user
+**/*.db
+**/logs/
+build_output.txt
+docs/

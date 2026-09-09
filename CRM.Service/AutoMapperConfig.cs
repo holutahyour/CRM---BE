@@ -159,6 +159,19 @@ namespace CRM.Service
             CreateMap<Vendor, VendorResponse>().ReverseMap();
             CreateMap<CreateVendorRequest, Vendor>().ReverseMap();
             CreateMap<UpdateVendorRequest, Vendor>().ReverseMap();
+
+            // Sales (EPL Poultry)
+            CreateMap<SalesDailyProduction, SalesDailyProductionResponse>().ReverseMap();
+            CreateMap<CreateSalesDailyProductionRequest, SalesDailyProduction>().ReverseMap();
+
+            CreateMap<SalesRecord, SalesRecordResponse>().ReverseMap();
+            CreateMap<CreateSalesRecordRequest, SalesRecord>().ReverseMap();
+
+            CreateMap<SalesFeedCost, SalesFeedCostResponse>().ReverseMap();
+            CreateMap<CreateSalesFeedCostRequest, SalesFeedCost>().ReverseMap();
+
+            CreateMap<SalesStockRecord, SalesStockRecordResponse>().ReverseMap();
+            CreateMap<CreateSalesStockRecordRequest, SalesStockRecord>().ReverseMap();
         }
     }
 }

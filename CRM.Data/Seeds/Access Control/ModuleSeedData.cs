@@ -1,4 +1,4 @@
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace CRM.Data.Seeds.Access_Control;
@@ -117,6 +117,7 @@ public static class MenuSeedData
     private static readonly Guid MenuAdmId = new Guid("a7a7a7a7-7a7a-7a7a-7a7a-a7a7a7a7a7a7");
     private static readonly Guid MenuApprovalWorkflowsId = new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1");
     private static readonly Guid MenuOpsId = new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2");
+    private static readonly Guid MenuSalesId = new Guid("c3c3c3c3-3c3c-3c3c-3c3c-c3c3c3c3c3c3");
 
     public static void Seed(ModelBuilder modelBuilder)
     {
@@ -134,6 +135,7 @@ public static class MenuSeedData
             new Menu { Id = MenuOpsId, Name = "OPERATIONS", Label = "Operations", Icon = "home", Route = "/operations", Position = 9, ModuleCode = ModuleCodes.Core },
             new Menu { Id = MenuAdmId, Name = "ADMIN", Label = "Administration", Icon = "settings", Position = 10, ModuleCode = ModuleCodes.Core },
             new Menu { Id = MenuApprovalWorkflowsId, Name = "APPROVAL_WORKFLOWS", Label = "Approval Workflows", Icon = "git-branch", Route = "/approval-workflows", Position = 11, ModuleCode = ModuleCodes.Core },
+            new Menu { Id = MenuSalesId, Name = "SALES", Label = "Sales", Icon = "trending-up", Route = "/sales", Position = 12, ModuleCode = ModuleCodes.Core },
 
             // Inventory children (unchanged)
             new Menu { Id = new Guid("b1b1b1b1-1b1b-1b1b-1b1b-b1b1b1b1b1b1"), Name = "INVENTORY_ITEMS", Label = "Items", Icon = "box", Route = "/inventory/items", ParentId = MenuInvId, Position = 0 },
@@ -214,6 +216,10 @@ public static class MenuPermissionSeedData
         // Operations
         AddMapping(new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Permissions.OperationsView);
         AddMapping(new Guid("c2c2c2c2-2c2c-2c2c-2c2c-c2c2c2c2c2c2"), Permissions.OperationsManage);
+
+        // Sales Department
+        AddMapping(new Guid("c3c3c3c3-3c3c-3c3c-3c3c-c3c3c3c3c3c3"), Permissions.SalesDeptView);
+        AddMapping(new Guid("c3c3c3c3-3c3c-3c3c-3c3c-c3c3c3c3c3c3"), Permissions.SalesDeptManage);
 
         // Approval Workflows
         AddMapping(new Guid("c1c1c1c1-1c1c-1c1c-1c1c-c1c1c1c1c1c1"), Permissions.WorkflowTemplatesView);

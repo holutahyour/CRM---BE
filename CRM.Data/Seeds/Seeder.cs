@@ -1,4 +1,4 @@
-namespace CRM.Data.Seeds;
+﻿namespace CRM.Data.Seeds;
 
 public class Seeder
 {
@@ -111,6 +111,10 @@ public class Seeder
             _context.SaveChanges();
         }
 
+        // Collapse the Guid.Empty "global" HasData roles onto the real SYSTEM tenant before
+        // syncing permissions, so there is exactly one ADMIN / SUPER_ADMIN to sync and to resolve.
+        ReconcileGlobalRoles();
+
         // Always sync: keep SUPER_ADMIN/ADMIN role permissions current. This handles new
         // permissions added via migrations after the initial seeding (the block above only
         // runs once, so this catch-all keeps the high-privilege roles up to date).
@@ -182,6 +186,84 @@ public class Seeder
         // Approval workflow templates (Requisition + Item Request → Manager then Admin) per the
         // Role Allocation document §5.1. Also exposed via POST /seed-workflow-data.
         new WorkflowDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
+    }
+
+    /// <summary>
+    /// Collapses the two <c>HasData</c> "global" roles onto the SYSTEM tenant.
+    ///
+    /// The model pins ADMIN (<see cref="RoleSeedData.AdminRoleId"/>) and SUPER_ADMIN
+    /// (<see cref="SuperAdminRoleSeedData.SuperAdminRoleId"/>) to <c>TenantId = Guid.Empty</c> as a
+    /// stand-in for "the system tenant" — but no tenant with that id is ever created. <see cref="Intialize"/>
+    /// asks for <c>Id = Guid.Empty</c> and EF silently discards it: <c>BaseEntity.Id</c> is declared
+    /// <c>DatabaseGeneratedOption.Identity</c>, and Guid.Empty is the CLR default that EF reads as
+    /// "not set", so it generates a random id instead. The two seeded roles are therefore orphaned
+    /// under a non-existent tenant, and the block above adds a *second* ADMIN under the real tenant.
+    ///
+    /// That duplicate is the actual defect: UserProvisioningMiddleware resolves the admin role with
+    /// <c>Code == "ADMIN" &amp;&amp; (TenantId == user.TenantId || TenantId == Guid.Empty)</c> and an
+    /// unordered FirstOrDefault, so it can bind a user to the orphan. Role carries the global tenant
+    /// query filter, so that user's role then filters out and they silently end up with no permissions.
+    ///
+    /// Idempotent, and safe on databases that were already seeded: an orphan is re-pointed at the
+    /// SYSTEM tenant when the tenant owns no role with that code, otherwise it is retired and any user
+    /// assignments are moved onto the surviving tenant-owned role.
+    /// </summary>
+    public void ReconcileGlobalRoles()
+    {
+        var systemTenant = _context.Tenants.IgnoreQueryFilters().FirstOrDefault(t => t.Code == "SYSTEM");
+        if (systemTenant == null) return;
+
+        (Guid OrphanId, string Code)[] globalRoles =
+        [
+            (RoleSeedData.AdminRoleId, "ADMIN"),
+            (SuperAdminRoleSeedData.SuperAdminRoleId, "SUPER_ADMIN"),
+        ];
+
+        bool changed = false;
+
+        foreach (var (orphanId, code) in globalRoles)
+        {
+            var orphan = _context.Roles.IgnoreQueryFilters()
+                .FirstOrDefault(r => r.Id == orphanId && r.TenantId == Guid.Empty && !r.IsDeleted);
+            if (orphan == null) continue;
+
+            var owned = _context.Roles.IgnoreQueryFilters()
+                .FirstOrDefault(r => r.Code == code && r.TenantId == systemTenant.Id && !r.IsDeleted);
+
+            if (owned == null)
+            {
+                // Nothing else claims this code — adopt the seeded role into the SYSTEM tenant.
+                orphan.TenantId = systemTenant.Id;
+            }
+            else
+            {
+                // The tenant already owns a role with this code. Retire the orphan and carry its
+                // users over, skipping anyone who already holds the surviving role.
+                var holders = _context.UserRoles.IgnoreQueryFilters()
+                    .Where(ur => ur.RoleId == owned.Id && !ur.IsDeleted)
+                    .Select(ur => ur.UserId)
+                    .ToHashSet();
+
+                var stranded = _context.UserRoles.IgnoreQueryFilters()
+                    .Where(ur => ur.RoleId == orphan.Id && !ur.IsDeleted)
+                    .ToList();
+
+                foreach (var assignment in stranded)
+                {
+                    if (holders.Add(assignment.UserId))
+                        assignment.RoleId = owned.Id;
+                    else
+                        assignment.IsDeleted = true;
+                }
+
+                orphan.IsDeleted = true;
+            }
+
+            changed = true;
+        }
+
+        if (changed)
+            _context.SaveChanges();
     }
 
     /// <summary>

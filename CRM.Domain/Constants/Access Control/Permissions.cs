@@ -1,4 +1,4 @@
-namespace CRM.Domain.Constants;
+﻿namespace CRM.Domain.Constants;
 
 /// <summary>
 /// All fine-grained permission codes used throughout the system.
@@ -30,6 +30,10 @@ public static class Permissions
     // Operations (facility management, processing, logistics)
     public const string OperationsView = "operations.view";
     public const string OperationsManage = "operations.manage";
+
+    // Sales Department (EPL Poultry: production, sales, feed cost, stock)
+    public const string SalesDeptView = "sales.view";
+    public const string SalesDeptManage = "sales.manage";
 
     // Monthly Reports
     public const string MonthlyReportsView = "reports.monthly.view";

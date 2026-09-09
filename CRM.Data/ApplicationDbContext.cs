@@ -109,6 +109,12 @@ namespace CRM.Data
         public DbSet<SalesOrder> SalesOrders => Set<SalesOrder>();
         public DbSet<SalesOrderItem> SalesOrderItems => Set<SalesOrderItem>();
 
+        // Sales (EPL Poultry)
+        public DbSet<SalesDailyProduction> SalesDailyProductions => Set<SalesDailyProduction>();
+        public DbSet<SalesRecord> SalesRecords => Set<SalesRecord>();
+        public DbSet<SalesFeedCost> SalesFeedCosts => Set<SalesFeedCost>();
+        public DbSet<SalesStockRecord> SalesStockRecords => Set<SalesStockRecord>();
+
         //Parameter
         public DbSet<ParameterDefinition> ParameterDefinitions { get; set; }
         public DbSet<ParameterValue> ParameterValues { get; set; }

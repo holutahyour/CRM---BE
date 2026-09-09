@@ -54,6 +54,12 @@ public static class DependencyInjection
         //Orders
         services.AddScoped<IVendorService, VendorService>();
 
+        //Sales
+        services.AddScoped<ISalesDailyProductionService, SalesDailyProductionService>();
+        services.AddScoped<ISalesRecordService, SalesRecordService>();
+        services.AddScoped<ISalesFeedCostService, SalesFeedCostService>();
+        services.AddScoped<ISalesStockRecordService, SalesStockRecordService>();
+
 
         services.AddAutoMapper(mc =>
         {
