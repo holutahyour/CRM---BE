@@ -1,4 +1,4 @@
-using CRM.API.Infrastructure;
+﻿using CRM.API.Infrastructure;
 using CRM.API.Middleware;
 using CRM.Base.Domain.Common;
 using CRM.Data;
@@ -133,11 +133,21 @@ if (args.Contains("--seed"))
     return;
 }
 
-if (app.Environment.IsDevelopment())
+// Swagger is always on in Development. Anywhere else (the published Azure Web App
+// runs as Production) it is driven by `Swagger:Enabled`, which appsettings.json turns
+// on and the App Setting `Swagger__Enabled=false` can turn off without a redeploy.
+var swaggerEnabled = app.Environment.IsDevelopment()
+    || app.Configuration.GetValue("Swagger:Enabled", false);
+
+if (swaggerEnabled)
 {
     app.UseSwagger();
     app.UseSwaggerUI((c =>
     {
+        // Relative endpoint so the UI still resolves the document when the app is
+        // served behind a reverse proxy / path base (Azure App Service, containers).
+        c.SwaggerEndpoint("v1/swagger.json", "CRM v1");
+
         // Enable the "Authorize" button in the Swagger UI
         c.OAuthClientId("swagger");
         c.OAuthClientSecret("secret");
