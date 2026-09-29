@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Ginger",
+    "productCode": "SFL/002/GIG2/A10/0525/01",
+    "upc": "002",
+    "sku": "GIG2",
+    "rawMaterialId": "A10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 2
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Cray Fish",
+    "productCode": "SFL/003/CRG4/B10/0525/01",
+    "upc": "003",
+    "sku": "CRG4",
+    "rawMaterialId": "B10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 3
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Chilli Pepper",
+    "productCode": "SFL/004/CHG12/C10/0525/01",
+    "upc": "004",
+    "sku": "CHG12",
+    "rawMaterialId": "C10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 4
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Tumeric",
+    "productCode": "SFL/005/TUG6/D10/0525/01",
+    "upc": "005",
+    "sku": "TUG6",
+    "rawMaterialId": "D10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 5
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Iru (Dawadawa)",
+    "productCode": "SFL/006/IRG9/F10/0525/01",
+    "upc": "006",
+    "sku": "IRG9",
+    "rawMaterialId": "E10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 6
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Onion",
+    "productCode": "SFL/007/ONG10/I10/0525/01",
+    "upc": "007",
+    "sku": "ONG10",
+    "rawMaterialId": "F10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 7
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Cabbage",
+    "productCode": "SFL/008/CBG11/G10/0525/01",
+    "upc": "008",
+    "sku": "CBG11",
+    "rawMaterialId": "G10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 8
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Basil",
+    "productCode": "SFL/009/BAG10/H10/0525/01",
+    "upc": "009",
+    "sku": "BAG10",
+    "rawMaterialId": "H10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 9
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Ugu",
+    "productCode": "SFL/010/UGG8/I10/0525/01",
+    "upc": "010",
+    "sku": "UGG8",
+    "rawMaterialId": "I10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 10
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Carolina Reaper",
+    "productCode": "SFL/011/CAG13/0525/0001",
+    "upc": "011",
+    "sku": null,
+    "rawMaterialId": "J10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 11
+    },
+    "created": {
+      "name_recased": false
+    }
+  },
+  {
+    "name": "Catfish",
+    "productCode": "SFL/012/CTG13/J10/0525/01",
+    "upc": "012",
+    "sku": "CTG13",
+    "rawMaterialId": "H10",
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 12
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Tilapia",
+    "productCode": "SFL/013/TLG7/0525/0001",
+    "upc": null,
+    "sku": null,
+    "rawMaterialId": null,
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 13
+    },
+    "created": {
+      "name_recased": false
+    }
+  },
+  {
+    "name": "Soy Bean Chaff Powder",
+    "productCode": "SFL/014/SBG2/1125/001",
+    "upc": null,
+    "sku": null,
+    "rawMaterialId": null,
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 14
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Hering Fish",
+    "productCode": "SFL/015/HFG3/0326/001",
+    "upc": null,
+    "sku": null,
+    "rawMaterialId": null,
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 15
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Banana",
+    "productCode": "SFL/016/BAG10/0426/001",
+    "upc": null,
+    "sku": "BAG10",
+    "rawMaterialId": null,
+    "processingDuration": null,
+    "source": {
+      "sheet": "PRODUCT IDENTIFICATION",
+      "row": 16
+    },
+    "created": {
+      "name_recased": true
+    }
+  },
+  {
+    "name": "Pineapple",
+    "productCode": null,
+    "upc": null,
+    "sku": null,
+    "rawMaterialId": null,
+    "processingDuration": "12Hrs",
+    "source": {
+      "sheet": "PRODUCT DURATION"
+    },
+    "created": {
+      "name_recased": true,
+      "duration_only": true
+    }
+  }
+]

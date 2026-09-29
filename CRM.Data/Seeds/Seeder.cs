@@ -183,6 +183,10 @@ public class Seeder
         new OperationalDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
         new InventoryDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
 
+        // Operations → Processing reference data (Batch Production Scheduling workbook). Runs after the
+        // inventory import because it reuses some of its items. Also exposed via POST /seed-processing-data.
+        new ProcessingDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();
+
         // Approval workflow templates (Requisition + Item Request → Manager then Admin) per the
         // Role Allocation document §5.1. Also exposed via POST /seed-workflow-data.
         new WorkflowDataSeeder(_context).InitializeAsync().GetAwaiter().GetResult();

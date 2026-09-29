@@ -86,6 +86,7 @@ Controllers, services, entities, and DTOs are organized consistently into these 
 - **Inventory** — Categories, Items, Locations, ItemLocations, Batches, InventoryTransactions
 - **Orders** — Vendors, PurchaseOrders, SalesOrders
 - **Requisitions** — Activities, Incidents, ItemRequests, MonthlyReports, Requisitions, DashboardSummary
+- **Operations** — ProcessingProducts, OrderRequests, ProductionBatches, YieldEntries (`ops_` tables) and stock cards (`StockCardService`, a view over Inventory Items/Transactions in the `ProcessingCategories`). Services validate requests themselves (`ValidatedRecordService`) — nothing runs FluentValidation automatically in this API.
 
 ## CI/CD
 

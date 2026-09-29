@@ -7,6 +7,7 @@
 
             services.AddScoped<OperationalDataSeeder>();
             services.AddScoped<InventoryDataSeeder>();
+            services.AddScoped<ProcessingDataSeeder>();
             services.AddScoped<WorkflowDataSeeder>();
 
             // Provider is selectable per-environment via the "DatabaseProvider" config key.

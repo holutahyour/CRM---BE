@@ -1,0 +1,2935 @@
+[
+  {
+    "name": "Alligator Pepper",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "g",
+    "reuseSku": null,
+    "sourceNames": [
+      "ALLIGATOR PEPPER (G)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Black Pepper",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "BLACK PEPPER (KG)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Calabar Nugmeg",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "g",
+    "reuseSku": null,
+    "sourceNames": [
+      "CALABAR NUGMEG (G)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Chicken Powder",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "CHICKEN POWDER (KG)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Cloves",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "g",
+    "reuseSku": null,
+    "sourceNames": [
+      "CLOVES (G)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Date Powder",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "DATE POWDER (KG)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Maggi",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "MAGGI"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Parsley",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "g",
+    "reuseSku": null,
+    "sourceNames": [
+      "PARSLEY (G)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Pepper Soup",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "PEPPER SOUP"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Rosemary",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "g",
+    "reuseSku": null,
+    "sourceNames": [
+      "ROSEMARY (G)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Rosemary Powder",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "g",
+    "reuseSku": null,
+    "sourceNames": [
+      "ROSEMARY POWDER (G)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Uda",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "g",
+    "reuseSku": null,
+    "sourceNames": [
+      "UDA (G)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Yagi",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "YAGI (KG)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Yagi (In Big Bucket)",
+    "categoryName": "Processing – Ingredients",
+    "locationName": "Packaging Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "YAGI (IN BIG BUCKET) (KG)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (PACKAGING STORE)"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "200 cc Plastic Round Jar",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": "OTHR-0803",
+    "sourceNames": [
+      "200 CC PLASTIC ROUND JAR"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": false,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "reused_from": {
+        "sku": "OTHR-0803",
+        "name": "200 cc Plastic Round Jar",
+        "previousCategory": "Other Items",
+        "quantityOnHand": 5000.0,
+        "unitType": "pcs"
+      }
+    }
+  },
+  {
+    "name": "53 mm Black Cover",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "53 MM BLACK COVER"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Big Celo-Tape",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Big Celo-Tape"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_existing": [
+        "Big Celotape"
+      ]
+    }
+  },
+  {
+    "name": "Black Tin (With Inner Cover)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Black Tin  (With Inner Cover)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": true
+    }
+  },
+  {
+    "name": "Disposable Coverall (White)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Disposable Coverall (White)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Disposable Cutlery",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Disposable Cutlery"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Dovetee (Packaging Sacks)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "DOVETEE (Packaging Sacks)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Frigile Tape",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Frigile Tape"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_existing": [
+        "Fragile Tape"
+      ]
+    }
+  },
+  {
+    "name": "Glass Seasoning Pot (Centre Pull Spoon)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Glass Seasoning Pot (Centre Pull Spoon)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Hand Glove",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "HAND GLOVE"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_existing": [
+        "Hand Gloves"
+      ]
+    }
+  },
+  {
+    "name": "Ludo Bottle (Black)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "LUDO Bottle (Black)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Magnetic Stainless Steel Spice Tin",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Magnetic Stainless Steel Spice Tin"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Mini-Size Spice Jar with Perforated Golden Lids",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Mini-Size Spice Jar with Perforated Golden Lids"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Mini-Size Spice Jar with Wooden Lids"
+      ]
+    }
+  },
+  {
+    "name": "Mini-Size Spice Jar with Wooden Lids",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Mini-Size Spice Jar with Wooden Lids"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Mini-Size Spice Jar with Perforated Golden Lids",
+        "Spice Jar with wooden lid"
+      ]
+    }
+  },
+  {
+    "name": "Nose Mask",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": "OTHR-0748",
+    "sourceNames": [
+      "Nose Mask"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": false,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "reused_from": {
+        "sku": "OTHR-0748",
+        "name": "Nose Mask",
+        "previousCategory": "Other Items",
+        "quantityOnHand": 62.0,
+        "unitType": "pks"
+      }
+    }
+  },
+  {
+    "name": "Packaging Bottle With Paper Led (Big)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "PACKAGING BOTTLE WITH PAPER LED (BIG)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Packaging Bottle With Paper Led (Small)"
+      ]
+    }
+  },
+  {
+    "name": "Packaging Bottle With Paper Led (Small)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "PACKAGING BOTTLE WITH PAPER LED (SMALL)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Packaging Bottle With Paper Led (Big)",
+        "Packaging Bottle with Wooden Lid (Round Small)"
+      ]
+    }
+  },
+  {
+    "name": "Packaging Bottle with Wooden Lid (Round Small)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Packaging Bottle with Wooden Lid (Round Small)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Packaging Bottle with Wooden Lid (Round)",
+        "Packaging Bottle with Wooden Lid (Square Small)",
+        "Packaging Bottle with Wooden Lid and Spoon (Round Small & Big)"
+      ]
+    }
+  },
+  {
+    "name": "Packaging Bottle with Wooden Lid (Round)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Packaging Bottle with Wooden Lid (Round)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Packaging Bottle with Wooden Lid (Round Small)",
+        "Packaging Bottle with Wooden Lid (Square)",
+        "Packaging Bottle with Wooden Lid (Square Small)"
+      ]
+    }
+  },
+  {
+    "name": "Packaging Bottle with Wooden Lid (Square Small)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Packaging Bottle with Wooden Lid (Square Small)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Packaging Bottle with Wooden Lid (Square)",
+        "Packaging Bottle with Wooden Lid (Round Small)",
+        "Packaging Bottle with Wooden Lid (Round)"
+      ]
+    }
+  },
+  {
+    "name": "Packaging Bottle with Wooden Lid (Square)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Packaging Bottle with Wooden Lid (Square)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Packaging Bottle with Wooden Lid (Square Small)",
+        "Packaging Bottle with Wooden Lid (Round)",
+        "Packaging Bottle with Wooden Lid (Round Small)"
+      ]
+    }
+  },
+  {
+    "name": "Packaging Bottle with Wooden Lid and Spoon (Round Small & Big)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Packaging Bottle with Wooden Lid and Spoon (Round Small & Big)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Packaging Bottle with Wooden Lid (Round Small)"
+      ]
+    }
+  },
+  {
+    "name": "Packaging Glass Cylindrical Bottle with Glass Lids",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Packaging Glass Cylindrical Bottle with Glass Lids"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Paint Brush (Big)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Paint Brush (Big)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Paint Brush (Small)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Paint Brush (Small)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Paper Cylinder Spice Jar (Carton Colour)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Paper Cylinder Spice Jar (Carton Colour)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Paper Cylinder Spice Jar (Multi Colours)",
+        "Paper Cylinder Spice Jar (Green)"
+      ]
+    }
+  },
+  {
+    "name": "Paper Cylinder Spice Jar (Green)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Paper Cylinder Spice Jar (Green)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Paper Cylinder Spice Jar (Carton Colour)"
+      ]
+    }
+  },
+  {
+    "name": "Paper Cylinder Spice Jar (Multi Colours)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Paper Cylinder Spice Jar (Multi Colours)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Paper Cylinder Spice Jar (Carton Colour)"
+      ]
+    }
+  },
+  {
+    "name": "Paper Plate",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "PAPER PLATE"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Paper Tape",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": "OTHR-0341",
+    "sourceNames": [
+      "Paper Tape"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": false,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "reused_from": {
+        "sku": "OTHR-0341",
+        "name": "Paper Tape",
+        "previousCategory": "Other Items",
+        "quantityOnHand": 27.0,
+        "unitType": "pcs"
+      }
+    }
+  },
+  {
+    "name": "Plastic Square Jar (Coke Lid)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Plastic Square Jar (Coke Lid)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Plastic with Black Plastic Lid",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Plastic  with Black Plastic Lid"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": true
+    }
+  },
+  {
+    "name": "Plastic with Perforated Swivel Black Lid",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Plastic  with Perforated Swivel Black Lid"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": true
+    }
+  },
+  {
+    "name": "Plastic with Rubber Perforated Lids",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Plastic  with Rubber Perforated Lids"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": true
+    }
+  },
+  {
+    "name": "Polythene Pouch (10.2 x 15.2 inches)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "POLYTHENE POUCH (10.2 x 15.2 inches)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Polythene Pouch (8 x 12 inches)",
+        "Polythene Pouch (9.5 x 13 inches)",
+        "Polythene Pouch (5.5 x 9.5 inches)"
+      ]
+    }
+  },
+  {
+    "name": "Polythene Pouch (24 x 33mm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "POLYTHENE POUCH (24 x 33mm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Polythene Pouch (30 x 40 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Polythene Pouch (30 x 40 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "POLYTHENE POUCH (30 x 40 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Polythene Pouch (24 x 33mm)"
+      ]
+    }
+  },
+  {
+    "name": "Polythene Pouch (4.5 x 8.5 inches)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "POLYTHENE POUCH (4.5 x 8.5 inches)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Polythene Pouch (5.5 x 9.5 inches)",
+        "Polythene Pouch (9.5 x 13 inches)",
+        "Polythene Pouch (8 x 12 inches)"
+      ]
+    }
+  },
+  {
+    "name": "Polythene Pouch (5.5 x 9.5 inches)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "POLYTHENE POUCH (5.5 x 9.5 inches)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Polythene Pouch (4.5 x 8.5 inches)",
+        "Polythene Pouch (9.5 x 13 inches)",
+        "Polythene Pouch (8 x 12 inches)"
+      ]
+    }
+  },
+  {
+    "name": "Polythene Pouch (8 x 12 inches)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "POLYTHENE POUCH (8 x 12 inches)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Polythene Pouch (9.5 x 13 inches)",
+        "Polythene Pouch (10.2 x 15.2 inches)",
+        "Polythene Pouch (5.5 x 9.5 inches)"
+      ]
+    }
+  },
+  {
+    "name": "Polythene Pouch (9.5 x 13 inches)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "POLYTHENE POUCH (9.5 x 13 inches)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Polythene Pouch (8 x 12 inches)",
+        "Polythene Pouch (5.5 x 9.5 inches)",
+        "Polythene Pouch (4.5 x 8.5 inches)"
+      ]
+    }
+  },
+  {
+    "name": "Quantify Seasoning Pot with Green Lid",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Quantify Seasoning Pot with Green Lid"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Respirator",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Respirator"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Round Bottle with Wooden Lid",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Round Bottle with Wooden Lid"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Salt Dispenser (Different Colour)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Salt Dispenser (Different Colour)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Sample Bottles",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Sample Bottles"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Sewing Thread",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": "OTHR-0741",
+    "sourceNames": [
+      "Sewing Thread"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": false,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "reused_from": {
+        "sku": "OTHR-0741",
+        "name": "Sewing Thread",
+        "previousCategory": "Other Items",
+        "quantityOnHand": 25.0,
+        "unitType": "pks"
+      }
+    }
+  },
+  {
+    "name": "Sieve (Big)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Sieve (Big)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Sieve (Small)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Sieve (Small)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Soilless Apron",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Soilless Apron"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Spice Jar with Black Lids (Square)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Spice Jar with Black Lids (Square)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Spice Jar with Stainless Steel Swivel Lids (Round)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Spice Jar with Stainless Steel Swivel Lids (Round)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Spice Jar with Stainless Steel Swivel Lids (Square)"
+      ]
+    }
+  },
+  {
+    "name": "Spice Jar with Stainless Steel Swivel Lids (Square)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Spice Jar with Stainless Steel Swivel Lids (Square)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Spice Jar with Stainless Steel Swivel Lids (Round)"
+      ]
+    }
+  },
+  {
+    "name": "Spice Jar with wooden lid",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Spice Jar with wooden lid"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Mini-Size Spice Jar with Wooden Lids"
+      ]
+    }
+  },
+  {
+    "name": "Stackable Clear s",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Stackable Clear s"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": true
+    }
+  },
+  {
+    "name": "Stainless Steel Scoop Set (Spoon)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Stainless Steel Scoop Set (Spoon)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Tamper Proof Nylon",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": "OTHR-0842",
+    "sourceNames": [
+      "Tamper Proof Nylon"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": false,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "reused_from": {
+        "sku": "OTHR-0842",
+        "name": "Tamper Proof Nylon",
+        "previousCategory": "Other Items",
+        "quantityOnHand": 10.0,
+        "unitType": "packs"
+      }
+    }
+  },
+  {
+    "name": "Tea Bag (Small)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Tea Bag (Small)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Tea Bags (Big)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Tea Bags (Big)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "ToothPicks",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "ToothPicks"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_existing": [
+        "Tooth-pick"
+      ]
+    }
+  },
+  {
+    "name": "Unbranded Packaging Nylon (White) (Big)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Unbranded Packaging Nylon (White) (Big)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Unbranded Packaging Nylon (White) (small)",
+        "Unbranded Pakaging Nylon (wine colour)"
+      ]
+    }
+  },
+  {
+    "name": "Unbranded Packaging Nylon (White) (small)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Unbranded Packaging Nylon (White) (small)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Unbranded Packaging Nylon (White) (Big)",
+        "Unbranded Pakaging Nylon (wine colour)"
+      ]
+    }
+  },
+  {
+    "name": "Unbranded Pakaging Nylon (wine colour)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Unbranded Pakaging Nylon (wine colour)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Vacuum Sealable Bags (Rows)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE BAGS (ROWS)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (14 x 24 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH (14 x 24 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (15 x 25 cm)",
+        "Vacuum Sealable Polythene Pouch (17 x 25 cm)",
+        "Vacuum Sealable Polythene Pouch (30 x 40 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (15 x 25 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH (15 x 25 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (17 x 25 cm)",
+        "Vacuum Sealable Polythene Pouch (14 x 24 cm)",
+        "Vacuum Sealable Polythene Pouch (6 x 10 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (17 x 25 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH ( 17 x 25 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (15 x 25 cm)",
+        "Vacuum Sealable Polythene Pouch (14 x 24 cm)",
+        "Vacuum Sealable Polythene Pouch (25 x 30 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (20 x 30 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH (20 x 30 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (25 x 30 cm)",
+        "Vacuum Sealable Polythene Pouch (30 x 40 cm)",
+        "Vacuum Sealable Polythene Pouch (28 x 40 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (24 x 33 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH (24 x 33 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (20 x 30 cm)",
+        "Vacuum Sealable Polythene Pouch (25 x 30 cm)",
+        "Vacuum Sealable Polythene Pouch (28 x 40 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (25 x 30 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH ( 25 x 30 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (20 x 30 cm)",
+        "Vacuum Sealable Polythene Pouch (28 x 40 cm)",
+        "Vacuum Sealable Polythene Pouch (24 x 33 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (28 x 40 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH (28 x 40 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (30 x 40 cm)",
+        "Vacuum Sealable Polythene Pouch (20 x 30 cm)",
+        "Vacuum Sealable Polythene Pouch (25 x 30 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (30 x 40 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH (30 x 40 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (28 x 40 cm)",
+        "Vacuum Sealable Polythene Pouch (20 x 30 cm)",
+        "Vacuum Sealable Polythene Pouch (6 x 10 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Vacuum Sealable Polythene Pouch (6 x 10 cm)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "VACUUM SEALABLE POLYTHENE POUCH (6 x 10 cm)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Vacuum Sealable Polythene Pouch (30 x 40 cm)",
+        "Vacuum Sealable Polythene Pouch (28 x 40 cm)",
+        "Vacuum Sealable Polythene Pouch (20 x 30 cm)"
+      ]
+    }
+  },
+  {
+    "name": "Wooden Scoop Set (Spoon)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Wooden Scoop Set (Spoon)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Wooden Spoon",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Wooden Spoon"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Ziplock (Big)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Ziplock (Big)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_existing": [
+        "Ziplock Bag (Big)"
+      ]
+    }
+  },
+  {
+    "name": "Ziplock(Medium)",
+    "categoryName": "Processing – Packaging & Supplies",
+    "locationName": "Packaging Store",
+    "unitType": "pcs",
+    "reuseSku": null,
+    "sourceNames": [
+      "Ziplock(Medium)"
+    ],
+    "source": {
+      "sheets": [
+        "OTHER MATERIALS INVENTORY"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": true,
+      "name_looks_damaged_in_source": false,
+      "near_miss_existing": [
+        "Ziplock Bag (Medium)"
+      ]
+    }
+  },
+  {
+    "name": "Beans",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": "OTHR-0241",
+    "sourceNames": [
+      "Beans",
+      "BEANS"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials",
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": false,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "reused_from": {
+        "sku": "OTHR-0241",
+        "name": "Beans",
+        "previousCategory": "Other Items",
+        "quantityOnHand": 25.0,
+        "unitType": "kg"
+      }
+    }
+  },
+  {
+    "name": "Bell Pepper",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "BELL PEPPER"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Bitter Leaf",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "BITTER LEAF"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Chilli",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "CHILLI"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Chilli Pepper",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Chilli Pepper"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Crayfish",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": "OTHR-0400",
+    "sourceNames": [
+      "Crayfish",
+      "Cray Fish"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": false,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "alias_merged": "CRAY FISH",
+      "reused_from": {
+        "sku": "OTHR-0400",
+        "name": "Crayfish",
+        "previousCategory": "Other Items",
+        "quantityOnHand": 40.0,
+        "unitType": "pcs"
+      }
+    }
+  },
+  {
+    "name": "Ewedu",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "EWEDU"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Fresh Habanero",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Fresh Habanero (KG)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Red Habanero"
+      ]
+    }
+  },
+  {
+    "name": "Fufu",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "FUFU"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Garlic",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Garlic"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Garri",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": "OTHR-0242",
+    "sourceNames": [
+      "Garri"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": false,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "reused_from": {
+        "sku": "OTHR-0242",
+        "name": "Garri",
+        "previousCategory": "Other Items",
+        "quantityOnHand": 50.0,
+        "unitType": "kg"
+      }
+    }
+  },
+  {
+    "name": "Ginger",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Ginger",
+      "GINGER"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials",
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Green Habanero",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "GREEN HABANERO"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Red Habanero"
+      ]
+    }
+  },
+  {
+    "name": "Hibiscus Flower",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "bags",
+    "reuseSku": null,
+    "sourceNames": [
+      "HIBISCUS Flower (Bags)",
+      "HIBISCUS FLOWER"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials",
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": false,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "ambiguous_existing": [
+        {
+          "sku": "ELEC-0081",
+          "name": "Hibiscus Flower",
+          "category": "Electricals"
+        },
+        {
+          "sku": "OTHR-0528",
+          "name": "Hibiscus Flower",
+          "category": "Other Items"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Locust beans",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Locust beans",
+      "Locust Bean"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "alias_merged": "LOCUST BEAN"
+    }
+  },
+  {
+    "name": "Moringa Leaf",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "MORINGA LEAF"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Onion",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Onion",
+      "ONION"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials",
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "near_miss_existing": [
+        "Onions"
+      ]
+    }
+  },
+  {
+    "name": "Pap",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "PAP"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Pepper (tatashe)",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Pepper (tatashe)"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Red Habanero",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "RED HABANERO"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Green Habanero",
+        "Fresh Habanero"
+      ]
+    }
+  },
+  {
+    "name": "Scent Leaf",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "SCENT LEAF"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Shombo",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "SHOMBO"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Soko",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "SOKO"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Tatase",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Tatase"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Tatashe"
+      ]
+    }
+  },
+  {
+    "name": "Tatashe",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "TATASHE"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false,
+      "near_miss_workbook": [
+        "Tatase"
+      ]
+    }
+  },
+  {
+    "name": "Tete",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "TETE"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Tomato",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "TOMATO"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Turmeric",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "Turmeric",
+      "TURMERIC"
+    ],
+    "source": {
+      "sheets": [
+        "RAW MATERIALS (WAREHOUSECOLDROO",
+        "2026 Raw Materials",
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": false,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  },
+  {
+    "name": "Ugu",
+    "categoryName": "Processing – Raw Produce",
+    "locationName": "Main Store",
+    "unitType": "kg",
+    "reuseSku": null,
+    "sourceNames": [
+      "UGU"
+    ],
+    "source": {
+      "sheets": [
+        "PROCESSING ACTIVITIES",
+        "2026 Processing Activities"
+      ]
+    },
+    "created": {
+      "name_recased": true,
+      "unit_defaulted": true,
+      "sku_generated": true,
+      "location_assigned": false,
+      "name_looks_damaged_in_source": false
+    }
+  }
+]

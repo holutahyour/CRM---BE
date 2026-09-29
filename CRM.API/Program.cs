@@ -100,7 +100,9 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("RolesManage", p => p.AddRequirements(new PermissionRequirement(Permissions.RolesManage)))
     .AddPolicy("ModulesView", p => p.AddRequirements(new PermissionRequirement(Permissions.ModulesView)))
     .AddPolicy("ModulesManage", p => p.AddRequirements(new PermissionRequirement(Permissions.ModulesManage)))
-    .AddPolicy("MenusManage", p => p.AddRequirements(new PermissionRequirement(Permissions.MenusManage)));
+    .AddPolicy("MenusManage", p => p.AddRequirements(new PermissionRequirement(Permissions.MenusManage)))
+    .AddPolicy("OperationsView", p => p.AddRequirements(new PermissionRequirement(Permissions.OperationsView)))
+    .AddPolicy("OperationsManage", p => p.AddRequirements(new PermissionRequirement(Permissions.OperationsManage)));
 
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 

@@ -172,6 +172,20 @@ namespace CRM.Service
 
             CreateMap<SalesStockRecord, SalesStockRecordResponse>().ReverseMap();
             CreateMap<CreateSalesStockRecordRequest, SalesStockRecord>().ReverseMap();
+
+            // Operations → Processing. Create requests double as update bodies, so they map onto
+            // an existing entity without touching its Id or tenant.
+            CreateMap<ProcessingProduct, ProcessingProductResponse>();
+            CreateMap<CreateProcessingProductRequest, ProcessingProduct>();
+
+            CreateMap<OrderRequest, OrderRequestResponse>();
+            CreateMap<CreateOrderRequestRequest, OrderRequest>();
+
+            CreateMap<ProductionBatch, ProductionBatchResponse>();
+            CreateMap<CreateProductionBatchRequest, ProductionBatch>();
+
+            CreateMap<YieldEntry, YieldEntryResponse>();
+            CreateMap<CreateYieldEntryRequest, YieldEntry>();
         }
     }
 }

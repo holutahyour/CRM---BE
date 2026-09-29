@@ -9,12 +9,14 @@ public class SeedersController : ControllerBase
     private readonly OperationalDataSeeder _service;
     private readonly InventoryDataSeeder _inventorySeeder;
     private readonly WorkflowDataSeeder _workflowSeeder;
+    private readonly ProcessingDataSeeder _processingSeeder;
 
-    public SeedersController(OperationalDataSeeder service, InventoryDataSeeder inventorySeeder, WorkflowDataSeeder workflowSeeder)
+    public SeedersController(OperationalDataSeeder service, InventoryDataSeeder inventorySeeder, WorkflowDataSeeder workflowSeeder, ProcessingDataSeeder processingSeeder)
     {
         _service = service;
         _inventorySeeder = inventorySeeder;
         _workflowSeeder = workflowSeeder;
+        _processingSeeder = processingSeeder;
     }
 
     [HttpPost("seed-operational-data")]
@@ -37,6 +39,14 @@ public class SeedersController : ControllerBase
     public async Task<ActionResult> SeedWorkflowData()
     {
         var summary = await _workflowSeeder.InitializeAsync();
+
+        return Ok(summary);
+    }
+
+    [HttpPost("seed-processing-data")]
+    public async Task<ActionResult> SeedProcessingData()
+    {
+        var summary = await _processingSeeder.InitializeAsync();
 
         return Ok(summary);
     }

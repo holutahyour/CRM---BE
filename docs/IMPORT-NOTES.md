@@ -132,6 +132,61 @@ re-runnable via `POST /seed-workflow-data`; idempotent (guarded on an existing a
 - **G-W4 — no approver users yet.** Staff import is deferred (G-U1), so no MANAGER/ADMIN *users* exist
   today; the templates are valid but won't route to real people until staff are onboarded.
 
+### Operations → Processing — Batch Production Scheduling workbook
+
+Source: `𝐁𝐀𝐓𝐂𝐇 𝐏𝐑𝐎𝐃𝐔𝐂𝐓𝐈𝐎𝐍 𝐒𝐂𝐇𝐄𝐃𝐔𝐋𝐈𝐍𝐆 (1).xlsx` (11 sheets). Extracted by `tools/import/extract_processing.py`
+→ `CRM.Data/Seeds/Data/Eupepsia-Seed-Data/processing/{materials,products}.json` → `ProcessingDataSeeder`
+(also `POST /seed-processing-data`). **Reference data only** — the workbook's historical order requests,
+batches, yield rows and stock-card movements were deliberately *not* imported (customer decision); the
+workbook remains the record of those.
+
+**Loaded:** 120 materials as Inventory items (14 Processing – Ingredients, 77 Processing – Packaging & Supplies, 29 Processing – Raw Produce),
+16 products (`ops_products`), 1 new location (**Packaging Store**, type PackingArea), 3 new categories.
+
+- **P-1 — Warehouse/Cold Room = existing "Main Store".** Customer decision. Raw produce stock cards post there.
+- **P-2 — Packaging Store holds two sheets.** "RAW MATERIALS (PACKAGING STORE)" (spices/ingredients → *Processing – Ingredients*)
+  and "OTHER MATERIALS INVENTORY" (→ *Processing – Packaging & Supplies*). The second sheet names no location; placing it in
+  the Packaging Store is **assumed**. It also holds PPE and small tools (Hand Glove, Nose Mask, Respirator, Sieves,
+  Paint Brushes, Soilless Apron…), hence "& Supplies" in the category name.
+- **P-3 — Reused existing items (8).** Exact name match (case/space-insensitive) to exactly one item from the
+  SHIPMENTS RECEIVED CARD import. The item is **moved into its Processing category** and keeps its SKU, unit and stock:
+  - 200 cc Plastic Round Jar → `OTHR-0803` "200 cc Plastic Round Jar" (was *Other Items*, 5000 pcs on hand)
+  - Nose Mask → `OTHR-0748` "Nose Mask" (was *Other Items*, 62 pks on hand)
+  - Paper Tape → `OTHR-0341` "Paper Tape" (was *Other Items*, 27 pcs on hand)
+  - Sewing Thread → `OTHR-0741` "Sewing Thread" (was *Other Items*, 25 pks on hand)
+  - Tamper Proof Nylon → `OTHR-0842` "Tamper Proof Nylon" (was *Other Items*, 10 packs on hand)
+  - Beans → `OTHR-0241` "Beans" (was *Other Items*, 25 kg on hand)
+  - Crayfish → `OTHR-0400` "Crayfish" (was *Other Items*, 40 pcs on hand)
+  - Garri → `OTHR-0242` "Garri" (was *Other Items*, 50 kg on hand)
+  Units are the existing item's, so a stock card may count in the old unit (Crayfish in pcs, Nose Mask in pks).
+- **P-4 — Ambiguous, NOT reused (1).** Several existing items share the name, so a new item was created instead:
+  - Hibiscus Flower — candidates: `ELEC-0081` (Electricals); `OTHR-0528` (Other Items)
+    → If one of these *is* the processing stock, merge by hand and remove the new PROC item.
+- **P-5 — Near-misses NOT merged (7).** Similar to an existing item but not the same name; created new:
+  - Big Celo-Tape ≈ "Big Celotape"
+  - Frigile Tape ≈ "Fragile Tape"
+  - Hand Glove ≈ "Hand Gloves"
+  - ToothPicks ≈ "Tooth-pick"
+  - Ziplock (Big) ≈ "Ziplock Bag (Big)"
+  - Ziplock(Medium) ≈ "Ziplock Bag (Medium)"
+  - Onion ≈ "Onions"
+- **P-6 — Spelling variants merged (ALIASES).** "Cray Fish" → **Crayfish**; "Locust Bean" → **Locust beans**.
+- **P-7 — Similar produce kept separate.** Each appears as its own column block / stock card in the workbook, so they were
+  not merged — confirm which are the same produce: Fresh / Green / Red Habanero; Tatase / Tatashe /
+  Pepper (tatashe); Chilli / Chilli Pepper. Merging later = move stock onto one item, then retire the other.
+- **P-8 — Names re-cased (56).** ALL-CAPS words were title-cased for display (e.g. "POLYTHENE POUCH (8 x 12 inches)"
+  → "Polythene Pouch (8 x 12 inches)"; "200 CC" → "200 cc"). Spelling kept as written ("Nugmeg", "Yagi", "Frigile", "Pakaging", "Led").
+- **P-9 — Names that look damaged in the source (5), kept verbatim:** "Black Tin  (With Inner Cover)"; "Plastic  with Black Plastic Lid"; "Plastic  with Perforated Swivel Black Lid"; "Plastic  with Rubber Perforated Lids"; "Stackable Clear s".
+  The double space / trailing "s" suggests a word was lost (e.g. "Plastic [Jar] with…", "Stackable Clear [Jar]s").
+- **P-10 — Units.** Taken from the header where given ("(KG)" → kg, "(G)" → g, "(Bags)" → bags). Otherwise **defaulted** (106):
+  kg for produce and ingredients, pcs for packaging & supplies.
+- **P-11 — Generated SKUs.** New items get `PROC-0001`… in seed order (Code = SKU).
+- **P-12 — Products.** 15 rows of PRODUCT IDENTIFICATION with code/UPC/SKU/raw-material ID verbatim (blank where blank —
+  e.g. Tilapia, Soy Bean Chaff Powder, Hering Fish have only a product code). PRODUCT DURATION holds one value (Pineapple,
+  "12Hrs"), which has no identification row, so **Pineapple was added as a product with only a duration**. Names re-cased;
+  "Cray Fish", "Tumeric", "Hering Fish" kept as spelled on the sheet.
+- **P-13 — Status list.** The "Dropdown keys" sheet's seven statuses are the `ProcessingStatus` enum (code, not data).
+
 ---
 
 ## Re-running / reset
@@ -139,3 +194,6 @@ re-runnable via `POST /seed-workflow-data`; idempotent (guarded on an existing a
   (recreates schema + static seeds), then the seeders run on startup or via the seed endpoints.
 - All seeders are idempotent: they guard on existing SYSTEM-tenant rows
   (`IgnoreQueryFilters().AnyAsync(x => x.TenantId == tenantId)`) so re-running does not duplicate.
+- `ProcessingDataSeeder` matches by name instead (a material already in a Processing category, a product already
+  in `ops_products`), so it can also run after items were added by hand. Regenerate its JSON with
+  `python tools/import/extract_processing.py` (reads the workbook from `~/Downloads`, or `SRC_XLSX`).

@@ -35,6 +35,10 @@ public static class EupepsiaSeedData
     public static List<LocationSeed> Locations() => Load<List<LocationSeed>>("locations.json");
     public static List<ItemSeed> Items() => Load<List<ItemSeed>>("items.json");
     public static List<TransactionSeed> Transactions() => Load<List<TransactionSeed>>("inventory-transactions.json");
+
+    // Operations → Processing reference data (tools/import/extract_processing.py)
+    public static List<ProcessingMaterialSeed> ProcessingMaterials() => Load<List<ProcessingMaterialSeed>>("processing.materials.json");
+    public static List<ProcessingProductSeed> ProcessingProducts() => Load<List<ProcessingProductSeed>>("processing.products.json");
 }
 
 // Staging DTOs — only the concrete fields the seeders need (the `created`/`source` audit
@@ -43,4 +47,6 @@ public record DepartmentSeed(string Name, string Code, string Description, int S
 public record CategorySeed(string Name, string Description);
 public record LocationSeed(string Name, string Type);
 public record ItemSeed(string Sku, string Name, string CategoryName, string UnitType, decimal QuantityOnHand);
+public record ProcessingMaterialSeed(string Name, string CategoryName, string LocationName, string UnitType, string? ReuseSku);
+public record ProcessingProductSeed(string Name, string? ProductCode, string? Upc, string? Sku, string? RawMaterialId, string? ProcessingDuration);
 public record TransactionSeed(string ItemSku, string CategoryName, string LocationName, string TransactionType, decimal Quantity, string RawQuantity, string? TransactionDate, string Notes, string SourceSheet);

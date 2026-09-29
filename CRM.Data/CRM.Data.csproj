@@ -19,6 +19,8 @@
   <ItemGroup>
     <!-- Eupepsia / Soilless Farm Lab staging data produced by tools/import/extract.py -->
     <EmbeddedResource Include="Seeds\Data\Eupepsia-Seed-Data\*.json" />
+    <!-- Operations → Processing reference data produced by tools/import/extract_processing.py -->
+    <EmbeddedResource Include="Seeds\Data\Eupepsia-Seed-Data\processing\*.json" />
   </ItemGroup>
 
   <ItemGroup>

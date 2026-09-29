@@ -60,6 +60,13 @@ public static class DependencyInjection
         services.AddScoped<ISalesFeedCostService, SalesFeedCostService>();
         services.AddScoped<ISalesStockRecordService, SalesStockRecordService>();
 
+        //Operations → Processing
+        services.AddScoped<IProcessingProductService, ProcessingProductService>();
+        services.AddScoped<IOrderRequestService, OrderRequestService>();
+        services.AddScoped<IProductionBatchService, ProductionBatchService>();
+        services.AddScoped<IYieldEntryService, YieldEntryService>();
+        services.AddScoped<IStockCardService, StockCardService>();
+
 
         services.AddAutoMapper(mc =>
         {
