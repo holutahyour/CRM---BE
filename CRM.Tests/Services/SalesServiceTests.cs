@@ -218,4 +218,152 @@ public class SalesServiceTests
 
         (await sqlite.Context.Set<SalesStockRecord>().CountAsync()).Should().Be(1);
     }
+
+    // ── Fresh Produce ────────────────────────────────────────────────────────
+
+    private static ProducePackhouseIntakeService BuildIntakeService(ApplicationDbContext db) => new(
+        new MSSQLRepository<ProducePackhouseIntake, Guid>(db),
+        new MSSQLRepository<AuditLog, long>(db),
+        db,
+        BuildMapper(),
+        new Mock<IHttpContextAccessor>().Object);
+
+    private static ProduceSaleService BuildProduceSaleService(ApplicationDbContext db) => new(
+        new MSSQLRepository<ProduceSale, Guid>(db),
+        new MSSQLRepository<AuditLog, long>(db),
+        db,
+        BuildMapper(),
+        new Mock<IHttpContextAccessor>().Object);
+
+    private static ProduceWeeklySummaryService BuildWeeklyService(ApplicationDbContext db) => new(
+        new MSSQLRepository<ProduceWeeklySummary, Guid>(db),
+        new MSSQLRepository<AuditLog, long>(db),
+        db,
+        BuildMapper(),
+        new Mock<IHttpContextAccessor>().Object);
+
+    private static CreateProduceSaleRequest AProduceSale(string customer = "Abuja Supermart") => new()
+    {
+        Date = new DateOnly(2026, 6, 1),
+        Customer = customer,
+        Location = "Abuja",
+        ProduceType = "Habanero",
+        Grade = "Grade A",
+        Category = "Habanero",
+        Quantity = 80.5m,
+        PricePerKg = 2500,
+        Paid = 200000,
+        ModeOfPayment = "Transfer",
+        PaymentStatus = "Fully Paid",
+    };
+
+    [Fact]
+    public async Task Creating_a_packhouse_intake_persists_every_field()
+    {
+        using var sqlite = SqliteTestDb.Create(_tenantA);
+        var service = BuildIntakeService(sqlite.Context);
+
+        var created = await service
+            .CreateAsync<ProducePackhouseIntakeResponse, CreateProducePackhouseIntakeRequest>(new()
+            {
+                Date = new DateOnly(2026, 6, 1),
+                ProduceType = "Habanero",
+                GradeA = 150.25m,
+                GradeB = 100,
+                GradeC = 50,
+                Rejected = 20,
+                QuantityHarvested = 320.25m,
+                Remarks = "Morning harvest",
+            });
+
+        created.IsSuccess.Should().BeTrue(created.ErrorMessage);
+        created.Content.Id.Should().NotBeEmpty();
+        created.Content.ProduceType.Should().Be("Habanero");
+        created.Content.GradeA.Should().Be(150.25m);
+        created.Content.GradeB.Should().Be(100);
+        created.Content.GradeC.Should().Be(50);
+        created.Content.Rejected.Should().Be(20);
+        created.Content.QuantityHarvested.Should().Be(320.25m);
+        created.Content.Remarks.Should().Be("Morning harvest");
+
+        var stored = await sqlite.Context.Set<ProducePackhouseIntake>().SingleAsync();
+        stored.TenantId.Should().Be(_tenantA);
+    }
+
+    [Fact]
+    public async Task Creating_a_produce_sale_persists_every_field()
+    {
+        using var sqlite = SqliteTestDb.Create(_tenantA);
+        var service = BuildProduceSaleService(sqlite.Context);
+
+        var created = await service.CreateAsync<ProduceSaleResponse, CreateProduceSaleRequest>(AProduceSale());
+
+        created.IsSuccess.Should().BeTrue(created.ErrorMessage);
+        created.Content.Id.Should().NotBeEmpty();
+        created.Content.Date.Should().Be(new DateOnly(2026, 6, 1));
+        created.Content.Customer.Should().Be("Abuja Supermart");
+        created.Content.Location.Should().Be("Abuja");
+        created.Content.ProduceType.Should().Be("Habanero");
+        created.Content.Grade.Should().Be("Grade A");
+        created.Content.Category.Should().Be("Habanero");
+        created.Content.Quantity.Should().Be(80.5m);
+        created.Content.PricePerKg.Should().Be(2500);
+        created.Content.Paid.Should().Be(200000);
+        created.Content.ModeOfPayment.Should().Be("Transfer");
+        created.Content.PaymentStatus.Should().Be("Fully Paid");
+
+        var listed = await service.GetAllAsync<ProduceSaleResponse>();
+        listed.Content.Should().ContainSingle();
+    }
+
+    [Fact]
+    public async Task Removing_a_produce_sale_takes_it_out_of_the_list()
+    {
+        using var sqlite = SqliteTestDb.Create(_tenantA);
+        var service = BuildProduceSaleService(sqlite.Context);
+        var created = await service.CreateAsync<ProduceSaleResponse, CreateProduceSaleRequest>(AProduceSale());
+
+        var removed = await service.RemoveAsync(created.Content.Id);
+
+        removed.IsSuccess.Should().BeTrue(removed.ErrorMessage);
+        (await service.GetAllAsync<ProduceSaleResponse>()).Content.Should().BeEmpty();
+    }
+
+    [Fact]
+    public async Task Produce_sales_are_scoped_to_the_tenant_that_created_them()
+    {
+        using var sqlite = SqliteTestDb.Create(_tenantA);
+        await BuildProduceSaleService(sqlite.Context)
+            .CreateAsync<ProduceSaleResponse, CreateProduceSaleRequest>(AProduceSale("Tenant A Buyer"));
+
+        using var other = SqliteTestDb.Create(_tenantB);
+        var listedForB = await BuildProduceSaleService(other.Context).GetAllAsync<ProduceSaleResponse>();
+
+        listedForB.Content.Should().BeEmpty();
+    }
+
+    [Fact]
+    public async Task Creating_a_weekly_summary_persists_every_field()
+    {
+        using var sqlite = SqliteTestDb.Create(_tenantA);
+        var service = BuildWeeklyService(sqlite.Context);
+
+        var created = await service
+            .CreateAsync<ProduceWeeklySummaryResponse, CreateProduceWeeklySummaryRequest>(new()
+            {
+                WeekStart = new DateOnly(2026, 6, 1),
+                WeekEnd = new DateOnly(2026, 6, 7),
+                TotalSales = 416000,
+                TotalPaid = 300000,
+            });
+
+        created.IsSuccess.Should().BeTrue(created.ErrorMessage);
+        created.Content.Id.Should().NotBeEmpty();
+        created.Content.WeekStart.Should().Be(new DateOnly(2026, 6, 1));
+        created.Content.WeekEnd.Should().Be(new DateOnly(2026, 6, 7));
+        created.Content.TotalSales.Should().Be(416000);
+        created.Content.TotalPaid.Should().Be(300000);
+
+        (await sqlite.Context.Set<ProduceWeeklySummary>().CountAsync()).Should().Be(1);
+    }
 }

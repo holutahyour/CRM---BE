@@ -173,6 +173,16 @@ namespace CRM.Service
             CreateMap<SalesStockRecord, SalesStockRecordResponse>().ReverseMap();
             CreateMap<CreateSalesStockRecordRequest, SalesStockRecord>().ReverseMap();
 
+            // Sales (Fresh Produce)
+            CreateMap<ProducePackhouseIntake, ProducePackhouseIntakeResponse>().ReverseMap();
+            CreateMap<CreateProducePackhouseIntakeRequest, ProducePackhouseIntake>().ReverseMap();
+
+            CreateMap<ProduceSale, ProduceSaleResponse>().ReverseMap();
+            CreateMap<CreateProduceSaleRequest, ProduceSale>().ReverseMap();
+
+            CreateMap<ProduceWeeklySummary, ProduceWeeklySummaryResponse>().ReverseMap();
+            CreateMap<CreateProduceWeeklySummaryRequest, ProduceWeeklySummary>().ReverseMap();
+
             // Operations → Processing. Create requests double as update bodies, so they map onto
             // an existing entity without touching its Id or tenant.
             CreateMap<ProcessingProduct, ProcessingProductResponse>();

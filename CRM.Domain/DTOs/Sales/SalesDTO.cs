@@ -84,3 +84,62 @@ public class SalesStockRecordResponse : CreateSalesStockRecordRequest
 {
     public Guid Id { get; set; }
 }
+
+// ── Fresh Produce: Packhouse Intake ──────────────────────────────────────────
+
+public class CreateProducePackhouseIntakeRequest
+{
+    public DateOnly Date { get; set; }
+    public string ProduceType { get; set; } = "";
+    public decimal GradeA { get; set; }
+    public decimal GradeB { get; set; }
+    public decimal GradeC { get; set; }
+    public decimal Rejected { get; set; }
+    public decimal QuantityHarvested { get; set; }
+    public string? Remarks { get; set; }
+}
+
+public class ProducePackhouseIntakeResponse : CreateProducePackhouseIntakeRequest
+{
+    public Guid Id { get; set; }
+}
+
+// ── Fresh Produce: Sales ─────────────────────────────────────────────────────
+
+public class CreateProduceSaleRequest
+{
+    public DateOnly Date { get; set; }
+    public string Customer { get; set; } = "";
+    public string? Location { get; set; }
+    public string? ProduceType { get; set; }
+    public string? Grade { get; set; }
+    public string Category { get; set; } = "";
+
+    /// <summary>Kilograms sold.</summary>
+    public decimal Quantity { get; set; }
+
+    public decimal PricePerKg { get; set; }
+    public decimal Paid { get; set; }
+    public string ModeOfPayment { get; set; } = "";
+    public string PaymentStatus { get; set; } = "";
+}
+
+public class ProduceSaleResponse : CreateProduceSaleRequest
+{
+    public Guid Id { get; set; }
+}
+
+// ── Fresh Produce: Weekly Sales Summary ──────────────────────────────────────
+
+public class CreateProduceWeeklySummaryRequest
+{
+    public DateOnly WeekStart { get; set; }
+    public DateOnly WeekEnd { get; set; }
+    public decimal TotalSales { get; set; }
+    public decimal TotalPaid { get; set; }
+}
+
+public class ProduceWeeklySummaryResponse : CreateProduceWeeklySummaryRequest
+{
+    public Guid Id { get; set; }
+}
