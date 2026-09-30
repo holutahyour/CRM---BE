@@ -115,6 +115,11 @@ namespace CRM.Data
         public DbSet<SalesFeedCost> SalesFeedCosts => Set<SalesFeedCost>();
         public DbSet<SalesStockRecord> SalesStockRecords => Set<SalesStockRecord>();
 
+        // Sales (Fresh Produce)
+        public DbSet<ProducePackhouseIntake> ProducePackhouseIntakes => Set<ProducePackhouseIntake>();
+        public DbSet<ProduceSale> ProduceSales => Set<ProduceSale>();
+        public DbSet<ProduceWeeklySummary> ProduceWeeklySummaries => Set<ProduceWeeklySummary>();
+
         // Operations → Processing (stock cards live on Inventory Items/InventoryTransactions)
         public DbSet<ProcessingProduct> ProcessingProducts => Set<ProcessingProduct>();
         public DbSet<OrderRequest> OrderRequests => Set<OrderRequest>();

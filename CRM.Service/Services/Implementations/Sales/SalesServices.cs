@@ -53,3 +53,45 @@ public class SalesStockRecordService
     {
     }
 }
+
+public class ProducePackhouseIntakeService
+    : MSSQLBaseService<ProducePackhouseIntake, Guid>, IProducePackhouseIntakeService
+{
+    public ProducePackhouseIntakeService(
+        IMSSQLRepository<ProducePackhouseIntake, Guid> baseRepository,
+        IMSSQLRepository<AuditLog, long> auditLogRepository,
+        IApplicationDbContext context,
+        IMapper mapper,
+        IHttpContextAccessor httpContextAccessor)
+        : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
+    {
+    }
+}
+
+public class ProduceSaleService
+    : MSSQLBaseService<ProduceSale, Guid>, IProduceSaleService
+{
+    public ProduceSaleService(
+        IMSSQLRepository<ProduceSale, Guid> baseRepository,
+        IMSSQLRepository<AuditLog, long> auditLogRepository,
+        IApplicationDbContext context,
+        IMapper mapper,
+        IHttpContextAccessor httpContextAccessor)
+        : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
+    {
+    }
+}
+
+public class ProduceWeeklySummaryService
+    : MSSQLBaseService<ProduceWeeklySummary, Guid>, IProduceWeeklySummaryService
+{
+    public ProduceWeeklySummaryService(
+        IMSSQLRepository<ProduceWeeklySummary, Guid> baseRepository,
+        IMSSQLRepository<AuditLog, long> auditLogRepository,
+        IApplicationDbContext context,
+        IMapper mapper,
+        IHttpContextAccessor httpContextAccessor)
+        : base(baseRepository, auditLogRepository, context, mapper, httpContextAccessor)
+    {
+    }
+}
