@@ -123,7 +123,10 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+// Development always migrates. The published site runs as Production and is deployed
+// with Web Deploy (no CI step), so it migrates on startup when `Database:MigrateOnStartup`
+// is true — which appsettings.json sets. A failed migration stops startup.
+if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("Database:MigrateOnStartup"))
 {
     app.Services.ApplyMigrationsAndSeed();
 }
